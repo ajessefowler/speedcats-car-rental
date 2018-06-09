@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}<title>Speedcats Car Rental</title>{% endblock %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+	<header>
+		<i class="material-icons" id="menubutton">menu</i>
+		<h1>Speedcats</h1>
+		<i class="material-icons" id="accountbutton">account_circle</i>
+	</header>
+
+	<div id="content">
+		{% block content %}{% endblock %}
+	</div>
+</body>
+</html>
