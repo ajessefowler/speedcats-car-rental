@@ -1,0 +1,9 @@
+@keyframes menuOut {
+	from { transform: translateX(-350px); }
+	to { transform: translateX(0); }
+}
+
+@keyframes menuIn {
+	from { transform: translateX(0); }
+	to { transform: translateX(-350px); }
+}

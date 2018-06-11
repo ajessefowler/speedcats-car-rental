@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1 id="storeheader">City, State</h1>
+
+    {% if vehicle_list %}
+    <ul>
+
+        {% for vehicle in vehicle_list %}
+        <li>
+            <p>{{ vehicle.year }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

@@ -23,4 +23,4 @@ urlpatterns = [
 	path('inventory/', include('inventory.urls')),
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='/inventory/')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

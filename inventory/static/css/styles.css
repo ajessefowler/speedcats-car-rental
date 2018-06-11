@@ -3,30 +3,52 @@ html, body {
 	margin: 0px;
 }
 
+body {
+	background-color: rgb(218, 216, 216);
+}
+
 h1 {
 	font-size: 20pt;
 	font-family: 'Fjalla One', sans-serif;
 	margin: 0;
 }
 
+h2 {
+	font-size: 18pt;
+	font-family: 'Fjalla One', sans-serif;
+	margin: 0;
+}
+
 p {
 	font-size: 13pt;
-	font-family: Helvetica, sans-serif;
+	font-family: 'Cantarell', sans-serif;
 	padding: 0 15px;
 	text-align: center;
+}
+
+li {
+	list-style-type: none;
+	margin: 0 30px 10px;
+	padding: 0 0 15px;
+	font-size: 18pt;
+	font-family: 'Cantarell', sans-serif;
+	color: white;
+	text-align: center;
+	border-bottom: 1px solid rgb(156, 188, 204);
 }
 
 header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: calc(100% - 30px);
+	width: calc(100% - 14px);
 	height: 55px;
 	background-color: #607D8B;
 	box-shadow: 0 1px 6px #666666;
-	padding: 0 15px;
+	padding: 0 7px;
 	position: fixed;
 	top: 0;
+	z-index: 10;
 }
 
 header > h1 {
@@ -34,10 +56,35 @@ header > h1 {
 	color: white;
 }
 
-#content {
-	width: 100%;
-	padding-top: 55px;
+nav {
+	position: fixed;
+	display: flex;
+	background-color: #8eacbb;
+	width: 300px;
+	height: 100%;
+	transform: translateX(-350px);
+	top: 55px;
+	box-shadow: 2px 0 6px -2px #666666;
+	z-index: 10;
 }
+
+nav > ul {
+	width: 100%;
+	padding: 15px 0;
+	margin: 0;
+}
+
+.pac-container {
+	margin-top: 16px !important;
+	padding: 0 7px 7px 7px !important;
+	border-radius: 3px !important;
+	box-shadow: 0 1px 3px #666666 !important;
+}
+
+.button {
+	padding: 8px;
+}
+
 
 #menubutton {
 	font-size: 21pt;
@@ -47,4 +94,94 @@ header > h1 {
 #accountbutton {
 	font-size: 20pt;
 	color: white;
+}
+
+#content {
+	width: 100%;
+	padding-top: 68px;
+}
+
+#search > h2 {
+	padding: 0 0 7px 22px;
+}
+
+#searchbox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 5px 20px;
+	height: 45px;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #666666;
+	background-color: white;
+}
+
+#locatebutton {
+	margin-right: auto;
+}
+
+#locationsearch {
+	border: none;
+	width: 100%;
+	font-family: 'Cantarell', sans-serif;
+	font-size: 12pt;
+	padding: 0 10px;
+}
+
+#locationsearch:focus {
+	outline: none;
+}
+
+#searchbutton {
+	margin-left: auto;
+	transform: scaleX(-1);
+}
+
+#map {
+	height: 260px;
+	margin: 12px 20px 0;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #666666;
+}
+
+#select {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	height: 45px;
+	margin: 12px 20px;
+	background-color: #1b5e20;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #666666;
+}
+
+#select > p {
+	color: white;
+}
+
+#selectlink {
+	margin-left: auto;
+}
+
+#selectbutton {
+	color: white;
+}
+
+#storeheader {
+	padding: 10px 0 0 40px;
+}
+
+@media only screen and (min-width: 768px) {
+
+	.button:hover {
+		cursor: pointer;
+	}
+
+	#search {
+		margin: 5px 23%;
+	}
+
+	#map {
+		height: 400px;
+	}
 }
