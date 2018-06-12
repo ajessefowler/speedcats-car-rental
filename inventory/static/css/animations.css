@@ -1,3 +1,4 @@
+/* Slides menu in and out */
 @keyframes menuOut {
 	from { transform: translateX(-350px); }
 	to { transform: translateX(0); }

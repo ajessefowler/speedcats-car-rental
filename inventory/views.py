@@ -14,7 +14,7 @@ def index(request):
 	return render(request, 'inventory/index.html', context)
 
 def store(request, storeID):
-	vehicles = Vehicle.objects.filter(store_id=storeID)
+	vehicles = Vehicle.objects.filter(store_id=storeID).filter(status='a')
 	context = {
 		"vehicles":vehicles
 	}

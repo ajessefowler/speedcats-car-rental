@@ -84,7 +84,7 @@ nav > ul {
 }
 
 .pac-container {
-	margin-top: 16px !important;
+	margin-top: 12px !important;
 	padding: 0 7px 7px 7px !important;
 	border-radius: 3px !important;
 	box-shadow: 0 1px 3px #666666 !important;
@@ -96,10 +96,15 @@ nav > ul {
 
 .vehicle {
 	background-color: white;
-	padding: 3px 0;
+	padding: 5px 0;
 	margin: 0 20px 10px;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #666666;
+}
+
+.vehicle > p {
+	margin: 0;
+	padding: 0;
 }
 
 #menubutton {
@@ -126,7 +131,7 @@ nav > ul {
 	justify-content: center;
 	align-items: center;
 	margin: 5px 20px;
-	height: 45px;
+	height: 40px;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #666666;
 	background-color: white;
@@ -140,7 +145,7 @@ nav > ul {
 	border: none;
 	width: 100%;
 	font-family: 'Cantarell', sans-serif;
-	font-size: 12pt;
+	font-size: 11pt;
 	padding: 0 10px;
 }
 
@@ -164,7 +169,7 @@ nav > ul {
 	display: none;
 	justify-content: center;
 	align-items: center;
-	height: 45px;
+	height: 40px;
 	margin: 12px 20px;
 	background-color: #1b5e20;
 	border-radius: 3px;
@@ -173,6 +178,7 @@ nav > ul {
 
 #select > p {
 	color: white;
+	font-size: 11pt;
 }
 
 #selectlink {
@@ -181,6 +187,7 @@ nav > ul {
 
 #selectbutton {
 	color: white;
+	font-size: 17pt;
 }
 
 #storeheader {

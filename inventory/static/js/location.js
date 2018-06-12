@@ -1,3 +1,4 @@
+// Setup location autocomplete and search
 function initLocation() {
     const countryRestriction = { componentRestrictions: { country: 'us' }};
     const autocomplete = new google.maps.places.Autocomplete(document.getElementById('locationsearch'), countryRestriction);
@@ -12,10 +13,10 @@ function initLocation() {
 
     function resolveLocation(element) {
         const place = element.getPlace();
-        console.log(place);
     }
 }
 
+// Determine user's current location
 function findLocation() {
     if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(resolveCoords, locationError);
@@ -24,8 +25,8 @@ function findLocation() {
 	}
 }
 
+// Determine the coordinates of the user's current location
 function resolveCoords(position) {
-    console.log(position);
 	const lat = position.coords.latitude;
 	const long = position.coords.longitude;
 	const key = 'AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE';
@@ -47,6 +48,7 @@ function resolveCoords(position) {
 	request.send();
 }
 
+// Initialize the map, with markers for each store
 function initMap() {
     let i;
 
@@ -72,6 +74,7 @@ function initMap() {
                 });
                 const vehiclesLink = '/inventory/' + id + '/';
 
+                // Set the select button's link to the selected store
                 google.maps.event.addListener(marker, 'click', function() {
                     document.getElementById('select').style.display = 'flex';
                     document.getElementById('selecttext').innerHTML = addressDisplay;
