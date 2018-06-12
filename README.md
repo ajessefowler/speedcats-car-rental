@@ -15,3 +15,8 @@ Terminal or Command Prompt. The speedcats directory contains a file called 'mana
 Now, you should be able to start the server with the command 'python manage.py runserver'. You will be able to access the site at
 http://127.0.0.1:8000, and the admin site at http://127.0.0.1:8000/admin. To create an account to login to the admin site, run the command
 'python manage.py createsuperuser' and enter a name and password. Then, you can login and manipulate the data!
+
+The following video from Harvard's CS50 is a great introduction to Django. After watching, you should be comfortable enough
+to use Django for this project, and be able to appreciate its ease of use.
+
+https://youtu.be/ZjAMRnCu-84
