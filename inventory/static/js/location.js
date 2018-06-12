@@ -70,7 +70,7 @@ function initMap() {
                     position: coords,
                     map: map
                 });
-                const vehiclesLink = '/inventory/store/' + id + '/';
+                const vehiclesLink = '/inventory/' + id + '/';
 
                 google.maps.event.addListener(marker, 'click', function() {
                     document.getElementById('select').style.display = 'flex';

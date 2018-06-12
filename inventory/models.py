@@ -3,7 +3,7 @@ from django.urls import reverse
 
 class Store(models.Model):
 
-	storeID = models.IntegerField(primary_key=True, unique=True, default=0)
+	ID = models.IntegerField(primary_key=True, unique=True, default=0)
 	address = models.CharField(max_length=100)
 	city = models.CharField(max_length=50)
 	state = models.CharField(max_length=2)
@@ -15,7 +15,7 @@ class Store(models.Model):
 		return reverse('store-detail-view', args=[str(self.StoreID)])
 
 	def __str__(self):
-		return 'Store #' + str(self.storeID) + ', ' + self.address + ' ' + self.city + ', ' + self.state
+		return 'Store #' + str(self.ID) + ', ' + self.address + ' ' + self.city + ', ' + self.state
 
 class Vehicle(models.Model):
 
@@ -33,7 +33,7 @@ class Vehicle(models.Model):
 	)
 
 	VIN = models.CharField(max_length=17)
-	storeID = models.ForeignKey(Store, on_delete=models.CASCADE)
+	store = models.ForeignKey(Store, on_delete=models.CASCADE)
 	year = models.IntegerField()
 	make = models.CharField(max_length=30)
 	model = models.CharField(max_length=30)
@@ -55,4 +55,4 @@ class Vehicle(models.Model):
 		return reverse('vehicle-detail-view', args=[str(self.id)])
 
 	def __str__(self):
-		return str(self.VIN) + ', ' + self.color + ' ' + str(self.year) + ' ' + self.make + ' ' + self.model + ', ' + str(self.mileage) + ' miles, ' + str(self.storeID)
+		return str(self.year) + ' ' + self.make + ' ' + self.model

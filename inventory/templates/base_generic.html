@@ -14,7 +14,6 @@
 	<script>
 		var locationStr = '{{locations}}';
 		var locations = JSON.parse(locationStr.replace(/(&quot;)/g, '"'));
-		console.log(locations);
 	</script>
 	<script type="text/javascript" src="{% static 'js/location.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/animations.js' %}"></script>
@@ -23,7 +22,7 @@
 <body>
 	<header>
 		<i class="button material-icons" id="menubutton">menu</i>
-		<h1>Speedcats</h1>
+		<a href="{% url 'index' %}"><h1>Speedcats</h1></a>
 		<i class="button material-icons" id="accountbutton">account_circle</i>
 	</header>
 
@@ -35,9 +34,10 @@
 		<ul>
 			<li>Home</li>
 			<li>About</li>
-			<li>Locations</li>
 			<li>Vehicles</li>
 			<li>Contact</li>
+			<li>FAQs</li>
+			<li>Feedback</li>
 		</ul>
 	</nav>
 	
