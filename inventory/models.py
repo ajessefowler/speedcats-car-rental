@@ -39,6 +39,7 @@ class Vehicle(models.Model):
 	model = models.CharField(max_length=30)
 	color = models.CharField(max_length=10)
 	mileage = models.IntegerField()
+	image = models.ImageField(upload_to="vehicle_photos", blank=True)
 	status = models.CharField(
 		max_length=1,
 		choices=status_choices,

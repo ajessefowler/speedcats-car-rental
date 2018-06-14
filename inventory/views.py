@@ -1,6 +1,6 @@
 import json
 from django.core.serializers.json import DjangoJSONEncoder
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from .models import Store, Vehicle
 
@@ -19,3 +19,10 @@ def store(request, storeID):
 		"vehicles":vehicles
 	}
 	return render(request, 'inventory/vehicle_list.html', context)
+
+def vehicle(request, storeID, vehicleID):
+	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
+	context = {
+		"vehicle":vehicle
+	}
+	return render(request, 'inventory/vehicle_detail.html', context)

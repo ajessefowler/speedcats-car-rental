@@ -1,11 +1,18 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1 id="storeheader">{{ vehicles.0.store.address }}, {{ vehicles.0.store.city }}, {{ vehicles.0.store.state }}</h1>
     <div id="storecontent">
+    <h1 class="header">{{ vehicles.0.store.address }}, {{ vehicles.0.store.city }}, {{ vehicles.0.store.state }}</h1>
     {% for vehicle in vehicles %}
         <div class="vehicle">
-            <p>{{ vehicle }}</p>
+            <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/">
+                <div class="vehicleimage">
+                    <img src="{{ vehicle.image.url }}" width="100%">
+                </div>
+                <div class="vehiclename">
+                    <p>{{ vehicle }}</p>
+                </div>
+            </a>
         </div>
     {% endfor %}
     </div>

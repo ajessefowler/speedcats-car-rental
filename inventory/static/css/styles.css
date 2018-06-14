@@ -52,8 +52,8 @@ header {
 	justify-content: space-between;
 	width: calc(100% - 14px);
 	height: 55px;
-	background-color: #607D8B;
-	box-shadow: 0 1px 6px #666666;
+	background-color: #455A64;
+	box-shadow: 0 1px 4px 1px #3f3f3f;
 	padding: 0 7px;
 	position: fixed;
 	top: 0;
@@ -68,12 +68,12 @@ header > h1 {
 nav {
 	position: fixed;
 	display: flex;
-	background-color: #8eacbb;
+	background-color: #607D8B;
 	width: 300px;
 	height: 100%;
 	transform: translateX(-350px);
 	top: 55px;
-	box-shadow: 2px 0 6px -2px #666666;
+	box-shadow: 2px 0 6px -2px #3f3f3f;
 	z-index: 10;
 }
 
@@ -94,17 +94,52 @@ nav > ul {
 	padding: 8px;
 }
 
+.header {
+	padding: 0 0 8px 0;
+	margin: 0 20px;
+}
+
 .vehicle {
-	background-color: white;
-	padding: 5px 0;
-	margin: 0 20px 10px;
+	background-color: #607D8B;
+	padding: 0;
+	margin: 0 20px 15px;
 	border-radius: 3px;
-	box-shadow: 0 1px 3px #666666;
+	box-shadow: 0 1px 3px 1px #666666;
+	position: relative;
 }
 
 .vehicle > p {
 	margin: 0;
 	padding: 0;
+}
+
+.vehiclename {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.vehiclename > p {
+	text-align: left;
+	margin: 0;
+	padding: 5px 0 10px 15px;
+	font-size: 13pt;
+	margin-right: auto;
+	color: white;
+}
+
+.vehicleimage {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.vehicleimage > img {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
 }
 
 #menubutton {
@@ -171,7 +206,7 @@ nav > ul {
 	align-items: center;
 	height: 40px;
 	margin: 12px 20px;
-	background-color: #1b5e20;
+	background-color: #607D8B;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #666666;
 }
@@ -190,14 +225,48 @@ nav > ul {
 	font-size: 17pt;
 }
 
-#storeheader {
-	padding: 0 0 0 22px;
-	font-size: 18pt;
-}
-
 #storecontent {
 	width: 100%;
-	padding-top: 13px;
+}
+
+#storecontent > a {
+	width: 100%;
+}
+
+#vehiclecontent {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+#vehiclecontent > img {
+	margin: 0 20px;
+	width: calc(100% - 40px);
+	border-radius: 3px;
+	box-shadow: 0 1px 3px 1px #666666;
+}
+
+#reservebutton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	bottom: 35px;
+	right: 25px;
+	height: 30px;
+	background-color: #FF5722;
+	border-radius: 30px;
+	box-shadow: 0 1px 3px 1px #3d3d3d;
+	padding: 5px 0;
+}
+
+#reservebutton > p {
+	padding: 0 18px;
+	margin: 0;
+	color: white;
+	position: relative;
+	top: -1px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -207,19 +276,39 @@ nav > ul {
 	}
 
 	.vehicle {
-		margin: 0 23% 10px;
+		margin: 0 23% 25px;
 	}
 
 	.vehicle:hover {
 		cursor: pointer;
-		background-color: rgb(226, 226, 226);
+	}
+
+	.vehiclename > p {
+		font-size: 16pt;
+	}
+
+	.reservebutton {
+		top: -29px;
+		right: 28px;
+		height: 30px;
+		border-radius: 30px;
 	}
 
 	#search {
 		margin: 5px 23%;
 	}
 
+	#select:hover {
+		cursor: pointer;
+	}
+
 	#map {
 		height: 400px;
+	}
+
+	#reservebutton:hover {
+		cursor: pointer;
+		background-color: rgb(216, 69, 25);
+		box-shadow: 0 1px 3px 2px #3d3d3d;
 	}
 }

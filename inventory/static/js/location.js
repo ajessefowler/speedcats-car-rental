@@ -78,7 +78,7 @@ function initMap() {
                 google.maps.event.addListener(marker, 'click', function() {
                     document.getElementById('select').style.display = 'flex';
                     document.getElementById('selecttext').innerHTML = addressDisplay;
-                    document.getElementById('selectlink').onclick = function() {
+                    document.getElementById('select').onclick = function() {
                         document.location.href = vehiclesLink;
                     }
                 });
