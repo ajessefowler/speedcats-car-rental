@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '^hhcy+uu$-^81k&akchivxha(y^xwm
 # DEBUG = True
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['peaceful-badlands-16235.herokuapp.com','127.0.0.1']
 
 
 # Application definition
