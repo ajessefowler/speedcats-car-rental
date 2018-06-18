@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Store(models.Model):
 
-	ID = models.IntegerField(primary_key=True, unique=True, default=0)
+	ID = models.IntegerField(primary_key=True)
 	address = models.CharField(max_length=100)
 	city = models.CharField(max_length=50)
 	state = models.CharField(max_length=2)
