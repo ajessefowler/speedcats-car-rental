@@ -1,10 +1,10 @@
 /* Slides menu in and out */
 @keyframes menuOut {
-	from { transform: translateX(-350px); }
-	to { transform: translateX(0); }
+	from { transform: translateY(-40px); }
+	to { transform: translateY(0); }
 }
 
 @keyframes menuIn {
-	from { transform: translateX(0); }
-	to { transform: translateX(-350px); }
+	from { transform: translateY(0); }
+	to { transform: translateY(-40px); }
 }

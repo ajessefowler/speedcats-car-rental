@@ -7,6 +7,9 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cantarell" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -21,25 +24,22 @@
 
 <body>
 	<header>
-		<i class="button material-icons" id="menubutton">menu</i>
-		<a href="{% url 'index' %}"><h1>Speedcats</h1></a>
-		<i class="button material-icons" id="accountbutton">account_circle</i>
+		<nav>
+			<a href="{% url 'index' %}"><p>Home</p></a>
+			<a href="{% url 'faqs' %}"><p>FAQs</p></a>
+			<a href="{% url 'contact' %}"><p>Contact</p></a>
+			<a href="{% url 'feedback' %}"><p>Feedback</p></a>
+		</nav>
+		<div id="headermenu">
+			<i class="button material-icons" id="menubutton">menu</i>
+			<a href="{% url 'index' %}"><h1 id="logo">Speedcats</h1></a>
+			<a href="{% url 'login' %}"><i class="button material-icons" id="accountbutton">account_circle</i></a>
+		</div>
 	</header>
 
 	<div id="content">
 		{% block content %}{% endblock %}
 	</div>
-
-	<nav>
-		<ul>
-			<li>Home</li>
-			<li>About</li>
-			<li>Vehicles</li>
-			<li>Contact</li>
-			<li>FAQs</li>
-			<li>Feedback</li>
-		</ul>
-	</nav>
 	
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE&libraries=places&callback=initMap"></script>
 </body>

@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
+from django.contrib.auth.models import User
 
 class Store(models.Model):
 
@@ -15,7 +17,7 @@ class Store(models.Model):
 		return reverse('store-detail-view', args=[str(self.StoreID)])
 
 	def __str__(self):
-		return 'Store #' + str(self.ID) + ', ' + self.address + ' ' + self.city + ', ' + self.state
+		return self.address + ', ' + self.city + ', ' + self.state
 
 class Vehicle(models.Model):
 
@@ -40,6 +42,7 @@ class Vehicle(models.Model):
 	color = models.CharField(max_length=10)
 	mileage = models.IntegerField()
 	image = models.ImageField(upload_to="vehicle_photos", blank=True)
+	description = models.CharField(max_length=800, default="")
 	status = models.CharField(
 		max_length=1,
 		choices=status_choices,
@@ -57,3 +60,15 @@ class Vehicle(models.Model):
 
 	def __str__(self):
 		return str(self.year) + ' ' + self.make + ' ' + self.model
+
+class Reservation(models.Model):
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+	pick_up_time = models.DateTimeField(blank=False, null=False)
+	pick_up_location = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='pick_up_store')
+	drop_off_time = models.DateTimeField(blank=False, null=False)
+	drop_off_location = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='drop_off_store')
+	miles_driven = models.IntegerField()
+
+	def __str__(self):
+		return str(self.vehicle) + ' from ' + self.pick_up_location + ' to ' + self.drop_off_location

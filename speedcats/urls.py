@@ -23,6 +23,7 @@ from django.views.generic import RedirectView
 urlpatterns = [
 	path('inventory/', include('inventory.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', RedirectView.as_view(url='/inventory/')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	document.getElementById('menubutton').addEventListener('click', function() {
 		if (!menuOut) {
 			menuOut = true;
-			document.querySelector('nav').style.animation = 'menuOut .3s ease forwards';
-			document.getElementById('menubutton').innerHTML = 'chevron_left';
+			document.querySelector('header').style.animation = 'menuOut .3s ease forwards';
+			document.getElementById('menubutton').innerHTML = 'expand_less';
 		} else {
 			menuOut = false;
-			document.querySelector('nav').style.animation = 'menuIn .3s ease forwards';
+			document.querySelector('header').style.animation = 'menuIn .3s ease forwards';
 			document.getElementById('menubutton').innerHTML = 'menu';
 		}
 	});

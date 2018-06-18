@@ -1,11 +1,12 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+    <h2 class="header">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h2>
     <div id="vehiclecontent">
-        <h1 class="header">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h1>
         <img src="{{ vehicle.image.url }}" width="100%">
-    </div>
-    <div id="reservebutton">
-        <p>RESERVE</p>
+        <p>{{ vehicle.description }}</p>
+        <div id="reservebutton">
+            <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/reserve"><p>RESERVE</p></a>
+        </div>
     </div>
 {% endblock %}

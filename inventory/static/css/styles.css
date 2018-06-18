@@ -3,6 +3,8 @@ html, body {
 	margin: 0px;
 }
 
+textarea, select, input, button { outline: none; }
+
 body {
 	background-color: rgb(218, 216, 216);
 }
@@ -24,40 +26,32 @@ h1 {
 
 h2 {
 	font-size: 18pt;
-	font-family: 'Fjalla One', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	letter-spacing: -0.5px;
 	margin: 0;
 }
 
 p {
 	font-size: 13pt;
-	font-family: 'Cantarell', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	padding: 0 15px;
 	text-align: center;
 }
 
-li {
-	list-style-type: none;
-	margin: 0 30px 10px;
-	padding: 0 0 15px;
-	font-size: 18pt;
-	font-family: 'Cantarell', sans-serif;
-	color: white;
-	text-align: center;
-	border-bottom: 1px solid rgb(156, 188, 204);
-}
-
 header {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
 	width: calc(100% - 14px);
-	height: 55px;
+	height: 95px;
 	background-color: #455A64;
 	box-shadow: 0 1px 4px 1px #3f3f3f;
 	padding: 0 7px;
 	position: fixed;
 	top: 0;
 	z-index: 10;
+	transform: translateY(-40px);
 }
 
 header > h1 {
@@ -66,21 +60,22 @@ header > h1 {
 }
 
 nav {
-	position: fixed;
 	display: flex;
-	background-color: #607D8B;
-	width: 300px;
-	height: 100%;
-	transform: translateX(-350px);
-	top: 55px;
-	box-shadow: 2px 0 6px -2px #3f3f3f;
+	align-items: center;
+	justify-content: space-between;
+	width: calc(100% - 32px);
+	height: 40px;
 	z-index: 10;
+	padding: 4px 0 0;
 }
 
-nav > ul {
-	width: 100%;
-	padding: 15px 0;
-	margin: 0;
+nav > p {
+	padding: 8px;
+	color: white;
+}
+
+a:-webkit-any-link {
+	text-decoration: none;
 }
 
 .pac-container {
@@ -97,6 +92,7 @@ nav > ul {
 .header {
 	padding: 0 0 8px 0;
 	margin: 0 20px;
+	font-size: 19pt;
 }
 
 .vehicle {
@@ -121,6 +117,7 @@ nav > ul {
 }
 
 .vehiclename > p {
+	font-family: 'Roboto', sans-serif;
 	text-align: left;
 	margin: 0;
 	padding: 5px 0 10px 15px;
@@ -142,6 +139,99 @@ nav > ul {
 	border-top-right-radius: 3px;
 }
 
+.loginform {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.loginform > p {
+	font-size: 11pt;
+	font-family: 'Roboto', sans-serif;
+	color: #525252;
+}
+
+.loginform > input {
+	width: 250px;
+	border: none;
+	border-bottom: 1px solid #bbbbbb;
+	font-size: 11pt;
+	font-family: 'Roboto', sans-serif;
+	padding: 0 5px 3px;
+	color: #2b2b2b;
+}
+
+.loginmessage {
+	font-size: 11pt;
+	color: #f44336;
+	margin: 10px 0 5px;
+}
+
+#logincontent {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 20px 0;
+	background-color: white;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px 1px #666666;
+	padding: 8px 0;
+}
+
+#loginbutton {
+	background-color: #FF5722;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 1px 4px #3d3d3d;
+	font-family: 'Roboto', sans-serif;
+	font-size: 13pt;
+	height: 40px;
+	padding: 0 12px;
+	width: 100%;
+	margin-top: 24px;
+}
+
+#register {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+}
+
+#register > p {
+	font-size: 10pt;
+	color: #777676;
+	padding: 8px;
+	margin-bottom: 2px;
+}
+
+#logoutbutton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #FF5722;
+	color: white;
+	height: 40px;
+	border-radius: 3px;
+	box-shadow: 0 1px 4px #3d3d3d;
+}
+
+#logo {
+	text-decoration: underline;
+}
+
+#headermenu {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 5px;
+}
+
 #menubutton {
 	font-size: 21pt;
 	color: white;
@@ -155,6 +245,12 @@ nav > ul {
 #content {
 	width: 100%;
 	padding-top: 68px;
+}
+
+#welcome {
+	text-align: left;
+	text-indent: 18px;
+	margin: 16px 7px;
 }
 
 #search > h2 {
@@ -174,12 +270,13 @@ nav > ul {
 
 #locatebutton {
 	margin-right: auto;
+	color: #333333;
 }
 
 #locationsearch {
 	border: none;
 	width: 100%;
-	font-family: 'Cantarell', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 11pt;
 	padding: 0 10px;
 }
@@ -190,6 +287,7 @@ nav > ul {
 
 #searchbutton {
 	margin-left: auto;
+	color: #333333;
 	transform: scaleX(-1);
 }
 
@@ -238,35 +336,40 @@ nav > ul {
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+	background-color: white;
+	margin: 0 20px 30px;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px 1px #666666;
+}
+
+#vehiclecontent > p {
+	text-align: left;
+	text-indent: 18px;
+	margin: 15px 0 12px;
 }
 
 #vehiclecontent > img {
-	margin: 0 20px;
-	width: calc(100% - 40px);
-	border-radius: 3px;
-	box-shadow: 0 1px 3px 1px #666666;
+	margin: 0;
+	width: 100%;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
 }
 
 #reservebutton {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: absolute;
-	bottom: 35px;
-	right: 25px;
-	height: 30px;
+	width: calc(100% - 40px);
+	height: 40px;
+	margin: 0 20px 20px;
 	background-color: #FF5722;
-	border-radius: 30px;
+	border-radius: 3px;
 	box-shadow: 0 1px 3px 1px #3d3d3d;
-	padding: 5px 0;
 }
 
 #reservebutton > p {
-	padding: 0 18px;
-	margin: 0;
 	color: white;
-	position: relative;
-	top: -1px;
+	font-size: 12pt;
 }
 
 @media only screen and (min-width: 768px) {
@@ -294,6 +397,14 @@ nav > ul {
 		border-radius: 30px;
 	}
 
+	#welcome {
+		margin: 16px 23%;
+	}
+
+	#logincontent {
+		margin: 20px 30% 0;
+	}
+
 	#search {
 		margin: 5px 23%;
 	}
@@ -304,6 +415,11 @@ nav > ul {
 
 	#map {
 		height: 400px;
+	}
+
+	#vehiclecontent {
+		margin: 0 23% 20px;
+		width: 54%;
 	}
 
 	#reservebutton:hover {
