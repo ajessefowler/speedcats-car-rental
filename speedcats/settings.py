@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = '^hhcy+uu$-^81k&akchivxha(y^xwmcr5tcs134c7tuhboy(2o'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '^hhcy+uu$-^81k&akchivxha(y^xwmcr5tcs134c7tuhboy(2o')
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS SECRET_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'speedcats'
 
 # SECURITY WARNING: don't run with debug turned on in production!
