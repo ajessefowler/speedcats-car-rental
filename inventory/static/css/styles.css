@@ -21,13 +21,13 @@ a:visited {
 h1 {
 	font-size: 20pt;
 	font-family: 'Fjalla One', sans-serif;
+	letter-spacing: 1px;
 	margin: 0;
 }
 
 h2 {
 	font-size: 18pt;
-	font-family: 'Roboto', sans-serif;
-	letter-spacing: -0.5px;
+	font-family: 'Fjalla One', sans-serif;
 	margin: 0;
 }
 
@@ -46,7 +46,7 @@ header {
 	width: calc(100% - 14px);
 	height: 95px;
 	background-color: #455A64;
-	box-shadow: 0 1px 4px 1px #3f3f3f;
+	box-shadow: 0 4px 6px -3px #2c2c2c;
 	padding: 0 7px;
 	position: fixed;
 	top: 0;
@@ -91,7 +91,7 @@ a:-webkit-any-link {
 
 .header {
 	padding: 8px 0 8px 0;
-	margin: 0 20px;
+	margin: 0 25px;
 	font-size: 19pt;
 }
 
@@ -232,12 +232,6 @@ a:-webkit-any-link {
 	padding-top: 55px;
 }
 
-#welcome {
-	text-align: center;
-	margin: 0px 7px !important;
-	padding-bottom: 0px !important;
-}
-
 #search {
 	position: relative;
 	top: 270px;
@@ -275,6 +269,10 @@ a:-webkit-any-link {
 	padding: 0 10px;
 }
 
+#locationheader {
+	padding-top: 14px;
+}
+
 #locationsearch:focus {
 	outline: none;
 }
@@ -302,13 +300,18 @@ a:-webkit-any-link {
 	margin-top: 300px;
 	height: 100%;
 	z-index: 51;
-	box-shadow: 0 -3px 6px -3px #666666;
+	box-shadow: 0 -3px 6px -3px #2c2c2c;
 	background-color: rgb(218, 216, 216);
 }
 
 #infocontainer > p {
-	margin: 11px 0 0;
+	text-align: justify;
+	margin: 5px 0 0;
 	padding-bottom: 15px;
+}
+
+#welcome {
+	padding-bottom: 0 !important;
 }
 
 #select {
@@ -316,7 +319,7 @@ a:-webkit-any-link {
 	justify-content: center;
 	align-items: center;
 	height: 40px;
-	margin: 3px 20px 13px;
+	margin: 0 20px 13px;
 	background-color: #607D8B;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #666666;
@@ -344,32 +347,26 @@ a:-webkit-any-link {
 	width: 100%;
 }
 
-#vehiclecontent {
+#vehicleimage {
+	display: block;
+	z-index: 9;
+}
+
+#vehicledescription {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	background-color: white;
-	margin: 0 20px 30px;
-	border-radius: 3px;
-	box-shadow: 0 1px 3px 1px #666666;
+	margin: 0 2px 30px;
 }
 
-#vehiclecontent > a {
+#vehicledescription > a {
 	width: 100%;
 }
 
-#vehiclecontent > p {
-	text-align: left;
-	text-indent: 18px;
-	margin: 15px 0 12px;
-}
-
-#vehiclecontent > img {
-	margin: 0;
-	width: 100%;
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
+#vehicledescription > p {
+	text-align: justify;
+	margin: 0 0 20px;
 }
 
 #reservebutton {
