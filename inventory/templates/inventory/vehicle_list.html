@@ -6,12 +6,10 @@
     {% for vehicle in vehicles %}
         <div class="vehicle">
             <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/">
-                <div class="vehicleimage">
-                    <img src="{{ vehicle.image.url }}" width="100%">
-                </div>
                 <div class="vehiclename">
                     <p>{{ vehicle }}</p>
                 </div>
+                <img src="{{ vehicle.image.url }}">
             </a>
         </div>
     {% endfor %}

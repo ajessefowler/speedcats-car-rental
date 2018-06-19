@@ -50,7 +50,7 @@ header {
 	padding: 0 7px;
 	position: fixed;
 	top: 0;
-	z-index: 51;
+	z-index: 52;
 	transform: translateY(-40px);
 }
 
@@ -79,7 +79,7 @@ a:-webkit-any-link {
 }
 
 .pac-container {
-	margin-top: 12px !important;
+	margin-top: 15px !important;
 	padding: 0 7px 7px 7px !important;
 	border-radius: 3px !important;
 	box-shadow: 0 1px 3px #666666 !important;
@@ -97,46 +97,31 @@ a:-webkit-any-link {
 
 .vehicle {
 	background-color: #607D8B;
-	padding: 0;
 	margin: 0 20px 15px;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px 1px #666666;
-	position: relative;
-}
-
-.vehicle > p {
-	margin: 0;
-	padding: 0;
 }
 
 .vehiclename {
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	height: 35px;
+	padding: 0;
 }
 
 .vehiclename > p {
-	font-family: 'Roboto', sans-serif;
-	text-align: left;
-	margin: 0;
-	padding: 5px 0 10px 15px;
-	font-size: 13pt;
 	margin-right: auto;
-	color: white;
 }
 
-.vehicleimage {
+.vehicle > a > img {
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
-}
-
-.vehicleimage > img {
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
+	display: block;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-top: 2px solid #455A64;
 }
 
 .loginform {
@@ -248,9 +233,9 @@ a:-webkit-any-link {
 }
 
 #welcome {
-	text-align: left;
-	text-indent: 18px;
-	margin: 16px 7px;
+	text-align: center;
+	margin: 0px 7px !important;
+	padding-bottom: 0px !important;
 }
 
 #search {
@@ -260,10 +245,6 @@ a:-webkit-any-link {
 
 #search > h2 {
 	padding: 0 0 7px 22px;
-}
-
-#locationheader {
-	padding-top: 8px;
 }
 
 #searchbox {
@@ -277,7 +258,7 @@ a:-webkit-any-link {
 	background-color: white;
 	z-index: 50;
 	position: absolute;
-	top: 62px;
+	top: 5px;
 	width: calc(100% - 40px);
 }
 
@@ -307,7 +288,27 @@ a:-webkit-any-link {
 #map {
 	width: 100%;
 	height: 300px;
-	box-shadow: 0 1px 3px #666666;
+}
+
+#mapcontainer {
+	position: fixed;
+	height: 300px;
+	width: 100%;
+	z-index: 50;
+}
+
+#infocontainer {
+	position: relative;
+	margin-top: 300px;
+	height: 100%;
+	z-index: 51;
+	box-shadow: 0 -3px 6px -3px #666666;
+	background-color: rgb(218, 216, 216);
+}
+
+#infocontainer > p {
+	margin: 11px 0 0;
+	padding-bottom: 15px;
 }
 
 #select {
@@ -315,7 +316,7 @@ a:-webkit-any-link {
 	justify-content: center;
 	align-items: center;
 	height: 40px;
-	margin: 3px 20px 10px;
+	margin: 3px 20px 13px;
 	background-color: #607D8B;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #666666;
@@ -413,6 +414,11 @@ a:-webkit-any-link {
 		border-radius: 30px;
 	}
 
+	#infocontainer {
+		position: relative;
+		margin-top: 440px;
+	}
+
 	#welcome {
 		margin: 16px 23%;
 	}
@@ -430,7 +436,7 @@ a:-webkit-any-link {
 	}
 
 	#map {
-		height: 400px;
+		height: 440px;
 	}
 
 	#vehiclecontent {
