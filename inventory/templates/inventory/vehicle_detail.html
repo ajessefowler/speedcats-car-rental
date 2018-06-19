@@ -5,8 +5,10 @@
     <div id="vehiclecontent">
         <img src="{{ vehicle.image.url }}" width="100%">
         <p>{{ vehicle.description }}</p>
-        <div id="reservebutton">
-            <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/reserve"><p>RESERVE</p></a>
-        </div>
+        <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/reserve">
+            <div id="reservebutton">
+                <p>RESERVE</p>
+            </div>
+        </a>
     </div>
 {% endblock %}
