@@ -1,20 +1,22 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div id="search">
-    <h2>Start Your Reservation</h2>
+<div id="mapcontainer">
+    <div id="map"></div>
     <div id="searchbox">
         <i class="button material-icons" id="locatebutton">near_me</i>
         <input id="locationsearch" placeholder="Enter your location..." type="text">
         <i class="button material-icons" id="searchbutton">search</i>
     </div>
-    <div id="map"></div>
-    <div id="select">
-        <p id="selecttext"></p> 
-        <a id="selectlink">
-            <i class="button material-icons" id="selectbutton">chevron_right</i>
-        </a>
-    </div>
+</div>
+
+<h2 class="header" id="locationheader">Start Your Reservation</h2>
+
+<div id="select">
+    <p id="selecttext"></p> 
+    <a id="selectlink">
+        <i class="button material-icons" id="selectbutton">chevron_right</i>
+    </a>
 </div>
 
 <p id="welcome">
