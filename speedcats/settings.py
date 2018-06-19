@@ -21,7 +21,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '^hhcy+uu$-^81k&akchivxha(y^xwmcr5tcs134c7tuhboy(2o'
-import os
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '^hhcy+uu$-^81k&akchivxha(y^xwmcr5tcs134c7tuhboy(2o')
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS SECRET_ACCESS_KEY')
@@ -132,13 +131,10 @@ DATABASES['default'].update(db_from_env)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3Boto3Storage'
-
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
