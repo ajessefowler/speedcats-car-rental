@@ -350,6 +350,14 @@ a:-webkit-any-link {
 #vehicleimage {
 	display: block;
 	z-index: 9;
+	position: fixed;
+}
+
+#vehiclecontent {
+	z-index: 10;
+	position: relative;
+	background-color: rgb(218, 216, 216);
+	box-shadow: 0 -3px 6px -3px #2c2c2c;
 }
 
 #vehicledescription {
@@ -357,7 +365,7 @@ a:-webkit-any-link {
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	margin: 0 2px 30px;
+	margin: 0 2px 15px;
 }
 
 #vehicledescription > a {

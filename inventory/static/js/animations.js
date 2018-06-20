@@ -20,5 +20,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		}
 	});
 
+	if (document.getElementById('vehiclecontent')) {
+		document.getElementById('vehiclecontent').style.top = (document.getElementById('vehicleimage').height + 'px');
+	}
+
 	initLocation();
 });
