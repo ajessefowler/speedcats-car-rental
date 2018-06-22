@@ -76,9 +76,8 @@ function initMap() {
 
                 // Set the select button's link to the selected store
                 google.maps.event.addListener(marker, 'click', function() {
-                    document.getElementById('select').style.display = 'flex';
                     document.getElementById('selecttext').innerHTML = addressDisplay;
-                    document.getElementById('select').onclick = function() {
+                    document.getElementById('startbutton').onclick = function() {
                         document.location.href = vehiclesLink;
                     }
                 });
@@ -93,7 +92,7 @@ function initMap() {
     }
 
     const map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 40.85, lng: -82.99},
+        center: {lat: 41.0, lng: -82.99},
         zoom: 6,
         zoomControl: true,
         mapTypeControl: false,
