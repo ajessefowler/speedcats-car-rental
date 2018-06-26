@@ -33,8 +33,9 @@ h2 {
 
 h3 {
 	font-size: 15pt;
+	font-weight: 500;
 	font-family: 'Roboto', sans-serif;
-	color: rgb(31, 30, 30);
+	color: rgb(29, 29, 29);
 	margin: 0 0 5px;
 	letter-spacing: -0.5px;
 }
@@ -340,7 +341,7 @@ a:-webkit-any-link {
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	margin: 0 20px 8px;
+	margin: 0 20px;
 }
 
 #selectlocation > p {
@@ -367,7 +368,7 @@ a:-webkit-any-link {
 	background-color: rgb(126, 126, 126);
 	height: 40px;
 	width: 110px;
-	margin: 0 20px 25px auto;
+	margin: 4px 20px 25px auto;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px 1px #666666;
 }
