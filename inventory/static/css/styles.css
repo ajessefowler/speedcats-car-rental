@@ -82,6 +82,12 @@ nav > p {
 	color: white;
 }
 
+nav > a > p {
+	margin-bottom: 0;
+	position: relative;
+	top: -8px;
+}
+
 a:-webkit-any-link {
 	text-decoration: none;
 }
@@ -395,6 +401,11 @@ a:-webkit-any-link {
 #timepicker > p {
 	font-size: 11pt;
 	color: white;
+}
+
+#donebutton {
+	padding-right: 3px;
+	color: #949393 !important;
 }
 
 #storecontent {
