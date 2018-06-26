@@ -77,6 +77,8 @@ function initMap() {
                 // Set the select button's link to the selected store
                 google.maps.event.addListener(marker, 'click', function() {
                     document.getElementById('selecttext').innerHTML = addressDisplay;
+                    document.getElementById('startbutton').style.backgroundColor = '#FF5722';
+                    document.getElementById('startbutton').style.color = '#FFFFFF';
                     document.getElementById('startbutton').onclick = function() {
                         document.location.href = vehiclesLink;
                     }

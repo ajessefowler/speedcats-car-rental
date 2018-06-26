@@ -1,10 +1,21 @@
 /* Slides menu in and out */
 @keyframes menuOut {
-	from { transform: translateY(-41px); }
+	from { transform: translateY(-42px); }
 	to { transform: translateY(0); }
 }
 
 @keyframes menuIn {
 	from { transform: translateY(0); }
-	to { transform: translateY(-41px); }
+	to { transform: translateY(-42px); }
+}
+
+/* Slides time picker up and down */
+@keyframes timeUp {
+	from { transform: translateY(100px); }
+	to { transform: translateY(-86px); }
+}
+
+@keyframes timeDown {
+	from { transform: translateY(-86px); }
+	to { transform: translateY(100px); }
 }

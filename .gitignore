@@ -3,3 +3,9 @@
 
 # AWS files
 .aws/
+
+# Local media files
+media/
+
+# VS Code files
+.vscode/

@@ -17,12 +17,21 @@
         <h3>Pick Up Location</h3>
         <p id="selecttext">Select a location on the map</p>
         <h3>Pick Up Time</h3>
-        <p>Click here to select a date and time</p> 
+        <p id="timeselect">Click here to select a pick up time</p> 
     </div>
 
     <div id="startbutton">
         <p>START</p>
     </div>
+</div>
 
+<div id="timecard">
+   <h3>Select Your Pick Up Time</h3>
+   <div id="timepicker">
+       <input type="date" id="dateinput" class="input" name="dateinput"/>
+       <p>AT</p>
+       <input type="time" id="timeinput" class="input" name="timeinput" min="7:00" max="20:00"/>
+       <p id="donebutton">DONE</p>
+   </div>
 </div>
 {% endblock %}

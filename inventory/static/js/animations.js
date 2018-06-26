@@ -1,6 +1,7 @@
 // Initialize animations
 document.addEventListener('DOMContentLoaded', function(event) {
 	let menuOut = false;
+	let timeOut = false;
 
 	if (document.getElementById('locatebutton')) {
 		document.getElementById('locatebutton').addEventListener('click', function() {
@@ -22,6 +23,20 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	if (document.getElementById('vehiclecontent')) {
 		document.getElementById('vehiclecontent').style.top = (document.getElementById('vehicleimage').height + 'px');
+	}
+
+	if (document.getElementById('timeselect')) {
+		document.getElementById('timeselect').addEventListener('click', function() {
+			if (!timeOut) {
+				timeOut = true;
+				document.getElementById('timecard').style.animation = 'timeUp .4s ease forwards';
+			}
+		});
+
+		document.getElementById('donebutton').addEventListener('click', function() {
+			timeOut = false;
+			document.getElementById('timecard').style.animation = 'timeDown .4s ease forwards';
+		});
 	}
 
 	initLocation();
