@@ -1,5 +1,6 @@
 // Initialize animations
 document.addEventListener('DOMContentLoaded', function(event) {
+	const today = new Date();
 	let menuOut = false;
 	let timeOut = false;
 
@@ -12,11 +13,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	document.getElementById('menubutton').addEventListener('click', function() {
 		if (!menuOut) {
 			menuOut = true;
-			document.querySelector('header').style.animation = 'menuOut .3s ease forwards';
-			document.getElementById('menubutton').innerHTML = 'expand_less';
+			document.querySelector('nav').style.animation = 'menuOut .3s ease forwards';
+			document.getElementById('menubutton').innerHTML = 'chevron_left';
 		} else {
 			menuOut = false;
-			document.querySelector('header').style.animation = 'menuIn .3s ease forwards';
+			document.querySelector('nav').style.animation = 'menuIn .3s ease forwards';
 			document.getElementById('menubutton').innerHTML = 'menu';
 		}
 	});
@@ -29,13 +30,23 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		document.getElementById('timeselect').addEventListener('click', function() {
 			if (!timeOut) {
 				timeOut = true;
-				document.getElementById('timecard').style.animation = 'timeUp .4s ease forwards';
+				document.getElementById('expandtimecard').style.animation = 'arrowDown .3s ease forwards';
+				document.getElementById('timecard').style.animation = 'timeUp .3s ease forwards';
+			} else {
+				timeOut = false;
+				document.getElementById('expandtimecard').style.animation = 'arrowUp .3s ease forwards';
+				document.getElementById('timecard').style.animation = 'timeDown .3s ease forwards';
 			}
 		});
 
 		document.getElementById('donebutton').addEventListener('click', function() {
+			const apptDate = document.getElementById('dateinput').value;
+			const apptTime = document.getElementById('timeinput').value;
+			const meridiem = apptTime >= 12 ? 'PM' : 'AM';
+
 			timeOut = false;
-			document.getElementById('timecard').style.animation = 'timeDown .4s ease forwards';
+			document.getElementById('timecard').style.animation = 'timeDown .3s ease forwards';
+			document.getElementById('timeselecttext').innerHTML = apptDate + ' at ' + apptTime + ' ' + meridiem;
 		});
 	}
 

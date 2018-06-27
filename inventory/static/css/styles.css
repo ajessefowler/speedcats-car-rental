@@ -51,16 +51,15 @@ header {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	width: calc(100% - 14px);
-	height: 95px;
+	height: 50px;
 	background-color: #455A64;
 	box-shadow: 0 4px 6px -3px #2c2c2c;
-	padding: 0 7px 2px;
+	padding: 0 7px;
 	position: fixed;
 	top: 0;
 	z-index: 52;
-	transform: translateY(-42px);
 }
 
 header > h1 {
@@ -70,23 +69,17 @@ header > h1 {
 
 nav {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	width: calc(100% - 32px);
-	height: 40px;
-	z-index: 10;
-	padding: 4px 0 0;
-}
-
-nav > p {
-	padding: 8px;
-	color: white;
-}
-
-nav > a > p {
-	margin-bottom: 0;
-	position: relative;
-	top: -8px;
+	width: 250px;
+	height: calc(100vh - 50px);
+	z-index: 53;
+	position: fixed;
+	top: 50px;
+	background-color: #718792;
+	box-shadow: 4px 0 6px -3px #2c2c2c;
+	transform: translateX(-270px);
 }
 
 a:-webkit-any-link {
@@ -181,12 +174,29 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px #292929;
 }
 
+.selectcard {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: rgb(20, 20, 20);
+	font-size: 12pt;
+	margin: 8px 0 12px;
+	padding: 0 6px;
+	background-color: white;
+	height: 40px;
+	align-self: center;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #666666;
+	width: calc(100% - 12px);
+	letter-spacing: -0.5px;
+}
+
 #logincontent {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 20px 20px 0;
+	margin: 70px 20px 0;
 	background-color: white;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px 1px #666666;
@@ -242,7 +252,6 @@ a:-webkit-any-link {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding-bottom: 5px;
 }
 
 #menubutton {
@@ -257,7 +266,10 @@ a:-webkit-any-link {
 
 #content {
 	width: 100%;
-	padding-top: 54px;
+}
+
+#content > img {
+	margin-top: 50px;
 }
 
 #search {
@@ -318,6 +330,7 @@ a:-webkit-any-link {
 
 #mapcontainer {
 	position: fixed;
+	top: 50px;
 	height: 280px;
 	width: 100%;
 	z-index: 50;
@@ -325,7 +338,7 @@ a:-webkit-any-link {
 
 #infocontainer {
 	position: relative;
-	margin-top: 280px;
+	margin-top: 330px;
 	height: 100%;
 	z-index: 51;
 	box-shadow: 0 -3px 6px -3px #2c2c2c;
@@ -344,21 +357,6 @@ a:-webkit-any-link {
 	margin: 0 20px;
 }
 
-#selectlocation > p {
-	color: rgb(20, 20, 20);
-	font-size: 12pt;
-	padding-bottom: 5px;
-	margin: 9px 0 21px;
-	background-color: white;
-	height: 35px;
-	line-height: 40px;
-	align-self: center;
-	border-radius: 3px;
-	box-shadow: 0 1px 3px #666666;
-	width: 90%;
-	letter-spacing: -0.5px;
-}
-
 #startbutton {
 	display: flex;
 	justify-content: center;
@@ -368,9 +366,23 @@ a:-webkit-any-link {
 	background-color: rgb(126, 126, 126);
 	height: 40px;
 	width: 110px;
-	margin: 4px 20px 25px auto;
+	margin: 15px 20px 25px auto;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px 1px #666666;
+}
+
+#expandtimecard {
+	transform-origin: center;
+	transform: rotate(0deg);
+}
+
+#timeselect > i {
+	font-size: 22pt;
+	margin-left: auto;
+}
+
+#timeselecttext {
+	padding: 0 3px 0 15px;
 }
 
 #timecard {
@@ -412,6 +424,7 @@ a:-webkit-any-link {
 
 #storecontent {
 	width: 100%;
+	margin-top: 50px;
 }
 
 #storecontent > a {

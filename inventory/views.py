@@ -14,10 +14,7 @@ def index(request):
 	}
 
 	return render(request, 'inventory/index.html', context)
-
-def login(request):
-	return render(request, 'inventory/login.html')
-
+	
 def faqs(request):
 	return render(request, 'inventory/faqs.html')
 
