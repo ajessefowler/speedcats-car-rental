@@ -107,7 +107,7 @@ a:-webkit-any-link {
 	background-color: white;
 	margin: 0 20px 15px;
 	border-radius: 3px;
-	box-shadow: 0 1px 3px 1px #525252;
+	box-shadow: 0 1px 3px #525252;
 }
 
 .vehicle > a {
@@ -119,12 +119,17 @@ a:-webkit-any-link {
 	color: black;
 }
 
+.vehicle > a > p {
+	margin-right: auto;
+}
+
 .vehicle > a > img {
 	height: 80px;
 	padding: 0;
 	margin: 0;
 	display: block;
 	margin-right: auto;
+	border-right: 1px solid #bbbbbb;
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
 	max-width: 80px;
@@ -139,19 +144,22 @@ a:-webkit-any-link {
 }
 
 .loginform > p {
-	font-size: 11pt;
+	margin: 14px 0;
+	padding: 0;
+	font-size: 15pt;
 	font-family: 'Roboto', sans-serif;
-	color: #525252;
+	color: #161616;
 }
 
 .loginform > input {
 	width: 250px;
 	border: none;
-	border-bottom: 1px solid #bbbbbb;
 	font-size: 11pt;
 	font-family: 'Roboto', sans-serif;
-	padding: 0 5px 3px;
+	padding: 10px 14px;
 	color: #2b2b2b;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #424242;
 }
 
 .loginmessage {
@@ -190,10 +198,7 @@ a:-webkit-any-link {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 70px 20px 0;
-	background-color: white;
-	border-radius: 3px;
-	box-shadow: 0 1px 3px 1px #666666;
+	margin: 50px 20px 0;
 	padding: 8px 0;
 }
 
@@ -207,8 +212,9 @@ a:-webkit-any-link {
 	font-size: 13pt;
 	height: 40px;
 	padding: 0 12px;
-	width: 100%;
+	width: 110px;
 	margin-top: 24px;
+	float: right;
 }
 
 #register {
@@ -377,6 +383,7 @@ a:-webkit-any-link {
 
 #timeselecttext {
 	padding: 0 3px 0 15px;
+	margin-left: auto;
 }
 
 #timecard {
