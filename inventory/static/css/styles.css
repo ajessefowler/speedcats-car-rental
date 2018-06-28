@@ -53,7 +53,7 @@ header {
 	align-items: center;
 	justify-content: center;
 	width: calc(100% - 14px);
-	height: 50px;
+	height: 55px;
 	background-color: #455A64;
 	box-shadow: 0 4px 6px -3px #2c2c2c;
 	padding: 0 7px;
@@ -71,12 +71,12 @@ nav {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-start;
 	width: 250px;
 	height: calc(100vh - 50px);
-	z-index: 53;
+	z-index: 54;
 	position: fixed;
-	top: 50px;
+	top: 55px;
 	background-color: #718792;
 	box-shadow: 4px 0 6px -3px #2c2c2c;
 	transform: translateX(-270px);
@@ -132,7 +132,7 @@ a:-webkit-any-link {
 	border-right: 1px solid #bbbbbb;
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
-	max-width: 80px;
+	max-width: 110px;
 	object-fit: cover;
 }
 
@@ -170,7 +170,7 @@ a:-webkit-any-link {
 
 .input {
 	font-family: 'Roboto', sans-serif;
-	padding: 4px 7px;
+	padding: 8px 7px;
 	border: none;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #292929;
@@ -266,10 +266,7 @@ a:-webkit-any-link {
 
 #content {
 	width: 100%;
-}
-
-#content > img {
-	margin-top: 50px;
+	margin-top: 55px;
 }
 
 #search {
@@ -330,7 +327,7 @@ a:-webkit-any-link {
 
 #mapcontainer {
 	position: fixed;
-	top: 50px;
+	top: 55px;
 	height: 280px;
 	width: 100%;
 	z-index: 50;
@@ -388,20 +385,32 @@ a:-webkit-any-link {
 
 #timecard {
 	width: calc(100% - 30px);
-	height: 70px;
+	height: 100px;
 	position: fixed;
 	bottom: 0;
-	transform: translateY(100px);
+	transform: translateY(130px);
 	background-color: #455A64;
 	box-shadow: 0 -3px 6px -3px #2c2c2c;
-	padding: 9px 15px;
+	padding: 4px 15px 9px;
 	z-index: 53;
 }
 
-#timecard > h3 {
+#timeheader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#timeheader > h3 {
 	color: white;
 	font-size: 14pt;
 	font-weight: 300;
+}
+
+#closetimecard {
+	color: white;
+	padding: 8px 0 8px 8px;
 }
 
 #timepicker {
@@ -410,11 +419,10 @@ a:-webkit-any-link {
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
-	top: -4px;
 }
 
 #timepicker > p {
-	font-size: 11pt;
+	font-size: 13pt;
 	color: white;
 }
 
@@ -424,11 +432,6 @@ a:-webkit-any-link {
 }
 
 #storecontent {
-	width: 100%;
-	margin-top: 50px;
-}
-
-#storecontent > a {
 	width: 100%;
 }
 

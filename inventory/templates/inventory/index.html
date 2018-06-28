@@ -31,12 +31,15 @@
 </div>
 
 <div id="timecard">
-   <h3>Select Your Pick Up Time</h3>
-   <div id="timepicker">
-       <input type="date" id="dateinput" class="input" name="dateinput"/>
-       <p>AT</p>
-       <input type="time" id="timeinput" class="input" name="timeinput" min="7:00" max="20:00"/>
-       <p id="donebutton">DONE</p>
-   </div>
+    <div id="timeheader">
+        <h3>Select Your Pick Up Time</h3>
+        <i id="closetimecard" class="material-icons">expand_more</i>
+    </div>
+    <div id="timepicker">
+        <input type="date" id="dateinput" class="input" name="dateinput"/>
+        <p>AT</p>
+        <input type="time" id="timeinput" class="input" name="timeinput" min="7:00" max="20:00"/>
+        <p id="donebutton">DONE</p>
+    </div>
 </div>
 {% endblock %}

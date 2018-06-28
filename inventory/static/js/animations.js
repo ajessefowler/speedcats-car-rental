@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		document.getElementById('timeselect').addEventListener('click', function() {
 			if (!timeOut) {
 				timeOut = true;
-				document.getElementById('expandtimecard').style.animation = 'arrowDown .3s ease forwards';
 				document.getElementById('timecard').style.animation = 'timeUp .3s ease forwards';
-			} else {
-				timeOut = false;
-				document.getElementById('expandtimecard').style.animation = 'arrowUp .3s ease forwards';
-				document.getElementById('timecard').style.animation = 'timeDown .3s ease forwards';
 			}
+		});
+
+		document.getElementById('closetimecard').addEventListener('click', function() {
+			timeOut = false;
+			document.getElementById('timecard').style.animation = 'timeDown .3s ease forwards';
 		});
 
 		document.getElementById('donebutton').addEventListener('click', function() {
