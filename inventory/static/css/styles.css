@@ -170,7 +170,8 @@ a:-webkit-any-link {
 
 .input {
 	font-family: 'Roboto', sans-serif;
-	padding: 8px 7px;
+	padding: 0 7px;
+	height: 35px;
 	border: none;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #292929;
@@ -368,11 +369,6 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px 1px #666666;
 }
 
-#expandtimecard {
-	transform-origin: center;
-	transform: rotate(0deg);
-}
-
 #timeselect > i {
 	font-size: 22pt;
 	margin-left: auto;
@@ -404,7 +400,7 @@ a:-webkit-any-link {
 
 #timeheader > h3 {
 	color: white;
-	font-size: 14pt;
+	font-size: 16pt;
 	font-weight: 300;
 }
 
@@ -419,10 +415,11 @@ a:-webkit-any-link {
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
+	padding-top: 5px;
 }
 
 #timepicker > p {
-	font-size: 13pt;
+	font-size: 12pt;
 	color: white;
 }
 
