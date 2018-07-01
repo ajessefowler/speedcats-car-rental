@@ -64,6 +64,13 @@ function checkStartFormCompletion() {
     }
 }
 
+// Adds link to start button given a URL containing the storeID
+function addStartLink(linkURL) {
+    document.getElementById('startbutton').onclick = function() {
+        document.location.href = linkURL;
+    }
+}
+
 function mapOnLoad(request, id, map, addressDisplay, marker, element) {
     
     // Scroll to top of page to display entire map
@@ -73,6 +80,11 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
         behavior: 'smooth' 
     });
 
+    // Add close animation to close button
+    document.getElementById('close' + element).addEventListener('click', function() {
+        document.getElementById(element + 'locationcard').style.animation = 'timeDown .3s ease forwards';
+    });
+
     if (request.status >= 200 && request.status < 400) {
         const vehiclesLink = '/inventory/' + id + '/';
 
@@ -80,18 +92,20 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
         google.maps.event.addListener(marker, 'click', function() {
             document.getElementById(element + 'locationdone').style.color = '#ffffff';
             document.getElementById(element + 'locationtext').innerHTML = addressDisplay;
-                //document.getElementById('startbutton').onclick = function() {
-                // document.location.href = vehiclesLink;
-                // }
-
-            // Confirms location on done button click
+            
             document.getElementById(element + 'locationdone').addEventListener('click', function() {
                 document.getElementById(element + 'locationcardtext').innerHTML = addressDisplay;
                 document.getElementById(element + 'locationcard').style.animation = 'timeDown .3s ease forwards';
                 document.getElementById(element + 'location').scrollIntoView({
                     behavior: 'smooth'
                 });
+
                 checkStartFormCompletion();
+
+                // Add link to start button for the selected pick upstore
+                if (element === 'pickup') {
+                    addStartLink(vehiclesLink);
+                }
             });
         });
 
@@ -105,6 +119,7 @@ function initMap() {
     const key = 'AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE';
     let i;
 
+    // Initialize map centered over store locations
     const map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 41.0, lng: -82.99},
         zoom: 6,

@@ -54,7 +54,6 @@ class Vehicle(models.Model):
 		default='c',
 	)
 
-
 	def get_absolute_url(self):
 		return reverse('vehicle-detail-view', args=[str(self.id)])
 
@@ -71,4 +70,4 @@ class Reservation(models.Model):
 	miles_driven = models.IntegerField()
 
 	def __str__(self):
-		return str(self.vehicle) + ' from ' + self.pick_up_location + ' to ' + self.drop_off_location
+		return str(self.vehicle) + ' from ' + str(self.pick_up_location) + ' to ' + str(self.drop_off_location)

@@ -4,6 +4,14 @@
 <img src="{{ vehicle.image.url }}" width="100%">
 <h2 class="header">Place Your Reservation</h2>
 <div id="reservecontent">
-    
+    <div id="paymentlocation">
+        <form name="paymentlocation">
+            <input type="radio" name="paymentlocation" value="online" checked>Online Payment<br>
+            <input type="radio" name="paymentlocation" value="instore">In Store<br>
+        </form>
+        <div id="paymentlocationcontinue">
+            <p>CONTINUE</p>
+        </div>
+    </div>
 </div>
 {% endblock %}

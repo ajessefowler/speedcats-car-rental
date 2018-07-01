@@ -38,9 +38,19 @@ def vehicle(request, storeID, vehicleID):
 	}
 	return render(request, 'inventory/vehicle_detail.html', context)
 
+@login_required
 def reserve(request, storeID, vehicleID):
 	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
 	context = {
 		"vehicle":vehicle
 	}
 	return render(request, 'inventory/reserve_vehicle.html', context)
+
+@login_required
+def make_reservation(request, storeID, vehicleID):
+	try:
+		user = request.user
+		store = Store.objects.get(pk=storeID)
+		vehicle = Vehicle.objects.get(pk=vehicleID)
+	except KeyError:
+		pass

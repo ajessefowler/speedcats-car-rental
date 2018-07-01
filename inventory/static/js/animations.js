@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	// Add event listener to find location button
 	if (document.getElementById('locatebutton')) {
+		initLocation();
 		document.getElementById('locatebutton').addEventListener('click', function() {
 			findLocation();
 		});
@@ -34,7 +35,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		initTimeHandler('dropoff');
 	}
 
-	initLocation();
+	// Add animations to make reservation page
+	if (document.getElementById('reservecontent')) {
+		document.getElementById('paymentlocationcontinue').addEventListener('click', function() {
+			console.log(document.querySelector('input[name="paymentlocation"]:checked').value);
+		});
+	}
 });
 
 function initTimeHandler(element) {
