@@ -38,7 +38,6 @@ def vehicle(request, storeID, vehicleID):
 	}
 	return render(request, 'inventory/vehicle_detail.html', context)
 
-@login_required
 def reserve(request, storeID, vehicleID):
 	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
 	context = {

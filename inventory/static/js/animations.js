@@ -2,14 +2,15 @@
 document.addEventListener('DOMContentLoaded', function(event) {
 	const today = new Date();
 	let menuOut = false;
-	let timeOut = false;
 
+	// Add event listener to find location button
 	if (document.getElementById('locatebutton')) {
 		document.getElementById('locatebutton').addEventListener('click', function() {
 			findLocation();
 		});
 	}
 
+	// Slides menu in and out
 	document.getElementById('menubutton').addEventListener('click', function() {
 		if (!menuOut) {
 			menuOut = true;
@@ -22,33 +23,36 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		}
 	});
 
+	// Calculates height of vehicle image to position information
 	if (document.getElementById('vehiclecontent')) {
 		document.getElementById('vehiclecontent').style.top = (document.getElementById('vehicleimage').height + 'px');
 	}
 
-	if (document.getElementById('timeselect')) {
-		document.getElementById('timeselect').addEventListener('click', function() {
-			if (!timeOut) {
-				timeOut = true;
-				document.getElementById('timecard').style.animation = 'timeUp .3s ease forwards';
-			}
-		});
-
-		document.getElementById('closetimecard').addEventListener('click', function() {
-			timeOut = false;
-			document.getElementById('timecard').style.animation = 'timeDown .3s ease forwards';
-		});
-
-		document.getElementById('donebutton').addEventListener('click', function() {
-			const apptDate = document.getElementById('dateinput').value;
-			const apptTime = document.getElementById('timeinput').value;
-			const meridiem = apptTime >= 12 ? 'PM' : 'AM';
-
-			timeOut = false;
-			document.getElementById('timecard').style.animation = 'timeDown .3s ease forwards';
-			document.getElementById('timeselecttext').innerHTML = apptDate + ' at ' + apptTime + ' ' + meridiem;
-		});
+	// Add animations and input for time selection
+	if (document.getElementById('pickuptimeselect')) {
+		initTimeHandler('pickup');
+		initTimeHandler('dropoff');
 	}
 
 	initLocation();
 });
+
+function initTimeHandler(element) {
+	document.getElementById(element + 'timeselect').addEventListener('click', function() {
+		document.getElementById(element + 'timecard').style.animation = 'timeUp .3s ease forwards';
+	});
+
+	document.getElementById('close' + element + 'time').addEventListener('click', function() {
+		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
+	});
+
+	document.getElementById(element + 'donebutton').addEventListener('click', function() {
+		const apptDate = document.getElementById(element + 'dateinput').value;
+		const apptTime = document.getElementById(element + 'timeinput').value;
+		const meridiem = apptTime >= 12 ? 'PM' : 'AM';
+
+		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
+		document.getElementById(element + 'timecardtext').innerHTML = apptDate + ' at ' + apptTime + ' ' + meridiem;
+		checkStartFormCompletion();
+	});
+}

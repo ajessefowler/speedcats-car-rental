@@ -177,13 +177,67 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px #292929;
 }
 
+.infoselector {
+	width: calc(100% - 30px);
+	height: 100px;
+	position: fixed;
+	bottom: 0;
+	transform: translateY(130px);
+	background-color: #455A64;
+	box-shadow: 0 -3px 6px -3px #2c2c2c;
+	padding: 4px 15px 9px;
+	z-index: 53;
+}
+
+.infoselectorheader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 4px 0 0;
+}
+
+.infoselectorheader > h3 {
+	color: white;
+	font-size: 16pt;
+	font-weight: 300;
+}
+
+.infoselectorheader > i {
+	color: white;
+	padding: 8px 0 8px 8px;
+}
+
+.locationpicker {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-top: 0px;
+}
+
+.locationpickertext {
+	font-size: 11pt;
+	padding: 8px 0;
+	width: 300px;
+	background-color: white;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #383838;
+	margin-right: 10px;
+}
+
+.donebutton {
+	padding-right: 3px;
+	color: #949393;
+}
+
 .selectcard {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: rgb(20, 20, 20);
 	font-size: 12pt;
-	margin: 8px 0 12px;
+	margin: 0 0 12px;
 	padding: 0 6px;
 	background-color: white;
 	height: 40px;
@@ -336,7 +390,7 @@ a:-webkit-any-link {
 
 #infocontainer {
 	position: relative;
-	margin-top: 330px;
+	margin-top: 335px;
 	height: 100%;
 	z-index: 51;
 	box-shadow: 0 -3px 6px -3px #2c2c2c;
@@ -355,6 +409,14 @@ a:-webkit-any-link {
 	margin: 0 20px;
 }
 
+#selectlocation > h3 {
+	padding-bottom: 6px;
+}
+
+#selectlocation > h3:nth-of-type(2) {
+	padding-top: 6px;
+}
+
 #startbutton {
 	display: flex;
 	justify-content: center;
@@ -369,46 +431,6 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px 1px #666666;
 }
 
-#timeselect > i {
-	font-size: 22pt;
-	margin-left: auto;
-}
-
-#timeselecttext {
-	padding: 0 3px 0 15px;
-	margin-left: auto;
-}
-
-#timecard {
-	width: calc(100% - 30px);
-	height: 100px;
-	position: fixed;
-	bottom: 0;
-	transform: translateY(130px);
-	background-color: #455A64;
-	box-shadow: 0 -3px 6px -3px #2c2c2c;
-	padding: 4px 15px 9px;
-	z-index: 53;
-}
-
-#timeheader {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-}
-
-#timeheader > h3 {
-	color: white;
-	font-size: 16pt;
-	font-weight: 300;
-}
-
-#closetimecard {
-	color: white;
-	padding: 8px 0 8px 8px;
-}
-
 #timepicker {
 	display: flex;
 	flex-direction: row;
@@ -421,11 +443,6 @@ a:-webkit-any-link {
 #timepicker > p {
 	font-size: 12pt;
 	color: white;
-}
-
-#donebutton {
-	padding-right: 3px;
-	color: #949393 !important;
 }
 
 #storecontent {
@@ -529,7 +546,7 @@ a:-webkit-any-link {
 		height: 440px;
 	}
 
-	#timeselect {
+	#pickuptimeselect {
 		cursor: pointer;
 	}
 
