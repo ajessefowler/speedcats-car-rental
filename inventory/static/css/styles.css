@@ -86,6 +86,7 @@ nav {
 	background-color: #718792;
 	box-shadow: 4px 0 6px -3px #2c2c2c;
 	transform: translateX(-270px);
+	padding-top: 15px;
 }
 
 a:-webkit-any-link {
@@ -556,6 +557,44 @@ a:-webkit-any-link {
 
 #deletebutton {
 	background-color: #f44336;
+}
+
+#startreservationbutton {
+	margin: 0 60px;
+	padding: 10px 0;
+	background-color: #FF5722; 
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #707070;
+	position: relative;
+}
+
+#startreservationbutton > a > p {
+	margin: 0;
+	padding: 0;
+}
+
+#homephoto {
+	position: fixed;
+}
+
+#welcomeheading {
+	position: fixed;
+	text-align: center;
+	width: 100%;
+	padding-top: 8%;
+}
+
+#startnav {
+	background-color: #FF5722;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #414040;
+	padding: 10px 14px;
+}
+
+#startnav > p {
+	color: white;
+	margin: 0;
+	padding: 0;
 }
 
 @media only screen and (min-width: 768px) {

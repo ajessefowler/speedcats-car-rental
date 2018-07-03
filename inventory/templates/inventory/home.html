@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <img src="../../static/img/homephoto.jpg" width="100%" id="homephoto">
+    <h2 id="welcomeheading">Welcome to Speedcats Car Rental</h2>
+    <div id="startreservationbutton">
+        <a href="{% url 'inventory:index' %}"><p>START A RESERVATION</p></a>
+    </div>
+{% endblock %}

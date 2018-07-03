@@ -15,6 +15,9 @@ def index(request):
 
 	return render(request, 'inventory/index.html', context)
 	
+def home(request):
+	return render(request, 'inventory/home.html')
+
 @login_required
 def history(request):
 	user = request.user
