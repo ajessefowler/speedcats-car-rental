@@ -4,6 +4,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 
+import datetime
+
 class Store(models.Model):
 
 	ID = models.IntegerField(primary_key=True)
@@ -69,6 +71,38 @@ class Reservation(models.Model):
 	drop_off_time = models.DateTimeField(blank=False, null=False)
 	drop_off_location = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='drop_off_store')
 	miles_driven = models.IntegerField(null=True, blank=True)
+
+	@property
+	def status(self):
+		pick_up_time = self.format_pick_up_time()
+		drop_off_time = self.format_drop_off_time()
+		now = datetime.datetime.now()
+
+		if pick_up_time > now:
+			return 'Upcoming'
+		elif drop_off_time > now:
+			return 'In Progress'
+		elif now > drop_off_time:
+			return 'Completed'
+		
+
+	def format_pick_up_time(self):
+		year = int(str(self.pick_up_time)[:4])
+		month = int(str(self.pick_up_time)[5:7])
+		day = int(str(self.pick_up_time)[8:10])
+		hour = int(str(self.pick_up_time)[11:13])
+		minute = int(str(self.pick_up_time)[14:16])
+		time = datetime.datetime(year, month, day, hour, minute)
+		return time
+
+	def format_drop_off_time(self):
+		year = int(str(self.drop_off_time)[:4])
+		month = int(str(self.drop_off_time)[5:7])
+		day = int(str(self.drop_off_time)[8:10])
+		hour = int(str(self.drop_off_time)[11:13])
+		minute = int(str(self.drop_off_time)[14:16])
+		time = datetime.datetime(year, month, day, hour, minute)
+		return time
 
 	def __str__(self):
 		return str(self.vehicle) + ' ' + str(self.pick_up_time)[:10] + ' to ' + str(self.drop_off_time)[:10]

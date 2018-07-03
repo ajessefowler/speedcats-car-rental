@@ -6,11 +6,18 @@
     <ul id="reservationlist">
         {% for reservation in reservations %}
         <div>
-            <p>{{ reservation }}</p>
-            <div id="reservebuttons">
-                <p id="deletebutton" class="reservebutton">DELETE</p>
-                <p id="editbutton" class="reservebutton">MODIFY</p>
-            </div>
+            <p>{{ reservation.vehicle }}</p>
+            {% if reservation.status == "Upcoming" %}
+                <p class="reservationtime">Starting {{ reservation.pick_up_time }}</p>
+            {% endif %}
+            {% if reservation.status != "Upcoming" %}
+                <p class="reservationtime">Started {{ reservation.pick_up_time }}</p>
+            {% endif %}
+            <p class="reservationtime">Status: {{ reservation.status }}</p>
+        </div>
+        {% empty %}
+        <div>
+            <p>You haven't made a reservation yet.</p>
         </div>
         {% endfor %}
     </ul>

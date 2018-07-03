@@ -2,8 +2,26 @@
 
 {% block content %}
     <img src="../../static/img/homephoto.jpg" width="100%" id="homephoto">
-    <h2 id="welcomeheading">Welcome to Speedcats Car Rental</h2>
+    <div id="welcomeheading">
+        <h2>Welcome to Speedcats Car Rental</h2>
+        <p>The speediest way to get on the road!</p>
+    </div>
     <div id="startreservationbutton">
         <a href="{% url 'inventory:index' %}"><p>START A RESERVATION</p></a>
+    </div>
+    <p>Details about the company here. Provide an introduction to Speedcats and reasons why users should choose our service.</p>
+    <div id="threedetails">
+        <div class="detail">
+            <h2>Pay Online</h2>
+            <p>Some more details about this feature here.</p>
+        </div>
+        <div class="detail">
+            <h2>Pay Online</h2>
+            <p>Some more details about this feature here.</p>
+        </div>
+        <div class="detail">
+            <h2>Pay Online</h2>
+            <p>Some more details about this feature here.</p>
+        </div>
     </div>
 {% endblock %}
