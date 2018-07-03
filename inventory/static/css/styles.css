@@ -283,7 +283,7 @@ a:-webkit-any-link {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 	margin: 50px 20px 0;
 	padding: 8px 0;
 }

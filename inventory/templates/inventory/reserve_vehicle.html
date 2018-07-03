@@ -4,18 +4,50 @@
 <img src="{{ vehicle.image.url }}" width="100%">
 <h2 class="header">Place Your Reservation</h2>
 <div id="reservecontent">
-    <div id="paymentlocation">
-        <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
-            {% csrf_token %}
-            <p>Confirm details here</p>
-            <input type="text" name="pickupstore" id="pickupstore">
-            <input type="text" name="pickuptime" id="pickuptime">
-            <input type="text" name="dropoffstore" id="dropoffstore">
-            <input type="text" name="dropofftime" id="dropofftime">
-            <div id="paymentlocationcontinue">
-                <input type="submit" value="CONTINUE">
-            </div>
-        </form>
-    </div>
+    <p>Confirm details here</p>
+    <p>{{ vehicle }}</p>
+    <p>Subtotal: $88.88</p>
+    <p>Tax: $8.88</p>
+    <p>Total: $100.00</p>
+    <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="pickupstore" id="pickupstore">
+        <input type="text" name="pickuptime" id="pickuptime">
+        <input type="text" name="dropoffstore" id="dropoffstore">
+        <input type="text" name="dropofftime" id="dropofftime"><br>
+        <input type="radio" name="payment" id="payinstore" checked>Pay in store<br>
+        <input type="radio" name="payment" id="payonline">Pay online<br>
+        <div id="paymentformdiv">
+            <h2>Enter Your Payment Information</h2>
+            <input type="text" placeholder="Cardholder name">
+            <input type="text" placeholder="Card number">
+            <select>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            <select>
+                <option value="18">2018</option>
+                <option value="19">2019</option>
+                <option value="20">2020</option>
+                <option value="21">2021</option>
+                <option value="22">2022</option>
+                <option value="23">2023</option>
+                <option value="24">2024</option>
+                <option value="25">2025</option>
+            </select>
+            <input type="text" placeholder="CVV"
+        </div>
+        <input type="submit" value="CONTINUE">
+    </form>
 </div>
 {% endblock %}
