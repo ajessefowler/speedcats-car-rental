@@ -5,13 +5,17 @@
 <h2 class="header">Place Your Reservation</h2>
 <div id="reservecontent">
     <div id="paymentlocation">
-        <form name="paymentlocation">
-            <input type="radio" name="paymentlocation" value="online" checked>Online Payment<br>
-            <input type="radio" name="paymentlocation" value="instore">In Store<br>
+        <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
+            {% csrf_token %}
+            <p>Confirm details here</p>
+            <input type="text" name="pickupstore" id="pickupstore">
+            <input type="text" name="pickuptime" id="pickuptime">
+            <input type="text" name="dropoffstore" id="dropoffstore">
+            <input type="text" name="dropofftime" id="dropofftime">
+            <div id="paymentlocationcontinue">
+                <input type="submit" value="CONTINUE">
+            </div>
         </form>
-        <div id="paymentlocationcontinue">
-            <p>CONTINUE</p>
-        </div>
     </div>
 </div>
 {% endblock %}

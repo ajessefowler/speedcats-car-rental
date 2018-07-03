@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.dispatch import receiver
 
 class Store(models.Model):
 
@@ -61,13 +62,13 @@ class Vehicle(models.Model):
 		return str(self.year) + ' ' + self.make + ' ' + self.model
 
 class Reservation(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reservations")
 	vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
 	pick_up_time = models.DateTimeField(blank=False, null=False)
 	pick_up_location = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='pick_up_store')
 	drop_off_time = models.DateTimeField(blank=False, null=False)
 	drop_off_location = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='drop_off_store')
-	miles_driven = models.IntegerField()
+	miles_driven = models.IntegerField(null=True, blank=True)
 
 	def __str__(self):
-		return str(self.vehicle) + ' from ' + str(self.pick_up_location) + ' to ' + str(self.drop_off_location)
+		return str(self.vehicle) + ' ' + str(self.pick_up_time)[:10] + ' to ' + str(self.drop_off_time)[:10]

@@ -47,6 +47,12 @@ p {
 	text-align: center;
 }
 
+li {
+	font-size: 12pt;
+	font-family: 'Roboto', sans-serif;
+	text-align: center;
+}
+
 header {
 	display: flex;
 	flex-direction: column;
@@ -248,11 +254,20 @@ a:-webkit-any-link {
 	letter-spacing: -0.5px;
 }
 
+.reservebutton {
+	font-size: 11pt;
+	color: white;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #707070;
+	margin: 0 8px 14px;
+	padding: 6px 10px;
+}
+
 #logincontent {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	margin: 50px 20px 0;
 	padding: 8px 0;
 }
@@ -296,6 +311,7 @@ a:-webkit-any-link {
 	height: 40px;
 	border-radius: 3px;
 	box-shadow: 0 1px 4px #3d3d3d;
+	margin-left: auto;
 }
 
 #logo {
@@ -494,6 +510,52 @@ a:-webkit-any-link {
 #reservebutton > p {
 	color: white;
 	font-size: 12pt;
+}
+
+#reservationlist {
+	padding: 0;
+	background-color: white;
+	margin: 0 20px;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #707070;
+}
+
+#reservationhistory {
+	background-color: white;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #707070;
+	padding: 9px 10px;
+	width: calc(100% - 20px);
+}
+
+#reservationhistory > a {
+	color: black;
+	padding: 8px;
+}
+
+#reservationlist > div > p {
+	padding: 10px 8px;
+	margin: 0;
+}
+
+#reservationlist > div:not(:last-child) {
+	border-bottom: 1px solid #dddddd;
+}
+
+#reservebuttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding-left: 12px;
+}
+
+#editbutton {
+	background-color: #718792;
+}
+
+#deletebutton {
+	background-color: #f44336;
 }
 
 @media only screen and (min-width: 768px) {

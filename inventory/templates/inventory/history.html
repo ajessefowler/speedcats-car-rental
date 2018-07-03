@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h2 class="header">Your Reservation History</h2>
+
+    <ul id="reservationlist">
+        {% for reservation in reservations %}
+        <div>
+            <p>{{ reservation }}</p>
+            <div id="reservebuttons">
+                <p id="deletebutton" class="reservebutton">DELETE</p>
+                <p id="editbutton" class="reservebutton">MODIFY</p>
+            </div>
+        </div>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

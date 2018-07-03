@@ -1,3 +1,6 @@
+var pickUpTime;
+var dropOffTime;
+
 // Initialize animations
 document.addEventListener('DOMContentLoaded', function(event) {
 	const today = new Date();
@@ -37,6 +40,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	// Add animations to make reservation page
 	if (document.getElementById('reservecontent')) {
+		document.getElementById('pickupstore').value = localStorage.getItem('pickup');
+		document.getElementById('pickuptime').value = localStorage.getItem('pickuptime');
+		document.getElementById('dropoffstore').value = localStorage.getItem('dropoff');
+		document.getElementById('dropofftime').value = localStorage.getItem('dropofftime');
 		document.getElementById('paymentlocationcontinue').addEventListener('click', function() {
 			console.log(document.querySelector('input[name="paymentlocation"]:checked').value);
 		});
@@ -57,8 +64,23 @@ function initTimeHandler(element) {
 		const apptTime = document.getElementById(element + 'timeinput').value;
 		const meridiem = apptTime >= 12 ? 'PM' : 'AM';
 
+		if (element === 'pickup') {
+			pickUpTime = apptDate + ' ' + apptTime;
+		} else if (element === 'dropoff') {
+			dropOffTime = apptDate + ' ' + apptTime;
+		}
+
+		if (pickUpTime && dropOffTime) {
+			updateLocalStorageTime();
+		}
+
 		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
 		document.getElementById(element + 'timecardtext').innerHTML = apptDate + ' at ' + apptTime + ' ' + meridiem;
 		checkStartFormCompletion();
 	});
+
+	function updateLocalStorageTime() {
+		localStorage.setItem('pickuptime', pickUpTime);
+		localStorage.setItem('dropofftime', dropOffTime);
+	}
 }

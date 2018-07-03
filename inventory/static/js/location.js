@@ -1,5 +1,7 @@
 var pickUpStoreId;
+var pickUpStoreAddress;
 var dropOffStoreId;
+var dropOffStoreAddress;
 
 // Setup location autocomplete and search
 function initLocation() {
@@ -72,7 +74,7 @@ function addStartLink(linkURL) {
 }
 
 function mapOnLoad(request, id, map, addressDisplay, marker, element) {
-    
+
     // Scroll to top of page to display entire map
     window.scroll({
         top: 0,
@@ -94,6 +96,20 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
             document.getElementById(element + 'locationtext').innerHTML = addressDisplay;
             
             document.getElementById(element + 'locationdone').addEventListener('click', function() {
+                // Save selected store IDs
+                if (element === 'pickup') {
+                    pickUpStoreId = id;
+                    pickUpStoreAddress = addressDisplay;
+                } else if (element === 'dropoff') {
+                    dropOffStoreId = id;
+                    dropOffStoreAddress = addressDisplay;
+                }
+
+                // Update local storage with both store ID values
+                if (pickUpStoreId && dropOffStoreId) {
+                    updateLocalStorageLocation();
+                }
+
                 document.getElementById(element + 'locationcardtext').innerHTML = addressDisplay;
                 document.getElementById(element + 'locationcard').style.animation = 'timeDown .3s ease forwards';
                 document.getElementById(element + 'location').scrollIntoView({
@@ -111,6 +127,14 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
 
     } else {
         console.log('Data error.');
+    }
+
+    // Update local storage with both store ID values
+    function updateLocalStorageLocation() {
+        localStorage.setItem('pickup', pickUpStoreId);
+        localStorage.setItem('dropoff', dropOffStoreId);
+        localStorage.setItem('pickupaddress', pickUpStoreAddress);
+        localStorage.setItem('dropoffaddress', dropOffStoreAddress);
     }
 }
 
