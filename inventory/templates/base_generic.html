@@ -32,15 +32,15 @@
 	</header>
 
 	<nav>
-		<a href="{% url 'inventory:index' %}">
-			<div id="startnav">
-				<p>Start A Reservation</p>
-			</div>
-		</a>
 		<a href="{% url 'inventory:home' %}"><p>Home</p></a>
 		<a href="{% url 'inventory:faqs' %}"><p>FAQs</p></a>
 		<a href="{% url 'inventory:contact' %}"><p>Contact</p></a>
 		<a href="{% url 'inventory:feedback' %}"><p>Feedback</p></a>
+		<a href="{% url 'inventory:index' %}">
+			<div id="startnav" class="roundbutton">
+				<p>Start A Reservation</p>
+			</div>
+		</a>
 	</nav>
 
 	<div id="content">

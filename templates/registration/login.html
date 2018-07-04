@@ -19,7 +19,7 @@
         {% if user.is_authenticated %}
             <h2 class="header">Welcome, {{ user.first_name }}!</h2>
             <p id="reservationhistory"><a href="{% url 'inventory:history' %}">Your Reservation History</a></p>
-            <div id="logoutbutton">
+            <div id="logoutbutton" class="roundbutton">
                 <p><a href="{% url 'logout' %}">LOGOUT</a></p>
             </div>
         {% else %}
@@ -33,7 +33,7 @@
                 <p>Password</p>
                 <input type="password" name="password">
             </div>
-            <button type="submit" id="loginbutton">LOGIN</button>
+            <button type="submit" id="loginbutton" class="roundbutton">LOGIN</button>
         </form>
         <div id="register">
             <p>REGISTER</p>

@@ -9,24 +9,26 @@
         </div>
     </div>
     <div id="vehiclecontent">
-    <div id="homecontent">
-    <p>Details about the company here. Provide an introduction to Speedcats and reasons why users should choose our service.</p>
-    <div id="threedetails">
-        <div class="detail">
-            <h2>Reserve Online</h2>
-            <p>Choose any vehicle any time, right from your phone.</p>
+        <div id="homecontent">
+            <p>Details about the company here. Provide an introduction to Speedcats and reasons why users should choose our service.</p>
+            <div id="threedetails">
+            <div class="detail">
+                <h2>Reserve Online</h2>
+                <p>Choose any vehicle any time, right from your phone.</p>
+            </div>
+            <div class="detail">
+                <h2>No Hidden Fees</h2>
+                <p>Some more details about this feature here.</p>
+            </div>
+            <div class="detail">
+                <h2>Choose Your Payment</h2>
+                <p>Save time by paying online, or choose to pay in store.</p>
+            </div>
         </div>
-        <div class="detail">
-            <h2>No Hidden Fees</h2>
-            <p>Some more details about this feature here.</p>
-        </div>
-        <div class="detail">
-            <h2>Choose Your Payment</h2>
-            <p>Save time by paying online, or choose to pay in store.</p>
-        </div>
-    </div>
-    <div id="startreservationbutton">
-        <a href="{% url 'inventory:index' %}"><p>START A RESERVATION</p></a>
-    </div>
+        <a href="{% url 'inventory:index' %}">
+            <div id="startreservationbutton" class="roundbutton">
+                <p>Start A Reservation</p>
+            </div>
+        </a>
     </div>
 {% endblock %}

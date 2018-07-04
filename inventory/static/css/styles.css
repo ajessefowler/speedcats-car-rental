@@ -86,7 +86,11 @@ nav {
 	background-color: #718792;
 	box-shadow: 4px 0 6px -3px #2c2c2c;
 	transform: translateX(-270px);
-	padding-top: 15px;
+}
+
+nav > a:last-child {
+	margin-top: auto;
+	margin-bottom: 50px;
 }
 
 a:-webkit-any-link {
@@ -102,6 +106,15 @@ a:-webkit-any-link {
 
 .button {
 	padding: 8px;
+}
+
+.roundbutton {
+	height: 40px;
+	border-radius: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 1px 3px 1px #707070;
 }
 
 .header {
@@ -283,12 +296,9 @@ a:-webkit-any-link {
 }
 
 .reservebutton {
-	font-size: 11pt;
 	color: white;
-	border-radius: 3px;
-	box-shadow: 0 1px 3px #707070;
 	margin: 0 8px 14px;
-	padding: 6px 10px;
+	width: 110px;
 }
 
 .reservebutton > p {
@@ -299,10 +309,8 @@ a:-webkit-any-link {
 .disabledbutton {
 	color: #696969;
 	background-color: rgb(126, 126, 126) !important;
-	border-radius: 3px;
-	box-shadow: 0 1px 3px #707070;
 	margin: 0 8px 14px;
-	padding: 6px 10px;
+	width: 110px;
 }
 
 .disabledbutton > p {
@@ -341,11 +349,8 @@ a:-webkit-any-link {
 	background-color: #FF5722;
 	color: white;
 	border: none;
-	border-radius: 3px;
-	box-shadow: 0 1px 4px #3d3d3d;
 	font-family: 'Roboto', sans-serif;
 	font-size: 13pt;
-	height: 40px;
 	padding: 0 12px;
 	width: 110px;
 	margin-top: 24px;
@@ -368,15 +373,10 @@ a:-webkit-any-link {
 }
 
 #logoutbutton {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	background-color: #FF5722;
 	color: white;
-	height: 40px;
-	border-radius: 3px;
-	box-shadow: 0 1px 4px #3d3d3d;
 	margin-left: auto;
+	width: 110px;
 }
 
 #logo {
@@ -499,17 +499,11 @@ a:-webkit-any-link {
 }
 
 #startbutton {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	color: #696969;
 	font-size: 17pt;
 	background-color: rgb(126, 126, 126);
-	height: 40px;
 	width: 110px;
 	margin: 15px 20px 25px auto;
-	border-radius: 3px;
-	box-shadow: 0 1px 3px 1px #666666;
 }
 
 #timepicker {
@@ -561,15 +555,10 @@ a:-webkit-any-link {
 }
 
 #reservebutton {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: calc(100% - 40px);
-	height: 40px;
-	margin: 0 20px 20px;
+	width: 130px;
 	background-color: #FF5722;
-	border-radius: 3px;
-	box-shadow: 0 1px 3px 1px #3d3d3d;
+	margin-left: auto;
+	margin-right: 20px;
 }
 
 #reservebutton > p {
@@ -623,12 +612,8 @@ a:-webkit-any-link {
 }
 
 #startreservationbutton {
-	margin: 10px 60px 0;
-	padding: 10px 0;
+	margin: 0 30px;
 	background-color: #FF5722; 
-	border-radius: 3px;
-	box-shadow: 0 1px 3px #707070;
-	position: relative;
 }
 
 #startreservationbutton > a > p {
@@ -664,9 +649,10 @@ a:-webkit-any-link {
 
 #startnav {
 	background-color: #FF5722;
-	border-radius: 3px;
 	box-shadow: 0 1px 3px #414040;
-	padding: 10px 14px;
+	height: 40px;
+	width: 190px;
+	margin-top: auto;
 }
 
 #startnav > p {
