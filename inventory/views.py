@@ -80,12 +80,31 @@ def makereservation(request, storeID, vehicleID):
 
 @login_required
 def reservation(request, reservationID):
-	reservation = get_object_or_404(Reservation, pk=reservationID)
+	reservation = Reservation.objects.get(pk=reservationID)
+	context = {
+		"reservation":reservation
+	}
+
+	# If user made the reservation, display details, otherwise display error
+	if request.user == reservation.user:
+		return render(request, 'inventory/reservation.html', context)
+
+@login_required
+def modify(request, reservationID):
+	reservation = Reservation.objects.get(pk=reservationID)
 	context = {
 		"reservation":reservation
 	}
 	if request.user == reservation.user:
-		return render(request, 'inventory/reservation.html', context)
-	# if request.user == reservation.user
-	# allow access
-	# otherwise error
+		return render(request, 'inventory/modify.html', context)
+
+@login_required
+def cancel(request, reservationID):
+	user = request.user
+	reservation = Reservation.objects.get(pk=reservationID)
+	reservation.delete()
+	reservations = Reservation.objects.filter(user=user)
+	context = {
+		"reservations":reservations
+	}
+	return render(request, 'inventory/history.html', context)

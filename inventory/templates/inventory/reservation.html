@@ -4,19 +4,26 @@
     <img src="{{ reservation.vehicle.image.url }}" width="100%" id="vehicleimage">
     <div id="vehiclecontent">
         <h2 class="header">{{ reservation.vehicle }}</h2>
+        <p>From {{ reservation.pick_up_location }} to {{ reservation.drop_off_location }}</p>
         <div id="reservebuttons">
             {% if reservation.status == 'Upcoming' %}
-            <div id="editbutton" class="reservebutton">
-                <p>MODIFY</p>
-            </div>
-            <div id="deletebutton" class="reservebutton">
-                <p>CANCEL</p>
-            </div>
+            <a href="{% url 'inventory:modify' reservation.id %}">
+                <div id="editbutton" class="reservebutton">
+                    <p>MODIFY</p>
+                </div>
+            </a>
+            <a href="{% url 'inventory:cancel' reservation.id %}">
+                <div id="deletebutton" class="reservebutton">
+                    <p>CANCEL</p>
+                </div>
+            </a>
             {% endif %}
             {% if reservation.status == 'In Progress' %}
-            <div id="editbutton" class="reservebutton">
-                <p>MODIFY</p>
-            </div>
+            <a href="{% url 'inventory:modify' reservation.id %}">
+                <div id="editbutton" class="reservebutton">
+                    <p>MODIFY</p>
+                </div>
+            </a>
             <div id="deletebutton" class="disabledbutton">
                 <p>CANCEL</p>
             </div>

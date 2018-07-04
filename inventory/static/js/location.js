@@ -141,6 +141,7 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
 // Initialize the map, with markers for each store
 function initMap() {
     const key = 'AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE';
+    const locations = JSON.parse(localStorage.getItem('locations'));
     let i;
 
     // Initialize map centered over store locations

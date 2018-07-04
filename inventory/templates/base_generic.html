@@ -11,10 +11,13 @@
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 	<link rel="stylesheet" href="{% static 'css/animations.css' %}">
+	{% if locations %}
 	<script>
 		var locationStr = '{{locations}}';
 		var locations = JSON.parse(locationStr.replace(/(&quot;)/g, '"'));
+		localStorage.setItem('locations', JSON.stringify(locations));
 	</script>
+	{% endif %}
 	<script type="text/javascript" src="{% static 'js/location.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/animations.js' %}"></script>
 </head>
