@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <img src="{{ reservation.vehicle.image.url }}" width="100%" id="vehicleimage">
+    <div id="vehiclecontent">
+        <h2 class="header">{{ reservation.vehicle }}</h2>
+        <div id="reservebuttons">
+            {% if reservation.status == 'Upcoming' %}
+            <div id="editbutton" class="reservebutton">
+                <p>MODIFY</p>
+            </div>
+            <div id="deletebutton" class="reservebutton">
+                <p>CANCEL</p>
+            </div>
+            {% endif %}
+            {% if reservation.status == 'In Progress' %}
+            <div id="editbutton" class="reservebutton">
+                <p>MODIFY</p>
+            </div>
+            <div id="deletebutton" class="disabledbutton">
+                <p>CANCEL</p>
+            </div>
+            {% endif %}
+            {% if reservation.status == 'Completed' %}
+            <div id="editbutton" class="disabledbutton">
+                <p>MODIFY</p>
+            </div>
+            <div id="deletebutton" class="disabledbutton">
+                <p>CANCEL</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

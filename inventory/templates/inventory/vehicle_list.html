@@ -7,17 +7,13 @@
         <div class="vehicle">
             <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/">
                 <img src="{{ vehicle.image.url }}">
-                <p>{{ vehicle }}</p>
+                <div class="vehiclelistdetails">
+                    <p class="vehiclename">{{ vehicle }}</p>
+                    <p class="vehicleprice">${{ vehicle.price }}</p>
+                </div>
+                <i class="material-icons">chevron_right</i>
             </a>
         </div>
     {% endfor %}
     </div>
 {% endblock %}
-
- <!--<div class="vehiclename">
-                    <p>{{ vehicle }}</p>
-                </div>
-                <img src="{{ vehicle.image.url }}">
-                <div class="vehicleprice">
-                    <p>Starting at $88.88</p>
-                </div>-->

@@ -6,7 +6,8 @@
     <ul id="reservationlist">
         {% for reservation in reservations %}
         <div>
-            <p>{{ reservation.vehicle }}</p>
+            <a href="{% url 'inventory:reservation' reservation.id %}">
+            <p class="reservationtime">{{ reservation.vehicle }}</p>
             {% if reservation.status == "Upcoming" %}
                 <p class="reservationtime">Starting {{ reservation.pick_up_time }}</p>
             {% endif %}
@@ -14,6 +15,7 @@
                 <p class="reservationtime">Started {{ reservation.pick_up_time }}</p>
             {% endif %}
             <p class="reservationtime">Status: {{ reservation.status }}</p>
+            </a>
         </div>
         {% empty %}
         <div>

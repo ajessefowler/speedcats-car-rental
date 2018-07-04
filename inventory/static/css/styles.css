@@ -139,8 +139,35 @@ a:-webkit-any-link {
 	border-right: 1px solid #bbbbbb;
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
-	max-width: 110px;
+	max-width: 100px;
 	object-fit: cover;
+}
+
+.vehicle > a > i {
+	padding-right: 8px;
+}
+
+.vehiclelistdetails {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	width: 100%;
+	padding-right: 15px;
+}
+
+.vehiclelistdetails > p {
+	padding: 4px 0 4px 15px;
+	margin: 0;
+}
+
+.vehiclename {
+	font-size: 15pt;
+}
+
+.vehicleprice {
+	color: rgb(70, 70, 70);
+	font-size: 12pt;
 }
 
 .loginform {
@@ -264,8 +291,30 @@ a:-webkit-any-link {
 	padding: 6px 10px;
 }
 
+.reservebutton > p {
+	margin: 0;
+	padding: 2px 9px;
+}
+
+.disabledbutton {
+	color: #696969;
+	background-color: rgb(126, 126, 126) !important;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #707070;
+	margin: 0 8px 14px;
+	padding: 6px 10px;
+}
+
+.disabledbutton > p {
+	margin: 0;
+	padding: 2px 9px;
+}
+
 .reservationtime {
+	padding: 4px 0;
+	margin: 0;
 	font-size: 11pt;
+	color: black;
 }
 
 .detail > p {
@@ -536,6 +585,14 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px #707070;
 }
 
+#reservationlist > div {
+	padding: 12px 0;
+}
+
+#reservationlist > div:not(:last-child) {
+	border-bottom: 1px solid #dddddd;
+}
+
 #reservationhistory {
 	background-color: white;
 	border-radius: 3px;
@@ -547,15 +604,6 @@ a:-webkit-any-link {
 #reservationhistory > a {
 	color: black;
 	padding: 8px;
-}
-
-#reservationlist > div > p {
-	padding: 10px 8px;
-	margin: 0;
-}
-
-#reservationlist > div:not(:last-child) {
-	border-bottom: 1px solid #dddddd;
 }
 
 #reservebuttons {

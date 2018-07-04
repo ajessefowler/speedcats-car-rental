@@ -6,9 +6,9 @@
 <div id="reservecontent">
     <p>Confirm details here</p>
     <p>{{ vehicle }}</p>
-    <p>Subtotal: $88.88</p>
-    <p>Tax: $8.88</p>
-    <p>Total: $100.00</p>
+    <p id="checkoutsub">Subtotal: ${{ vehicle.price }}</p>
+    <p id="checkouttax"></p>
+    <p id="checkouttotal"></p>
     <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
         {% csrf_token %}
         <input type="text" name="pickupstore" id="pickupstore">

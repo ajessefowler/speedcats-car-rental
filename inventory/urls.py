@@ -10,6 +10,7 @@ urlpatterns = [
 	path('history/', views.history, name="history"),
 	path('contact/', views.contact, name='contact'),
 	path('feedback/', views.feedback, name='feedback'),
+	path('reservation/<int:reservationID>', views.reservation, name='reservation'),
 	path('<int:storeID>/', views.store, name='store'),
 	path('<int:storeID>/<int:vehicleID>/', views.vehicle, name='vehicle'),
 	path('<int:storeID>/<int:vehicleID>/reserve/', views.reserve, name='reserve'),

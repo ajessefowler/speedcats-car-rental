@@ -77,3 +77,15 @@ def makereservation(request, storeID, vehicleID):
 	reservation = Reservation(user=user, vehicle=vehicle, pick_up_time=pickup_time, pick_up_location=pickup_store, drop_off_time=dropoff_time, drop_off_location=dropoff_store)
 	reservation.save()
 	return HttpResponseRedirect('/')
+
+@login_required
+def reservation(request, reservationID):
+	reservation = get_object_or_404(Reservation, pk=reservationID)
+	context = {
+		"reservation":reservation
+	}
+	if request.user == reservation.user:
+		return render(request, 'inventory/reservation.html', context)
+	# if request.user == reservation.user
+	# allow access
+	# otherwise error

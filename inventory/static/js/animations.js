@@ -40,10 +40,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	// Add animations to make reservation page
 	if (document.getElementById('reservecontent')) {
+		const subelem = document.getElementById('checkoutsub').innerHTML;
+		const subtotal = parseInt(subelem.substr(subelem.length - 5));
+		const tax = subtotal * 0.07;
+		const total = subtotal + tax;
+		document.getElementById('checkouttax').innerHTML = 'Tax: $' + tax;
+		document.getElementById('checkouttotal').innerHTML = 'Total: $' + total;
+
 		document.getElementById('pickupstore').value = localStorage.getItem('pickup');
 		document.getElementById('pickuptime').value = localStorage.getItem('pickuptime');
 		document.getElementById('dropoffstore').value = localStorage.getItem('dropoff');
 		document.getElementById('dropofftime').value = localStorage.getItem('dropofftime');
+		
 		document.getElementById('paymentlocationcontinue').addEventListener('click', function() {
 			console.log(document.querySelector('input[name="paymentlocation"]:checked').value);
 		});
