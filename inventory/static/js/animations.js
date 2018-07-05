@@ -30,15 +30,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	// Calculates height of vehicle image to position information
 	if (document.getElementById('vehiclecontent')) {
 		const img = document.getElementById('vehicleimage');
-		
-		function calculateImgHeight() {
-			document.getElementById('vehiclecontent').style.top = (document.getElementById('vehicleimage').height + 'px');
-		}
 
 		if (img.complete) {
 			calculateImgHeight();
 		} else {
 			img.addEventListener('load', calculateImgHeight);
+		}
+
+		function calculateImgHeight() {
+			const height = document.getElementById('vehicleimage').clientHeight;
+			document.getElementById('vehiclecontent').style.top = (height + 'px');
 		}
 	}
 
