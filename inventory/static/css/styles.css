@@ -618,12 +618,12 @@ a:-webkit-any-link {
 }
 
 #startreservationbutton > p {
-	margin-right: auto;
-	padding-left: 8px;
+	margin: auto;
 }
 
 #startreservationbutton > i {
-	margin-left: auto;
+	position: absolute;
+	right: 8px;
 }
 
 #welcomeheading {
