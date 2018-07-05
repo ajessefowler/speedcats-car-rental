@@ -4,7 +4,8 @@
     <img src="{{ reservation.vehicle.image.url }}" width="100%" id="vehicleimage">
     <div id="vehiclecontent">
         <h2 class="header">{{ reservation.vehicle }}</h2>
-        <p>From {{ reservation.pick_up_location }} to {{ reservation.drop_off_location }}</p>
+        <p>From {{ reservation.pick_up_location }}</p>
+        <p>To {{ reservation.drop_off_location }}</p>
         <div id="reservebuttons">
             {% if reservation.status == 'Upcoming' %}
             <a href="{% url 'inventory:modify' reservation.id %}">

@@ -10,6 +10,11 @@
     </div>
     <div id="vehiclecontent">
         <div id="homecontent">
+            <a href="{% url 'inventory:index' %}">
+                <div id="startreservationbutton" class="roundbutton">
+                    <p>Start A Reservation</p>
+                </div>
+            </a>
             <p>Details about the company here. Provide an introduction to Speedcats and reasons why users should choose our service.</p>
             <div id="threedetails">
             <div class="detail">
@@ -25,10 +30,5 @@
                 <p>Save time by paying online, or choose to pay in store.</p>
             </div>
         </div>
-        <a href="{% url 'inventory:index' %}">
-            <div id="startreservationbutton" class="roundbutton">
-                <p>Start A Reservation</p>
-            </div>
-        </a>
     </div>
 {% endblock %}

@@ -29,7 +29,17 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	// Calculates height of vehicle image to position information
 	if (document.getElementById('vehiclecontent')) {
-		document.getElementById('vehiclecontent').style.top = (document.getElementById('vehicleimage').height + 'px');
+		const img = document.getElementById('vehicleimage');
+		
+		function calculateImgHeight() {
+			document.getElementById('vehiclecontent').style.top = (document.getElementById('vehicleimage').height + 'px');
+		}
+
+		if (img.complete) {
+			calculateImgHeight();
+		} else {
+			img.addEventListener('load', calculateImgHeight);
+		}
 	}
 
 	// Add animations and input for time selection

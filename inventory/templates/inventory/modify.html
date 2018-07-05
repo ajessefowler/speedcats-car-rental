@@ -14,6 +14,7 @@
     <h2 class="header" id="locationheader">Modify Your Reservation</h2>
 
     <div id="selectlocation">
+        {% if reservation.status == "Upcoming" %}
         <h3>Choose Your Pick Up</h3>
         <div id="pickuplocation" class="selectcard">
             <p id="pickuplocationcardtext">{{ reservation.pick_up_location }}</p>
@@ -21,8 +22,8 @@
         <div id="pickuptimeselect" class="selectcard">
             <p id="pickuptimecardtext">{{ reservation.pick_up_time }}</p> 
         </div>
+        {% endif %}
         <h3>Choose Your Drop Off</h3>
-        <input type="checkbox" id="dropoffdiff" name="dropoffdiff" value="Dropping off at other location">
         <div id="dropofflocation" class="selectcard">
             <p id="dropofflocationcardtext">{{ reservation.drop_off_location }}</p>
         </div>
@@ -32,7 +33,7 @@
     </div>
 
     <div id="startbutton" class="roundbutton">
-        <p>START</p>
+        <p>DONE</p>
     </div>
 </div>
 

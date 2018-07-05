@@ -612,8 +612,11 @@ a:-webkit-any-link {
 }
 
 #startreservationbutton {
+	position: absolute;
+	top: -3vh;
 	margin: 0 30px;
 	background-color: #FF5722; 
+	width: calc(100% - 60px);
 }
 
 #startreservationbutton > a > p {
@@ -630,21 +633,22 @@ a:-webkit-any-link {
 }
 
 #homecontent {
-	padding-top: 15px;
+	padding-top: 30px;
 }
 
 #homecontent > p {
-	padding: 0;
+	padding: 0 15px;
 	margin: 0;
 }
 
 #welcomeheading > p {
 	margin: 3px 0 0;
 	padding: 0;
+	font-size: 12pt;
 }
 
 #welcomeheading > h2 {
-	font-size: 19pt;
+	font-size: 17pt;
 }
 
 #startnav {
