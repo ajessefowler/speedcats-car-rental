@@ -1,7 +1,6 @@
 html, body {
 	padding: 0px;
 	margin: 0px;
-	height: 100%;
 }
 
 textarea, select, input, button { outline: none; }
@@ -87,11 +86,7 @@ nav {
 	background-color: #718792;
 	box-shadow: 4px 0 6px -3px #2c2c2c;
 	transform: translateX(-270px);
-}
-
-nav > a:last-child {
-	margin-top: auto;
-	margin-bottom: 50px;
+	padding-top: 15px;
 }
 
 a:-webkit-any-link {
@@ -329,10 +324,11 @@ a:-webkit-any-link {
 .detail > p {
 	margin: 5px 0 0;
 	padding: 0;
-	font-size: 12pt;
+	font-size: 11pt;
 }
 
 .detail > h2 {
+	font-weight: 400;
 	text-align: center;
 	font-size: 16pt;
 }
@@ -613,16 +609,20 @@ a:-webkit-any-link {
 }
 
 #startreservationbutton {
-	position: absolute;
-	top: -3vh;
+	position: relative;
+	top: -20px;
 	margin: 0 30px;
 	background-color: #FF5722; 
-	width: calc(100% - 60px);
+	width: calc(100% - 90px);
+	padding: 0 12px;
 }
 
-#startreservationbutton > a > p {
-	margin: 0;
-	padding: 0;
+#startreservationbutton > p {
+	margin-left: auto;
+}
+
+#startreservationbutton > i {
+	margin-left: auto;
 }
 
 #welcomeheading {
@@ -633,23 +633,25 @@ a:-webkit-any-link {
 	z-index: 9;
 }
 
-#homecontent {
-	padding-top: 30px;
-}
-
 #homecontent > p {
+	font-size: 12pt;
 	padding: 0 15px;
 	margin: 0;
+	position: relative;
+	top: -2px;
 }
 
 #welcomeheading > p {
 	margin: 3px 0 0;
 	padding: 0;
 	font-size: 12pt;
+	color: white;
 }
 
 #welcomeheading > h2 {
+	font-weight: 400;
 	font-size: 17pt;
+	color: white;
 }
 
 #startnav {
