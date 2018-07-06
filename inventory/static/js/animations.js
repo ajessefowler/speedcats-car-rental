@@ -51,10 +51,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	// Add animations to make reservation page
 	if (document.getElementById('reservecontent')) {
+		const msInOneDay = 86400000;
+		const reservePickUp = localStorage.getItem('pickuptime');
+		const pickUpTime = formatTime(reservePickUp);
+		const reserveDropOff = localStorage.getItem('dropofftime');
+		const dropOffTime = formatTime(reserveDropOff);
+		const length = (((dropOffTime - pickUpTime) / msInOneDay) + 1);
+
 		const subelem = document.getElementById('checkoutsub').innerHTML;
-		const subtotal = parseInt(subelem.substr(subelem.length - 5));
-		const tax = subtotal * 0.07;
-		const total = subtotal + tax;
+		const subtotal = Number(parseFloat(subelem.substr(subelem.length - 5)) * length).toFixed(2);
+		const tax = Number(parseFloat(subtotal) * 0.07).toFixed(2);
+		const total = Number(parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
+		document.getElementById('checkoutsub').innerHTML = 'Subtotal: $' + subtotal;
 		document.getElementById('checkouttax').innerHTML = 'Tax: $' + tax;
 		document.getElementById('checkouttotal').innerHTML = 'Total: $' + total;
 
@@ -66,6 +74,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		document.getElementById('paymentlocationcontinue').addEventListener('click', function() {
 			console.log(document.querySelector('input[name="paymentlocation"]:checked').value);
 		});
+	}
+
+	function formatTime(timeStr) {
+		const year = timeStr.substr(0,4);
+		const month = timeStr.substr(5,2);
+		const day = timeStr.substr(8,2);
+		const hour = timeStr.substr(11,2);
+		const min = timeStr.substr(14,2);
+		const date = new Date(year, month, day, hour, min);
+		return date;
 	}
 });
 

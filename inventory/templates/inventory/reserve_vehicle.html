@@ -6,11 +6,11 @@
 <div id="reservecontent">
     <p>Confirm details here</p>
     <p>{{ vehicle }}</p>
-    <p id="checkoutsub">Subtotal: ${{ vehicle.price }}</p>
-    <p id="checkouttax"></p>
-    <p id="checkouttotal"></p>
     <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
         {% csrf_token %}
+        <p id="checkoutsub">Subtotal: ${{ vehicle.price }}</p>
+        <p id="checkouttax"></p>
+        <p id="checkouttotal"></p>
         <input type="text" name="pickupstore" id="pickupstore">
         <input type="text" name="pickuptime" id="pickuptime">
         <input type="text" name="dropoffstore" id="dropoffstore">

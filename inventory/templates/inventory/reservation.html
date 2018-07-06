@@ -6,6 +6,7 @@
         <h2 class="header">{{ reservation.vehicle }}</h2>
         <p>From {{ reservation.pick_up_location }}</p>
         <p>To {{ reservation.drop_off_location }}</p>
+        <p>{{ reservation.length }}</p>
         <div id="reservebuttons">
             {% if reservation.status == 'Upcoming' %}
             <a href="{% url 'inventory:modify' reservation.id %}">

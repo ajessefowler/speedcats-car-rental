@@ -30,6 +30,12 @@
         <div id="dropofftimeselect" class="selectcard">
             <p id="dropofftimecardtext">{{ reservation.drop_off_time }}</p> 
         </div>
+        {% if reservation.status == "Upcoming" %}
+        <h3>Change Your Vehicle</h3>
+        <div id="modifyvehicle" class="selectcard">
+            <p id="modifyvehiclecardtext">{{ reservation.vehicle }}</p>
+        </div>
+        {% endif %}
     </div>
 
     <div id="startbutton" class="roundbutton">
