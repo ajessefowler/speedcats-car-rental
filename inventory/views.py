@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from .models import Store, Vehicle, Reservation
 
@@ -46,8 +48,10 @@ def store(request, storeID):
 
 def vehicle(request, storeID, vehicleID):
 	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
+	reservations = vehicle.reservation_set
 	context = {
-		"vehicle":vehicle
+		"vehicle":vehicle,
+		"reservations":reservations
 	}
 	return render(request, 'inventory/vehicle_detail.html', context)
 
@@ -72,6 +76,8 @@ def makereservation(request, storeID, vehicleID):
 		dropoff_id = int(request.POST["dropoffstore"])
 		dropoff_store = get_object_or_404(Store, pk=dropoff_id)
 		dropoff_time = request.POST["dropofftime"]
+		vehicle.status = 'r'
+		vehicle.save()
 	except KeyError:
 		pass
 	reservation = Reservation(user=user, vehicle=vehicle, pick_up_time=pickup_time, pick_up_location=pickup_store, drop_off_time=dropoff_time, drop_off_location=dropoff_store)
@@ -102,6 +108,8 @@ def modify(request, reservationID):
 def cancel(request, reservationID):
 	user = request.user
 	reservation = Reservation.objects.get(pk=reservationID)
+	reservation.vehicle.status = 'a'
+	reservation.vehicle.save()
 	reservation.delete()
 	reservations = Reservation.objects.filter(user=user)
 	context = {

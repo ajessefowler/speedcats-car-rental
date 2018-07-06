@@ -1,5 +1,7 @@
 {% extends "base_generic.html" %}
 
+{% block title %}<title>Place Your Reservation</title>{% endblock %}
+
 {% block content %}
 <img src="{{ vehicle.image.url }}" width="100%" id="vehicleimage">
 <div id="vehiclecontent">
@@ -7,6 +9,7 @@
     <div id="reservecontent">
         <p>Confirm details here</p>
         <p>{{ vehicle }}</p>
+        <p></p>
         <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
             {% csrf_token %}
             <input type="text" name="subtotal" id="checkoutsub" value="{{ vehicle.price }}" readonly><br>
