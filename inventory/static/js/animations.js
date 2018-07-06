@@ -58,21 +58,25 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		const dropOffTime = formatTime(reserveDropOff);
 		const length = (((dropOffTime - pickUpTime) / msInOneDay) + 1);
 
-		const subelem = document.getElementById('checkoutsub').innerHTML;
+		const subelem = document.getElementById('checkoutsub').value;
 		const subtotal = Number(parseFloat(subelem.substr(subelem.length - 5)) * length).toFixed(2);
 		const tax = Number(parseFloat(subtotal) * 0.07).toFixed(2);
 		const total = Number(parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
-		document.getElementById('checkoutsub').innerHTML = 'Subtotal: $' + subtotal;
-		document.getElementById('checkouttax').innerHTML = 'Tax: $' + tax;
-		document.getElementById('checkouttotal').innerHTML = 'Total: $' + total;
+		document.getElementById('checkoutsub').value = 'Subtotal: $' + subtotal;
+		document.getElementById('checkouttax').value = 'Tax: $' + tax;
+		document.getElementById('checkouttotal').value = 'Total: $' + total;
 
 		document.getElementById('pickupstore').value = localStorage.getItem('pickup');
 		document.getElementById('pickuptime').value = localStorage.getItem('pickuptime');
 		document.getElementById('dropoffstore').value = localStorage.getItem('dropoff');
 		document.getElementById('dropofftime').value = localStorage.getItem('dropofftime');
-		
-		document.getElementById('paymentlocationcontinue').addEventListener('click', function() {
-			console.log(document.querySelector('input[name="paymentlocation"]:checked').value);
+
+		// Show and hide payment form based on location selection
+		document.getElementById('payonline').addEventListener('click', function() {
+			document.getElementById('paymentformdiv').style.display = 'block';
+		});
+		document.getElementById('payinstore').addEventListener('click', function() {
+			document.getElementById('paymentformdiv').style.display = 'none';
 		});
 	}
 

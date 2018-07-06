@@ -690,6 +690,10 @@ a:-webkit-any-link {
 	border-right: 1px solid #dadada;
 }
 
+#paymentformdiv {
+	display: none;
+}
+
 @media only screen and (min-width: 768px) {
 
 	.button:hover {
