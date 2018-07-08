@@ -2,7 +2,13 @@
 
 {% block content %}
     <div id="storecontent">
-    <h2 class="header">{{ vehicles.0.store.city }}, {{ vehicles.0.store.state }}</h2>
+    <h2 class="header">{{ store.city }}, {{ store.state }}</h2>
+    <div id="vehiclesearch">
+        <form name="vehiclesearch" id="vehiclesearchform" method="post">
+            {% csrf_token %}
+            <input type="text" name="searchfield" id="searchfield" placeholder="Search for vehicles...">
+        </form>
+    </div>
     {% for vehicle in vehicles %}
         <div class="vehicle">
             <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/">
@@ -14,6 +20,8 @@
                 <i class="material-icons">chevron_right</i>
             </a>
         </div>
+    {% empty %}
+        <p>No vehicles available</p>
     {% endfor %}
     </div>
 {% endblock %}

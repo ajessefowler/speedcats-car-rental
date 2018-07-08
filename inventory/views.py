@@ -1,4 +1,6 @@
 import json
+import pytz
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import get_object_or_404, render
@@ -39,11 +41,38 @@ def contact(request):
 def feedback(request):
 	return render(request, 'inventory/feedback.html')
 
-def store(request, storeID):
-	vehicles = Vehicle.objects.filter(store_id=storeID).filter(status='a')
+def store(request):
+	try:
+		pickup_id = int(request.POST["pickuplocationid"])
+		pickup_time = request.POST["pickuptimeformat"]
+		dropoff_id = int(request.POST["dropofflocationid"])
+		dropoff_time = request.POST["dropofftimeformat"]
+		request.session["pickup_id"] = pickup_id
+		request.session["pickup_time"] = pickup_time
+		request.session["dropoff_id"] = dropoff_id
+		request.session["dropoff_time"] = dropoff_time
+	except KeyError:
+		pass
+
+	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").utcnow().replace(tzinfo=pytz.UTC)
+	available_vehicles = []
+	store = Store.objects.get(pk=pickup_id)
+	vehicles = Vehicle.objects.filter(store_id=pickup_id).filter(status='a')
+
+	# Check if vehicle is available during entire reservation time
+	for vehicle in vehicles:
+		if len(vehicle.reservation_set.all()) == 0:
+			available_vehicles.append(vehicle)
+		else:
+			for reservation in vehicle.reservation_set.all():
+				if reservation.pick_up_time < dropoff_format:
+					available_vehicles.append(vehicle)
+			
 	context = {
-		"vehicles":vehicles
+		"vehicles":available_vehicles,
+		"store":store
 	}
+
 	return render(request, 'inventory/vehicle_list.html', context)
 
 def vehicle(request, storeID, vehicleID):
@@ -76,8 +105,6 @@ def makereservation(request, storeID, vehicleID):
 		dropoff_id = int(request.POST["dropoffstore"])
 		dropoff_store = get_object_or_404(Store, pk=dropoff_id)
 		dropoff_time = request.POST["dropofftime"]
-		vehicle.status = 'r'
-		vehicle.save()
 	except KeyError:
 		pass
 	reservation = Reservation(user=user, vehicle=vehicle, pick_up_time=pickup_time, pick_up_location=pickup_store, drop_off_time=dropoff_time, drop_off_location=dropoff_store)

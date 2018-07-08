@@ -3,7 +3,6 @@ var dropOffTime;
 
 // Initialize animations
 document.addEventListener('DOMContentLoaded', function(event) {
-	const today = new Date();
 	let menuOut = false;
 
 	// Add event listener to find location button
@@ -44,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	}
 
 	// Add animations and input for time selection
-	if (document.getElementById('pickuptimeselect')) {
+	if (document.getElementById('mapcontainer')) {
 		initTimeHandler('pickup');
 		initTimeHandler('dropoff');
 	}
@@ -92,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 });
 
 function initTimeHandler(element) {
-	document.getElementById(element + 'timeselect').addEventListener('click', function() {
+	document.getElementById(element + 'time').addEventListener('click', function() {
 		document.getElementById(element + 'timecard').style.animation = 'timeUp .3s ease forwards';
 	});
 
@@ -105,23 +104,9 @@ function initTimeHandler(element) {
 		const apptTime = document.getElementById(element + 'timeinput').value;
 		const meridiem = apptTime >= 12 ? 'PM' : 'AM';
 
-		if (element === 'pickup') {
-			pickUpTime = apptDate + ' ' + apptTime;
-		} else if (element === 'dropoff') {
-			dropOffTime = apptDate + ' ' + apptTime;
-		}
-
-		if (pickUpTime && dropOffTime) {
-			updateLocalStorageTime();
-		}
-
 		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
-		document.getElementById(element + 'timecardtext').innerHTML = apptDate + ' at ' + apptTime + ' ' + meridiem;
+		document.getElementById(element + 'time').value = apptDate + ' at ' + apptTime + ' ' + meridiem;
+		document.getElementById(element + 'timeformat').value = apptDate + ' ' + apptTime;
 		checkStartFormCompletion();
 	});
-
-	function updateLocalStorageTime() {
-		localStorage.setItem('pickuptime', pickUpTime);
-		localStorage.setItem('dropofftime', dropOffTime);
-	}
 }

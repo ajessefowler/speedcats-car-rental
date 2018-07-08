@@ -1,8 +1,3 @@
-var pickUpStoreId;
-var pickUpStoreAddress;
-var dropOffStoreId;
-var dropOffStoreAddress;
-
 // Setup location autocomplete and search
 function initLocation() {
     const countryRestriction = { componentRestrictions: { country: 'us' }};
@@ -55,21 +50,19 @@ function resolveCoords(position) {
 
 // If all selections have been made, turn the start button orange and activate click handler
 function checkStartFormCompletion() {
-    if (
-        (document.getElementById('pickuplocationcardtext').innerHTML !== 'Tap here to select a location') &&
-        (document.getElementById('pickuptimecardtext').innerHTML !== 'Tap here to select a time') &&
-        (document.getElementById('dropofflocationcardtext').innerHTML !== 'Tap here to select a location') &&
-        (document.getElementById('dropofftimecardtext').innerHTML !== 'Tap here to select a time')
-    ) {
-        document.getElementById('startbutton').style.backgroundColor = '#FF5722';
-        document.getElementById('startbutton').style.color = '#FFFFFF';
-    }
-}
+    const start= document.getElementById('startbutton');
 
-// Adds link to start button given a URL containing the storeID
-function addStartLink(linkURL) {
-    document.getElementById('startbutton').onclick = function() {
-        document.location.href = linkURL;
+    if (
+        (document.getElementById('pickuplocation').value !== 'Tap here to select a location') &&
+        (document.getElementById('pickuptime').value !== 'Tap here to select a time') &&
+        (document.getElementById('dropofflocation').value !== 'Tap here to select a location') &&
+        (document.getElementById('dropofftime').value !== 'Tap here to select a time')
+    ) {
+        start.style.backgroundColor = '#FF5722';
+        start.style.color = '#FFFFFF';
+        start.addEventListener('click', function() {
+            document.getElementById('selectlocation').submit();
+        });
     }
 }
 
@@ -96,45 +89,19 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
             document.getElementById(element + 'locationtext').innerHTML = addressDisplay;
             
             document.getElementById(element + 'locationdone').addEventListener('click', function() {
-                // Save selected store IDs
-                if (element === 'pickup') {
-                    pickUpStoreId = id;
-                    pickUpStoreAddress = addressDisplay;
-                } else if (element === 'dropoff') {
-                    dropOffStoreId = id;
-                    dropOffStoreAddress = addressDisplay;
-                }
-
-                // Update local storage with both store ID values
-                if (pickUpStoreId && dropOffStoreId) {
-                    updateLocalStorageLocation();
-                }
-
-                document.getElementById(element + 'locationcardtext').innerHTML = addressDisplay;
+                document.getElementById(element + 'locationid').value = id;
+                document.getElementById(element + 'location').value = addressDisplay;
                 document.getElementById(element + 'locationcard').style.animation = 'timeDown .3s ease forwards';
                 document.getElementById(element + 'location').scrollIntoView({
                     behavior: 'smooth'
                 });
 
                 checkStartFormCompletion();
-
-                // Add link to start button for the selected pick upstore
-                if (element === 'pickup') {
-                    addStartLink(vehiclesLink);
-                }
             });
         });
 
     } else {
         console.log('Data error.');
-    }
-
-    // Update local storage with both store ID values
-    function updateLocalStorageLocation() {
-        localStorage.setItem('pickup', pickUpStoreId);
-        localStorage.setItem('dropoff', dropOffStoreId);
-        localStorage.setItem('pickupaddress', pickUpStoreAddress);
-        localStorage.setItem('dropoffaddress', dropOffStoreAddress);
     }
 }
 

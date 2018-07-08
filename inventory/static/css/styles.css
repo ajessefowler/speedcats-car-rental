@@ -289,6 +289,9 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px #666666;
 	width: calc(100% - 12px);
 	letter-spacing: -0.5px;
+	text-align: center;
+	border: none;
+	font-family: 'Roboto', sans-serif;
 }
 
 .reservebutton {
@@ -497,10 +500,11 @@ a:-webkit-any-link {
 
 #startbutton {
 	color: #696969;
-	font-size: 17pt;
+	font-size: 13pt;
 	background-color: rgb(126, 126, 126);
 	width: 110px;
 	margin: 15px 20px 25px auto;
+	border: none;
 }
 
 #timepicker {
@@ -519,6 +523,28 @@ a:-webkit-any-link {
 
 #storecontent {
 	width: 100%;
+}
+
+#vehiclesearch {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 40px;
+	background-color: white;
+	margin: 0 20px 15px;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #525252;
+	padding: 0 14px;
+}
+
+#searchfield {
+	border: none;
+	height: 30px;
+	margin-right: auto;
+	font-family: 'Roboto', sans-serif;
+	color: #131313;
+	font-size: 11pt;
 }
 
 #vehicleimage {
