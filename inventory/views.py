@@ -1,6 +1,6 @@
 import json
 import pytz
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import get_object_or_404, render
@@ -10,17 +10,31 @@ from django.dispatch import receiver
 
 from .models import Store, Vehicle, Reservation
 
+def home(request):
+	return render(request, 'inventory/home.html')
+	
+def faqs(request):
+	return render(request, 'inventory/faqs.html')
+
+def contact(request):
+	return render(request, 'inventory/contact.html')
+
+def feedback(request):
+	return render(request, 'inventory/feedback.html')
+
+def locations(request):
+	return render(request, 'inventory/locations.html')
+
 def index(request):
+	# Pass location data so front-end map can display store markers
 	locations = Store.objects.all().values('address', 'city', 'state')
 	locations_json = json.dumps(list(locations), cls=DjangoJSONEncoder)
+	
 	context = {
 		"locations":locations_json
 	}
 
 	return render(request, 'inventory/index.html', context)
-	
-def home(request):
-	return render(request, 'inventory/home.html')
 
 @login_required
 def history(request):
@@ -31,15 +45,6 @@ def history(request):
 	}
 
 	return render(request, 'inventory/history.html', context)
-
-def faqs(request):
-	return render(request, 'inventory/faqs.html')
-
-def contact(request):
-	return render(request, 'inventory/contact.html')
-
-def feedback(request):
-	return render(request, 'inventory/feedback.html')
 
 def store(request):
 	try:
@@ -54,10 +59,10 @@ def store(request):
 	except KeyError:
 		pass
 
-	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").utcnow().replace(tzinfo=pytz.UTC)
 	available_vehicles = []
 	store = Store.objects.get(pk=pickup_id)
 	vehicles = Vehicle.objects.filter(store_id=pickup_id).filter(status='a')
+	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
 	# Check if vehicle is available during entire reservation time
 	for vehicle in vehicles:
@@ -65,7 +70,7 @@ def store(request):
 			available_vehicles.append(vehicle)
 		else:
 			for reservation in vehicle.reservation_set.all():
-				if reservation.pick_up_time < dropoff_format:
+				if reservation.pick_up_time > dropoff_format:
 					available_vehicles.append(vehicle)
 			
 	context = {
@@ -88,9 +93,24 @@ def vehicle(request, storeID, vehicleID):
 def reserve(request, storeID, vehicleID):
 	store = get_object_or_404(Store, pk=storeID)
 	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
+
+	# Calculate the length of the potential reservation, rounding number of days up
+	dropoff_format = datetime.strptime(request.session["dropoff_time"], "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
+	pickup_format = datetime.strptime(request.session["pickup_time"], "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
+	reservation_length = ((dropoff_format - pickup_format) + timedelta(days=1)).days + 1
+
+	# Calculate pricing of potential reservation
+	subtotal = vehicle.price * reservation_length
+	tax = round(float(subtotal) * 0.07,2)
+	total = round(float(subtotal) + tax,2)
+	
 	context = {
 		"store":store,
-		"vehicle":vehicle
+		"vehicle":vehicle,
+		"length":reservation_length,
+		"subtotal":subtotal,
+		"tax":tax,
+		"total":total
 	}
 	return render(request, 'inventory/reserve_vehicle.html', context)
 
@@ -99,17 +119,23 @@ def makereservation(request, storeID, vehicleID):
 	try:
 		user = request.user
 		vehicle = Vehicle.objects.get(pk=vehicleID)
-		pickup_id = int(request.POST["pickupstore"])
+		pickup_id = request.session["pickup_id"]
 		pickup_store = get_object_or_404(Store, pk=pickup_id)
-		pickup_time = request.POST["pickuptime"]
-		dropoff_id = int(request.POST["dropoffstore"])
+		pickup_time = request.session["pickup_time"]
+		dropoff_id = request.session["dropoff_id"]
 		dropoff_store = get_object_or_404(Store, pk=dropoff_id)
-		dropoff_time = request.POST["dropofftime"]
+		dropoff_time = request.session["dropoff_time"]
 	except KeyError:
 		pass
+	
+	# Create new reservation
 	reservation = Reservation(user=user, vehicle=vehicle, pick_up_time=pickup_time, pick_up_location=pickup_store, drop_off_time=dropoff_time, drop_off_location=dropoff_store)
 	reservation.save()
-	return HttpResponseRedirect('/')
+
+	context = {
+		"reservation":reservation
+	}
+	return render(request, 'inventory/confirm.html', context)
 
 @login_required
 def reservation(request, reservationID):

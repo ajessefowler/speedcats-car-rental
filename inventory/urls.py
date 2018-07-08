@@ -13,6 +13,7 @@ urlpatterns = [
 	path('reservation/<int:reservationID>/modify/', views.modify, name='modify'),
 	path('reservation/<int:reservationID>/cancel/', views.cancel, name='cancel'),
 	path('reservation/<int:reservationID>', views.reservation, name='reservation'),
+	path('locations/', views.locations, name='locations'),
 	path('vehicles/', views.store, name='store'),
 	path('<int:storeID>/<int:vehicleID>/', views.vehicle, name='vehicle'),
 	path('<int:storeID>/<int:vehicleID>/reserve/', views.reserve, name='reserve'),

@@ -72,7 +72,19 @@ class Reservation(models.Model):
 	pick_up_location = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='pick_up_store')
 	drop_off_time = models.DateTimeField(blank=False, null=False)
 	drop_off_location = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='drop_off_store')
+	subtotal = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+	tax = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+	total = models.DecimalField(max_digits=8, decimal_places=2, null=True)
 	miles_driven = models.IntegerField(null=True, blank=True)
+	
+	"""
+	@property
+	def active(self):
+		now = datetime.datetime.utcnow()
+		if self.pick_up_time < now and now < self.drop_off_time:
+			return True
+		return False
+	"""
 
 	@property
 	def status(self):

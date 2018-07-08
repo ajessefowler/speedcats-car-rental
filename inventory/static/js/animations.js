@@ -48,45 +48,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		initTimeHandler('dropoff');
 	}
 
-	// Add animations to make reservation page
+	// Show and hide payment form based on location selection
 	if (document.getElementById('reservecontent')) {
-		const msInOneDay = 86400000;
-		const reservePickUp = localStorage.getItem('pickuptime');
-		const pickUpTime = formatTime(reservePickUp);
-		const reserveDropOff = localStorage.getItem('dropofftime');
-		const dropOffTime = formatTime(reserveDropOff);
-		const length = (((dropOffTime - pickUpTime) / msInOneDay) + 1);
-
-		const subelem = document.getElementById('checkoutsub').value;
-		const subtotal = Number(parseFloat(subelem.substr(subelem.length - 5)) * length).toFixed(2);
-		const tax = Number(parseFloat(subtotal) * 0.07).toFixed(2);
-		const total = Number(parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
-		document.getElementById('checkoutsub').value = 'Subtotal: $' + subtotal;
-		document.getElementById('checkouttax').value = 'Tax: $' + tax;
-		document.getElementById('checkouttotal').value = 'Total: $' + total;
-
-		document.getElementById('pickupstore').value = localStorage.getItem('pickup');
-		document.getElementById('pickuptime').value = localStorage.getItem('pickuptime');
-		document.getElementById('dropoffstore').value = localStorage.getItem('dropoff');
-		document.getElementById('dropofftime').value = localStorage.getItem('dropofftime');
-
-		// Show and hide payment form based on location selection
 		document.getElementById('payonline').addEventListener('click', function() {
 			document.getElementById('paymentformdiv').style.display = 'block';
 		});
 		document.getElementById('payinstore').addEventListener('click', function() {
 			document.getElementById('paymentformdiv').style.display = 'none';
 		});
-	}
-
-	function formatTime(timeStr) {
-		const year = timeStr.substr(0,4);
-		const month = timeStr.substr(5,2);
-		const day = timeStr.substr(8,2);
-		const hour = timeStr.substr(11,2);
-		const min = timeStr.substr(14,2);
-		const date = new Date(year, month, day, hour, min);
-		return date;
 	}
 });
 

@@ -9,22 +9,22 @@
     <div id="reservecontent">
         <p>Confirm details here</p>
         <p>{{ vehicle }}</p>
+        <p>{{ length }}</p>
         <p></p>
         <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
             {% csrf_token %}
-            <input type="text" name="subtotal" id="checkoutsub" value="{{ vehicle.price }}" readonly><br>
-            <input type="text" name="tax" id="checkouttax" readonly><br>
-            <input type="text" name="total" id="checkouttotal" readonly><br>
-            <input type="hidden" name="pickupstore" id="pickupstore">
-            <input type="hidden" name="pickuptime" id="pickuptime">
-            <input type="hidden" name="dropoffstore" id="dropoffstore">
-            <input type="hidden" name="dropofftime" id="dropofftime"><br>
+            <input type="text" name="subtotal" id="checkoutsub" value="${{ subtotal }}" readonly><br>
+            <input type="text" name="tax" id="checkouttax" value="${{ tax }}" readonly><br>
+            <input type="text" name="total" id="checkouttotal" value="${{ total }}" readonly><br>
+
             <input type="radio" name="payment" id="payinstore" checked>Pay in store<br>
             <input type="radio" name="payment" id="payonline">Pay online<br>
+
             <div id="paymentformdiv">
                 <h2>Enter Your Payment Information</h2>
                 <input type="text" placeholder="Cardholder name">
                 <input type="text" placeholder="Card number">
+
                 <select>
                     <option value="01">January</option>
                     <option value="02">February</option>
@@ -39,6 +39,7 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
+
                 <select>
                     <option value="18">2018</option>
                     <option value="19">2019</option>
@@ -49,8 +50,10 @@
                     <option value="24">2024</option>
                     <option value="25">2025</option>
                 </select>
+
                 <input type="text" placeholder="CVV">
             </div>
+
             <input type="submit" value="CONTINUE">
         </form>
     </div>
