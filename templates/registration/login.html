@@ -25,6 +25,7 @@
         {% else %}
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
+            
             <div id="username" class="loginform">
                 <p>Username</p>
                 <input type="text" name="username">
@@ -33,6 +34,11 @@
                 <p>Password</p>
                 <input type="password" name="password">
             </div>
+
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
+
             <button type="submit" id="loginbutton" class="roundbutton">LOGIN</button>
         </form>
         <div id="register">

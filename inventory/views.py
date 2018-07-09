@@ -2,6 +2,7 @@ import json
 import pytz
 from datetime import datetime, timedelta
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchVector
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -62,6 +63,8 @@ def store(request):
 	available_vehicles = []
 	store = Store.objects.get(pk=pickup_id)
 	vehicles = Vehicle.objects.filter(store_id=pickup_id).filter(status='a')
+
+	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
 	# Check if vehicle is available during entire reservation time
@@ -70,7 +73,7 @@ def store(request):
 			available_vehicles.append(vehicle)
 		else:
 			for reservation in vehicle.reservation_set.all():
-				if reservation.pick_up_time > dropoff_format:
+				if reservation.drop_off_time < pickup_format or reservation.pick_up_time > dropoff_format:
 					available_vehicles.append(vehicle)
 			
 	context = {
@@ -79,6 +82,19 @@ def store(request):
 	}
 
 	return render(request, 'inventory/vehicle_list.html', context)
+
+def search(request):
+	query = request.POST["searchquery"]
+	results = Vehicle.objects.annotate(
+		search=SearchVector('year', 'make', 'model', 'color'),
+	).filter(search=query)
+
+	context = {
+		"results":results
+	}
+
+	return render(request, 'inventory/search.html', context)
+
 
 def vehicle(request, storeID, vehicleID):
 	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
@@ -161,10 +177,12 @@ def modify(request, reservationID):
 def cancel(request, reservationID):
 	user = request.user
 	reservation = Reservation.objects.get(pk=reservationID)
-	reservation.vehicle.status = 'a'
-	reservation.vehicle.save()
-	reservation.delete()
-	reservations = Reservation.objects.filter(user=user)
+	if user == reservation.user:
+		reservation = Reservation.objects.get(pk=reservationID)
+		reservation.vehicle.status = 'a'
+		reservation.vehicle.save()
+		reservation.delete()
+		reservations = Reservation.objects.filter(user=user)
 	context = {
 		"reservations":reservations
 	}

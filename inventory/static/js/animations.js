@@ -1,6 +1,3 @@
-var pickUpTime;
-var dropOffTime;
-
 // Initialize animations
 document.addEventListener('DOMContentLoaded', function(event) {
 	let menuOut = false;

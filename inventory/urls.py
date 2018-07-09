@@ -15,6 +15,7 @@ urlpatterns = [
 	path('reservation/<int:reservationID>', views.reservation, name='reservation'),
 	path('locations/', views.locations, name='locations'),
 	path('vehicles/', views.store, name='store'),
+	path('vehicles/search/', views.search, name='search'),
 	path('<int:storeID>/<int:vehicleID>/', views.vehicle, name='vehicle'),
 	path('<int:storeID>/<int:vehicleID>/reserve/', views.reserve, name='reserve'),
 	path('<int:storeID>/<int:vehicleID>/reserve/confirm/', views.makereservation, name='makereservation')

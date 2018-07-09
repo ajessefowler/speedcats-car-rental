@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="{% static 'css/animations.css' %}">
 	{% if locations %}
 	<script>
-		var locationStr = '{{locations}}';
+		var locationStr = '{{ locations }}';
 		var locations = JSON.parse(locationStr.replace(/(&quot;)/g, '"'));
 		localStorage.setItem('locations', JSON.stringify(locations));
 	</script>

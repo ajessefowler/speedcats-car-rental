@@ -7,16 +7,16 @@
         <form name="vehiclesearch" id="vehiclesearchform" action="{% url 'inventory:search' %}" method="post">
             {% csrf_token %}
             <input type="text" name="searchquery" id="searchquery" placeholder="Search for vehicles...">
-            <button type="submit" id="vehiclesearchbutton"><i class="button material-icons" id="vehiclesearchicon">search</i></button>
+            <button type="submit">Search</button>
         </form>
     </div>
-    {% for vehicle in vehicles %}
+    {% for result in results %}
         <div class="vehicle">
-            <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/">
-                <img src="{{ vehicle.image.url }}">
+            <a href="/inventory/{{ result.store.ID }}/{{ result.id }}/">
+                <img src="{{ result.image.url }}">
                 <div class="vehiclelistdetails">
-                    <p class="vehiclename">{{ vehicle }}</p>
-                    <p class="vehicleprice">${{ vehicle.price }} / day</p>
+                    <p class="vehiclename">{{ result }}</p>
+                    <p class="vehicleprice">${{ result.price }} / day</p>
                 </div>
                 <i class="material-icons">chevron_right</i>
             </a>
