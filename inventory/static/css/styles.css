@@ -65,7 +65,7 @@ header {
 	padding: 0 7px;
 	position: fixed;
 	top: 0;
-	z-index: 52;
+	z-index: 54;
 }
 
 header > h1 {
@@ -353,23 +353,25 @@ a:-webkit-any-link {
 	font-size: 13pt;
 	padding: 0 12px;
 	width: 110px;
-	margin-top: 24px;
 	float: right;
 }
 
-#register {
+#loginbuttons {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	width: 100%;
+	padding-top: 25px;
 }
 
-#register > p {
-	font-size: 10pt;
+#loginbuttons > p {
+	font-size: 11pt;
+	padding-left: 3px;
+}
+
+#loginbuttons > p > a {
 	color: #777676;
-	padding: 8px;
-	margin-bottom: 2px;
 }
 
 #logoutbutton {
@@ -478,6 +480,29 @@ a:-webkit-any-link {
 	background-color: rgb(218, 216, 216);
 }
 
+#dropoffcheckbox {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+#dropoffcheckbox > p {
+	padding: 0 0 0 3px;
+	margin: 0;
+	font-size: 12pt;
+}
+
+#dropofflocation {
+	display: none;
+}
+
+#dropoffloctext {
+	margin: 0;
+	line-height: 40px;
+}
+
 #welcome {
 	padding-bottom: 0 !important;
 }
@@ -499,6 +524,15 @@ a:-webkit-any-link {
 }
 
 #startbutton {
+	color: #696969;
+	font-size: 13pt;
+	background-color: rgb(126, 126, 126);
+	width: 110px;
+	margin: 15px 0px 25px auto;
+	border: none;
+}
+
+#modifybutton {
 	color: #696969;
 	font-size: 13pt;
 	background-color: rgb(126, 126, 126);
@@ -530,9 +564,9 @@ a:-webkit-any-link {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	height: 40px;
+	height: 38px;
 	background-color: white;
-	margin: 0 20px 25px 20px;
+	margin: 0 20px 15px 20px;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #525252;
 	padding: 0 0 0 14px;

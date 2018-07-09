@@ -1,4 +1,10 @@
 {% extends "base_generic.html" %}
+{% load static %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'js/checkModifyForm.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/location.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div id="mapcontainer">
@@ -14,31 +20,42 @@
     <h2 class="header" id="locationheader">Modify Your Reservation</h2>
 
     <div id="selectlocation">
+
         {% if reservation.status == "Upcoming" %}
-        <h3>Choose Your Pick Up</h3>
-        <div id="pickuplocation" class="selectcard">
-            <p id="pickuplocationcardtext">{{ reservation.pick_up_location }}</p>
-        </div>
-        <div id="pickuptimeselect" class="selectcard">
-            <p id="pickuptimecardtext">{{ reservation.pick_up_time }}</p> 
-        </div>
-        {% endif %}
-        <h3>Choose Your Drop Off</h3>
-        <div id="dropofflocation" class="selectcard">
-            <p id="dropofflocationcardtext">{{ reservation.drop_off_location }}</p>
-        </div>
-        <div id="dropofftimeselect" class="selectcard">
-            <p id="dropofftimecardtext">{{ reservation.drop_off_time }}</p> 
-        </div>
-        {% if reservation.status == "Upcoming" %}
-        <h3>Change Your Vehicle</h3>
-        <div id="modifyvehicle" class="selectcard">
+        <!--<h3>Change Your Vehicle</h3>
+            <div id="modifyvehicle" class="selectcard">
             <p id="modifyvehiclecardtext">{{ reservation.vehicle }}</p>
+        </div>-->
+
+        <h3>Change Your Pick Up</h3>
+
+        <div id="pickuptime" class="selectcard">
+            <p id="pickuptimetext">{{ reservation.pick_up_time }}</p> 
         </div>
         {% endif %}
+
+        <h3>Change Your Drop Off</h3>
+        <div id="dropofftime" class="selectcard">
+            <p id="dropofftimetext">{{ reservation.drop_off_time }}</p> 
+        </div>
+        <div id="dropofflocation" class="selectcard">
+            <p id="dropoffloctext">{{ reservation.drop_off_location }}</p>
+        </div>
+        {% if reservation.pick_up_location == reservation.drop_off_location %}
+        <div id="dropoffcheckbox">
+            <input type="checkbox" id="dropoffdiff" name="dropoffdiff">
+            <p>Drop off at another location</p>
+        </div>
+        {% else %}
+        <div id="dropoffcheckbox">
+            <input type="checkbox" id="dropoffdiff" name="dropoffdiff" checked>
+            <p>Drop off at another location</p>
+        </div>
+        {% endif %}
+
     </div>
 
-    <div id="startbutton" class="roundbutton">
+    <div id="modifybutton" class="roundbutton">
         <p>DONE</p>
     </div>
 </div>
@@ -79,15 +96,8 @@
         <p id="dropofflocationdone" class="donebutton">DONE</p>
     </div>
 </div>
+{% endblock %}
 
-<div id="pickuplocationcard" class="infoselector">
-    <div class="infoselectorheader">
-        <h3>Select Your Pick Up Location</h3>
-        <i id="closepickup" class="material-icons">expand_more</i>
-    </div>
-    <div class="locationpicker">
-        <p id="pickuplocationtext" class="locationpickertext">Choose a location on the map</p>
-        <p id="pickuplocationdone" class="donebutton">DONE</p>
-    </div>
-</div>
+{% block initMap %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE&libraries=places&callback=initMap"></script>
 {% endblock %}

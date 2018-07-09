@@ -18,8 +18,9 @@
 		localStorage.setItem('locations', JSON.stringify(locations));
 	</script>
 	{% endif %}
-	<script type="text/javascript" src="{% static 'js/location.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/animations.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
+	{% block scripts %}
+	{% endblock %}
 </head>
 
 <body>
@@ -48,6 +49,6 @@
 		{% block content %}{% endblock %}
 	</div>
 	
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE&libraries=places&callback=initMap"></script>
+	{% block initMap %}{% endblock %}
 </body>
 </html>

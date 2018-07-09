@@ -1,6 +1,12 @@
 {% extends "base_generic.html" %}
+{% load static %}
 
 {% block title %}<title>Place Your Reservation</title>{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'js/setupPage.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/reserve.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <img src="{{ vehicle.image.url }}" width="100%" id="vehicleimage">

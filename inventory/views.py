@@ -2,13 +2,16 @@ import json
 import pytz
 from datetime import datetime, timedelta
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.postgres.search import SearchVector
 from django.core.serializers.json import DjangoJSONEncoder
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from .forms import RegisterForm
 from .models import Store, Vehicle, Reservation
 
 def home(request):
@@ -25,6 +28,24 @@ def feedback(request):
 
 def locations(request):
 	return render(request, 'inventory/locations.html')
+
+def register(request):
+	if request.method == 'POST':
+		form = RegisterForm(request.POST)
+		if form.is_valid():
+			form.save()
+			username = form.cleaned_data.get('username')
+			raw_password = form.cleaned_data.get('password1')
+			user = authenticate(username=username, password=raw_password)
+			login(request, user)
+			return redirect('/')
+	else:
+		form = RegisterForm()
+
+	context = {
+		"form":form
+	}
+	return render(request, 'inventory/register.html', context)
 
 def index(request):
 	# Pass location data so front-end map can display store markers

@@ -38,13 +38,11 @@
             {% if request.GET.next %}
             <input type="hidden" name="next" value="{{ request.GET.next }}">
             {% endif %}
-
-            <button type="submit" id="loginbutton" class="roundbutton">LOGIN</button>
+            <div id="loginbuttons">
+                <p id="registerbutton"><a href="{% url 'inventory:register' %}">Create Account</a></p>
+                <button type="submit" id="loginbutton" class="roundbutton">LOGIN</button>
+            </div>
         </form>
-        <div id="register">
-            <p>REGISTER</p>
-            <p>RESET PASSWORD</p>
-        </div>
         {% endif %}
         
     </div>

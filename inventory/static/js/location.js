@@ -1,3 +1,28 @@
+document.addEventListener('DOMContentLoaded', function(event) {
+    let dropOffSelected = false;
+
+    // Add event listener to find location button
+	initLocation();
+	document.getElementById('locatebutton').addEventListener('click', function() {
+		findLocation();
+	});
+    
+    initTimeHandler('pickup');
+	initTimeHandler('dropoff');
+
+	document.getElementById('dropoffdiff').addEventListener('click', function(){
+		if (!dropOffSelected) {
+			dropOffSelected = true;
+			document.getElementById('dropofflocation').style.display = 'block';
+			checkFormCompletion();
+		} else {
+			dropOffSelected = false;
+			document.getElementById('dropofflocation').style.display = 'none';
+			checkFormCompletion();
+		}
+	});
+});
+
 // Setup location autocomplete and search
 function initLocation() {
     const countryRestriction = { componentRestrictions: { country: 'us' }};
@@ -48,24 +73,6 @@ function resolveCoords(position) {
 	request.send();
 }
 
-// If all selections have been made, turn the start button orange and activate click handler
-function checkStartFormCompletion() {
-    const start= document.getElementById('startbutton');
-
-    if (
-        (document.getElementById('pickuplocation').value !== 'Tap here to select a location') &&
-        (document.getElementById('pickuptime').value !== 'Tap here to select a time') &&
-        (document.getElementById('dropofflocation').value !== 'Tap here to select a location') &&
-        (document.getElementById('dropofftime').value !== 'Tap here to select a time')
-    ) {
-        start.style.backgroundColor = '#FF5722';
-        start.style.color = '#FFFFFF';
-        start.addEventListener('click', function() {
-            document.getElementById('selectlocation').submit();
-        });
-    }
-}
-
 function mapOnLoad(request, id, map, addressDisplay, marker, element) {
 
     // Scroll to top of page to display entire map
@@ -89,14 +96,19 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
             document.getElementById(element + 'locationtext').innerHTML = addressDisplay;
             
             document.getElementById(element + 'locationdone').addEventListener('click', function() {
-                document.getElementById(element + 'locationid').value = id;
-                document.getElementById(element + 'location').value = addressDisplay;
+                if (document.getElementById('dropoffdiff').checked) {
+                    document.getElementById(element + 'locationid').value = id;
+                } else {
+                    document.getElementById('pickuplocationid').value = id;
+                    document.getElementById('dropofflocationid').value = id;
+                }
+                document.getElementById(element + 'loctext').innerHTML = addressDisplay;
                 document.getElementById(element + 'locationcard').style.animation = 'timeDown .3s ease forwards';
                 document.getElementById(element + 'location').scrollIntoView({
                     behavior: 'smooth'
                 });
 
-                checkStartFormCompletion();
+                checkFormCompletion();
             });
         });
 
@@ -147,14 +159,37 @@ function initMap() {
                 document.getElementById('dropofflocationcard').style.animation = 'timeUp .3s ease forwards';
             });
 
-            document.getElementById('pickuplocation').addEventListener('click', function() {
-                mapOnLoad(request, id, map, addressDisplay, marker, 'pickup');
-                document.getElementById('pickuplocationcard').style.animation = 'timeUp .3s ease forwards';
-            });
+            if (document.getElementById('pickuplocation')) {
+                document.getElementById('pickuplocation').addEventListener('click', function() {
+                    mapOnLoad(request, id, map, addressDisplay, marker, 'pickup');
+                    document.getElementById('pickuplocationcard').style.animation = 'timeUp .3s ease forwards';
+                });
+            }
         };
 
 	    request.onerror = () => { console.log('Connection error.'); };
 
 	    request.send();
     }
+}
+
+function initTimeHandler(element) {
+	document.getElementById(element + 'time').addEventListener('click', function() {
+		document.getElementById(element + 'timecard').style.animation = 'timeUp .3s ease forwards';
+	});
+
+	document.getElementById('close' + element + 'time').addEventListener('click', function() {
+		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
+	});
+
+	document.getElementById(element + 'donebutton').addEventListener('click', function() {
+		const apptDate = document.getElementById(element + 'dateinput').value;
+		const apptTime = document.getElementById(element + 'timeinput').value;
+		const meridiem = apptTime >= 12 ? 'PM' : 'AM';
+
+		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
+		document.getElementById(element + 'timetext').innerHTML = apptDate + ' at ' + apptTime + ' ' + meridiem;
+		document.getElementById(element + 'timeformat').value = apptDate + ' ' + apptTime;
+		checkFormCompletion();
+	});
 }
