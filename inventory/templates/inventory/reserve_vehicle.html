@@ -13,21 +13,42 @@
 <div id="vehiclecontent">
     <h2 class="header">Place Your Reservation</h2>
     <div id="reservecontent">
-        <p>Confirm details here</p>
-        <p>{{ vehicle }}</p>
-        <p>{{ length }}</p>
-        <p></p>
-        <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
+        <h3>Summary</h3>
+        <p>{{ vehicle }} for {{ length }} days</p>
+        <h3>Pick Up</h3>
+        <p>{{ store }} on {{ pick_up_time }}</p>
+        <h3>Drop Off</h3>
+        <p id="separator">{{ drop_off_store }} on {{ drop_off_time }}</p>
+        <form name="paymentlocation" id="paymentform" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
             {% csrf_token %}
-            <input type="text" name="subtotal" id="checkoutsub" value="${{ subtotal }}" readonly><br>
-            <input type="text" name="tax" id="checkouttax" value="${{ tax }}" readonly><br>
-            <input type="text" name="total" id="checkouttotal" value="${{ total }}" readonly><br>
+            <div class="paymentprice">
+                    <p>Base Price:</p>
+                    <input type="text" name="subtotal" id="checkoutsub" value="${{ vehicle.price }}" readonly><br>
+                </div>
+            <div class="paymentprice">
+                <p>Subtotal:</p>
+                <input type="text" name="subtotal" id="checkoutsub" value="${{ subtotal }}" readonly><br>
+            </div>
+            <div class="paymentprice">
+                <p>Tax:</p>
+                <input type="text" name="tax" id="checkouttax" value="${{ tax }}" readonly><br>
+            </div>
+            <div class="paymentprice" id="totaldiv">
+                <p>Total:</p>
+                <input type="text" name="total" id="checkouttotal" value="${{ total }}" readonly><br>
+            </div>
 
-            <input type="radio" name="payment" id="payinstore" checked>Pay in store<br>
-            <input type="radio" name="payment" id="payonline">Pay online<br>
+            <div class="paymentlocationselect" id="instorediv">
+                <input type="radio" name="payment" id="payinstore" checked>
+                <p class="paymenttext">Pay in store</p><br>
+            </div>
+            <div class="paymentlocationselect">
+                <input type="radio" name="payment" id="payonline">
+                <p class="paymenttext">Pay online</p><br>
+            </div>
 
             <div id="paymentformdiv">
-                <h2>Enter Your Payment Information</h2>
+                <h3>Enter Your Payment Information</h3>
                 <input type="text" placeholder="Cardholder name">
                 <input type="text" placeholder="Card number">
 

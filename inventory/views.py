@@ -131,6 +131,11 @@ def reserve(request, storeID, vehicleID):
 	store = get_object_or_404(Store, pk=storeID)
 	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
 
+	dropoff_id = request.session["dropoff_id"]
+	dropoff_store = get_object_or_404(Store, pk=dropoff_id)
+	pickup_time = request.session["pickup_time"]
+	dropoff_time = request.session["dropoff_time"]
+
 	# Calculate the length of the potential reservation, rounding number of days up
 	dropoff_format = datetime.strptime(request.session["dropoff_time"], "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 	pickup_format = datetime.strptime(request.session["pickup_time"], "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
@@ -143,6 +148,9 @@ def reserve(request, storeID, vehicleID):
 	
 	context = {
 		"store":store,
+		"drop_off_store":dropoff_store,
+		"pick_up_time":pickup_time,
+		"drop_off_time":dropoff_time,
 		"vehicle":vehicle,
 		"length":reservation_length,
 		"subtotal":subtotal,

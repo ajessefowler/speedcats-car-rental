@@ -105,8 +105,8 @@ a:-webkit-any-link {
 }
 
 .roundbutton {
-	height: 40px;
-	border-radius: 20px;
+	height: 36px;
+	border-radius: 18px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -345,6 +345,40 @@ a:-webkit-any-link {
 	border: none;
 	width: 120px;
 	font-size: 12pt;
+}
+
+.paymentlocationselect {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.paymenttext {
+	font-size: 12pt;
+	font-family: 'Roboto', sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+.paymentprice {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+}
+
+.paymentprice > p {
+	padding: 0 20px 0 0;
+	margin: 10px 0;
+}
+
+.paymentprice > input {
+	border: none;
+	font-size: 12pt;
+	font-family: 'Roboto', sans-serif;
+	width: 80px;
 }
 
 #reservecancelbutton {
@@ -831,6 +865,40 @@ a:-webkit-any-link {
 
 #paymentformdiv {
 	display: none;
+	padding: 12px 10px 0;
+}
+
+#reservecontent {
+	background-color: white;
+	margin: 0 20px 20px;
+	padding: 14px 8px;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #707070;
+}
+
+#reservecontent > h3 {
+	color: black;
+	font-size: 14pt;
+	padding-left: 10px;
+}
+
+#reservecontent > p {
+	font-size: 11pt;
+}
+
+#separator {
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #dadada;
+}
+
+#totaldiv {
+	padding-bottom: 9px;
+	border-bottom: 1px solid #dadada;
+}
+
+#instorediv {
+	padding-top: 14px;
 }
 
 @media only screen and (min-width: 768px) {
