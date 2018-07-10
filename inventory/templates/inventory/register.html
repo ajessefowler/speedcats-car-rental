@@ -3,10 +3,23 @@
 {% block title %}<title>Register</title>{% endblock %}
 
 {% block content %}
-  <h2 class="header">Sign up</h2>
+  <h2 class="header">Create An Account</h2>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">REGISTER</button>
+    <div id="registerform">
+    {% for field in form %}
+    <p>
+      {{ field.label_tag }}
+      {{ field }}<br>
+      {% if field.help_text %}
+        <small style="color: grey">{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+    </p>
+    {% endfor %}
+    </div>
+    <button type="submit" id="registerbutton" class="roundbutton">REGISTER</button>
   </form>
 {% endblock %}

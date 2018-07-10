@@ -336,6 +336,67 @@ a:-webkit-any-link {
 	font-size: 14pt;
 }
 
+.helptext {
+	font-size: 10pt;
+}
+
+.placebuttons {
+	color: white;
+	border: none;
+	width: 120px;
+	font-size: 12pt;
+}
+
+#reservecancelbutton {
+	color: #777676;
+}
+
+#reservecontinuebutton {
+	background-color: #FF5722;
+}
+
+#content > form > ul > li {
+	font-size: 10pt;
+}
+
+#registerform {
+	background-color: white;
+	box-shadow: 0 1px 3px #707070;
+	border-radius: 3px;
+	margin: 0 20px 20px;
+	padding: 15px 0;
+}
+
+#registerform > p > input {
+	width: 120px;
+	margin-left: 10px;
+	border: none;
+	border-bottom: 1px solid #666666;
+}
+
+#registerbutton {
+	border: none;
+	background-color: #FF5722;
+	color: white;
+	width: 120px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 13pt;
+	margin: 0 20px 20px;
+	float: right;
+}
+
+#id_email {
+	width: 200px !important;
+}
+
+#reservebuttongroup {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin: 20px;
+}
+
 #logincontent {
 	display: flex;
 	flex-direction: column;

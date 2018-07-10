@@ -60,7 +60,14 @@
                 <input type="text" placeholder="CVV">
             </div>
 
-            <input type="submit" value="CONTINUE">
+            <div id="reservebuttongroup">
+                <a href="{% url 'inventory:home' %}">
+                    <div id="reservecancelbutton">
+                        <p>Cancel</p>
+                    </div>
+                </a>
+                <input type="submit" value="CONTINUE" id="reservecontinuebutton" class="placebuttons roundbutton">
+            </div>
         </form>
     </div>
 </div>

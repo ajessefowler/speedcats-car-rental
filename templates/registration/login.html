@@ -39,7 +39,7 @@
             <input type="hidden" name="next" value="{{ request.GET.next }}">
             {% endif %}
             <div id="loginbuttons">
-                <p id="registerbutton"><a href="{% url 'inventory:register' %}">Create Account</a></p>
+                <p id="createaccountbutton"><a href="{% url 'inventory:register' %}">Create Account</a></p>
                 <button type="submit" id="loginbutton" class="roundbutton">LOGIN</button>
             </div>
         </form>

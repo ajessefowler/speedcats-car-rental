@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', function(event) {
-    let dropOffSelected = false;
+    let dropOffSelected;
+
+    if (document.getElementById('dropoffdiff').checked) {
+        dropOffSelected = true;
+    } else {
+        dropOffSelected = false;
+    }
 
     // Add event listener to find location button
 	initLocation();
@@ -11,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	initTimeHandler('dropoff');
 
 	document.getElementById('dropoffdiff').addEventListener('click', function(){
+    
 		if (!dropOffSelected) {
 			dropOffSelected = true;
 			document.getElementById('dropofflocation').style.display = 'block';
