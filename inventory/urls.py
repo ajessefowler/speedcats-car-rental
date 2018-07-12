@@ -12,6 +12,7 @@ urlpatterns = [
 	path('contact/', views.contact, name='contact'),
 	path('feedback/', views.feedback, name='feedback'),
 	path('reservation/<int:reservationID>/modify/', views.modify, name='modify'),
+	path('reservation/<int:reservationID>/update/', views.update, name='update'),
 	path('reservation/<int:reservationID>/cancel/', views.cancel, name='cancel'),
 	path('reservation/<int:reservationID>', views.reservation, name='reservation'),
 	path('locations/', views.locations, name='locations'),

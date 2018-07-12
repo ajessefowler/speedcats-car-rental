@@ -1,10 +1,24 @@
 document.addEventListener('DOMContentLoaded', function(event) {
     let dropOffSelected;
 
-    if (document.getElementById('dropoffdiff').checked) {
-        dropOffSelected = true;
-    } else {
-        dropOffSelected = false;
+    if (document.getElementById('pickuplocationcard')) {
+        if (document.getElementById('dropoffdiff').checked) {
+            dropOffSelected = true;
+        } else {
+            dropOffSelected = false;
+        }
+
+        document.getElementById('dropoffdiff').addEventListener('click', function(){
+            if (!dropOffSelected) {
+                dropOffSelected = true;
+                document.getElementById('dropofflocation').style.display = 'block';
+                checkFormCompletion();
+            } else {
+                dropOffSelected = false;
+                document.getElementById('dropofflocation').style.display = 'none';
+                checkFormCompletion();
+            }
+        });
     }
 
     // Add event listener to find location button
@@ -15,19 +29,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     
     initTimeHandler('pickup');
 	initTimeHandler('dropoff');
-
-	document.getElementById('dropoffdiff').addEventListener('click', function(){
-    
-		if (!dropOffSelected) {
-			dropOffSelected = true;
-			document.getElementById('dropofflocation').style.display = 'block';
-			checkFormCompletion();
-		} else {
-			dropOffSelected = false;
-			document.getElementById('dropofflocation').style.display = 'none';
-			checkFormCompletion();
-		}
-	});
 });
 
 // Setup location autocomplete and search
@@ -103,11 +104,15 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
             document.getElementById(element + 'locationtext').innerHTML = addressDisplay;
             
             document.getElementById(element + 'locationdone').addEventListener('click', function() {
-                if (document.getElementById('dropoffdiff').checked) {
-                    document.getElementById(element + 'locationid').value = id;
+                if (document.getElementById('pickuplocationcard')) {
+                    if (document.getElementById('dropoffdiff').checked) {
+                        document.getElementById(element + 'locationid').value = id;
+                    } else {
+                        document.getElementById('pickuplocationid').value = id;
+                        document.getElementById('dropofflocationid').value = id;
+                    }
                 } else {
-                    document.getElementById('pickuplocationid').value = id;
-                    document.getElementById('dropofflocationid').value = id;
+                    document.getElementById(element + 'locationid').value = id;
                 }
                 document.getElementById(element + 'loctext').innerHTML = addressDisplay;
                 document.getElementById(element + 'locationcard').style.animation = 'timeDown .3s ease forwards';
@@ -178,25 +183,4 @@ function initMap() {
 
 	    request.send();
     }
-}
-
-function initTimeHandler(element) {
-	document.getElementById(element + 'time').addEventListener('click', function() {
-		document.getElementById(element + 'timecard').style.animation = 'timeUp .3s ease forwards';
-	});
-
-	document.getElementById('close' + element + 'time').addEventListener('click', function() {
-		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
-	});
-
-	document.getElementById(element + 'donebutton').addEventListener('click', function() {
-		const apptDate = document.getElementById(element + 'dateinput').value;
-		const apptTime = document.getElementById(element + 'timeinput').value;
-		const meridiem = apptTime >= 12 ? 'PM' : 'AM';
-
-		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
-		document.getElementById(element + 'timetext').innerHTML = apptDate + ' at ' + apptTime + ' ' + meridiem;
-		document.getElementById(element + 'timeformat').value = apptDate + ' ' + apptTime;
-		checkFormCompletion();
-	});
 }

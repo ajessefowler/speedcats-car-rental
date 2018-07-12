@@ -203,6 +203,36 @@ def modify(request, reservationID):
 		return render(request, 'inventory/modify.html', context)
 
 @login_required
+def update(request, reservationID):
+	reservation = Reservation.objects.get(pk=reservationID)
+
+	if request.user == reservation.user:
+		pickup_id = int(request.POST["pickuplocationid"])
+		pickup_store = get_object_or_404(Store, pk=pickup_id)
+		dropoff_id = int(request.POST["dropofflocationid"])
+		dropoff_store = get_object_or_404(Store, pk=dropoff_id)
+
+		pickup_init = request.POST["pickuptimeformat"]
+		pickup_time = pickup_init.replace('.', '')
+		pickup_format = datetime.strptime(pickup_time, '%B %d, %Y, %I:%M %p')
+
+		dropoff_init = request.POST["dropofftimeformat"]
+		dropoff_time = dropoff_init.replace('.', '')
+		dropoff_format = datetime.strptime(dropoff_time, '%B %d, %Y, %I:%M %p')
+
+		reservation.pick_up_location = pickup_store
+		reservation.pick_up_time = pickup_format
+		reservation.drop_off_location = dropoff_store
+		reservation.drop_off_time = dropoff_format
+		reservation.save()
+
+		context = {
+			"reservation":reservation
+		}
+		
+		return render(request, 'inventory/reservation.html', context)
+
+@login_required
 def cancel(request, reservationID):
 	user = request.user
 	reservation = Reservation.objects.get(pk=reservationID)
