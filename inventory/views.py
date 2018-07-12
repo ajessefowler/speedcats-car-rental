@@ -136,9 +136,10 @@ def reserve(request, storeID, vehicleID):
 	pickup_time = request.session["pickup_time"]
 	dropoff_time = request.session["dropoff_time"]
 
+	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
+	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
+
 	# Calculate the length of the potential reservation, rounding number of days up
-	dropoff_format = datetime.strptime(request.session["dropoff_time"], "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
-	pickup_format = datetime.strptime(request.session["pickup_time"], "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 	reservation_length = ((dropoff_format - pickup_format) + timedelta(days=1)).days + 1
 
 	# Calculate pricing of potential reservation
@@ -212,13 +213,11 @@ def update(request, reservationID):
 		dropoff_id = int(request.POST["dropofflocationid"])
 		dropoff_store = get_object_or_404(Store, pk=dropoff_id)
 
-		pickup_init = request.POST["pickuptimeformat"]
-		pickup_time = pickup_init.replace('.', '')
-		pickup_format = datetime.strptime(pickup_time, '%B %d, %Y, %I:%M %p')
+		pickup_time = request.POST["pickuptimeformat"]
+		pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
-		dropoff_init = request.POST["dropofftimeformat"]
-		dropoff_time = dropoff_init.replace('.', '')
-		dropoff_format = datetime.strptime(dropoff_time, '%B %d, %Y, %I:%M %p')
+		dropoff_time = request.POST["dropofftimeformat"]
+		dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
 		reservation.pick_up_location = pickup_store
 		reservation.pick_up_time = pickup_format

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         document.getElementById(element + 'dateinput').style.border = 'none';
 		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
 		document.getElementById(element + 'timetext').innerHTML = formattedDate + ', ' + formattedTime;
-		document.getElementById(element + 'timeformat').value = formattedDate + ', ' + formattedTime;
+		document.getElementById(element + 'timeformat').value = apptDate + ' ' + apptTime;
 		checkFormCompletion();
     }
 
