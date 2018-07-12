@@ -833,7 +833,8 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px #414040;
 	height: 35px;
 	width: 205px;
-	margin-top: auto;
+	margin-top: 4px;
+	margin-bottom: 6px;
 }
 
 #startnav > p {

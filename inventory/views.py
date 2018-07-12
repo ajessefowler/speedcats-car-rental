@@ -113,6 +113,7 @@ def search(request):
 	results = Vehicle.objects.filter(store_id=pickup_id).filter(status='a').filter(Q(year__icontains=query) | Q(make__icontains=query) | Q(model__icontains=query) | Q(color__icontains=query))
 
 	context = {
+		"query":query,
 		"results":results,
 		"store":store
 	}

@@ -100,31 +100,37 @@ document.addEventListener('DOMContentLoaded', function(event) {
 function validateDate(element) {
     const now = new Date();
     const date = document.getElementById(element + 'dateinput').value;
-    const year = parseInt(date.substring(0, 4));
-    const month = parseInt(date.substring(5, 7));
-    const day = parseInt(date.substring(8, 10));
 
-    if (element === 'dropoff') {
-        const pickupDate = document.getElementById('pickupdateinput').value;
-        const pickupYear = parseInt(pickupDate.substring(0, 4));
-        const pickupMonth = parseInt(pickupDate.substring(5, 7));
-        const pickupDay = parseInt(pickupDate.substring(8, 10));
+    if (date) {
+        const year = parseInt(date.substring(0, 4));
+        const month = parseInt(date.substring(5, 7));
+        const day = parseInt(date.substring(8, 10));
 
-        if (year < pickupYear || month < pickupMonth || day < pickupDay) {
-            // Check times as well to prevent 0 length reservations
+        if (element === 'dropoff') {
+            const pickupDate = document.getElementById('pickupdateinput').value;
+            const pickupYear = parseInt(pickupDate.substring(0, 4));
+            const pickupMonth = parseInt(pickupDate.substring(5, 7));
+            const pickupDay = parseInt(pickupDate.substring(8, 10));
+
+            if (year < pickupYear || month < pickupMonth || day < pickupDay) {
+                // Check times as well to prevent 0 length reservations
+                document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
+                return false;
+            } else {
+                return true;
+            }
+        }
+    
+        // Add one to now.getMonth because it is 0-indexed
+        if (year !== now.getFullYear() || month < (now.getMonth() + 1) || day < (now.getDate())) {
             document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
             return false;
         } else {
             return true;
         }
-    }
-    
-    // Add one to now.getMonth because it is 0-indexed
-    if (year !== now.getFullYear() || month < (now.getMonth() + 1) || day < (now.getDate())) {
+    } else {
         document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
         return false;
-    } else {
-        return true;
     }
 
     function compareTimes() {
@@ -145,13 +151,18 @@ function validateDate(element) {
 // Ensure that pick up and drop off times fall inside store hours
 function validateTime(element) {
     const time = document.getElementById(element + 'timeinput').value;
-    const hours = parseInt(time.substring(0, 2));
-    const mins = parseInt(time.substring(3, 5));
-    if (hours < 8 || (hours >= 18 && mins > 0)) {
+    if (time) {
+        const hours = parseInt(time.substring(0, 2));
+        const mins = parseInt(time.substring(3, 5));
+        if ((hours < 8 || (hours >= 18 && mins > 0))) {
+            document.getElementById(element + 'timeinput').style.border = '2px solid #f44336';
+            return false;
+        } else {
+            return true;
+        }
+    } else {
         document.getElementById(element + 'timeinput').style.border = '2px solid #f44336';
         return false;
-    } else {
-        return true;
     }
 }
 
