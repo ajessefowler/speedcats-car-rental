@@ -2,7 +2,7 @@
 
 {% block content %}
     <div id="storecontent">
-    <h2 class="header">{{ store.city }}, {{ store.state }}</h2>
+    <h2 class="header">Searching {{ store.city }}, {{ store.state }}</h2>
     <div id="vehiclesearch">
         <form name="vehiclesearch" id="vehiclesearchform" action="{% url 'inventory:search' %}" method="post">
             {% csrf_token %}
@@ -22,7 +22,7 @@
             </a>
         </div>
     {% empty %}
-        <p>No vehicles available</p>
+        <p>No vehicles found</p>
     {% endfor %}
     </div>
 {% endblock %}

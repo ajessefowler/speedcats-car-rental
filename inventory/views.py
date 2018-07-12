@@ -9,6 +9,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models.signals import post_save
+from django.db.models import Q
 from django.dispatch import receiver
 
 from .forms import RegisterForm
@@ -105,13 +106,15 @@ def store(request):
 	return render(request, 'inventory/vehicle_list.html', context)
 
 def search(request):
+	pickup_id = request.session["pickup_id"]
+	store = Store.objects.get(pk=pickup_id)
+	
 	query = request.POST["searchquery"]
-	results = Vehicle.objects.annotate(
-		search=SearchVector('year', 'make', 'model', 'color'),
-	).filter(search=query)
+	results = Vehicle.objects.filter(store_id=pickup_id).filter(status='a').filter(Q(year__icontains=query) | Q(make__icontains=query) | Q(model__icontains=query) | Q(color__icontains=query))
 
 	context = {
-		"results":results
+		"results":results,
+		"store":store
 	}
 
 	return render(request, 'inventory/search.html', context)
