@@ -381,6 +381,14 @@ a:-webkit-any-link {
 	width: 80px;
 }
 
+.desktop {
+	width: 100%;
+}
+
+.desktop > h3 {
+	padding-bottom: 4px;
+}
+
 #reservecancelbutton {
 	color: #777676;
 }
@@ -578,7 +586,7 @@ a:-webkit-any-link {
 #dropoffcheckbox {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	margin-bottom: 15px;
 }
@@ -902,14 +910,26 @@ a:-webkit-any-link {
 	padding-top: 14px;
 }
 
+#desktoparrow {
+	display: none;
+}
+
 @media only screen and (min-width: 768px) {
+
+	.desktop {
+		width: 45%;
+	}
 
 	.button:hover {
 		cursor: pointer;
 	}
 
+	.header {
+		margin: 0;
+	}
+
 	.vehicle {
-		margin: 0 23% 25px;
+		margin: 0 0 25px;
 	}
 
 	.vehicle:hover {
@@ -918,6 +938,10 @@ a:-webkit-any-link {
 
 	.vehiclename > p {
 		font-size: 16pt;
+	}
+
+	.selectcard:hover {
+		cursor: pointer;
 	}
 
 	.reservebutton {
@@ -929,11 +953,59 @@ a:-webkit-any-link {
 
 	#infocontainer {
 		position: relative;
-		margin-top: 440px;
+		margin-top: 525px;
+		padding: 0 20px;
+	}
+
+	#storecontent {
+		padding: 20px 23% 0;
+		width: auto;
+	}
+
+	#vehiclesearch {
+		margin: 0 0 15px;
+	}
+
+	#welcomeheading {
+		top: 150px;
+	}
+
+	#welcomeheading > h2 {
+		font-size: 32pt;
+	}
+
+	#welcomeheading > p {
+		font-size: 20pt;
+	}
+
+	#desktoparrow {
+		display: block;
+		z-index: 10;
+		color: white;
+		font-size: 50pt;
+		position: fixed;
+		text-align: center;
+		width: 100%;
+		bottom: 280px;
+		transform: translateY(0);
+		animation: arrowBounce 2s ease-in-out infinite;
+		cursor: default;
+	}
+
+	#selectlocation {
+		flex-direction: row;
+		justify-content: space-around;
+		padding: 0 90px;
 	}
 
 	#welcome {
 		margin: 16px 23%;
+	}
+
+	#startbutton {
+		position: absolute;
+		top: 220px;
+		right: 80px;
 	}
 
 	#logincontent {
@@ -949,7 +1021,7 @@ a:-webkit-any-link {
 	}
 
 	#map {
-		height: 440px;
+		height: 470px;
 	}
 
 	#pickuptimeselect {
@@ -957,7 +1029,8 @@ a:-webkit-any-link {
 	}
 
 	#vehiclecontent {
-		margin: 0 23% 20px;
+		margin: 0 0 20px;
+		padding: 0 23% 20px;
 		width: 54%;
 	}
 
