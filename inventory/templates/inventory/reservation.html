@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block content %}
+    {% if reservation.vehicle.image %}
     <img src="{{ reservation.vehicle.image.url }}" width="100%" id="vehicleimage">
+    {% endif %}
     <div id="vehiclecontent">
         <h2 class="header">{{ reservation.vehicle }}</h2>
         <p>From {{ reservation.pick_up_location }}</p>

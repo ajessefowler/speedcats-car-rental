@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block content %}
+    {% if vehicle.image %}
     <img src="{{ vehicle.image.url }}" width="100%" id="vehicleimage">
+    {% endif %}
     <div id="vehiclecontent">
         <h2 class="header">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h2>
         <div id="vehicledescription">

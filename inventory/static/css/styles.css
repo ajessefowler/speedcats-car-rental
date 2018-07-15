@@ -951,6 +951,15 @@ a:-webkit-any-link {
 		border-radius: 30px;
 	}
 
+	.infoselector {
+		width: 50%;
+		box-shadow: 0 -1px 3px 1px #535353;
+		padding: 4px 20px 9px;
+		margin: 0 25%;
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+	}
+
 	#infocontainer {
 		position: relative;
 		margin-top: 525px;

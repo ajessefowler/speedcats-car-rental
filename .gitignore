@@ -9,3 +9,13 @@ media/
 
 # VS Code files
 .vscode/
+
+# Testing
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Documents
+docs/

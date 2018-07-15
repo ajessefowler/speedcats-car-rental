@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.postgres.search import SearchVector
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db.models.signals import post_save
 from django.db.models import Q
 from django.dispatch import receiver
@@ -75,15 +75,19 @@ def store(request):
 		pickup_time = request.POST["pickuptimeformat"]
 		dropoff_id = int(request.POST["dropofflocationid"])
 		dropoff_time = request.POST["dropofftimeformat"]
+
 		request.session["pickup_id"] = pickup_id
 		request.session["pickup_time"] = pickup_time
 		request.session["dropoff_id"] = dropoff_id
 		request.session["dropoff_time"] = dropoff_time
+
+		store = Store.objects.get(pk=pickup_id)
 	except KeyError:
-		pass
+		raise Http404('Store does not exist')
+	except Store.DoesNotExist:
+		raise Http404('Store does not exist')
 
 	available_vehicles = []
-	store = Store.objects.get(pk=pickup_id)
 	vehicles = Vehicle.objects.filter(store_id=pickup_id).filter(status='a')
 
 	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
@@ -197,6 +201,8 @@ def reservation(request, reservationID):
 	# If user made the reservation, display details, otherwise display error
 	if request.user == reservation.user:
 		return render(request, 'inventory/reservation.html', context)
+	else:
+		raise Http404('You do not have permission to view this page.')
 
 @login_required
 def modify(request, reservationID):
@@ -206,6 +212,8 @@ def modify(request, reservationID):
 	}
 	if request.user == reservation.user:
 		return render(request, 'inventory/modify.html', context)
+	else:
+		raise Http404('You do not have permission to view this page.')
 
 @login_required
 def update(request, reservationID):
