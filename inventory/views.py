@@ -11,6 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db.models.signals import post_save
 from django.db.models import Q
 from django.dispatch import receiver
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import RegisterForm
 from .models import Store, Vehicle, Reservation
@@ -70,22 +71,32 @@ def history(request):
 	return render(request, 'inventory/history.html', context)
 
 def store(request):
-	try:
-		pickup_id = int(request.POST["pickuplocationid"])
-		pickup_time = request.POST["pickuptimeformat"]
-		dropoff_id = int(request.POST["dropofflocationid"])
-		dropoff_time = request.POST["dropofftimeformat"]
 
-		request.session["pickup_id"] = pickup_id
-		request.session["pickup_time"] = pickup_time
-		request.session["dropoff_id"] = dropoff_id
-		request.session["dropoff_time"] = dropoff_time
+	# If data is being posted, use that, otherwise use the session variables
+	if request.method == "POST":
+		try:
+			pickup_id = int(request.POST["pickuplocationid"])
+			pickup_time = request.POST["pickuptimeformat"]
+			dropoff_id = int(request.POST["dropofflocationid"])
+			dropoff_time = request.POST["dropofftimeformat"]
+
+			request.session["pickup_id"] = pickup_id
+			request.session["pickup_time"] = pickup_time
+			request.session["dropoff_id"] = dropoff_id
+			request.session["dropoff_time"] = dropoff_time
+
+			store = Store.objects.get(pk=pickup_id)
+		except KeyError:
+			raise Http404('Store does not exist')
+		except Store.DoesNotExist:
+			raise Http404('Store does not exist')
+	else:
+		pickup_id = request.session["pickup_id"]
+		pickup_time = request.session["pickup_time"]
+		dropoff_id = request.session["dropoff_id"]
+		dropoff_time = request.session["dropoff_time"]
 
 		store = Store.objects.get(pk=pickup_id)
-	except KeyError:
-		raise Http404('Store does not exist')
-	except Store.DoesNotExist:
-		raise Http404('Store does not exist')
 
 	available_vehicles = []
 	vehicles = Vehicle.objects.filter(store_id=pickup_id).filter(status='a')
@@ -101,9 +112,20 @@ def store(request):
 			for reservation in vehicle.reservation_set.all():
 				if reservation.drop_off_time < pickup_format or reservation.pick_up_time > dropoff_format:
 					available_vehicles.append(vehicle)
-			
+	
+	# Setup paginator to split up vehicles
+	page = request.GET.get('page')
+	paginator = Paginator(available_vehicles, 15)
+
+	try:
+		final_vehicles = paginator.page(page)
+	except PageNotAnInteger:
+		final_vehicles = paginator.page(1)
+	except EmptyPage:
+		final_vehicles = paginator.page(paginator.num_pages)
+
 	context = {
-		"vehicles":available_vehicles,
+		"vehicles":final_vehicles,
 		"store":store
 	}
 

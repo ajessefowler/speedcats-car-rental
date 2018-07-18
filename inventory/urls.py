@@ -17,6 +17,7 @@ urlpatterns = [
 	path('reservation/<int:reservationID>', views.reservation, name='reservation'),
 	path('locations/', views.locations, name='locations'),
 	path('vehicles/', views.store, name='store'),
+	path('vehicles/(?P<page>[a-z0-9]+)/$', views.store, name='storepage'),
 	path('vehicles/search/', views.search, name='search'),
 	path('<int:storeID>/<int:vehicleID>/', views.vehicle, name='vehicle'),
 	path('<int:storeID>/<int:vehicleID>/reserve/', views.reserve, name='reserve'),

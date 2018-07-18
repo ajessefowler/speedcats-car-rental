@@ -30,27 +30,28 @@
                 <div id="modifyvehicle" class="selectcard">
                 <p id="modifyvehiclecardtext">{{ reservation.vehicle }}</p>
             </div>-->
+            <div id="pickupdesktop" class="desktop">
+                <h3>Change Your Pick Up</h3>
 
-            <h3>Change Your Pick Up</h3>
-
-            <div id="pickuptime" class="selectcard">
-                <p id="pickuptimetext">{{ reservation.pick_up_time }}</p> 
+                <div id="pickuptime" class="selectcard">
+                    <p id="pickuptimetext">{{ reservation.pick_up_time }}</p> 
+                </div>
+                <input type="hidden" name="pickuptimeformat" id="pickuptimeformat" value="{{ reservation.pick_up_time|date:'Y-m-d H:m' }}" readonly>
             </div>
-            <input type="hidden" name="pickuptimeformat" id="pickuptimeformat" value="{{ reservation.pick_up_time|date:'Y-m-d H:m' }}" readonly>
-            <input type="hidden" name="pickuplocationid" id="pickuplocationid" value="{{ reservation.pick_up_location.ID }}" readonly>
             {% endif %}
 
-            <h3>Change Your Drop Off</h3>
-            <div id="dropofftime" class="selectcard">
-                <p id="dropofftimetext">{{ reservation.drop_off_time }}</p> 
-            </div>
-            <input type="hidden" name="dropofftimeformat" id="dropofftimeformat" value="{{ reservation.drop_off_time|date:'Y-m-d H:m' }}" readonly>
+            <div id="dropoffdesktop" class="desktop">
+                <h3>Change Your Drop Off</h3>
+                <div id="dropofftime" class="selectcard">
+                    <p id="dropofftimetext">{{ reservation.drop_off_time }}</p> 
+                </div>
+                <input type="hidden" name="dropofftimeformat" id="dropofftimeformat" value="{{ reservation.drop_off_time|date:'Y-m-d H:m' }}" readonly>
 
-            <div id="dropofflocation" class="selectcard" style="display: block;">
-                <p id="dropoffloctext">{{ reservation.drop_off_location }}</p>
+                <div id="dropofflocation" class="selectcard" style="display: block;">
+                    <p id="dropoffloctext">{{ reservation.drop_off_location }}</p>
+                </div>
+                <input type="hidden" name="dropofflocationid" id="dropofflocationid"  value="{{ reservation.drop_off_location.ID }}" readonly>
             </div>
-            <input type="hidden" name="dropofflocationid" id="dropofflocationid"  value="{{ reservation.drop_off_location.ID }}" readonly>
-
         </div>
 
         <div id="modifybutton" class="roundbutton">

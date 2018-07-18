@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Store, Vehicle, Reservation
+from .models import Store, Vehicle, Reservation, Maintenance
 
 class StoreAdmin(admin.ModelAdmin):
     list_display = ('address', 'city', 'state', 'zipcode', 'phone', 'email')
@@ -19,3 +19,4 @@ class ReservationAdmin(admin.ModelAdmin):
 admin.site.register(Store, StoreAdmin)
 admin.site.register(Vehicle, VehicleAdmin)
 admin.site.register(Reservation, ReservationAdmin)
+admin.site.register(Maintenance)

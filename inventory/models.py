@@ -131,3 +131,13 @@ class Reservation(models.Model):
 
 	def __str__(self):
 		return str(self.vehicle) + ' ' + str(self.pick_up_time)[:10] + ' to ' + str(self.drop_off_time)[:10]
+
+class Maintenance(models.Model):
+	vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+	mechanic = models.CharField(max_length=100, default="")
+	description = models.CharField(max_length=200, default="")
+	date = models.DateTimeField(blank=False, null=False)
+	price = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+
+	def __str__(self):
+		return str(self.vehicle) + ' on ' + str(self.date)[:10]

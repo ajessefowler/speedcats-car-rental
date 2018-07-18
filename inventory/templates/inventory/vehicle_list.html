@@ -25,4 +25,31 @@
         <p>No vehicles available</p>
     {% endfor %}
     </div>
+
+    {% if vehicles.has_other_pages %}
+        <div class="pagination">
+            {% if vehicles.has_previous %}
+                <div>
+                    <a href="?page={{ vehicles.previous_page_number }}">
+                        <i class="material-icons">chevron_left</i>
+                    </a>
+                </div>
+            {% else %}
+                <div class="emptypage">
+                    <i class="material-icons">chevron_left</i>
+                </div>
+            {% endif %}
+            {% if vehicles.has_next %}
+                <div>
+                    <a href="?page={{ vehicles.next_page_number }}">
+                        <i class="material-icons">chevron_right</i>
+                    </a>
+                </div>
+            {% else %}
+                <div class="emptypage">
+                    <i class="material-icons">chevron_right</i>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
 {% endblock %}

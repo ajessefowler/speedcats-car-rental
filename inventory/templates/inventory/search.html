@@ -6,7 +6,7 @@
     <div id="vehiclesearch">
         <form name="vehiclesearch" id="vehiclesearchform" action="{% url 'inventory:search' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="searchquery" id="searchquery" placeholder="Search for vehicles...">
+            <input type="text" name="searchquery" id="searchquery" placeholder="{{ query }}">
             <button type="submit" id="vehiclesearchbutton"><i class="button material-icons" id="vehiclesearchicon">search</i></button>
         </form>
     </div>

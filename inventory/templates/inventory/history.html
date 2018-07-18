@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h2 class="header">Your Reservation History</h2>
+    <h2 class="header" id="historyheader">Your Reservation History</h2>
 
     <ul id="reservationlist">
         {% for reservation in reservations %}
