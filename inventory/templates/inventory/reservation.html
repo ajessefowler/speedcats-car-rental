@@ -10,10 +10,20 @@
     <img src="{{ reservation.vehicle.image.url }}" width="100%" id="vehicleimage">
     {% endif %}
     <div id="vehiclecontent">
-        <h2 class="header">{{ reservation.vehicle }}</h2>
-        <p>From {{ reservation.pick_up_location }}</p>
-        <p>To {{ reservation.drop_off_location }}</p>
-        <p>{{ reservation.length }}</p>
+        <h2 class="header">Reservation Details</h2>
+        <div id="reservationdetails">
+            <h3>Summary</h3>
+            <p>{{ reservation.vehicle }} for {{ reservation.length }} days</p>
+            <h3>Pick Up</h3>
+            <p>{{ reservation.pick_up_location }} on {{ reservation.pick_up_time }}</p>
+            <h3>Drop Off</h3>
+            <p id="separator">{{ reservation.drop_off_location }} on {{ reservation.drop_off_time }}</p>
+            <div id="pricedetails">
+                <p>Subtotal: ${{ reservation.subtotal }}</p>
+                <p>Tax: ${{ reservation.tax }}</p>
+                <p>Total: ${{ reservation.total }}</p>
+            </div>
+        </div>
         <div id="reservebuttons">
             {% if reservation.status == 'Upcoming' %}
             <a href="{% url 'inventory:modify' reservation.id %}">

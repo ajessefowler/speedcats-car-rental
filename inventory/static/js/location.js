@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		findLocation();
 	});
     
-    initTimeHandler('pickup');
+    if (document.getElementById('pickuptimecard')) {
+        initTimeHandler('pickup');
+    }
 	initTimeHandler('dropoff');
 });
 

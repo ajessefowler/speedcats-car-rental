@@ -59,6 +59,7 @@
     </form>
 </div>
 
+{% if reservation.status == "Upcoming" %}
 <div id="pickuptimecard" class="infoselector">
     <div class="infoselectorheader">
         <h3>Select Your Pick Up Time</h3>
@@ -71,6 +72,7 @@
         <p id="pickupdonebutton" class="donebutton">DONE</p>
     </div>
 </div>
+{% endif %}
 
 <div id="dropofftimecard" class="infoselector">
     <div class="infoselectorheader">

@@ -16,26 +16,26 @@
         <h3>Summary</h3>
         <p>{{ vehicle }} for {{ length }} days</p>
         <h3>Pick Up</h3>
-        <p>{{ store }} on {{ pick_up_time }}</p>
+        <p>{{ store }} on {{ pick_up_format }}</p>
         <h3>Drop Off</h3>
-        <p id="separator">{{ drop_off_store }} on {{ drop_off_time }}</p>
+        <p id="separator">{{ drop_off_store }} on {{ drop_off_format }}</p>
         <form name="paymentlocation" id="paymentform" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
             {% csrf_token %}
             <div class="paymentprice">
-                    <p>Base Price:</p>
-                    <input type="text" name="subtotal" id="checkoutsub" value="${{ vehicle.price }}" readonly><br>
+                    <p>Base Price: $</p>
+                    <input type="text" name="subtotal" id="checkoutsub" value="{{ vehicle.price }}" readonly><br>
                 </div>
             <div class="paymentprice">
-                <p>Subtotal:</p>
-                <input type="text" name="subtotal" id="checkoutsub" value="${{ subtotal }}" readonly><br>
+                <p>Subtotal: $</p>
+                <input type="text" name="subtotal" id="checkoutsub" value="{{ subtotal }}" readonly><br>
             </div>
             <div class="paymentprice">
-                <p>Tax:</p>
-                <input type="text" name="tax" id="checkouttax" value="${{ tax }}" readonly><br>
+                <p>Tax: $</p>
+                <input type="text" name="tax" id="checkouttax" value="{{ tax }}" readonly><br>
             </div>
             <div class="paymentprice" id="totaldiv">
-                <p>Total:</p>
-                <input type="text" name="total" id="checkouttotal" value="${{ total }}" readonly><br>
+                <p>Total: $</p>
+                <input type="text" name="total" id="checkouttotal" value="{{ total }}" readonly><br>
             </div>
 
             <div class="paymentlocationselect" id="instorediv">

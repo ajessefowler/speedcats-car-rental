@@ -1,11 +1,14 @@
 // Add event listeners to done buttons to validate date and time
 document.addEventListener('DOMContentLoaded', function(event) {
-    document.getElementById('pickupdonebutton').addEventListener('click', function() {
-        const element = 'pickup';
-        if (validateTime(element) && validateDate(element)) {
-            confirmValidation(element);
-        }
-    });
+    if (document.getElementById('pickupdonebutton')) {
+        document.getElementById('pickupdonebutton').addEventListener('click', function() {
+            const element = 'pickup';
+            if (validateTime(element) && validateDate(element)) {
+                confirmValidation(element);
+            }
+        });
+    }
+
     document.getElementById('dropoffdonebutton').addEventListener('click', function() {
         const element = 'dropoff';
         if (validateTime(element) && validateDate(element)) {
@@ -106,7 +109,7 @@ function validateDate(element) {
         const month = parseInt(date.substring(5, 7));
         const day = parseInt(date.substring(8, 10));
 
-        if (element === 'dropoff') {
+        if (element === 'dropoff' && document.getElementById('pickuptimecard')) {
             const pickupDate = document.getElementById('pickupdateinput').value;
             const pickupYear = parseInt(pickupDate.substring(0, 4));
             const pickupMonth = parseInt(pickupDate.substring(5, 7));

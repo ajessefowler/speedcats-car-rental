@@ -371,14 +371,15 @@ a:-webkit-any-link {
 
 .paymentprice > p {
 	padding: 0 20px 0 0;
-	margin: 10px 0;
+	margin: 8px 0;
+	font-size: 11pt;
 }
 
 .paymentprice > input {
 	border: none;
-	font-size: 12pt;
+	font-size: 11pt;
 	font-family: 'Roboto', sans-serif;
-	width: 80px;
+	width: 65px;
 }
 
 .desktop {
@@ -763,8 +764,9 @@ a:-webkit-any-link {
 	background-color: white;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #707070;
-	padding: 9px 10px;
-	width: calc(100% - 20px);
+	padding: 0;
+	width: 100%;
+	margin-bottom: 20px;
 }
 
 #reservationhistory > a {
@@ -777,7 +779,9 @@ a:-webkit-any-link {
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	padding-left: 12px;
+	position: relative;
+	padding-left: 28px;
+	top: -18px;
 }
 
 #editbutton {
@@ -914,6 +918,61 @@ a:-webkit-any-link {
 	display: none;
 }
 
+#profileheader {
+	align-self: flex-start;
+	margin-left: 0;
+}
+
+#historylink {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 35px;
+}
+
+#historylink > p {
+	margin: 0;
+	padding-left: 5px;
+}
+
+#historylink > i {
+	margin-left: auto;
+}
+
+#reservationdetails {
+	background-color: white;
+	margin: 0 20px;
+	padding: 14px 0 30px;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #707070;
+}
+
+#reservationdetails > p, #pricedetails > p {
+	font-size: 11pt;
+}
+
+#reservationdetails > h3 {
+	padding-left: 20px;
+	color: black;
+}
+
+#pricedetails {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	padding-right: 12px;
+}
+
+#pricedetails > p {
+	margin: 8px 0;
+}
+
+#confirmheader {
+	font-size: 18pt;
+}
+
 @media only screen and (min-width: 768px) {
 
 	.desktop {
@@ -960,6 +1019,14 @@ a:-webkit-any-link {
 		border-top-right-radius: 12px;
 	}
 
+	.donebutton {
+		margin-left: auto;
+	}
+
+	.locationpickertext {
+		width: 400px;
+	}
+
 	#infocontainer {
 		position: relative;
 		margin-top: 525px;
@@ -995,10 +1062,26 @@ a:-webkit-any-link {
 		position: fixed;
 		text-align: center;
 		width: 100%;
-		bottom: 280px;
+		bottom: 200px;
 		transform: translateY(0);
 		animation: arrowBounce 2s ease-in-out infinite;
 		cursor: default;
+	}
+
+	#locationheader {
+		padding: 12px 0 15px 11%;
+		margin: 0;
+	}
+	
+	#searchbox {
+		width: 400px;
+		right: 0;
+		margin-top: 10px;
+		box-shadow: 0 1px 5px #3f3f3f;
+	}
+
+	#timepicker {
+		justify-content: flex-start;
 	}
 
 	#selectlocation {
@@ -1013,7 +1096,7 @@ a:-webkit-any-link {
 
 	#startbutton {
 		position: absolute;
-		top: 220px;
+		top: 240px;
 		right: 80px;
 	}
 

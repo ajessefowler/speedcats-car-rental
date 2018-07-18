@@ -144,11 +144,11 @@ def reserve(request, storeID, vehicleID):
 	pickup_time = request.session["pickup_time"]
 	dropoff_time = request.session["dropoff_time"]
 
-	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
-	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
+	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M")
+	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
 
 	# Calculate the length of the potential reservation, rounding number of days up
-	reservation_length = ((dropoff_format - pickup_format) + timedelta(days=1)).days + 1
+	reservation_length = ((dropoff_format - pickup_format) + timedelta(days=1)).days
 
 	# Calculate pricing of potential reservation
 	subtotal = vehicle.price * reservation_length
@@ -159,7 +159,9 @@ def reserve(request, storeID, vehicleID):
 		"store":store,
 		"drop_off_store":dropoff_store,
 		"pick_up_time":pickup_time,
+		"pick_up_format":pickup_format,
 		"drop_off_time":dropoff_time,
+		"drop_off_format":dropoff_format,
 		"vehicle":vehicle,
 		"length":reservation_length,
 		"subtotal":subtotal,
@@ -179,15 +181,24 @@ def makereservation(request, storeID, vehicleID):
 		dropoff_id = request.session["dropoff_id"]
 		dropoff_store = get_object_or_404(Store, pk=dropoff_id)
 		dropoff_time = request.session["dropoff_time"]
+
+		subtotal = request.POST["subtotal"]
+		tax = request.POST["tax"]
+		total = request.POST["total"]
 	except KeyError:
 		pass
 	
 	# Create new reservation
-	reservation = Reservation(user=user, vehicle=vehicle, pick_up_time=pickup_time, pick_up_location=pickup_store, drop_off_time=dropoff_time, drop_off_location=dropoff_store)
+	reservation = Reservation(user=user, vehicle=vehicle, pick_up_time=pickup_time, pick_up_location=pickup_store, drop_off_time=dropoff_time, drop_off_location=dropoff_store, subtotal=subtotal, tax=tax, total=total)
 	reservation.save()
 
+	calc_drop_off = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
+	calc_pick_up = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M")
+	length = int((calc_drop_off - calc_pick_up).days) + 1
+
 	context = {
-		"reservation":reservation
+		"reservation":reservation,
+		"length":length
 	}
 	return render(request, 'inventory/confirm.html', context)
 
@@ -220,28 +231,29 @@ def update(request, reservationID):
 	reservation = Reservation.objects.get(pk=reservationID)
 
 	if request.user == reservation.user:
-		pickup_id = int(request.POST["pickuplocationid"])
-		pickup_store = get_object_or_404(Store, pk=pickup_id)
+		if 'pickuplocationid' in request.POST:
+			pickup_id = int(request.POST["pickuplocationid"])
+			pickup_store = get_object_or_404(Store, pk=pickup_id)
+			reservation.pick_up_location = pickup_store
+
+		if 'pickuptimeformat' in request.POST:
+			pickup_time = request.POST["pickuptimeformat"]
+			pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M")
+			reservation.pick_up_time = pickup_format
+
 		dropoff_id = int(request.POST["dropofflocationid"])
 		dropoff_store = get_object_or_404(Store, pk=dropoff_id)
-
-		pickup_time = request.POST["pickuptimeformat"]
-		pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
+		reservation.drop_off_location = dropoff_store
 
 		dropoff_time = request.POST["dropofftimeformat"]
-		dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
-
-		reservation.pick_up_location = pickup_store
-		reservation.pick_up_time = pickup_format
-		reservation.drop_off_location = dropoff_store
+		dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
 		reservation.drop_off_time = dropoff_format
-		reservation.save()
 
-		context = {
-			"reservation":reservation
-		}
+		reservation.save()
 		
-		return render(request, 'inventory/reservation.html', context)
+		return redirect('/inventory/reservation/' + str(reservationID))
+	else:
+		raise Http404('You do not have permission to view this page.')
 
 @login_required
 def cancel(request, reservationID):

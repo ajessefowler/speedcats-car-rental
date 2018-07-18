@@ -17,8 +17,13 @@
         {% endif %}
         
         {% if user.is_authenticated %}
-            <h2 class="header">Welcome, {{ user.first_name }}!</h2>
-            <p id="reservationhistory"><a href="{% url 'inventory:history' %}">Your Reservation History</a></p>
+            <h2 class="header" id="profileheader">Welcome, {{ user.first_name }}!</h2>
+            <div id="reservationhistory">
+                <a href="{% url 'inventory:history' %}" id="historylink">
+                    <p>View Your Reservations</p>
+                    <i class="material-icons">chevron_right</i>
+                </a>
+            </div>
             <div id="logoutbutton" class="roundbutton">
                 <p><a href="{% url 'logout' %}">LOGOUT</a></p>
             </div>
