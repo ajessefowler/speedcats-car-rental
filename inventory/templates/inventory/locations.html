@@ -1,7 +1,38 @@
 {% extends "base_generic.html" %}
+{% load static %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'js/location.js' %}"></script>
+{% endblock %}
 
 {% block title %}<title>Speedcats Locations</title>{% endblock %}
 
 {% block content %}
-<h2 class="header">Locations</h2>
+<div id="mapcontainer">
+    <div id="map"></div>
+    <div id="searchbox">
+        <i class="button material-icons" id="locatebutton">near_me</i>
+        <input id="locationsearch" placeholder="Enter your location..." type="text">
+        <i class="button material-icons" id="searchbutton">search</i>
+    </div>
+</div>
+<div id="infocontainer" class="locationcontainer">
+    <h2 class="header" id="locationheader">Locations</h2>
+    <p>With eight locations across the state of Ohio</p>
+    {% for location in locations %}
+        <div class="locationcard" id="location{{ forloop.counter }}">
+            <div class="locationcardheader">
+                <h3>{{ location.city}}, {{ location.state }}</h3>
+                <i id="closedropofftime" class="material-icons">expand_less</i>
+            </div>
+            <p>{{ location }} {{ location.zipcode }}</p>
+            <p>Email: {{ location.email }}</p>
+            <p>Phone: {{ location.phone }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block initMap %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE&libraries=places&callback=initMap"></script>
 {% endblock %}

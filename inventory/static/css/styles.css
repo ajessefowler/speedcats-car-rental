@@ -222,14 +222,24 @@ a:-webkit-any-link {
 
 .infoselector {
 	width: calc(100% - 30px);
-	height: 100px;
+	height: 120px;
 	position: fixed;
 	bottom: 0;
-	transform: translateY(130px);
+	transform: translateY(150px);
 	background-color: #455A64;
 	box-shadow: 0 -3px 6px -3px #2c2c2c;
 	padding: 4px 15px 9px;
 	z-index: 53;
+	border-top-left-radius: 9px;
+	border-top-right-radius: 9px;
+}
+
+.infoselector > p {
+	margin: 0;
+	padding: 0;
+	font-size: 12pt;
+	color: white;
+	text-align: center;
 }
 
 .infoselectorheader {
@@ -251,12 +261,26 @@ a:-webkit-any-link {
 	padding: 8px 0 8px 8px;
 }
 
+.timepicker {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	padding-top: 5px;
+}
+
+.timepicker > p {
+	font-size: 12pt;
+	color: white;
+}
+
 .locationpicker {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	margin-top: 0px;
+	margin-top: 9px;
 }
 
 .locationpickertext {
@@ -395,6 +419,7 @@ a:-webkit-any-link {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 20px;
 }
 
 .pagination > div {
@@ -419,6 +444,35 @@ a:-webkit-any-link {
 
 .emptypage > i {
 	color: #696969;
+}
+
+.locationcontainer > p{
+	margin: 7px 0 0;
+}
+
+.locationcard {
+	background-color: white;
+	margin: 15px 20px;
+	padding: 10px 4px 8px;
+	box-shadow: 0 1px 3px #707070;
+	border-radius: 3px;
+}
+
+.locationcard > p {
+	font-size: 11pt;
+	margin: 6px 0;
+}
+
+.locationcardheader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 5px 8px 0;
+}
+
+.locationcardheader > h3 {
+	margin: 0 10px;
+	color: #3d3d3d;
 }
 
 #reservecancelbutton {
@@ -580,7 +634,7 @@ a:-webkit-any-link {
 }
 
 #locationheader {
-	padding: 14px 0 12px;
+	padding: 12px 0 0;
 }
 
 #locationsearch:focus {
@@ -674,20 +728,6 @@ a:-webkit-any-link {
 	width: 110px;
 	margin: 15px 20px 25px auto;
 	border: none;
-}
-
-#timepicker {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	position: relative;
-	padding-top: 5px;
-}
-
-#timepicker > p {
-	font-size: 12pt;
-	color: white;
 }
 
 #storecontent {
@@ -1050,6 +1090,10 @@ a:-webkit-any-link {
 		border-top-right-radius: 12px;
 	}
 
+	.timepicker {
+		justify-content: flex-start;
+	}
+
 	.donebutton {
 		margin-left: auto;
 	}
@@ -1109,10 +1153,6 @@ a:-webkit-any-link {
 		right: 0;
 		margin-top: 10px;
 		box-shadow: 0 1px 5px #3f3f3f;
-	}
-
-	#timepicker {
-		justify-content: flex-start;
 	}
 
 	#selectlocation {

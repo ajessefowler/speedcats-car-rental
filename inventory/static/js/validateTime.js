@@ -84,20 +84,20 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         return month;
     }
-
-    function formatTime(time) {
-        let hour = parseInt(time.substring(0, 2));
-        const mins = time.substring(3);
-        const meridiem = hour >= 12 ? 'p.m.' : 'a.m.';
-
-        if (hour > 12) {
-            hour -= 12;
-        }
-
-        const timeString = hour.toString() + ':' + mins + ' ' + meridiem;
-        return timeString;
-    }
 });
+
+function formatTime(time) {
+    let hour = parseInt(time.substring(0, 2));
+    const mins = time.substring(3);
+    const meridiem = hour >= 12 ? 'p.m.' : 'a.m.';
+
+    if (hour > 12) {
+        hour -= 12;
+    }
+
+    const timeString = hour.toString() + ':' + mins + ' ' + meridiem;
+    return timeString;
+}
 
 // Ensure that pick up and drop off dates are in the future and consecutive
 function validateDate(element) {
@@ -118,8 +118,10 @@ function validateDate(element) {
             if (year < pickupYear || month < pickupMonth || day < pickupDay) {
                 // Check times as well to prevent 0 length reservations
                 document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
+                displayAlert(element, 'Drop off must follow pick up.');
                 return false;
             } else {
+                clearAlert(element);
                 return true;
             }
         }
@@ -127,12 +129,15 @@ function validateDate(element) {
         // Add one to now.getMonth because it is 0-indexed
         if (year !== now.getFullYear() || month < (now.getMonth() + 1) || day < (now.getDate())) {
             document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
+            displayAlert(element, 'Time must be in the future.');
             return false;
         } else {
+            clearAlert(element);
             return true;
         }
     } else {
         document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
+        displayAlert(element, 'You must choose a date.');
         return false;
     }
 
@@ -159,16 +164,20 @@ function validateTime(element) {
         const mins = parseInt(time.substring(3, 5));
         if ((hours < 8 || (hours >= 18 && mins > 0))) {
             document.getElementById(element + 'timeinput').style.border = '2px solid #f44336';
+            displayAlert(element, 'Time must be between 8 A.M. and 6 P.M.');
             return false;
         } else {
+            clearAlert(element);
             return true;
         }
     } else {
         document.getElementById(element + 'timeinput').style.border = '2px solid #f44336';
+        displayAlert(element, 'You must choose a time.');
         return false;
     }
 }
 
+// Set up the animations for the information selector cards
 function initTimeHandler(element) {
 	document.getElementById(element + 'time').addEventListener('click', function() {
 		document.getElementById(element + 'timecard').style.animation = 'timeUp .3s ease forwards';
@@ -177,4 +186,16 @@ function initTimeHandler(element) {
 	document.getElementById('close' + element + 'time').addEventListener('click', function() {
 		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
 	});
+}
+
+// Display an alert when date or time invalid
+function displayAlert(element, message) {
+    document.getElementById(element + 'timemessage').style.color = '#FF5722';
+    document.getElementById(element + 'timemessage').innerHTML = message;
+}
+
+// Clear the alert for the given element
+function clearAlert(element) {
+    document.getElementById(element + 'timemessage').style.color = 'white';
+    document.getElementById(element + 'timemessage').innerHTML = 'Store Hours: 8:00 A.M. to 6:00 P.M.';
 }

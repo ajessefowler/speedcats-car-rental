@@ -9,15 +9,15 @@
 	to { transform: translateX(-270px); }
 }
 
-/* Slides time picker up and down */
+/* Slides time and location pickers up and down */
 @keyframes timeUp {
-	from { transform: translateY(130px); }
+	from { transform: translateY(150px); }
 	to { transform: translateY(0px); }
 }
 
 @keyframes timeDown {
 	from { transform: translateY(0px); }
-	to { transform: translateY(130px); }
+	to { transform: translateY(150px); }
 }
 
 /* Bounce arrow on desktop home page */

@@ -29,7 +29,13 @@ def feedback(request):
 	return render(request, 'inventory/feedback.html')
 
 def locations(request):
-	return render(request, 'inventory/locations.html')
+	locations = Store.objects.all()
+
+	context = {
+		"locations":locations
+	}
+
+	return render(request, 'inventory/locations.html', context)
 
 def register(request):
 	if request.method == 'POST':
