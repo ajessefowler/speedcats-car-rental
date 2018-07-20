@@ -150,3 +150,21 @@ class Maintenance(models.Model):
 
 	def __str__(self):
 		return str(self.vehicle) + ' on ' + str(self.date)[:10]
+'''
+class Payment(models.Model):
+	payment_type_choices = (
+		('i', 'In Store'),
+		('v', 'Visa'),
+		('m', 'Mastercard'),
+		('a', 'American Express'),
+	)
+
+	reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
+	amount = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+	date = models.DateTimeField(blank=False, null=False)
+	payment_type = models.CharField(
+		max_length=1,
+		choices=payment_type_choices,
+		default='i',
+	) 
+'''
