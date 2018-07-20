@@ -3,6 +3,7 @@
 from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
+from inventory.models import Store, Vehicle
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'speedcats.settings')
@@ -20,12 +21,15 @@ app.conf.update(BROKER_URL=os.environ['REDIS_URL'], CELERY_RESULT_BACKEND=os.env
 app.autodiscover_tasks()
 
 @app.task
-def set_vehicle_as_reserved(vehicle):
+def set_vehicle_as_reserved(vehicle_id):
+    vehicle = Vehicle.objects.get(pk=vehicle_id)
     vehicle.status = 'r'
     vehicle.save()
 
 @app.task
-def set_vehicle_as_available(vehicle, store):
+def set_vehicle_as_available(vehicle_id, store_id):
+    vehicle = Vehicle.objects.get(pk=vehicle_id)
+    store = Store.objects.get(ID=vehicle_id)
     vehicle.status = 'a'
     vehicle.store = store
     vehicle.save()
