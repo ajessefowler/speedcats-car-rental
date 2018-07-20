@@ -31,11 +31,9 @@
                     <p>MODIFY</p>
                 </div>
             </a>
-            <a href="{% url 'inventory:cancel' reservation.id %}">
                 <div id="deletebutton" class="reservebutton roundbutton">
                     <p>CANCEL</p>
                 </div>
-            </a>
             {% endif %}
             {% if reservation.status == 'In Progress' %}
             <a href="{% url 'inventory:modify' reservation.id %}">
@@ -55,6 +53,10 @@
                 <p>CANCEL</p>
             </div>
             {% endif %}
+        </div>
+
+        <div id="cancelconfirmation">
+            <p>Confirm your cancellation.</p>
         </div>
     </div>
 {% endblock %}

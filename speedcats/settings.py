@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -28,11 +27,9 @@ AWS_STORAGE_BUCKET_NAME = 'speedcats'
 AWS_QUERYSTRING_AUTH = False
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1']
-
 
 # Application definition
 
@@ -123,6 +120,11 @@ USE_L10N = True
 USE_TZ = True
 
 LOGOUT_REDIRECT_URL = '/'
+
+# Celery application definition
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url

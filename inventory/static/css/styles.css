@@ -701,7 +701,7 @@ a:-webkit-any-link {
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	margin: 0 20px;
+	margin: 7px 20px 0;
 }
 
 #selectlocation > h3 {
@@ -1044,6 +1044,14 @@ a:-webkit-any-link {
 	font-size: 18pt;
 }
 
+#cancelconfirmation {
+	z-index: 11;
+	background-color: white;
+	padding: 8px 0;
+	border-radius: 3px;
+	box-shadow: 0 1px 7px 1px #707070;
+}
+
 @media only screen and (min-width: 768px) {
 
 	.desktop {
@@ -1090,6 +1098,14 @@ a:-webkit-any-link {
 		border-top-right-radius: 12px;
 	}
 
+	.infoselectorheader > i:hover {
+		cursor: pointer;
+	}
+
+	.donebutton:hover {
+		cursor: pointer;
+	}
+
 	.timepicker {
 		justify-content: flex-start;
 	}
@@ -1102,10 +1118,28 @@ a:-webkit-any-link {
 		width: 400px;
 	}
 
+	.locationcard {
+		margin: 15px 10px;
+		width: 400px;
+	}
+
+	.locationcard:hover {
+		cursor: pointer;
+	}
+
+	#desktoplocations {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		margin-bottom: 40px;
+	}
+
 	#infocontainer {
 		position: relative;
 		margin-top: 525px;
-		padding: 0 20px;
+		padding: 0;
 	}
 
 	#storecontent {
@@ -1137,14 +1171,14 @@ a:-webkit-any-link {
 		position: fixed;
 		text-align: center;
 		width: 100%;
-		bottom: 200px;
+		bottom: 250px;
 		transform: translateY(0);
 		animation: arrowBounce 2s ease-in-out infinite;
 		cursor: default;
 	}
 
 	#locationheader {
-		padding: 12px 0 15px 11%;
+		padding: 12px 0 15px 100px;
 		margin: 0;
 	}
 	
@@ -1209,5 +1243,16 @@ a:-webkit-any-link {
 
 	#reservationlist {
 		margin: 0 23%;
+	}
+
+	#startreservationbutton:hover {
+		background-color: rgb(224, 69, 21); 
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.infoselector {
+		width: 36%;
+		margin: 0 32%;
 	}
 }

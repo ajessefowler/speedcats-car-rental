@@ -6,3 +6,5 @@ gunicorn==19.8.1
 Pillow==5.1.0
 psycopg2==2.7.5
 whitenoise==3.3.1
+Celery==4.2.1
+redis==2.10.6

@@ -8,6 +8,8 @@ from django.core.validators import RegexValidator
 
 import pytz
 import datetime
+from celery import Celery
+from speedcats.celery import set_vehicle_as_reserved, set_vehicle_as_available
 """
 # Profile extension found here: https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 class Profile(models.Model):
@@ -100,15 +102,6 @@ class Reservation(models.Model):
 	total = models.DecimalField(max_digits=8, decimal_places=2, null=True)
 	miles_driven = models.IntegerField(null=True, blank=True)
 	
-	"""
-	@property
-	def active(self):
-		now = datetime.datetime.utcnow()
-		if self.pick_up_time < now and now < self.drop_off_time:
-			return True
-		return False
-	"""
-
 	@property
 	def status(self):
 		pick_up_time = self.pick_up_time
@@ -131,6 +124,22 @@ class Reservation(models.Model):
 
 	def __str__(self):
 		return str(self.vehicle) + ' ' + str(self.pick_up_time)[:10] + ' to ' + str(self.drop_off_time)[:10]
+
+	# Create tasks to update vehicle status and store at pick up and drop off times
+	def save(self, *args, **kwargs):
+		create_task = False
+
+		if self.pk is None:
+			create_task = True
+
+		super(Reservation, self).save(*args, **kwargs)
+
+		if create_task:
+			set_reserved = set_vehicle_as_reserved.apply_async(args=[self.vehicle], eta=self.pick_up_time)
+			set_available = set_vehicle_as_available.apply_async(args=[self.vehicle, self.drop_off_location], eta=self.drop_off_time)
+		else:
+			# remove current tasks, create new tasks for modification
+			pass
 
 class Maintenance(models.Model):
 	vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
