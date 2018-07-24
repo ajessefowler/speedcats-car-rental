@@ -122,12 +122,10 @@ USE_TZ = True
 LOGOUT_REDIRECT_URL = '/'
 
 # Celery application definition
-BROKER_URL = os.environ.get('REDIS_URL')
 BROKER_POOL_LIMIT = 1
 CELERY_RESULT_SERIALIZER = 'pickle'
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_TIMEZONE = TIME_ZONE
-CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL')
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url
