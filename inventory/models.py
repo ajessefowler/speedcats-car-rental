@@ -10,7 +10,7 @@ import pytz
 import datetime
 from celery import Celery
 from speedcats.celery_tasks import set_vehicle_as_reserved, set_vehicle_as_available
-"""
+'''
 # Profile extension found here: https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -32,7 +32,7 @@ class Profile(models.Model):
 	@receiver(post_save, sender=User)
 	def save_user_profile(sender, instance, **kwargs):
 		instance.profile.save()
-"""
+'''
 class Store(models.Model):
 
 	ID = models.IntegerField(primary_key=True)
@@ -150,7 +150,7 @@ class Maintenance(models.Model):
 
 	def __str__(self):
 		return str(self.vehicle) + ' on ' + str(self.date)[:10]
-'''
+
 class Payment(models.Model):
 	payment_type_choices = (
 		('i', 'In Store'),
@@ -167,4 +167,3 @@ class Payment(models.Model):
 		choices=payment_type_choices,
 		default='i',
 	) 
-'''

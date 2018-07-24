@@ -124,6 +124,7 @@ LOGOUT_REDIRECT_URL = '/'
 # Celery application definition
 CELERY_RESULT_SERIALIZER = 'pickle'
 CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_TIMEZONE = TIME_ZONE
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url

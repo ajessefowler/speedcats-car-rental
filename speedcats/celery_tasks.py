@@ -1,3 +1,4 @@
+
 # http://docs.celeryproject.org/en/latest/django/first-steps-with-django.html
 
 from __future__ import absolute_import, unicode_literals
@@ -29,9 +30,3 @@ def set_vehicle_as_available(vehicle, store):
     vehicle.status = 'a'
     vehicle.store = store
     vehicle.save()
-
-'''
-@app.task(bind=True)
-def debug_task(self):
-    print('Request: {0!r}'.format(self.request))
-'''
