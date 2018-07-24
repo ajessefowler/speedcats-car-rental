@@ -63,6 +63,18 @@ class Vehicle(models.Model):
 		('t', 'Truck'),
 	)
 
+	engine_type_choices = (
+		('i4', 'Inline 4'),
+		('i6', 'Inline 6'),
+		('v4', 'V4'),
+		('v6', 'V6'),
+		('v8', 'V8'),
+		('w8', 'W8'),
+		('vr6', 'VR6'),
+		('e', 'Electric'),
+		('h', 'Hybrid'),
+	)
+
 	VIN = models.CharField(max_length=17)
 	store = models.ForeignKey(Store, on_delete=models.CASCADE)
 	year = models.IntegerField()
@@ -71,7 +83,15 @@ class Vehicle(models.Model):
 	color = models.CharField(max_length=10)
 	mileage = models.IntegerField()
 	image = models.ImageField(upload_to="vehicle_photos", blank=True)
-	description = models.CharField(max_length=800, default="")
+	gas_mileage = models.IntegerField(null=True, blank=True)
+	engine_size = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+	engine_type = models.CharField(
+		max_length=3,
+		choices=engine_type_choices,
+		default='i4',
+	)
+	storage_space = models.IntegerField(null=True, blank=True)
+	horsepower = models.IntegerField(null=True, blank=True)
 	price = models.DecimalField(max_digits=8, decimal_places=2, default=85.99)
 	status = models.CharField(
 		max_length=1,

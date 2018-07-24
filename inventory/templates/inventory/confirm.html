@@ -5,16 +5,19 @@
 {% block content %}
 <h2 class="header" id="confirmheader">Your Reservation Has Been Placed!</h2>
 <div id="reservationdetails">
-            <h3>Summary</h3>
-            <p>{{ reservation.vehicle }} for {{ length }} days</p>
-            <h3>Pick Up</h3>
-            <p>{{ reservation.pick_up_location }} on {{ reservation.pick_up_time }}</p>
-            <h3>Drop Off</h3>
-            <p id="separator">{{ reservation.drop_off_location }} on {{ reservation.drop_off_time }}</p>
-            <div id="pricedetails">
-                <p>Subtotal: ${{ reservation.subtotal }}</p>
-                <p>Tax: ${{ reservation.tax }}</p>
-                <p>Total: ${{ reservation.total }}</p>
-            </div>
-        </div>
+    <h3>Summary</h3>
+    <p>{{ reservation.vehicle }} for {{ length }} days</p>
+    <h3>Pick Up</h3>
+    <p>{{ reservation.pick_up_location }} on {{ reservation.pick_up_time }}</p>
+    <h3>Drop Off</h3>
+    <p id="separator">{{ reservation.drop_off_location }} on {{ reservation.drop_off_time }}</p>
+    <div id="pricedetails">
+        <p>Subtotal: ${{ reservation.subtotal }}</p>
+        <p>Tax: ${{ reservation.tax }}</p>
+        <p>Total: ${{ reservation.total }}</p>
+    </div>
+</div>
+<a id="returnhome" class="roundbutton" href="{% url 'inventory:home' %}">
+    <p>Return Home</p>
+</a>
 {% endblock %}

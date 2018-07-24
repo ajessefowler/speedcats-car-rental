@@ -3,6 +3,7 @@
 
 {% block scripts %}
 <script type="text/javascript" src="{% static 'js/setupPage.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/confirmModify.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -55,8 +56,16 @@
             {% endif %}
         </div>
 
+        <div id="popupshade"></div>
+
         <div id="cancelconfirmation">
-            <p>Confirm your cancellation.</p>
+            <p>Confirm Your Cancellation</p>
+            <i class="material-icons" id="closeconfirmation">close</i>
+            <a href="{% url 'inventory:cancel' reservation.id %}">
+                <div id="confirmcancelbutton" class="roundbutton">
+                    <p>CONFIRM</p>
+                </div>
+            </a>
         </div>
     </div>
 {% endblock %}
