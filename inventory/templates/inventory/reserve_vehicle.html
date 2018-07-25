@@ -19,7 +19,7 @@
         <p>{{ store }} on {{ pick_up_format }}</p>
         <h3>Drop Off</h3>
         <p id="separator">{{ drop_off_store }} on {{ drop_off_format }}</p>
-        <form name="paymentlocation" id="paymentform" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
+        <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
             {% csrf_token %}
             <div class="paymentprice">
                     <p>Base Price: $</p>
@@ -42,7 +42,7 @@
                 <input type="radio" name="payment" id="payinstore" checked>
                 <p class="paymenttext">Pay in store</p><br>
             </div>
-            <div class="paymentlocationselect">
+            <div class="paymentlocationselect" id="onlinediv">
                 <input type="radio" name="payment" id="payonline">
                 <p class="paymenttext">Pay online</p><br>
             </div>
@@ -80,15 +80,12 @@
 
                 <input type="text" placeholder="CVV">
             </div>
-
-            <div id="reservebuttongroup">
-                <a href="{% url 'inventory:home' %}">
-                    <div id="reservecancelbutton">
-                        <p>Cancel</p>
-                    </div>
-                </a>
-                <input type="submit" value="CONTINUE" id="reservecontinuebutton" class="placebuttons roundbutton">
-            </div>
+            <a href="{% url 'inventory:home' %}">
+                <div id="reservecancelbutton">
+                    <p>Cancel</p>
+                </div>
+            </a>
+            <input type="submit" value="CONTINUE" id="reservecontinuebutton" class="placebuttons roundbutton">
         </form>
     </div>
 </div>

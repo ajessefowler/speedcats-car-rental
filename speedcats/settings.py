@@ -127,6 +127,7 @@ CELERY_ACCEPT_CONTENT = ['pickle']
 CELERY_RESULT_SERIALIZER = 'pickle'
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_ALWAYS_EAGER = False
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url

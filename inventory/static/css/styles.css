@@ -395,7 +395,7 @@ a:-webkit-any-link {
 
 .paymentprice > p {
 	padding: 0 20px 0 0;
-	margin: 8px 0;
+	margin: 4px 0;
 	font-size: 11pt;
 }
 
@@ -477,10 +477,15 @@ a:-webkit-any-link {
 
 #reservecancelbutton {
 	color: #777676;
+	position: absolute;
+	bottom: 16px;
 }
 
 #reservecontinuebutton {
 	background-color: #FF5722;
+	position: absolute;
+	bottom: -17px;
+	right: 40px;
 }
 
 #content > form > ul > li {
@@ -522,7 +527,17 @@ a:-webkit-any-link {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin: 20px;
+	margin: 20px 20px 0;
+	position: absolute;
+	bottom: -18px;
+}
+
+#onlinediv {
+	padding-bottom: 60px;
+}
+
+#reservecancelbutton > p {
+	margin: 0;
 }
 
 #logincontent {
@@ -571,7 +586,8 @@ a:-webkit-any-link {
 }
 
 #logo {
-	text-decoration: underline;
+	height: 140px;
+	margin-top: 5px;
 }
 
 #headermenu {
@@ -954,8 +970,8 @@ a:-webkit-any-link {
 
 #reservecontent {
 	background-color: white;
-	margin: 0 20px 20px;
-	padding: 14px 8px;
+	margin: 0 20px 50px;
+	padding: 14px 8px 0;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #707070;
 }

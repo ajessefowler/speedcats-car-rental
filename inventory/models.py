@@ -155,8 +155,8 @@ class Reservation(models.Model):
 		super(Reservation, self).save(*args, **kwargs)
 
 		if create_task:
-			set_reserved = set_vehicle_as_reserved.apply_async(args=[self.vehicle], eta=self.pick_up_time)
-			set_available = set_vehicle_as_available.apply_async(args=[self.vehicle, self.drop_off_location], eta=self.drop_off_time)
+			set_vehicle_as_reserved.apply_async(args=[self.vehicle], eta=self.pick_up_time)
+			set_vehicle_as_available.apply_async(args=[self.vehicle, self.drop_off_location], eta=self.drop_off_time)
 		else:
 			# remove current tasks, create new tasks for modification
 			pass
