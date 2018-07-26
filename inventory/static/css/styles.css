@@ -544,13 +544,13 @@ a:-webkit-any-link {
 #reservecancelbutton {
 	color: #777676;
 	position: absolute;
-	bottom: 16px;
+	bottom: 23px;
 }
 
 #reservecontinuebutton {
 	background-color: #FF5722;
 	position: absolute;
-	bottom: -17px;
+	bottom: 15px;
 	right: 40px;
 	-webkit-appearance: none;
 }
@@ -604,7 +604,7 @@ a:-webkit-any-link {
 }
 
 #confirmform {
-	padding-bottom: 60px;
+	padding-bottom: 83px;
 }
 
 #logincontent {
@@ -889,7 +889,7 @@ a:-webkit-any-link {
 	margin: 0 10px 20px;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #525252;
-	padding: 12px 0;
+	padding: 12px 0 16px;
 }
 
 #vehicledetails > p{
@@ -897,7 +897,7 @@ a:-webkit-any-link {
 }
 
 #vehicledetails > h3 {
-	font-size: 18pt;
+	font-size: 17pt;
 	padding: 0 6px;
 	margin-left: 18px;
 	border-bottom: 1px solid #ccc;
@@ -915,7 +915,8 @@ a:-webkit-any-link {
 #reservebutton {
 	width: 130px;
 	background-color: #FF5722;
-	margin: 0 20px 15px auto;
+	border-radius: 20px;
+	margin: 20px 20px 0 auto;
 }
 
 #reservebutton > p {
@@ -960,7 +961,7 @@ a:-webkit-any-link {
 	align-items: center;
 	position: relative;
 	padding-right: 24px;
-	top: -18px;
+	top: -53px;
 }
 
 #editbutton {
@@ -1159,7 +1160,7 @@ a:-webkit-any-link {
 #reservationdetails {
 	background-color: white;
 	margin: 0 20px;
-	padding: 14px 0 40px;
+	padding: 14px 0 75px;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #707070;
 }

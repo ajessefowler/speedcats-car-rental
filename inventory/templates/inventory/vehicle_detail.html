@@ -19,12 +19,12 @@
                 <p><strong>Engine:</strong> {{ vehicle.engine_size }}L {{ vehicle.engine_type }}</p>
                 <p><strong>Storage Space:</strong> {{ vehicle.storage_space }} cu. ft.</p>
                 <p><strong>Horsepower:</strong> {{ vehicle.horsepower }} hp</p>
+                <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/reserve" id="reservebutton">
+                    <div class="roundbutton">
+                        <p>RESERVE</p>
+                    </div>
+                </a>
             </div>
-            <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/reserve">
-                <div id="reservebutton" class="roundbutton">
-                    <p>RESERVE</p>
-                </div>
-            </a>
         </div>
     </div>
 {% endblock %}
