@@ -14,7 +14,7 @@ from django.dispatch import receiver
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import RegisterForm
-from .models import Store, Vehicle, Reservation
+from .models import Store, Vehicle, Reservation, Payment
 
 def home(request):
 	return render(request, 'inventory/home.html')
@@ -213,12 +213,19 @@ def makereservation(request, storeID, vehicleID):
 		subtotal = request.POST["subtotal"]
 		tax = request.POST["tax"]
 		total = request.POST["total"]
+		payment_type = request.POST["paymenttype"]
 	except KeyError:
 		pass
+
+	now = datetime.now()
 	
 	# Create new reservation
 	reservation = Reservation(user=user, vehicle=vehicle, pick_up_time=pickup_time, pick_up_location=pickup_store, drop_off_time=dropoff_time, drop_off_location=dropoff_store, subtotal=subtotal, tax=tax, total=total)
 	reservation.save()
+
+	# Create new payment
+	payment = Payment(reservation=reservation, amount=total, date=now, payment_type=payment_type)
+	payment.save()
 
 	calc_drop_off = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
 	calc_pick_up = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M")

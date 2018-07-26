@@ -27,31 +27,31 @@
         </div>
         <div id="reservebuttons">
             {% if reservation.status == 'Upcoming' %}
+            <div id="deletebutton" class="reservebutton roundbutton">
+                <p>CANCEL</p>
+            </div>
             <a href="{% url 'inventory:modify' reservation.id %}">
                 <div id="editbutton" class="reservebutton roundbutton">
                     <p>MODIFY</p>
                 </div>
             </a>
-                <div id="deletebutton" class="reservebutton roundbutton">
-                    <p>CANCEL</p>
-                </div>
             {% endif %}
             {% if reservation.status == 'In Progress' %}
+            <div id="deletebutton" class="disabledbutton roundbutton">
+                <p>CANCEL</p>
+            </div>
             <a href="{% url 'inventory:modify' reservation.id %}">
                 <div id="editbutton" class="reservebutton roundbutton">
                     <p>MODIFY</p>
                 </div>
             </a>
-            <div id="deletebutton" class="disabledbutton roundbutton">
-                <p>CANCEL</p>
-            </div>
             {% endif %}
             {% if reservation.status == 'Completed' %}
-            <div id="editbutton" class="disabledbutton roundbutton">
-                <p>MODIFY</p>
-            </div>
             <div id="deletebutton" class="disabledbutton roundbutton">
                 <p>CANCEL</p>
+            </div>
+            <div id="editbutton" class="disabledbutton roundbutton">
+                <p>MODIFY</p>
             </div>
             {% endif %}
         </div>

@@ -6,6 +6,7 @@
 {% block scripts %}
 <script type="text/javascript" src="{% static 'js/setupPage.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/reserve.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/paymentValidation.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -19,7 +20,7 @@
         <p>{{ store }} on {{ pick_up_format }}</p>
         <h3>Drop Off</h3>
         <p id="separator">{{ drop_off_store }} on {{ drop_off_format }}</p>
-        <form name="paymentlocation" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
+        <form name="paymentlocation" id="confirmform" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
             {% csrf_token %}
             <div class="paymentprice">
                     <p>Base Price: $</p>
@@ -49,10 +50,21 @@
 
             <div id="paymentformdiv">
                 <h3>Enter Your Payment Information</h3>
-                <input type="text" placeholder="Cardholder name">
-                <input type="text" placeholder="Card number">
 
-                <select>
+                <div id="cardlogos">
+                    <img src="{% static 'img/visalogo.gif' %}" class="cclogo" id="visalogo">
+                    <img src="{% static 'img/mastercardlogo.gif' %}" class="cclogo" id="mastercardlogo">
+                    <img src="{% static 'img/discoverlogo.jpg' %}" class="cclogo" id="discoverlogo">
+                    <img src="{% static 'img/amexlogo.gif' %}" class="cclogo" id="amexlogo">
+                </div>
+
+                <input type="hidden" name="paymenttype" id="cardtype" value="i">
+
+                <input type="text" class="cardtext" placeholder="Cardholder name" id="cardname"><br>
+                <input type="text" class="cardtext" placeholder="Card number" id="cardnumber"><br>
+
+                <div id="carddetails">
+                <select id="monthpicker">
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -67,7 +79,7 @@
                     <option value="12">December</option>
                 </select>
 
-                <select>
+                <select id="daypicker">
                     <option value="18">2018</option>
                     <option value="19">2019</option>
                     <option value="20">2020</option>
@@ -78,7 +90,10 @@
                     <option value="25">2025</option>
                 </select>
 
-                <input type="text" placeholder="CVV">
+                <input type="text" maxlength="4" id="securitycode" placeholder="CVV">
+                </div>
+
+                <input type="text" id="zipcode" placeholder="ZIP / Postal Code">
             </div>
             <a href="{% url 'inventory:home' %}">
                 <div id="reservecancelbutton">

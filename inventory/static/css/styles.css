@@ -376,6 +376,8 @@ a:-webkit-any-link {
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
+	width: 125px;
+	margin-left: auto;
 }
 
 .paymenttext {
@@ -475,6 +477,27 @@ a:-webkit-any-link {
 	color: #3d3d3d;
 }
 
+.cclogo {
+	height: 26px;
+	margin: 0 6px;
+	filter: grayscale(100%);
+}
+
+.activelogo {
+	filter: grayscale(0%) !important;
+}
+
+#amexlogo {
+	height: 39px;
+}
+
+#cardlogos {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 7px 0 2px;
+}
+
 #reservecancelbutton {
 	color: #777676;
 	position: absolute;
@@ -486,6 +509,7 @@ a:-webkit-any-link {
 	position: absolute;
 	bottom: -17px;
 	right: 40px;
+	-webkit-appearance: none;
 }
 
 #content > form > ul > li {
@@ -532,12 +556,12 @@ a:-webkit-any-link {
 	bottom: -18px;
 }
 
-#onlinediv {
-	padding-bottom: 60px;
-}
-
 #reservecancelbutton > p {
 	margin: 0;
+}
+
+#confirmform {
+	padding-bottom: 60px;
 }
 
 #logincontent {
@@ -586,8 +610,9 @@ a:-webkit-any-link {
 }
 
 #logo {
-	height: 140px;
-	margin-top: 5px;
+	height: 38px;
+	position: relative;
+	top: 1px;
 }
 
 #headermenu {
@@ -864,15 +889,15 @@ a:-webkit-any-link {
 #reservebuttons {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	align-items: center;
 	position: relative;
-	padding-left: 28px;
+	padding-right: 24px;
 	top: -18px;
 }
 
 #editbutton {
-	background-color: #718792;
+	background-color: #455A64;
 }
 
 #deletebutton {
@@ -965,7 +990,44 @@ a:-webkit-any-link {
 
 #paymentformdiv {
 	display: none;
-	padding: 12px 10px 0;
+	padding: 22px 10px 4px;
+}
+
+#carddetails {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#daypicker {
+	margin-right: auto;
+	margin-left: 12px;
+}
+
+#paymentformdiv > input, #carddetails > input {
+	border: 1px solid transparent;
+	border-bottom: 1px solid #ccc;
+	margin: 10px 0;
+	font-size: 16px;
+	width: 100%;
+	padding: 6px 0 6px 4px;
+}
+
+#paymentformdiv > input:focus, #carddetails > input:focus, #paymentformdiv > select:focus, #carddetails > select:focus {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+#paymentformdiv > select, #carddetails > select {
+	border: 1px solid transparent;
+	border-bottom: 1px solid #ccc;
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	padding: 6px 0;
+}
+
+#securitycode {
+	width: 60px !important;
 }
 
 #reservecontent {
@@ -987,8 +1049,8 @@ a:-webkit-any-link {
 }
 
 #separator {
-	padding-bottom: 20px;
-	margin-bottom: 10px;
+	padding: 0 0 20px;
+	margin: 0 15px 10px;
 	border-bottom: 1px solid #dadada;
 }
 
@@ -1030,7 +1092,7 @@ a:-webkit-any-link {
 #reservationdetails {
 	background-color: white;
 	margin: 0 20px;
-	padding: 14px 0 30px;
+	padding: 14px 0 40px;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #707070;
 }
