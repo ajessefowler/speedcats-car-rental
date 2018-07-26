@@ -8,17 +8,11 @@
 {% endblock %}
 
 {% block content %}
-<div id="mapcontainer">
-    <div id="map"></div>
-    <div id="searchbox">
-        <i class="button material-icons" id="locatebutton">near_me</i>
-        <input id="locationsearch" placeholder="Enter your location..." type="text">
-        <i class="button material-icons" id="searchbutton">search</i>
-    </div>
-</div>
-
-<div id="infocontainer">
     <h2 class="header" id="locationheader">Start Your Reservation</h2>
+
+    <p id="startinstructions">Begin by selecting your pick up and drop off times and locations. Then, search our wide variety
+        of vehicles to find your favorite vehicle.
+    </p>
 
     <form name="paymentlocation" id="selectlocation" action="{% url 'inventory:store' %}" method="post">
         {% csrf_token %}
@@ -57,59 +51,68 @@
 
         <button type="button" id="startbutton" class="roundbutton">START</button>
     </form>
-</div>
+    
+    <div id="timeshade" class="popupshade"></div>
+    <div id="locationshade" class="popupshade"></div>
 
 <div id="pickuptimecard" class="infoselector">
     <div class="infoselectorheader">
         <h3>Select Your Pick Up Time</h3>
-        <i id="closepickuptime" class="material-icons">expand_more</i>
+        <i id="closepickuptime" class="material-icons">close</i>
     </div>
     <p id="pickuptimemessage">Store Hours: 8:00 A.M. to 6:00 P.M.</p>
     <div class="timepicker">
         <input type="date" id="pickupdateinput" class="input" name="dateinput"/>
         <p>AT</p>
         <input type="time" id="pickuptimeinput" class="input" name="timeinput" min="7:00" max="20:00"/>
-        <p id="pickupdonebutton" class="donebutton">DONE</p>
     </div>
+    <p id="pickupdonebutton" class="donebutton">DONE</p>
 </div>
 
 <div id="dropofftimecard" class="infoselector">
     <div class="infoselectorheader">
         <h3>Select Your Drop Off Time</h3>
-        <i id="closedropofftime" class="material-icons">expand_more</i>
+        <i id="closedropofftime" class="material-icons">close</i>
     </div>
     <p id="dropofftimemessage">Store Hours: 8:00 A.M. to 6:00 P.M.</p>
     <div class="timepicker">
         <input type="date" id="dropoffdateinput" class="input" name="dateinput"/>
         <p>AT</p>
         <input type="time" id="dropofftimeinput" class="input" name="timeinput" min="7:00" max="20:00"/>
-        <p id="dropoffdonebutton" class="donebutton">DONE</p>
     </div>
+    <p id="dropoffdonebutton" class="donebutton">DONE</p>
 </div>
 
-<div id="dropofflocationcard" class="infoselector">
+<div id="dropofflocationcard" class="infoselector mapinfoselector">
+    <div id="dropoffmap" class="testmap"></div>
     <div class="infoselectorheader">
         <h3>Select Your Drop Off Location</h3>
-        <i id="closedropoff" class="material-icons">expand_more</i>
+        <i id="closedropoff" class="material-icons">close</i>
     </div>
     <div class="locationpicker">
         <p id="dropofflocationtext" class="locationpickertext">Choose a location on the map</p>
-        <p id="dropofflocationdone" class="donebutton">DONE</p>
     </div>
+    <p id="dropofflocationdone" class="donebutton">DONE</p>
 </div>
 
-<div id="pickuplocationcard" class="infoselector">
+<div id="pickuplocationcard" class="infoselector mapinfoselector">
+    <div id="searchbox">
+        <i class="button material-icons" id="locatebutton">near_me</i>
+        <input id="locationsearch" placeholder="Enter your location..." type="text">
+        <i class="button material-icons" id="searchbutton">search</i>
+    </div>
+    <div id="pickupmap" class="testmap"></div>
     <div class="infoselectorheader">
         <h3>Select Your Pick Up Location</h3>
-        <i id="closepickup" class="material-icons">expand_more</i>
+        <i id="closepickup" class="material-icons">close</i>
     </div>
     <div class="locationpicker">
         <p id="pickuplocationtext" class="locationpickertext">Choose a location on the map</p>
-        <p id="pickuplocationdone" class="donebutton">DONE</p>
     </div>
+    <p id="pickuplocationdone" class="donebutton">DONE</p>
 </div>
 {% endblock %}
 
 {% block initMap %}
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE&libraries=places&callback=initMap"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE&libraries=places"></script>
 {% endblock %}

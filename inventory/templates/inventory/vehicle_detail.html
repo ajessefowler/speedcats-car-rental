@@ -13,11 +13,12 @@
         <h2 class="header">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h2>
         <div id="vehicledescription">
             <div id="vehicledetails">
-                <p>Milage: {{ vehicle.mileage }}</p>
-                <p>Average Fuel Efficiency: {{ vehicle.gas_mileage }} mpg</p>
-                <p>Engine: {{ vehicle.engine_size }}L {{ vehicle.engine_type }}</p>
-                <p>Storage Space: {{ vehicle.storage_space }} L^3</p>
-                <p>Horsepower: {{ vehicle.horsepower }} hp</p>
+                <h3><strong>Vehicle Details</strong></h3>
+                <p><strong>Mileage:</strong> {{ vehicle.mileage }}</p>
+                <p><strong>Average Fuel Efficiency:</strong> {{ vehicle.gas_mileage }} mpg</p>
+                <p><strong>Engine:</strong> {{ vehicle.engine_size }}L {{ vehicle.engine_type }}</p>
+                <p><strong>Storage Space:</strong> {{ vehicle.storage_space }} cu. ft.</p>
+                <p><strong>Horsepower:</strong> {{ vehicle.horsepower }} hp</p>
             </div>
             <a href="/inventory/{{ vehicle.store.ID }}/{{ vehicle.id }}/reserve">
                 <div id="reservebutton" class="roundbutton">

@@ -253,6 +253,18 @@ def reservation(request, reservationID):
 @login_required
 def modify(request, reservationID):
 	reservation = Reservation.objects.get(pk=reservationID)
+	vehicle = reservation.vehicle
+
+	# Pass earliest future pick up datetime and latest drop off time to view for comparison with new times
+	'''
+	if len(vehicle.reservation_set.all()) == 0:
+			available_vehicles.append(vehicle)
+		else:
+			for reservation in vehicle.reservation_set.all():
+				if reservation.drop_off_time < pickup_format or reservation.pick_up_time > dropoff_format:
+					available_vehicles.append(vehicle)
+	'''
+
 	context = {
 		"reservation":reservation
 	}

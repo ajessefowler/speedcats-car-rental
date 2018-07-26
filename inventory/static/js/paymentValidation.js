@@ -23,12 +23,17 @@ document.addEventListener('DOMContentLoaded', function(event) {
     });
 
     document.getElementById('payonline').addEventListener('click', function() {
-        const number = document.getElementById('cardnumber').value;
-        if (getTypeOfCard(number, false)) {
-            const paymentType = getTypeOfCard(number, false);
-            document.getElementById('cardtype').value = paymentType;
+        if (document.getElementById('cardnumber').value.length === 0) {
+            document.getElementById('cardtype').value = '';
         }
-    })
+        if (document.getElementById('cardtype').value !== '') {
+            const number = document.getElementById('cardnumber').value;
+            if (getTypeOfCard(number, false)) {
+                const paymentType = getTypeOfCard(number, false);
+                document.getElementById('cardtype').value = paymentType;
+            }
+        }
+    });
 
     document.getElementById('reservecontinuebutton').addEventListener('click', function(event) {
         if (document.getElementById('cardtype').value !== 'i' && !validateForm()) {

@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         document.getElementById(element + 'timeinput').style.border = 'none';
         document.getElementById(element + 'dateinput').style.border = 'none';
-		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
+		document.getElementById('timeshade').style.animation = 'fadeOut .4s ease forwards';
+        document.getElementById(element + 'timecard').style.animation = 'timeDown .4s ease forwards';
+        setTimeout(function() {
+            document.getElementById('timeshade').style.display = 'none';
+        }, 400);
 		document.getElementById(element + 'timetext').innerHTML = formattedDate + ', ' + formattedTime;
 		document.getElementById(element + 'timeformat').value = apptDate + ' ' + apptTime;
 		checkFormCompletion();
@@ -180,13 +184,28 @@ function validateTime(element) {
 // Set up the animations for the information selector cards
 function initTimeHandler(element) {
 	document.getElementById(element + 'time').addEventListener('click', function() {
-		document.getElementById(element + 'timecard').style.animation = 'timeUp .3s ease forwards';
+        document.getElementById('timeshade').style.display = 'block';
+        document.getElementById('timeshade').style.animation = 'fadeIn .4s ease forwards';
+		document.getElementById(element + 'timecard').style.animation = 'timeUp .4s ease forwards';
 	});
 
 	document.getElementById('close' + element + 'time').addEventListener('click', function() {
-		document.getElementById(element + 'timecard').style.animation = 'timeDown .3s ease forwards';
-	});
+        document.getElementById('timeshade').style.animation = 'fadeOut .4s ease forwards';
+        document.getElementById(element + 'timecard').style.animation = 'timeDown .4s ease forwards';
+        setTimeout(function() {
+            document.getElementById('timeshade').style.display = 'none';
+        }, 400);
+    });
+
+    document.getElementById('timeshade').addEventListener('click', function() {
+        document.getElementById('timeshade').style.animation = 'fadeOut .4s ease forwards';
+        document.getElementById(element + 'timecard').style.animation = 'timeDown .4s ease forwards';
+        setTimeout(function() {
+            document.getElementById('timeshade').style.display = 'none';
+        }, 400);
+    });
 }
+
 
 // Display an alert when date or time invalid
 function displayAlert(element, message) {
@@ -196,6 +215,6 @@ function displayAlert(element, message) {
 
 // Clear the alert for the given element
 function clearAlert(element) {
-    document.getElementById(element + 'timemessage').style.color = 'white';
+    document.getElementById(element + 'timemessage').style.color = '#111';
     document.getElementById(element + 'timemessage').innerHTML = 'Store Hours: 8:00 A.M. to 6:00 P.M.';
 }

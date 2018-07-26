@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function(event) {
     let dropOffSelected;
 
+    initMap('pickup');
+    initMap('dropoff');
+
     if (document.getElementById('pickuplocationcard')) {
         if (document.getElementById('dropoffdiff').checked) {
             dropOffSelected = true;
@@ -23,9 +26,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     // Add event listener to find location button
 	initLocation();
-	document.getElementById('locatebutton').addEventListener('click', function() {
+	/*document.getElementById('locatebutton').addEventListener('click', function() {
 		findLocation();
-	});
+	});*/
     
     if (document.getElementById('pickuptimecard')) {
         initTimeHandler('pickup');
@@ -42,9 +45,9 @@ function initLocation() {
 		document.getElementById('locationsearch').blur();
     });
     
-    document.getElementById('searchbutton').addEventListener('click', function() {
+    /* document.getElementById('searchbutton').addEventListener('click', function() {
         const currentLocation = resolveLocation(autocomplete);
-    });
+    });*/
 
     function resolveLocation(element) {
         const place = element.getPlace();
@@ -85,24 +88,29 @@ function resolveCoords(position) {
 
 function mapOnLoad(request, id, map, addressDisplay, marker, element) {
 
-    // Scroll to top of page to display entire map
-    window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth' 
-    });
-
     // Add close animation to close button
     document.getElementById('close' + element).addEventListener('click', function() {
-        document.getElementById(element + 'locationcard').style.animation = 'timeDown .3s ease forwards';
+        document.getElementById('locationshade').style.animation = 'fadeOut .4s ease forwards';
+        document.getElementById(element + 'locationcard').style.animation = 'mapDown .4s ease forwards';
+        setTimeout(function() {
+            document.getElementById('locationshade').style.display = 'none';
+        }, 400);
     });
+
+    document.getElementById('locationshade').addEventListener('click', function() {
+        document.getElementById('locationshade').style.animation = 'fadeOut .4s ease forwards';
+        document.getElementById(element + 'locationcard').style.animation = 'mapDown .4s ease forwards';
+        setTimeout(function() {
+            document.getElementById('locationshade').style.display = 'none';
+        }, 400);
+    })
 
     if (request.status >= 200 && request.status < 400) {
         const vehiclesLink = '/inventory/' + id + '/';
 
         // Set the select button's link to the selected store
         google.maps.event.addListener(marker, 'click', function() {
-            document.getElementById(element + 'locationdone').style.color = '#ffffff';
+            document.getElementById(element + 'locationdone').style.color = '#111';
             document.getElementById(element + 'locationtext').innerHTML = addressDisplay;
             
             document.getElementById(element + 'locationdone').addEventListener('click', function() {
@@ -117,10 +125,11 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
                     document.getElementById(element + 'locationid').value = id;
                 }
                 document.getElementById(element + 'loctext').innerHTML = addressDisplay;
-                document.getElementById(element + 'locationcard').style.animation = 'timeDown .3s ease forwards';
-                document.getElementById(element + 'location').scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.getElementById('locationshade').style.animation = 'fadeOut .4s ease forwards';
+                document.getElementById(element + 'locationcard').style.animation = 'mapDown .4s ease forwards';
+                setTimeout(function() {
+                    document.getElementById('locationshade').style.display = 'none';
+                }, 400);
 
                 checkFormCompletion();
             });
@@ -132,13 +141,13 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
 }
 
 // Initialize the map, with markers for each store
-function initMap() {
+function initMap(element) {
     const key = 'AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE';
     const locations = JSON.parse(localStorage.getItem('locations'));
     let i;
 
     // Initialize map centered over store locations
-    const map = new google.maps.Map(document.getElementById('map'), {
+    const map = new google.maps.Map(document.getElementById(element + 'map'), {
         center: {lat: 41.0, lng: -82.99},
         zoom: 6,
         zoomControl: true,
@@ -170,13 +179,17 @@ function initMap() {
 
             document.getElementById('dropofflocation').addEventListener('click', function() {
                 mapOnLoad(request, id, map, addressDisplay, marker, 'dropoff');
-                document.getElementById('dropofflocationcard').style.animation = 'timeUp .3s ease forwards';
+                document.getElementById('locationshade').style.display = 'block';
+                document.getElementById('locationshade').style.animation = 'fadeIn .4s ease forwards';
+                document.getElementById('dropofflocationcard').style.animation = 'mapUp .4s ease forwards';
             });
 
             if (document.getElementById('pickuplocation')) {
                 document.getElementById('pickuplocation').addEventListener('click', function() {
                     mapOnLoad(request, id, map, addressDisplay, marker, 'pickup');
-                    document.getElementById('pickuplocationcard').style.animation = 'timeUp .3s ease forwards';
+                    document.getElementById('locationshade').style.display = 'block';
+                    document.getElementById('locationshade').style.animation = 'fadeIn .4s ease forwards';
+                    document.getElementById('pickuplocationcard').style.animation = 'mapUp .4s ease forwards';
                 });
             }
         };

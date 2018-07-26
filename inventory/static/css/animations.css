@@ -11,13 +11,23 @@
 
 /* Slides time and location pickers up and down */
 @keyframes timeUp {
-	from { transform: translateY(150px); }
-	to { transform: translateY(0px); }
+	from { transform: translateY(210px); }
+	to { transform: translateY(-250px); }
 }
 
 @keyframes timeDown {
-	from { transform: translateY(0px); }
-	to { transform: translateY(150px); }
+	from { transform: translateY(-250px); }
+	to { transform: translateY(210px); }
+}
+
+@keyframes mapUp {
+	from { transform: translateY(580px); }
+	to { transform: translateY(-100px); }
+}
+
+@keyframes mapDown {
+	from { transform: translateY(-100px); }
+	to { transform: translateY(580px); }
 }
 
 /* Bounce arrow on desktop home page */
