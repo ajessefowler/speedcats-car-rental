@@ -7,21 +7,29 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     document.getElementById('menubutton').addEventListener('click', function() {
 			if (!menuOut) {
-				menuOut = true;
-				document.getElementById('menushade').style.display = 'block';
-				document.querySelector('nav').style.animation = 'menuOut .3s ease forwards';
-				document.getElementById('menushade').style.animation = 'fadeIn .3s ease forwards';
-				document.getElementById('menubutton').innerHTML = 'chevron_left';
+				openMenu();
 			} else {
 				closeMenu();
 			}
-    });
+		});
+		
+		function openMenu() {
+			menuOut = true;
+			document.getElementById('menumiddle').style.animation = 'fadeOut .2s ease forwards';
+			document.getElementById('menubottom').style.animation = 'bottomToArrow .4s ease forwards';
+			document.getElementById('menutop').style.animation = 'topToArrow .4s ease forwards';
+			document.getElementById('menushade').style.display = 'block';
+			document.querySelector('nav').style.animation = 'menuOut .4s ease forwards';
+			document.getElementById('menushade').style.animation = 'fadeIn .4s ease forwards';
+		}
 		
 		function closeMenu() {
 			menuOut = false;
+			document.getElementById('menumiddle').style.animation = 'fadeIn .6s ease forwards';
+			document.getElementById('menubottom').style.animation = 'bottomToButton .3s ease forwards';
+			document.getElementById('menutop').style.animation = 'topToButton .3s ease forwards';
 			document.querySelector('nav').style.animation = 'menuIn .3s ease forwards';
 			document.getElementById('menushade').style.animation = 'fadeOut .3s ease forwards';
-			document.getElementById('menubutton').innerHTML = 'menu';
 			setTimeout(function() {
 				document.getElementById('menushade').style.display = 'none';
 			}, 300);

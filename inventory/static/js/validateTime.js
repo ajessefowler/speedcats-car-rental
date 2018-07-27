@@ -119,25 +119,43 @@ function validateDate(element) {
             const pickupMonth = parseInt(pickupDate.substring(5, 7));
             const pickupDay = parseInt(pickupDate.substring(8, 10));
 
-            if (year < pickupYear || month < pickupMonth || day < pickupDay) {
+            if (year >= pickupYear && month > pickupMonth) {
+                clearAlert(element);
+                return true;
+            } else if (year >= pickupYear && month === pickupMonth) {
+                if (day >= pickupDay) {
+                    clearAlert(element);
+                    return true;
+                } else {
+                    document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
+                    displayAlert(element, 'Drop off must follow pick up.');
+                    return false;
+                }
+            } else {
                 // Check times as well to prevent 0 length reservations
                 document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
                 displayAlert(element, 'Drop off must follow pick up.');
                 return false;
-            } else {
-                clearAlert(element);
-                return true;
             }
         }
     
         // Add one to now.getMonth because it is 0-indexed
-        if (year !== now.getFullYear() || month < (now.getMonth() + 1) || day < (now.getDate())) {
+        if (year >= now.getFullYear() && month >= (now.getMonth() + 1)) {
+            clearAlert(element);
+            return true;
+        } else if (year >= now.getFullYear() && month === (now.getMonth() + 1)) {
+            if (day >= now.getDate()) {
+                clearAlert(element);
+                return true;
+            } else {
+                document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
+                displayAlert(element, 'Time must be in the future.');
+                return false;
+            }
+        } else {
             document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
             displayAlert(element, 'Time must be in the future.');
             return false;
-        } else {
-            clearAlert(element);
-            return true;
         }
     } else {
         document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';

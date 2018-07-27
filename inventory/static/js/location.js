@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function(event) {
     let dropOffSelected;
 
-    initMap('pickup');
+    if (!document.getElementById('modifylocation')) {
+        initMap('pickup');
+    }
     initMap('dropoff');
 
     if (document.getElementById('pickuplocationcard')) {

@@ -28,7 +28,11 @@
 
 	<header>
 		<div id="headermenu">
-			<i class="button material-icons" id="menubutton">menu</i>
+			<div id="menubutton">
+				<div class="menubar" id="menutop"></div>
+				<div class="menubar" id="menumiddle"></div>
+				<div class="menubar" id="menubottom"></div>
+			</div>
 			<a href="{% url 'inventory:home' %}">
 				<img src="{% static 'img/logo.png' %}" id="logo">
 			</a>

@@ -9,24 +9,25 @@
 	to { transform: translateX(-270px); }
 }
 
-/* Slides time and location pickers up and down */
+/* Slides time pickers up and down */
 @keyframes timeUp {
 	from { transform: translateY(210px); }
-	to { transform: translateY(-250px); }
+	to { transform: translateY(-220px); }
 }
 
 @keyframes timeDown {
-	from { transform: translateY(-250px); }
+	from { transform: translateY(-220px); }
 	to { transform: translateY(210px); }
 }
 
+/* Slides location pickers up and down */
 @keyframes mapUp {
 	from { transform: translateY(580px); }
-	to { transform: translateY(-100px); }
+	to { transform: translateY(-30px); }
 }
 
 @keyframes mapDown {
-	from { transform: translateY(-100px); }
+	from { transform: translateY(-30px); }
 	to { transform: translateY(580px); }
 }
 
@@ -56,4 +57,25 @@
 @keyframes cardDown {
 	from { transform: translateY(-600px); }
 	to { transform: translateY(0); }
+}
+
+/* Animations for menu button */
+@keyframes topToArrow {
+	from { transform: translateY(0px) scaleX(1) rotate(0deg); }
+	to { transform: translateY(3px) scaleX(0.5) rotate(-16deg); }
+}
+
+@keyframes topToButton {
+	from { transform: translateY(3px) scaleX(0.5) rotate(-16deg); }
+	to { transform: translateY(0px) scaleX(1) rotate(0deg); }
+}
+
+@keyframes bottomToArrow {
+	from { transform: translateY(0px) scaleX(1) rotate(0deg); }
+	to { transform: translateY(-3px) scaleX(0.5) rotate(16deg); }
+}
+
+@keyframes bottomToButton {
+	from { transform: translateY(-3px) scaleX(0.5) rotate(16deg); }
+	to { transform: translateY(0px) scaleX(1) rotate(0deg); }
 }

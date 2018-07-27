@@ -8,52 +8,52 @@
 {% endblock %}
 
 {% block content %}
-    <h2 class="header" id="locationheader">Start Your Reservation</h2>
+<h2 class="header" id="locationheader">Start Your Reservation</h2>
 
-    <p id="startinstructions">Begin by selecting your pick up and drop off times and locations. Then, search our wide variety
-        of vehicles to find your favorite vehicle.
-    </p>
+<p id="startinstructions">Begin by selecting your pick up and drop off times and locations. Then, search our wide variety
+    of vehicles to find your favorite vehicle.
+</p>
 
-    <form name="paymentlocation" id="selectlocation" action="{% url 'inventory:store' %}" method="post">
-        {% csrf_token %}
-        <div id="pickupdesktop" class="desktop">
-            <h3>Choose Your Pick Up</h3>
+<form name="paymentlocation" id="selectlocation" action="{% url 'inventory:store' %}" method="post">
+{% csrf_token %}
+    <div id="pickupdesktop" class="desktop">
+        <h3>Choose Your Pick Up</h3>
 
-            <div id="pickuptime" class="selectcard">
-                <p id="pickuptimetext">Tap here to select a time</p>
-            </div>
-            <input type="hidden" name="pickuptimeformat" id="pickuptimeformat" readonly>
-
-            <div id="pickuplocation" class="selectcard">
-                <p id="pickuploctext">Tap here to select a location</p>
-            </div>
-            <input type="hidden" name="pickuplocationid" id="pickuplocationid" readonly>
+        <div id="pickuptime" class="selectcard">
+            <p id="pickuptimetext">Tap here to select a time</p>
         </div>
+        <input type="hidden" name="pickuptimeformat" id="pickuptimeformat" readonly>
 
-        <div id="dropoffdesktop" class="desktop">
-            <h3>Choose Your Drop Off</h3>
-
-            <div id="dropofftime" class="selectcard">
-                <p id="dropofftimetext">Tap here to select a time</p>
-            </div>
-            <input type="hidden" name="dropofftimeformat" id="dropofftimeformat" readonly>
-
-            <div id="dropofflocation" class="selectcard">
-                <p id="dropoffloctext">Tap here to select a location</p>
-            </div>
-            <input type="hidden" name="dropofflocationid" id="dropofflocationid" readonly>
-
-            <div id="dropoffcheckbox">
-                <input type="checkbox" id="dropoffdiff" name="dropoffdiff">
-                <p>Drop off at another location</p>
-            </div>
+        <div id="pickuplocation" class="selectcard">
+            <p id="pickuploctext">Tap here to select a location</p>
         </div>
+        <input type="hidden" name="pickuplocationid" id="pickuplocationid" readonly>
+    </div>
 
-        <button type="button" id="startbutton" class="roundbutton">START</button>
-    </form>
+    <div id="dropoffdesktop" class="desktop">
+        <h3>Choose Your Drop Off</h3>
+
+        <div id="dropofftime" class="selectcard">
+            <p id="dropofftimetext">Tap here to select a time</p>
+        </div>
+        <input type="hidden" name="dropofftimeformat" id="dropofftimeformat" readonly>
+
+        <div id="dropofflocation" class="selectcard">
+            <p id="dropoffloctext">Tap here to select a location</p>
+        </div>
+        <input type="hidden" name="dropofflocationid" id="dropofflocationid" readonly>
+
+        <div id="dropoffcheckbox">
+            <input type="checkbox" id="dropoffdiff" name="dropoffdiff">
+            <p>Drop off at another location</p>
+        </div>
+    </div>
+
+    <button type="button" id="startbutton" class="roundbutton">START</button>
+</form>
     
-    <div id="timeshade" class="popupshade"></div>
-    <div id="locationshade" class="popupshade"></div>
+<div id="timeshade" class="popupshade"></div>
+<div id="locationshade" class="popupshade"></div>
 
 <div id="pickuptimecard" class="infoselector">
     <div class="infoselectorheader">
