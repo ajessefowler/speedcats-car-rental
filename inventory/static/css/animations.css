@@ -12,11 +12,11 @@
 /* Slides time pickers up and down */
 @keyframes timeUp {
 	from { transform: translateY(210px); }
-	to { transform: translateY(-220px); }
+	to { transform: translateY(-205px); }
 }
 
 @keyframes timeDown {
-	from { transform: translateY(-220px); }
+	from { transform: translateY(-205px); }
 	to { transform: translateY(210px); }
 }
 

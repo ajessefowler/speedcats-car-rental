@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		function openMenu() {
 			menuOut = true;
 			document.getElementById('menumiddle').style.animation = 'fadeOut .2s ease forwards';
-			document.getElementById('menubottom').style.animation = 'bottomToArrow .4s ease forwards';
-			document.getElementById('menutop').style.animation = 'topToArrow .4s ease forwards';
+			document.getElementById('menubottom').style.animation = 'bottomToArrow .3s ease forwards';
+			document.getElementById('menutop').style.animation = 'topToArrow .3s ease forwards';
 			document.getElementById('menushade').style.display = 'block';
-			document.querySelector('nav').style.animation = 'menuOut .4s ease forwards';
-			document.getElementById('menushade').style.animation = 'fadeIn .4s ease forwards';
+			document.querySelector('nav').style.animation = 'menuOut .3s ease forwards';
+			document.getElementById('menushade').style.animation = 'fadeIn .3s ease forwards';
 		}
 		
 		function closeMenu() {
