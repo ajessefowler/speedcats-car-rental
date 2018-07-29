@@ -296,6 +296,14 @@ def update(request, reservationID):
 		dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
 		reservation.drop_off_time = dropoff_format
 
+		subtotal = request.POST["subtotal"]
+		tax = request.POST["tax"]
+		total = request.POST["total"]
+
+		reservation.subtotal = subtotal
+		reservation.tax = tax
+		reservation.total = total
+
 		reservation.save()
 		
 		return redirect('/inventory/reservation/' + str(reservationID))

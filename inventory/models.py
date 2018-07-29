@@ -8,8 +8,8 @@ from django.core.validators import RegexValidator
 
 import pytz
 import datetime
-from celery import Celery
-from speedcats.celery_tasks import set_vehicle_as_reserved, set_vehicle_as_available
+#from celery import Celery
+#from speedcats.celery_tasks import set_vehicle_as_reserved, set_vehicle_as_available
 '''
 # Profile extension found here: https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 class Profile(models.Model):
@@ -144,7 +144,7 @@ class Reservation(models.Model):
 
 	def __str__(self):
 		return str(self.vehicle) + ' ' + str(self.pick_up_time)[:10] + ' to ' + str(self.drop_off_time)[:10]
-
+'''
 	# Create tasks to update vehicle status and store at pick up and drop off times
 	def save(self, *args, **kwargs):
 		create_task = False
@@ -160,7 +160,7 @@ class Reservation(models.Model):
 		else:
 			# remove current tasks, create new tasks for modification
 			pass
-
+'''
 class Maintenance(models.Model):
 	vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
 	mechanic = models.CharField(max_length=100, default="")

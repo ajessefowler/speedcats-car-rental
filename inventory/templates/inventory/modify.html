@@ -1,11 +1,11 @@
 {% extends "base_generic.html" %}
+{% load tz %}
 {% load static %}
 
 {% block scripts %}
 <script type="text/javascript" src="{% static 'js/checkModifyForm.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/validateTime.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/location.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/validateModify.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -20,6 +20,8 @@
 
 <form name="paymentlocation" id="modifylocation" action="{% url 'inventory:update' reservation.id %}" method="post">
 {% csrf_token %}
+    <input type="hidden" name="vehicleprice" id="vehicleprice" value="{{ reservation.vehicle.price }}">
+    <input type="hidden" name="length" id="reservationlength" value="{{ reservation.length }}">
     <div id="selectlocation">
 
         {% if reservation.status == "Upcoming" %}
@@ -29,7 +31,7 @@
                 <div id="pickuptime" class="selectcard">
                     <p id="pickuptimetext">{{ reservation.pick_up_time }}</p> 
                 </div>
-                <input type="hidden" name="pickuptimeformat" id="pickuptimeformat" value="{{ reservation.pick_up_time|date:'Y-m-d H:m' }}" readonly>
+                <input type="hidden" name="pickuptimeformat" id="pickuptimeformat" value="{{ reservation.pick_up_time|date:'Y-m-d H:i' }}" readonly>
             </div>
         {% endif %}
 
@@ -38,7 +40,7 @@
             <div id="dropofftime" class="selectcard">
                 <p id="dropofftimetext">{{ reservation.drop_off_time }}</p> 
             </div>
-            <input type="hidden" name="dropofftimeformat" id="dropofftimeformat" value="{{ reservation.drop_off_time|date:'Y-m-d H:m' }}" readonly>
+            <input type="hidden" name="dropofftimeformat" id="dropofftimeformat" value="{{ reservation.drop_off_time|date:'Y-m-d H:i' }}" readonly>
 
             <div id="dropofflocation" class="selectcard" style="display: block;">
                 <p id="dropoffloctext">{{ reservation.drop_off_location }}</p>
@@ -47,13 +49,37 @@
         </div>
     </div>
 
+    <input type="hidden" id="initialsubtotal" value="{{ reservation.subtotal }}">
+    <input type="hidden" id="initialtotal" value="{{ reservation.total }}">
+
+    <input type="hidden" name="subtotal" id="subtotal">
+    <input type="hidden" name="tax" id="tax">
+    <input type="hidden" name="total" id="total">
+
     <div id="modifybutton" class="roundbutton">
         <p>DONE</p>
     </div>
 </form>
 
+<div id="confirmshade" class="popupshade"></div>
 <div id="timeshade" class="popupshade"></div>
 <div id="locationshade" class="popupshade"></div>
+
+<div id="confirmcard">
+    <h3>Confirm Your Modification</h3>
+    <i class="material-icons" id="closeconfirmation">close</i>
+    <p id="priceupdate">Your price will not change.</p>
+    <div id="pricedetails">
+        <p id="displaysubtotal">Subtotal: ${{ reservation.subtotal }}</p>
+        <p id="displaytax">Tax: ${{ reservation.tax }}</p>
+        <p id="displaytotal">Total: ${{ reservation.total }}</p>
+    </div>
+    <a>
+        <div id="confirmcancelbutton" class="roundbutton">
+            <p>CONFIRM</p>
+        </div>
+    </a>
+</div>
 
 {% if reservation.status == "Upcoming" %}
 <div id="pickuptimecard" class="infoselector">

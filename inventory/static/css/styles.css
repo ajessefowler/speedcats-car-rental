@@ -1239,6 +1239,37 @@ a:-webkit-any-link {
 	width: 116px;
 }
 
+#confirmcard {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	z-index: 12;
+	background-color: white;
+	padding: 12px;
+	margin: 0 15px;
+	border-radius: 3px;
+	box-shadow: 0 1px 7px 1px #2c2c2c;
+	position: fixed;
+	width: calc(100% - 54px);
+	transform: translateY(500px);
+}
+
+#confirmcard > a {
+	margin:  14px 0 6px auto;
+}
+
+#confirmcard > h3 {
+	font-size: 16pt;
+	position: relative;
+	margin: 4px auto 7px 0;
+	padding-left: 5px;
+}
+
+#confirmcard > p {
+	margin: 8px 0;
+}
+
 #returnhome {
 	width: calc(100% - 40px);
 	margin: 20px 20px;

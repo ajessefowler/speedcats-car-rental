@@ -79,3 +79,13 @@
 	from { transform: translateY(-3px) scaleX(0.5) rotate(16deg); }
 	to { transform: translateY(0px) scaleX(1) rotate(0deg); }
 }
+
+@keyframes confirmUp {
+	from { transform: translateY(500px); }
+	to { transform: translateY(-90px); }
+}
+
+@keyframes confirmDown {
+	from { transform: translateY(-90px); }
+	to { transform: translateY(500px); }
+}
