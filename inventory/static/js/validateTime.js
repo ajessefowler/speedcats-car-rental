@@ -140,7 +140,7 @@ function validateDate(element) {
         }
     
         // Add one to now.getMonth because it is 0-indexed
-        if (year >= now.getFullYear() && month >= (now.getMonth() + 1)) {
+        if (year >= now.getFullYear() && month > (now.getMonth() + 1)) {
             clearAlert(element);
             return true;
         } else if (year >= now.getFullYear() && month === (now.getMonth() + 1)) {
