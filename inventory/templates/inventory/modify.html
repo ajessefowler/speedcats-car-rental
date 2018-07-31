@@ -18,6 +18,10 @@
 
 <h2 class="header" id="locationheader">Modify Your Reservation</h2>
 
+<p id="modifyinstructions">Modify the details of your reservation. You will be alerted to any price changes
+    before confirming your modification.
+</p>
+
 <form name="paymentlocation" id="modifylocation" action="{% url 'inventory:update' reservation.id %}" method="post">
 {% csrf_token %}
     <input type="hidden" name="vehicleprice" id="vehicleprice" value="{{ reservation.vehicle.price }}">

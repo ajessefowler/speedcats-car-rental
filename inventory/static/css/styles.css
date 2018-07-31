@@ -536,6 +536,51 @@ a:-webkit-any-link {
 	margin: 2px 0;
 }
 
+.contactform {
+	background-color: transparent;
+	margin: 0 20px;
+	padding: 0 10px 10px;
+}
+
+.contactform > p {
+	margin: 14px 0 0;
+	padding: 0;
+	text-align: left;
+}
+
+.contactform > input {
+	height: 18px;
+}
+
+.contactform > textarea {
+	resize: none;
+}
+
+.contactform > input, .contactform > textarea {
+	width: calc(100% - 12px);
+	border: none;
+	padding: 6px;
+	font-size: 16px;
+	background-color: transparent;
+	border-bottom: 1px solid #bbb;
+}
+
+.question {
+	font-size: 15pt;
+	padding: 0 20px;
+}
+
+.answer {
+	font-size: 13pt;
+	text-align: left;
+	padding: 0 20px;
+	margin: 10px 0;
+}
+
+#faqheader {
+	padding-top: 12px;
+}
+
 #menubutton {
 	display: flex;
 	flex-direction: column;
@@ -1278,6 +1323,11 @@ a:-webkit-any-link {
 
 #startinstructions {
 	padding: 8px;
+	margin: 0;
+}
+
+#modifyinstructions {
+	padding: 6px 16px;
 	margin: 0;
 }
 

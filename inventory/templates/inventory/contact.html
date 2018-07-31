@@ -1,5 +1,16 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h2 class="header">Contact Us</h2>
+<h2 class="header" id="locationheader">Contact Us</h2>
+<p id="modifyinstructions">Have a question about Speedcats's services? Use the form below to reach out to us.</p>
+<div class="contactform">
+    <p>Name</p>
+    <input type="text" name="name" id="contactname">
+    <p>Email</p>
+    <input type="email" name="email" id="contactemail">
+    <p>Subject</p>
+    <input type="text" name="subject" id="contactsubject">
+    <p>Message</p>
+    <textarea rows="6"></textarea>
+</div>
 {% endblock %}

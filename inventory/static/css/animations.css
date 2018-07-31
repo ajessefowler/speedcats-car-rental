@@ -82,10 +82,10 @@
 
 @keyframes confirmUp {
 	from { transform: translateY(500px); }
-	to { transform: translateY(-90px); }
+	to { transform: translateY(-250px); }
 }
 
 @keyframes confirmDown {
-	from { transform: translateY(-90px); }
+	from { transform: translateY(-250px); }
 	to { transform: translateY(500px); }
 }
