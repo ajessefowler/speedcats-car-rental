@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded', function(event) {
     let dropOffSelected;
 
-    if (!document.getElementById('modifylocation')) {
-        initMap('pickup');
+    if (document.getElementById('mapcontainer')) {
+        initMap('mapcontainer');
+    } else {
+
+        if (!document.getElementById('modifylocation')) {
+            initMap('pickup');
+        }
+
+        initMap('dropoff');
     }
-    initMap('dropoff');
 
     if (document.getElementById('pickuplocationcard')) {
         if (document.getElementById('dropoffdiff').checked) {
@@ -16,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         document.getElementById('dropoffdiff').addEventListener('click', function(){
             if (!dropOffSelected) {
                 dropOffSelected = true;
-                document.getElementById('dropofflocation').style.display = 'block';
+                document.getElementById('dropofflocation').style.display = 'flex';
                 checkFormCompletion();
             } else {
                 dropOffSelected = false;
@@ -147,18 +153,32 @@ function initMap(element) {
     const key = 'AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE';
     const locations = JSON.parse(localStorage.getItem('locations'));
     let i;
+    let map;
 
     // Initialize map centered over store locations
-    const map = new google.maps.Map(document.getElementById(element + 'map'), {
-        center: {lat: 41.0, lng: -82.99},
-        zoom: 6,
-        zoomControl: true,
-        mapTypeControl: false,
-        scaleControl: false,
-        streetViewControl: false,
-        rotateControl: false,
-        fullscreenControl: false
-    });
+    if (element !== 'mapcontainer') {
+        map = new google.maps.Map(document.getElementById(element + 'map'), {
+            center: {lat: 41.0, lng: -82.99},
+            zoom: 6,
+            zoomControl: true,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+        });
+    } else {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 41.1, lng: -82.99},
+            zoom: 6,
+            zoomControl: true,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+        });
+    }
 
     for (i = 0; i < locations.length; ++i) {
         const id = (i + 1);

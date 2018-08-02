@@ -34,20 +34,23 @@
 
                 <div id="pickuptime" class="selectcard">
                     <p id="pickuptimetext">{{ reservation.pick_up_time }}</p> 
+                    <i class="material-icons" id="pickuptimearrow">expand_less</i>
                 </div>
-                <input type="hidden" name="pickuptimeformat" id="pickuptimeformat" value="{{ reservation.pick_up_time|date:'Y-m-d H:i' }}" readonly>
             </div>
         {% endif %}
+        <input type="hidden" name="pickuptimeformat" id="pickuptimeformat" value="{{ reservation.pick_up_time|date:'Y-m-d H:i' }}" readonly>
 
         <div id="dropoffdesktop" class="desktop">
             <h3>Change Your Drop Off</h3>
             <div id="dropofftime" class="selectcard">
                 <p id="dropofftimetext">{{ reservation.drop_off_time }}</p> 
+                <i class="material-icons" id="dropofftimearrow">expand_less</i>
             </div>
             <input type="hidden" name="dropofftimeformat" id="dropofftimeformat" value="{{ reservation.drop_off_time|date:'Y-m-d H:i' }}" readonly>
 
-            <div id="dropofflocation" class="selectcard" style="display: block;">
+            <div id="dropofflocation" class="selectcard" style="display: flex;">
                 <p id="dropoffloctext">{{ reservation.drop_off_location }}</p>
+                <i class="material-icons" id="dropofflocationarrow">expand_less</i>
             </div>
             <input type="hidden" name="dropofflocationid" id="dropofflocationid"  value="{{ reservation.drop_off_location.ID }}" readonly>
         </div>

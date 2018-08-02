@@ -89,6 +89,14 @@ nav {
 	padding-top: 15px;
 }
 
+footer {
+	height: 40px;
+	background-color: #455A64;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
 a:-webkit-any-link {
 	text-decoration: none;
 }
@@ -340,6 +348,12 @@ a:-webkit-any-link {
 	font-family: 'Roboto', sans-serif;
 }
 
+.selectcard > i {
+	position: absolute;
+	right: 20px;
+	padding: 8px;
+}
+
 .reservebutton {
 	color: white;
 	margin: 0 8px 14px;
@@ -579,6 +593,7 @@ a:-webkit-any-link {
 
 #faqheader {
 	padding-top: 12px;
+	padding-bottom: 16px;
 }
 
 #menubutton {
@@ -622,15 +637,49 @@ a:-webkit-any-link {
 	background-color: white;
 	box-shadow: 0 1px 3px #707070;
 	border-radius: 3px;
-	margin: 0 20px 20px;
-	padding: 15px 0;
+	margin: 0 15px 20px;
+	padding: 19px 8px 6px;
 }
 
-#registerform > p > input {
+#registerform > p, #registerform > small {
+	font-family: 'Roboto', sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 8px 8px 20px;
+}
+
+#registerform > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#registerform > div > label {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+}
+
+#registerform > div > input {
 	width: 120px;
 	margin-left: 10px;
 	border: none;
-	border-bottom: 1px solid #666666;
+	border-bottom: 1px solid #bbb;
+	font-size: 16px;
+	color: rgb(54, 54, 54);
+	padding: 4px 0;
+}
+
+#forgotpassword {
+	font-size: 11pt;
+	padding: 0;
+	margin: 10px 0 0;
+	text-align: right;
+	color: #777676;
+}
+
+#forgotpassword > a:visited, #forgotpassword > a:link {
+	color: #777676;
 }
 
 #registerbutton {
@@ -642,10 +691,6 @@ a:-webkit-any-link {
 	font-size: 13pt;
 	margin: 0 20px 20px;
 	float: right;
-}
-
-#id_email {
-	width: 200px !important;
 }
 
 #reservebuttongroup {
@@ -686,13 +731,44 @@ a:-webkit-any-link {
 	float: right;
 }
 
+#resetinstructions {
+	margin: 0;
+}
+
+#resetform {
+	margin: 0 40px;
+}
+
+#resetform > p {
+	margin: 0;
+}
+
+#forgotpasswordsubmit {
+	background-color: #FF5722;
+	color: white;
+	border: none;
+	font-family: 'Roboto', sans-serif;
+	font-size: 13pt;
+	padding: 0 12px;
+	margin-top: 36px;
+	width: 110px;
+	float: right;
+	position: relative;
+	left: 20px;
+}
+
+#gotologinarrow {
+	position: absolute;
+	right: 28px;
+}
+
 #loginbuttons {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	padding-top: 25px;
+	padding-top: 20px;
 }
 
 #loginbuttons > p {
@@ -711,10 +787,27 @@ a:-webkit-any-link {
 	width: 110px;
 }
 
+#resetsent {
+	padding-top: 12px;
+}
+
+#resetsent > p {
+	font-size: 12pt;
+	margin: 0 0 18px;
+}
+
+#resetcomplete {
+	padding-top: 22px;
+}
+
+#changepasswordform {
+	margin: 0 20px;
+}
+
 #logo {
 	height: 38px;
 	position: relative;
-	top: 1px;
+	top: 2px;
 }
 
 #headermenu {
@@ -722,6 +815,10 @@ a:-webkit-any-link {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+#headermenu > p {
+	display: none;
 }
 
 #accountbutton {
@@ -791,9 +888,9 @@ a:-webkit-any-link {
 }
 
 #mapcontainer {
-	position: fixed;
+	position: fixed !important;
 	top: 55px;
-	height: 280px;
+	height: 470px;
 	width: 100%;
 	z-index: 50;
 }
@@ -823,11 +920,6 @@ a:-webkit-any-link {
 
 #dropofflocation {
 	display: none;
-}
-
-#dropoffloctext {
-	margin: 0;
-	line-height: 40px;
 }
 
 #welcome {
@@ -980,18 +1072,24 @@ a:-webkit-any-link {
 
 #reservationlist {
 	padding: 0;
-	background-color: white;
 	margin: 0 20px 20px;
-	border-radius: 3px;
-	box-shadow: 0 1px 3px #707070;
 }
 
 #reservationlist > div {
 	padding: 12px 0;
+	background-color: white;
+	margin-bottom: 10px;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #707070;
 }
 
-#reservationlist > div:not(:last-child) {
-	border-bottom: 1px solid #dddddd;
+#reservationlist > div > a > h3 {
+	margin-left: 20px;
+}
+
+#historyinstructions {
+	margin: 0 5px 17px;
+	text-align: left;
 }
 
 #reservationhistory {
@@ -1053,12 +1151,17 @@ a:-webkit-any-link {
 	z-index: 9;
 }
 
+#homecontent {
+	margin-bottom: 20px;
+}
+
 #homecontent > p {
 	font-size: 12pt;
 	padding: 0 10px;
-	margin: 0 8px;
+	margin: 0 8px 0 10px;
 	position: relative;
 	top: -6px;
+	text-align: left;
 }
 
 #welcomeheading > p {
@@ -1094,7 +1197,7 @@ a:-webkit-any-link {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	margin: 10px;
+	margin: 10px 10px 20px;
 	padding: 16px 4px;
 	background-color: white;
 	border-radius: 3px;
@@ -1257,7 +1360,7 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 7px 1px #2c2c2c;
 	position: fixed;
 	width: calc(100% - 54px);
-	transform: translateY(0);
+	transform: translateY(100px);
 }
 
 #cancelconfirmation > p {
@@ -1331,7 +1434,19 @@ a:-webkit-any-link {
 	margin: 0;
 }
 
+#accountbuttontext {
+	display: none;
+}
+
 @media only screen and (min-width: 768px) {
+
+	p, h2, h3:hover {
+		cursor: default;
+	}
+
+	nav > a > p:hover {
+		cursor: pointer;
+	}
 
 	.desktop {
 		width: 45%;
@@ -1346,7 +1461,7 @@ a:-webkit-any-link {
 	}
 
 	.vehicle {
-		margin: 0 0 25px;
+		margin: 0 0 15px;
 	}
 
 	.vehicle:hover {
@@ -1357,6 +1472,39 @@ a:-webkit-any-link {
 		font-size: 16pt;
 	}
 
+	.selectcard {
+		padding-right: 0;
+	}
+
+	.selectcard > p {
+		margin-left: auto;
+	}
+
+	.selectcard > p:hover {
+		cursor: pointer;
+	}
+
+	.selectcard > i {
+		position: relative;
+		margin-left: auto;
+		padding: 8px;
+		left: 0;
+	}
+
+	.roundbutton {
+		box-shadow: 0 1px 3px rgb(102, 102, 102) !important;
+	}
+
+	.roundbutton > p:hover {
+		cursor: pointer;
+	}
+
+	.roundbutton:hover {
+		cursor: pointer;
+		background-color: rgb(216, 69, 25);
+		box-shadow: 0 1px 5px #303030 !important;
+	}
+
 	.selectcard:hover {
 		cursor: pointer;
 	}
@@ -1364,14 +1512,31 @@ a:-webkit-any-link {
 	.reservebutton {
 		top: -29px;
 		right: 28px;
-		height: 30px;
+		height: 36px;
 		border-radius: 30px;
 	}
 
+	.disabledbutton:hover {
+		box-shadow: 0 1px 3px rgb(102, 102, 102) !important;
+		cursor: default;
+	}
+
+	.disabledbutton > p:hover {
+		cursor: default;
+	}
+
+	.reservationtime:hover {
+		cursor: pointer;
+	}
+
+	.locationcontainer {
+		margin-top: 595px !important;
+	}
+
 	.infoselector {
-		width: 50%;
+		width: 36%;
 		padding: 4px 20px 9px;
-		margin: 0 25%;
+		margin: 0 28%;
 	}
 
 	.infoselectorheader > i:hover {
@@ -1379,11 +1544,20 @@ a:-webkit-any-link {
 	}
 
 	.mapinfoselector {
+		margin: 0 25% !important;
 		width: 50% !important;
 	}
 
 	.donebutton:hover {
 		cursor: pointer;
+	}
+
+	.detail > h2 {
+		font-size: 18pt;
+	}
+
+	.detail > p {
+		font-size: 14pt;
 	}
 
 	.timepicker {
@@ -1407,6 +1581,71 @@ a:-webkit-any-link {
 		cursor: pointer;
 	}
 
+	#threedetails {
+		padding: 20px 14px;
+	}
+
+	#threedetails > div {
+		padding: 0 16px;
+	}
+
+	#threedetails > div:first-child {
+		padding-left: 0;
+	}
+
+	#threedetails > div:last-child {
+		padding-right: 0;
+	}
+
+	#headermenu > p {
+		display: block;
+		color: white;
+	}
+
+	#headermenu > p {
+		position: absolute;
+		bottom: 0;
+	}
+
+	#accountbuttontext {
+		display: block;
+		position: absolute;
+		right: 47px;
+	}
+
+	#headermenu > a > p:hover {
+		cursor: pointer;
+	}
+
+	#headermenu > p {
+		left: 45px;
+	}
+
+	#headermenu > p:hover {
+		cursor: pointer;
+	}
+
+	#startnav > p:hover {
+		cursor: pointer;
+	}
+
+	#accountbutton {
+		margin-right: 8px;
+	}
+
+	#menubutton {
+		padding: 8px;
+		margin-left: 8px;
+	}
+
+	#menubutton:hover {
+		cursor: pointer;
+	}
+
+	#reservationhistory > a > p:hover {
+		cursor: pointer;
+	}
+
 	#desktoplocations {
 		display: flex;
 		flex-direction: row;
@@ -1416,14 +1655,72 @@ a:-webkit-any-link {
 		margin-bottom: 40px;
 	}
 
+	#cancelconfirmation {
+		top: 100%;
+		width: 30%;
+		margin: 0 35%;
+	}
+
+	#closeconfirmation:hover {
+		cursor: pointer;
+	}
+
+	#confirmcard {
+		transform: translateY(700px);
+		margin: 0 33%;
+		width: 34%;
+	}
+
 	#infocontainer {
 		position: relative;
 		margin-top: 525px;
 		padding: 0;
 	}
 
+	#reservationlist > div:not(:last-child) {
+		border-bottom: none;
+	}
+
+	#reservationlist > div {
+		background-color: white;
+		border-radius: 3px;
+		box-shadow: 0 1px 3px #707070;
+		margin: 15px 0;
+	}
+
+	#reservationlist > div > a > h3 {
+		padding-left: 40px;
+	}
+
+	#reservationlist > div > a > h3:hover {
+		cursor: pointer;
+	}
+
+	#reservationlist > div:hover {
+		cursor: pointer;
+	}
+
+	#startreservationbutton {
+		height: 42px;
+		border-radius: 21px;
+		top: -21px;
+	}
+
+	#startreservationbutton > p {
+		font-size: 15pt;
+	}
+
+	#startreservationbutton > i {
+		font-size: 24pt;
+	}
+
+	#homecontent > p {
+		padding: 11px 10px;
+		font-size: 14pt;
+	}
+
 	#storecontent {
-		padding: 20px 23% 0;
+		padding: 20px 27% 0;
 		width: auto;
 	}
 
@@ -1458,12 +1755,12 @@ a:-webkit-any-link {
 	}
 
 	#locationheader {
-		padding: 12px 0 15px 100px;
+		padding: 12px 0 6px 100px;
 		margin: 0;
 	}
 	
 	#searchbox {
-		width: calc(100% - 40px);
+		width: 400px;
 		margin-top: 10px;
 		box-shadow: 0 1px 5px #3f3f3f;
 	}
@@ -1481,7 +1778,7 @@ a:-webkit-any-link {
 	#startbutton {
 		position: absolute;
 		top: 340px;
-		right: 80px;
+		right: 150px;
 	}
 
 	#logincontent {
@@ -1497,7 +1794,7 @@ a:-webkit-any-link {
 	}
 
 	#map {
-		height: 470px;
+		height: 540px;
 	}
 
 	#pickuptimeselect {
@@ -1506,30 +1803,47 @@ a:-webkit-any-link {
 
 	#vehiclecontent {
 		margin: 0;
-		padding: 0 23% 20px;
-		width: 54%;
+		padding: 0 25% 20px;
+		width: 50%;
 	}
 
-	#reservebutton:hover {
-		cursor: pointer;
-		background-color: rgb(216, 69, 25);
-		box-shadow: 0 1px 3px 2px #3d3d3d;
+	#vehiclecontent > .header {
+		margin: 0 12px;
 	}
 
 	#historyheader {
-		padding-left: 23%;
+		padding: 16px 0 0 30%;
+	}
+
+	#historyinstructions {
+		margin: 8px 30% 4px;
+		text-align: left;
+		padding: 0;
 	}
 
 	#reservationlist {
-		margin: 0 23%;
+		margin: 0 30%;
+		background-color: transparent;
+		border-radius: 0;
+		box-shadow: none;
 	}
 
 	#startreservationbutton:hover {
-		background-color: rgb(224, 69, 21); 
+		background-color: rgb(216, 69, 25);
 	}
-
 	#reservecontinuebutton {
 		bottom: 6px;
 		right: 25%;
+	}
+
+	#registerform {
+		margin: 0 23% 20px;
+		padding: 15px 10px;
+	}
+
+	#modifybutton {
+		position: relative;
+		top: 10px;
+		margin-right: 140px;
 	}
 }

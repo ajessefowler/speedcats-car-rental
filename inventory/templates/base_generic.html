@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 	{% load static %}
+	<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
 	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 	<link rel="stylesheet" href="{% static 'css/animations.css' %}">
 	{% if locations %}
@@ -33,9 +34,11 @@
 				<div class="menubar" id="menumiddle"></div>
 				<div class="menubar" id="menubottom"></div>
 			</div>
+			<p id="menubuttontext">Menu</p>
 			<a href="{% url 'inventory:home' %}">
 				<img src="{% static 'img/logo.png' %}" id="logo">
 			</a>
+			<a href="{% url 'login' %}" id="accountbuttontext"><p>Account</p></a>
 			<a href="{% url 'login' %}"><i class="button material-icons" id="accountbutton">account_circle</i></a>
 		</div>
 	</header>

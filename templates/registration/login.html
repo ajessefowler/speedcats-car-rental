@@ -42,6 +42,7 @@
                 <p>Password</p>
                 <input type="password" name="password">
             </div>
+            <p id="forgotpassword"><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
 
             {% if request.GET.next %}
             <input type="hidden" name="next" value="{{ request.GET.next }}">

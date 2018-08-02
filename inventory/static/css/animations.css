@@ -50,13 +50,13 @@
 
 /* Slide modify confirmation cards up and down */
 @keyframes cardUp {
-	from { transform: translateY(0); }
-	to { transform: translateY(-600px); }
+	from { transform: translateY(100px); }
+	to { transform: translateY(-350px); }
 }
 
 @keyframes cardDown {
-	from { transform: translateY(-600px); }
-	to { transform: translateY(0); }
+	from { transform: translateY(-350px); }
+	to { transform: translateY(100px); }
 }
 
 /* Animations for menu button */
@@ -88,4 +88,49 @@
 @keyframes confirmDown {
 	from { transform: translateY(-250px); }
 	to { transform: translateY(500px); }
+}
+
+@media only screen and (min-width: 768px) {
+	/* Slides time pickers up and down */
+	@keyframes timeUp {
+		from { transform: translateY(210px); }
+		to { transform: translateY(-395px); }
+	}
+
+	@keyframes timeDown {
+		from { transform: translateY(-395px); }
+		to { transform: translateY(210px); }
+	}
+
+	/* Slides location pickers up and down */
+	@keyframes mapUp {
+		from { transform: translateY(580px); }
+		to { transform: translateY(-230px); }
+	}
+
+	@keyframes mapDown {
+		from { transform: translateY(-230px); }
+		to { transform: translateY(580px); }
+	}
+
+	/* Slide modify confirmation cards up and down */
+	@keyframes cardUp {
+		from { transform: translateY(0); }
+		to { transform: translateY(-570px); }
+	}
+
+	@keyframes cardDown {
+		from { transform: translateY(-570px); }
+		to { transform: translateY(0); }
+	}
+	
+	@keyframes confirmUp {
+		from { transform: translateY(700px); }
+		to { transform: translateY(-150px); }
+	}
+	
+	@keyframes confirmDown {
+		from { transform: translateY(-150px); }
+		to { transform: translateY(700px); }
+	}
 }

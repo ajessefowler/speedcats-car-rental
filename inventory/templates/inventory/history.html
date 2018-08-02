@@ -2,19 +2,21 @@
 
 {% block content %}
     <h2 class="header" id="historyheader">Your Reservation History</h2>
+    <p id="historyinstructions">View your upcoming, in progress, and completed reservations. Click any reservation to view more details and
+        modify or cancel the reservation.</p>
 
     <ul id="reservationlist">
         {% for reservation in reservations %}
         <div>
             <a href="{% url 'inventory:reservation' reservation.id %}">
-            <p class="reservationtime">{{ reservation.vehicle }}</p>
-            {% if reservation.status == "Upcoming" %}
-                <p class="reservationtime">Starting {{ reservation.pick_up_time }}</p>
-            {% endif %}
-            {% if reservation.status != "Upcoming" %}
-                <p class="reservationtime">Started {{ reservation.pick_up_time }}</p>
-            {% endif %}
-            <p class="reservationtime">Status: {{ reservation.status }}</p>
+                <h3>{{ reservation.vehicle }}</h3>
+                {% if reservation.status == "Upcoming" %}
+                    <p class="reservationtime">Starting {{ reservation.pick_up_time }}</p>
+                {% endif %}
+                {% if reservation.status != "Upcoming" %}
+                    <p class="reservationtime">Started {{ reservation.pick_up_time }}</p>
+                {% endif %}
+                <p class="reservationtime">Status: {{ reservation.status }}</p>
             </a>
         </div>
         {% empty %}

@@ -163,7 +163,7 @@ function validateDate(element) {
         return false;
     }
 
-    function compareTimes() {
+    /*function compareTimes() {
         const pickupTime = document.getElementById('pickuptimeinput').value;
         const pickupHours = parseInt(pickupTime.substring(0, 2));
 
@@ -175,7 +175,7 @@ function validateDate(element) {
         } else {
             return false;
         }
-    }
+    }*/
 }
 
 // Ensure that pick up and drop off times fall inside store hours

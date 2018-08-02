@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
     modify.style.backgroundColor = '#FF5722';
     modify.style.color = '#FFFFFF';
     modify.addEventListener('click', function() {
-
-        const pickupStr = document.getElementById('pickuptimeformat').value
+        
+        const pickupStr = document.getElementById('pickuptimeformat').value;
         const pickup = formatDate(pickupStr);
-        const dropoffStr = document.getElementById('dropofftimeformat').value
+        const dropoffStr = document.getElementById('dropofftimeformat').value;
         const dropoff = formatDate(dropoffStr);
 
         const diff = Math.abs(dropoff.getTime() - pickup.getTime());
