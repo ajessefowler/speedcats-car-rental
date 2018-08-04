@@ -121,7 +121,7 @@ def store(request):
 	
 	# Setup paginator to split up vehicles
 	page = request.GET.get('page')
-	paginator = Paginator(available_vehicles, 15)
+	paginator = Paginator(available_vehicles, 10)
 
 	try:
 		final_vehicles = paginator.page(page)
@@ -142,7 +142,15 @@ def search(request):
 	store = Store.objects.get(pk=pickup_id)
 	
 	query = request.POST["searchquery"]
-	results = Vehicle.objects.filter(store_id=pickup_id).filter(status='a').filter(Q(year__icontains=query) | Q(make__icontains=query) | Q(model__icontains=query) | Q(color__icontains=query))
+
+	# Split query into words and filter selected store for available vehicles with first word
+	search_terms = query.split()
+	results = Vehicle.objects.filter(store_id=pickup_id).filter(status='a').filter(Q(year__icontains=search_terms[0]) | Q(make__icontains=search_terms[0]) | Q(model__icontains=search_terms[0]) | Q(color__icontains=search_terms[0]))
+
+	# If query has more than 1 word, filter results with each word
+	if len(search_terms) > 1:
+		for term in search_terms[1:]:
+			results = results.filter(Q(year__icontains=term) | Q(make__icontains=term) | Q(model__icontains=term) | Q(color__icontains=term))
 
 	context = {
 		"query":query,
@@ -253,17 +261,6 @@ def reservation(request, reservationID):
 @login_required
 def modify(request, reservationID):
 	reservation = Reservation.objects.get(pk=reservationID)
-	vehicle = reservation.vehicle
-
-	# Pass earliest future pick up datetime and latest drop off time to view for comparison with new times
-	'''
-	if len(vehicle.reservation_set.all()) == 0:
-			available_vehicles.append(vehicle)
-		else:
-			for reservation in vehicle.reservation_set.all():
-				if reservation.drop_off_time < pickup_format or reservation.pick_up_time > dropoff_format:
-					available_vehicles.append(vehicle)
-	'''
 
 	context = {
 		"reservation":reservation

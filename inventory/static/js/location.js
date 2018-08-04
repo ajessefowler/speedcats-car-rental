@@ -30,6 +30,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 checkFormCompletion();
             }
         });
+
+        document.getElementById('dropoffdiff').addEventListener('click', function() {
+            if (!document.getElementById('dropoffdiff').checked && document.getElementById('pickuplocationid').value != null) {
+                console.log('fired');
+                document.getElementById('dropofflocationid').value = document.getElementById('pickuplocationid').value;
+            } else {
+                console.log('not fired');
+            }
+        });
     }
 
     // Add event listener to find location button

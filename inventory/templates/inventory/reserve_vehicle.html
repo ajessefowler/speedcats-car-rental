@@ -10,10 +10,15 @@
 {% endblock %}
 
 {% block content %}
+{% if vehicle.image %}
 <img src="{{ vehicle.image.url }}" width="100%" id="vehicleimage">
+{% endif %}
 <div id="vehiclecontent">
     <h2 class="header">Place Your Reservation</h2>
     <div id="reservecontent">
+        {% if vehicle.image %}
+        <img src="{{ vehicle.image.url }}" width="100%" id="desktopvehicleimage">
+        {% endif %}
         <h3>Summary</h3>
         <p>{{ vehicle }} for {{ length }} days</p>
         <h3>Pick Up</h3>

@@ -13,6 +13,9 @@
     <div id="vehiclecontent">
         <h2 class="header">Reservation Details</h2>
         <div id="reservationdetails">
+            {% if reservation.vehicle.image %}
+            <img src="{{ reservation.vehicle.image.url }}" width="100%" id="desktopvehicleimage">
+            {% endif %}
             <h3>Summary</h3>
             <p>{{ reservation.vehicle }} for {{ reservation.length }} days</p>
             <h3>Pick Up</h3>

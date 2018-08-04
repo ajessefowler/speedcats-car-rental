@@ -3,7 +3,11 @@ html, body {
 	margin: 0px;
 }
 
-textarea, select, input, button { outline: none; }
+textarea, select, input[type="text"], input[type="button"], input[type="submit"], input[type="email"], button { 
+	outline: none;
+	-webkit-appearance: none;
+	border-radius: 0; 
+}
 
 body {
 	background-color: rgb(218, 216, 216);
@@ -90,11 +94,37 @@ nav {
 }
 
 footer {
-	height: 40px;
-	background-color: #455A64;
 	width: 100%;
 	position: absolute;
 	bottom: 0;
+}
+
+#social {
+	height: 50px;
+	background-color: #616161;
+	width: 100%;
+	position: absolute;
+	bottom: 33px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#copyright {
+	height: 33px;
+	background-color: #373737;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#copyright > p {
+	color: rgb(185, 185, 185);
+	letter-spacing: 0.5px;
+	font-size: 11pt;
 }
 
 a:-webkit-any-link {
@@ -114,7 +144,7 @@ a:-webkit-any-link {
 
 .roundbutton {
 	height: 36px;
-	border-radius: 18px;
+	border-radius: 18px !important;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -553,7 +583,7 @@ a:-webkit-any-link {
 .contactform {
 	background-color: transparent;
 	margin: 0 20px;
-	padding: 0 10px 10px;
+	padding: 0 0 10px;
 }
 
 .contactform > p {
@@ -568,15 +598,24 @@ a:-webkit-any-link {
 
 .contactform > textarea {
 	resize: none;
+	padding: 10px 12px !important;
+	width: calc(100% - 24px) !important;
 }
 
 .contactform > input, .contactform > textarea {
 	width: calc(100% - 12px);
-	border: none;
+	border: 1px solid transparent;
 	padding: 6px;
 	font-size: 16px;
 	background-color: transparent;
 	border-bottom: 1px solid #bbb;
+	margin-top: 6px;
+}
+
+.contactform > input:focus, .contactform > textarea:focus {
+	border: 1px solid #bbb;
+	border-radius: 5px;
+	background-color: white;
 }
 
 .question {
@@ -588,12 +627,19 @@ a:-webkit-any-link {
 	font-size: 13pt;
 	text-align: left;
 	padding: 0 20px;
-	margin: 10px 0;
+	margin: 8px 0 24px;
 }
 
 #faqheader {
 	padding-top: 12px;
 	padding-bottom: 16px;
+}
+
+#logincontent > p {
+	margin: 0;
+	margin-bottom: 14px;
+	text-align: left;
+	padding: 0;
 }
 
 #menubutton {
@@ -638,7 +684,7 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px #707070;
 	border-radius: 3px;
 	margin: 0 15px 20px;
-	padding: 19px 8px 6px;
+	padding: 19px 8px 60px;
 }
 
 #registerform > p, #registerform > small {
@@ -689,8 +735,10 @@ a:-webkit-any-link {
 	width: 120px;
 	font-family: 'Roboto', sans-serif;
 	font-size: 13pt;
-	margin: 0 20px 20px;
+	margin: 0 32px;
 	float: right;
+	position: relative;
+	bottom: 75px;
 }
 
 #reservebuttongroup {
@@ -1005,6 +1053,12 @@ a:-webkit-any-link {
 }
 
 #vehicleimage {
+	display: block;
+	z-index: 9;
+	position: fixed;
+}
+
+#homeimage {
 	display: block;
 	z-index: 9;
 	position: fixed;
@@ -1425,16 +1479,22 @@ a:-webkit-any-link {
 }
 
 #startinstructions {
-	padding: 8px;
+	padding: 8px 20px;
 	margin: 0;
+	text-align: left;
 }
 
 #modifyinstructions {
-	padding: 6px 16px;
+	padding: 6px 20px;
 	margin: 0;
+	text-align: left;
 }
 
 #accountbuttontext {
+	display: none;
+}
+
+#desktopvehicleimage {
 	display: none;
 }
 
@@ -1581,6 +1641,77 @@ a:-webkit-any-link {
 		cursor: pointer;
 	}
 
+	.question {
+		margin: 0 25% 10px;
+		padding: 0;
+	}
+
+	.answer {
+		margin: 0 25% 24px;
+	}
+
+	.paymentprice {
+		width: 86%;
+		margin: 0 7%;
+	}
+
+	.paymentlocationselect {
+		margin-right: 30px;
+	}
+
+	.contactform {
+		margin: 0 25%;
+	}
+
+	.contactform > input:hover, .contactform > textarea:hover {
+		border: 1px solid #bbb;
+		border-radius: 5px;
+	}
+
+	#vehicleimage {
+		display: none;
+	}
+
+	#desktopvehicleimage {
+		display: block;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		margin-bottom: 10px;
+	}
+
+	#vehicledetails {
+		padding-top: 0;
+	}
+
+	#reservationdetails {
+		padding-top: 0;
+	}
+
+	#reservecontent {
+		padding: 0;
+	}
+
+	#reservecontent > p {
+		margin: 0 30px 20px;
+	}
+
+	#reservecontent > h3 {
+		margin: 0 30px 5px;
+	}
+
+	#separator {
+		margin: 0 30px 10px !important;
+	}
+
+	#paymentformdiv {
+		padding: 22px 16px 4px;
+	}
+
+	#reservecancelbutton {
+		bottom: 97px;
+		margin-left: 30px;
+	}
+
 	#threedetails {
 		padding: 20px 14px;
 	}
@@ -1634,7 +1765,7 @@ a:-webkit-any-link {
 	}
 
 	#menubutton {
-		padding: 8px;
+		padding: 16px 8px;
 		margin-left: 8px;
 	}
 
@@ -1688,10 +1819,6 @@ a:-webkit-any-link {
 		margin: 15px 0;
 	}
 
-	#reservationlist > div > a > h3 {
-		padding-left: 40px;
-	}
-
 	#reservationlist > div > a > h3:hover {
 		cursor: pointer;
 	}
@@ -1702,7 +1829,7 @@ a:-webkit-any-link {
 
 	#startreservationbutton {
 		height: 42px;
-		border-radius: 21px;
+		border-radius: 21px !important;
 		top: -21px;
 	}
 
@@ -1748,14 +1875,16 @@ a:-webkit-any-link {
 		position: fixed;
 		text-align: center;
 		width: 100%;
-		bottom: 250px;
-		transform: translateY(0);
-		animation: arrowBounce 2s ease-in-out infinite;
+		bottom: 290px;
 		cursor: default;
 	}
 
+	#desktoparrow:hover {
+		cursor: pointer;
+	}
+
 	#locationheader {
-		padding: 12px 0 6px 100px;
+		padding: 12px 0 6px 140px;
 		margin: 0;
 	}
 	
@@ -1808,7 +1937,16 @@ a:-webkit-any-link {
 	}
 
 	#vehiclecontent > .header {
-		margin: 0 12px;
+		margin: 0 20px;
+	}
+
+	#vehicledescription {
+		margin: 0 20px;
+		width: 100%;
+	}
+
+	#vehicledetails {
+		margin: 0;
 	}
 
 	#historyheader {
@@ -1831,19 +1969,105 @@ a:-webkit-any-link {
 	#startreservationbutton:hover {
 		background-color: rgb(216, 69, 25);
 	}
+
 	#reservecontinuebutton {
-		bottom: 6px;
-		right: 25%;
+		bottom: 90px;
+		right: 29%;
 	}
 
 	#registerform {
-		margin: 0 23% 20px;
-		padding: 15px 10px;
+		margin: 0 25% 20px;
+		padding: 15px 10px 70px;
 	}
 
 	#modifybutton {
 		position: relative;
 		top: 10px;
 		margin-right: 140px;
+	}
+
+	#modifyinstructions {
+		margin: 0 25%;
+		padding: 6px 0;
+		text-align: left;
+	}
+
+	#resetinstructions {
+		margin: 0 25%;
+		text-align: left;
+		padding: 0;
+	}
+
+	#resetheader {
+		margin: 0 25%;
+		width: 50%;
+	}
+
+	#resetform {
+		padding-top: 25px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#forgotpasswordsubmit {
+		margin-top: 30px;
+		margin-left: 40px;
+	}
+
+	#menubuttontext {
+		margin: 0;
+		padding: 1em 0 1em 15px;
+	}
+
+	#faqheader {
+		margin: 0 25%;
+	}
+
+	#registerheader {
+		margin: 0 25%;
+	}
+
+	#registerbutton {
+		margin: 0 27%;
+	}
+
+	#startinstructions {
+		padding: 8px 140px;
+	}
+
+	#feedbackheader {
+		margin: 0;
+		padding: 12px 25% 6px;
+	}
+}
+
+@media only screen and (min-width: 1350px) {
+	.locationcontainer {
+		margin-top: 655px !important;
+	}
+
+	#welcomeheading {
+		top: 200px;
+	}
+
+	#welcomeheading > h2 {
+		font-size: 38pt;
+	}
+	#welcomeheading > p {
+		font-size: 24pt;
+	}
+
+	#map {
+		height: 600px;
+	}
+
+	#startreservationbutton {
+		width: calc(100% - 300px);
+		margin: 0 150px;
+	}
+
+	#desktoparrow {
+		bottom: 215px;
 	}
 }

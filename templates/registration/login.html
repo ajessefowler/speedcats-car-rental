@@ -17,10 +17,8 @@
         {% endif %}
         
         {% if user.is_authenticated %}
-            <h2 class="header" id="profileheader">Welcome, {{ user.first_name }}!</h2>
-            {% if user.reservation_set %}
-                {{ user.reservation_set|first }}
-            {% endif %}
+            <h2 class="header" id="profileheader">Hello, {{ user.first_name }}!</h2>
+            <p>Welcome to your profile! Here, you can view your reservation history.</p>
             <div id="reservationhistory">
                 <a href="{% url 'inventory:history' %}" id="historylink">
                     <p>View Your Reservations</p>

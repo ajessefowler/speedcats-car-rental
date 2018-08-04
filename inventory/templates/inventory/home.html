@@ -2,12 +2,14 @@
 {% load static %}
 
 {% block scripts %}
+<script type="text/javascript" src="{% static 'js/zenscroll-min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/homeScroll.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/setupPage.js' %}"></script>
 {% endblock %}
 
 {% block content %}
     <div>
-        <img src="../../static/img/homephoto.png" width="100%" id="vehicleimage">
+        <img src="../../static/img/homephoto.png" width="100%" id="homeimage">
         <div id="welcomeheading">
                 <h2>Welcome to Speedcats Car Rental</h2>
                 <p>The speediest way to get on the road!</p>

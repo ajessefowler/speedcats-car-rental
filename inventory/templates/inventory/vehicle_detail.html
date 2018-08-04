@@ -13,6 +13,9 @@
         <h2 class="header">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h2>
         <div id="vehicledescription">
             <div id="vehicledetails">
+                {% if vehicle.image %}
+                <img src="{{ vehicle.image.url }}" width="100%" id="desktopvehicleimage">
+                {% endif %}
                 <h3><strong>Vehicle Details</strong></h3>
                 <p><strong>Mileage:</strong> {{ vehicle.mileage }}</p>
                 <p><strong>Average Fuel Efficiency:</strong> {{ vehicle.gas_mileage }} mpg</p>

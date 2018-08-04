@@ -1,4 +1,4 @@
-
+'''
 # http://docs.celeryproject.org/en/latest/django/first-steps-with-django.html
 
 from __future__ import absolute_import, unicode_literals
@@ -8,3 +8,4 @@ from __future__ import absolute_import, unicode_literals
 from speedcats.celery_tasks import app as celery_app
 
 __all__ = ('celery_app',)
+'''

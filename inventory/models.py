@@ -4,35 +4,39 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MaxValueValidator
 
 import pytz
 import datetime
-from celery import Celery
-from speedcats.celery_tasks import set_vehicle_as_reserved, set_vehicle_as_available
-'''
+#from celery import Celery
+#from speedcats.celery_tasks import set_vehicle_as_reserved, set_vehicle_as_available
+
 # Profile extension found here: https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 class Profile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 
 	# Phone regex found here: https://stackoverflow.com/questions/19130942/whats-the-best-way-to-store-phone-number-in-django-models
-	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-	phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
-	address = models.CharField(max_length=100)
-	city = models.CharField(max_length=50)
-	state = models.CharField(max_length=2)
-	zipcode = models.IntegerField()
-	license_state = models.CharField(max_length=2)
+	phone_regex = RegexValidator(regex=r'\d{3}-\d{3}-\d{4}', message="Phone number must be entered in the format: '999-999-9999'.")
+	phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, null=True)
+	address = models.CharField(max_length=100, blank=True, null=True)
+	city = models.CharField(max_length=50, blank=True, null=True)
+	state = models.CharField(max_length=2, blank=True, null=True)
+	zipcode = models.IntegerField(validators=[MaxValueValidator(99999)], blank=True, null=True)
+	date_of_birth = models.DateField(blank=True, null=True)
+
+	def __str__(self):
+		return str(self.user.first_name) + ' ' + str(self.user.last_name)
 
 	@receiver(post_save, sender=User)
 	def create_user_profile(sender, instance, created, **kwargs):
 		if created:
 			Profile.objects.create(user=instance)
+		instance.profile.save()
 
 	@receiver(post_save, sender=User)
 	def save_user_profile(sender, instance, **kwargs):
 		instance.profile.save()
-'''
+
 class Store(models.Model):
 
 	ID = models.IntegerField(primary_key=True)
@@ -144,7 +148,7 @@ class Reservation(models.Model):
 
 	def __str__(self):
 		return str(self.vehicle) + ' ' + str(self.pick_up_time)[:10] + ' to ' + str(self.drop_off_time)[:10]
-
+'''
 	# Create tasks to update vehicle status and store at pick up and drop off times
 	def save(self, *args, **kwargs):
 		create_task = False
@@ -160,7 +164,7 @@ class Reservation(models.Model):
 		else:
 			# remove current tasks, create new tasks for modification
 			pass
-
+'''
 class Maintenance(models.Model):
 	vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
 	mechanic = models.CharField(max_length=100, default="")
@@ -188,3 +192,6 @@ class Payment(models.Model):
 		choices=payment_type_choices,
 		default='i',
 	) 
+
+	def __str__(self):
+		return '$' + str(self.amount) + ' by ' + str(self.reservation.user.first_name) + ' ' + str(self.reservation.user.last_name) + ' on ' + str(self.date)
