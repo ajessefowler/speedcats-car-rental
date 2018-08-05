@@ -7,7 +7,22 @@
   <form method="post">
     {% csrf_token %}
     <div id="registerform">
-      {% for field in form %}
+      <h3><b>Account Settings</b></h3>
+      {% for field in register_form %}
+      <div>
+        {{ field.label_tag }}
+        {{ field }}
+      </div>
+      {% if field.help_text %}
+        <small style="color: grey">{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+      {% endfor %}
+
+      <h3 id="profilesettingsheader"><b>Profile Settings</b></h3>
+      {% for field in profile_form %}
       <div>
         {{ field.label_tag }}
         {{ field }}
@@ -20,6 +35,6 @@
       {% endfor %}
       {% endfor %}
     </div>
-    <button type="submit" id="registerbutton" class="roundbutton">REGISTER</button>
+    <button type="submit" id="registerbutton" class="roundbutton">Register</button>
   </form>
 {% endblock %}

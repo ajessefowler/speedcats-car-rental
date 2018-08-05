@@ -21,5 +21,7 @@ urlpatterns = [
 	path('vehicles/search/', views.search, name='search'),
 	path('<int:storeID>/<int:vehicleID>/', views.vehicle, name='vehicle'),
 	path('<int:storeID>/<int:vehicleID>/reserve/', views.reserve, name='reserve'),
+	path('<int:storeID>/<int:vehicleID>/reserve/changepickup/', views.change_pick_up, name='change_pick_up'),
+	path('<int:storeID>/<int:vehicleID>/reserve/changedropoff/', views.change_drop_off, name='change_drop_off'),
 	path('<int:storeID>/<int:vehicleID>/reserve/confirm/', views.makereservation, name='makereservation')
 ]

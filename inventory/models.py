@@ -17,7 +17,7 @@ class Profile(models.Model):
 
 	# Phone regex found here: https://stackoverflow.com/questions/19130942/whats-the-best-way-to-store-phone-number-in-django-models
 	phone_regex = RegexValidator(regex=r'\d{3}-\d{3}-\d{4}', message="Phone number must be entered in the format: '999-999-9999'.")
-	phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, null=True)
+	phone_number = models.CharField(validators=[phone_regex], max_length=12, blank=True, null=True)
 	address = models.CharField(max_length=100, blank=True, null=True)
 	city = models.CharField(max_length=50, blank=True, null=True)
 	state = models.CharField(max_length=2, blank=True, null=True)

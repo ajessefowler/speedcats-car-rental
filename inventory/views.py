@@ -8,12 +8,13 @@ from django.contrib.postgres.search import SearchVector
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.db import transaction
 from django.db.models.signals import post_save
 from django.db.models import Q
 from django.dispatch import receiver
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from .forms import RegisterForm
+from .forms import RegisterForm, ProfileForm
 from .models import Store, Vehicle, Reservation, Payment
 
 def home(request):
@@ -39,19 +40,26 @@ def locations(request):
 
 def register(request):
 	if request.method == 'POST':
-		form = RegisterForm(request.POST)
-		if form.is_valid():
-			form.save()
-			username = form.cleaned_data.get('username')
-			raw_password = form.cleaned_data.get('password1')
+		register_form = RegisterForm(request.POST)
+		profile_form = ProfileForm(request.POST)
+		if register_form.is_valid() and profile_form.is_valid():
+			user = register_form.save()
+			user.refresh_from_db()
+			profile_form = ProfileForm(request.POST, instance=user.profile)
+			profile_form.full_clean()
+			profile_form.save()
+			username = register_form.cleaned_data.get('username')
+			raw_password = register_form.cleaned_data.get('password1')
 			user = authenticate(username=username, password=raw_password)
 			login(request, user)
 			return redirect('/')
 	else:
-		form = RegisterForm()
+		register_form = RegisterForm()
+		profile_form = ProfileForm()
 
 	context = {
-		"form":form
+		"register_form":register_form,
+		"profile_form":profile_form
 	}
 	return render(request, 'inventory/register.html', context)
 
@@ -172,13 +180,33 @@ def vehicle(request, storeID, vehicleID):
 
 @login_required
 def reserve(request, storeID, vehicleID):
-	store = get_object_or_404(Store, pk=storeID)
-	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
+	if request.method == "POST":
+		try:
+			pickup_id = int(request.POST["pickuplocationid"])
+			pickup_time = request.POST["pickuptimeformat"]
+			dropoff_id = int(request.POST["dropofflocationid"])
+			dropoff_time = request.POST["dropofftimeformat"]
 
-	dropoff_id = request.session["dropoff_id"]
-	dropoff_store = get_object_or_404(Store, pk=dropoff_id)
-	pickup_time = request.session["pickup_time"]
-	dropoff_time = request.session["dropoff_time"]
+			request.session["pickup_id"] = pickup_id
+			request.session["pickup_time"] = pickup_time
+			request.session["dropoff_id"] = dropoff_id
+			request.session["dropoff_time"] = dropoff_time
+
+			store = Store.objects.get(pk=pickup_id)
+			dropoff_store = get_object_or_404(Store, pk=dropoff_id)
+			vehicle = get_object_or_404(Vehicle, pk=vehicleID)
+		except KeyError:
+			raise Http404('Store does not exist')
+		except Store.DoesNotExist:
+			raise Http404('Store does not exist')
+	else:
+		store = get_object_or_404(Store, pk=storeID)
+		vehicle = get_object_or_404(Vehicle, pk=vehicleID)
+
+		dropoff_id = request.session["dropoff_id"]
+		dropoff_store = get_object_or_404(Store, pk=dropoff_id)
+		pickup_time = request.session["pickup_time"]
+		dropoff_time = request.session["dropoff_time"]
 
 	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M")
 	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
@@ -321,3 +349,55 @@ def cancel(request, reservationID):
 		"reservations":reservations
 	}
 	return render(request, 'inventory/history.html', context)
+
+@login_required
+def change_pick_up(request, storeID, vehicleID):
+	user = request.user
+	store = get_object_or_404(Store, pk=storeID)
+	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
+	pickup_id = request.session["pickup_id"]
+	pickup_time = request.session["pickup_time"]
+	dropoff_id = request.session["dropoff_id"]
+	dropoff_store = get_object_or_404(Store, pk=dropoff_id)
+	dropoff_time = request.session["dropoff_time"]
+
+	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M")
+	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
+
+	context = {
+		"store":store,
+		"drop_off_store":dropoff_store,
+		"pick_up_time":pickup_time,
+		"pick_up_format":pickup_format,
+		"drop_off_time":dropoff_time,
+		"drop_off_format":dropoff_format,
+		"vehicle":vehicle
+	}
+
+	return render(request, 'inventory/change_pick_up.html', context)
+
+@login_required
+def change_drop_off(request, storeID, vehicleID):
+	user = request.user
+	store = get_object_or_404(Store, pk=storeID)
+	vehicle = get_object_or_404(Vehicle, pk=vehicleID)
+	pickup_id = request.session["pickup_id"]
+	pickup_time = request.session["pickup_time"]
+	dropoff_id = request.session["dropoff_id"]
+	dropoff_store = get_object_or_404(Store, pk=dropoff_id)
+	dropoff_time = request.session["dropoff_time"]
+
+	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M")
+	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
+
+	context = {
+		"store":store,
+		"drop_off_store":dropoff_store,
+		"pick_up_time":pickup_time,
+		"pick_up_format":pickup_format,
+		"drop_off_time":dropoff_time,
+		"drop_off_format":dropoff_format,
+		"vehicle":vehicle
+	}
+
+	return render(request, 'inventory/change_drop_off.html', context)

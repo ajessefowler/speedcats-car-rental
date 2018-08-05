@@ -16,20 +16,35 @@
 <div id="vehiclecontent">
     <h2 class="header">Place Your Reservation</h2>
     <div id="reservecontent">
+
         {% if vehicle.image %}
         <img src="{{ vehicle.image.url }}" width="100%" id="desktopvehicleimage">
         {% endif %}
-        <h3>Summary</h3>
-        <p>{{ vehicle }} for {{ length }} days</p>
-        <h3>Pick Up</h3>
+
+        <div class="reservecontentheader">
+            <h3><b>Pick Up</b></h3>
+            <a href="{% url 'inventory:change_pick_up' store.ID vehicle.id %}"><i class="material-icons" id="changepickup">edit</i></a>
+        </div>
         <p>{{ store }} on {{ pick_up_format }}</p>
-        <h3>Drop Off</h3>
-        <p id="separator">{{ drop_off_store }} on {{ drop_off_format }}</p>
+
+        <div class="reservecontentheader">
+            <h3><b>Drop Off</b></h3>
+            <a href="{% url 'inventory:change_drop_off' store.ID vehicle.id %}"><i class="material-icons" id="changedropoff">edit</i></a>
+        </div>
+        <p>{{ drop_off_store }} on {{ drop_off_format }}</p>
+
+        <div class="reservecontentheader">
+            <h3><b>Vehicle</b></h3>
+            <a href="{% url 'inventory:store' %}"><i class="material-icons" id="changevehicle">edit</i></a>
+        </div>
+        <p>{{ vehicle }} with {{ vehicle.mileage }} miles</p>
+
+        <h3 id="separator"><b>Pricing</b></h3>
         <form name="paymentlocation" id="confirmform" action="{% url 'inventory:makereservation' store.ID vehicle.id %}" method="post">
             {% csrf_token %}
-            <div class="paymentprice">
-                    <p>Base Price: $</p>
-                    <input type="text" name="subtotal" id="checkoutsub" value="{{ vehicle.price }}" readonly><br>
+            <div id="reservationsummary">
+                    <p>{{ length }} days at ${{ vehicle.price }} / day.</p>
+                    <input type="hidden" name="subtotal" id="checkoutsub" value="{{ vehicle.price }}" readonly>
                 </div>
             <div class="paymentprice">
                 <p>Subtotal: $</p>
@@ -44,6 +59,7 @@
                 <input type="text" name="total" id="checkouttotal" value="{{ total }}" readonly><br>
             </div>
 
+            <h3 id="paymentheader"><b>Payment</b></h3>
             <div class="paymentlocationselect" id="instorediv">
                 <input type="radio" name="payment" id="payinstore" checked>
                 <p class="paymenttext">Pay in store</p><br>
@@ -54,8 +70,6 @@
             </div>
 
             <div id="paymentformdiv">
-                <h3>Enter Your Payment Information</h3>
-
                 <div id="cardlogos">
                     <img src="{% static 'img/visalogo.gif' %}" class="cclogo" id="visalogo">
                     <img src="{% static 'img/mastercardlogo.gif' %}" class="cclogo" id="mastercardlogo">
@@ -105,7 +119,7 @@
                     <p>Cancel</p>
                 </div>
             </a>
-            <input type="submit" value="CONTINUE" id="reservecontinuebutton" class="placebuttons roundbutton">
+            <input type="submit" value="Continue" id="reservecontinuebutton" class="placebuttons roundbutton">
         </form>
     </div>
 </div>

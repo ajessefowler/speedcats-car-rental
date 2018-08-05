@@ -3,7 +3,7 @@ html, body {
 	margin: 0px;
 }
 
-textarea, select, input[type="text"], input[type="button"], input[type="submit"], input[type="email"], button { 
+textarea, select, input[type="text"], input[type="number"], input[type="button"], input[type="submit"], input[type="email"], input[type="password"], button { 
 	outline: none;
 	-webkit-appearance: none;
 	border-radius: 0; 
@@ -458,7 +458,7 @@ a:-webkit-any-link {
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
-	width: 100%;
+	margin: 0 20px;
 }
 
 .paymentprice > p {
@@ -581,9 +581,11 @@ a:-webkit-any-link {
 }
 
 .contactform {
-	background-color: transparent;
-	margin: 0 20px;
-	padding: 0 0 10px;
+	background-color: white;
+	margin: 14px 20px;
+	padding: 1px 25px 80px;
+	box-shadow: 0 1px 3px #707070;
+	border-radius: 3px;
 }
 
 .contactform > p {
@@ -684,21 +686,31 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px #707070;
 	border-radius: 3px;
 	margin: 0 15px 20px;
-	padding: 19px 8px 60px;
+	padding: 19px 8px 95px;
 }
 
 #registerform > p, #registerform > small {
 	font-family: 'Roboto', sans-serif;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
-	padding: 8px 8px 20px;
+	padding: 8px 20px 12px;
+	font-size: smaller;
+	margin: 0;
+}
+
+#registerform > h3 {
+	margin: 0 16px 6px;
+	padding-bottom: 7px;
+	border-bottom: 1px solid #dadada;
 }
 
 #registerform > div {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
+	margin: 0 20px;
+	padding-top: 10px;
 }
 
 #registerform > div > label {
@@ -709,11 +721,20 @@ a:-webkit-any-link {
 #registerform > div > input {
 	width: 120px;
 	margin-left: 10px;
-	border: none;
+	border: 1px solid transparent;
 	border-bottom: 1px solid #bbb;
 	font-size: 16px;
 	color: rgb(54, 54, 54);
-	padding: 4px 0;
+	padding: 4px 6px;
+}
+
+#registerform > div > input:focus {
+	border-radius: 3px;
+	border: 1px solid #bbb;
+}
+
+#profilesettingsheader {
+	padding-top: 16px;
 }
 
 #forgotpassword {
@@ -850,6 +871,10 @@ a:-webkit-any-link {
 
 #changepasswordform {
 	margin: 0 20px;
+}
+
+#changevehiclecard {
+	height: 136px;
 }
 
 #logo {
@@ -1317,29 +1342,53 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 3px #707070;
 }
 
-#reservecontent > h3 {
+.reservecontentheader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #dadada;
+	margin: 0 20px;
+}
+
+.reservecontentheader > h3 {
 	color: black;
+	font-size: 16pt;
+	margin: 0 10px 5px;
+}
+
+.reservecontentheader > a {
+	padding: 6px 8px;
+	margin: 0 2px;
+}
+
+.reservecontentheader > a > i {
 	font-size: 14pt;
-	padding-left: 10px;
+	color: rgb(66, 66, 66);
 }
 
 #reservecontent > p {
 	font-size: 11pt;
+	padding-bottom: 14px;
 }
 
 #separator {
-	padding: 0 0 20px;
-	margin: 0 15px 10px;
+	padding: 16px 10px 6px !important;
+	margin: 10px 20px;
+	border-bottom: 1px solid #dadada;
+}
+
+#paymentheader {
+	padding: 0 10px 6px !important;
+	margin: 18px 20px;
 	border-bottom: 1px solid #dadada;
 }
 
 #totaldiv {
 	padding-bottom: 9px;
-	border-bottom: 1px solid #dadada;
 }
 
 #instorediv {
-	padding-top: 14px;
+	padding-top: 0px;
 }
 
 #desktoparrow {
@@ -1414,7 +1463,7 @@ a:-webkit-any-link {
 	box-shadow: 0 1px 7px 1px #2c2c2c;
 	position: fixed;
 	width: calc(100% - 54px);
-	transform: translateY(100px);
+	transform: translateY(170px);
 }
 
 #cancelconfirmation > p {
@@ -1473,9 +1522,11 @@ a:-webkit-any-link {
 }
 
 #returnhome {
-	width: calc(100% - 40px);
-	margin: 20px 20px;
+	width: calc(100% - 90px);
+	margin: 20px 45px;
 	background-color: #FF5722;
+	position: relative;
+	bottom: 75px;
 }
 
 #startinstructions {
@@ -1496,6 +1547,27 @@ a:-webkit-any-link {
 
 #desktopvehicleimage {
 	display: none;
+}
+
+#reservationsummary {
+	align-self: center;
+}
+
+#reservationsummary > p {
+	font-weight: bold;
+	margin: 0 0 12px;
+	padding: 6px 0 0;
+}
+
+#sendbutton {
+	background-color: #FF5722;
+	border: 0;
+	color: white;
+	width: 100px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 13pt;
+	float: right;
+	margin-top: 28px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1530,6 +1602,23 @@ a:-webkit-any-link {
 
 	.vehiclename > p {
 		font-size: 16pt;
+	}
+
+	.reservecontentheader {
+		margin: 0 30px 5px;
+	}
+
+	.reservecontentheader > h3 {
+		margin: 0 10px 5px;
+	}
+	
+	.reservecontentheader > a {
+		margin: 0 22px;
+	}
+	
+
+	.reservecontentheader > a:hover {
+		cursor: pointer;
 	}
 
 	.selectcard {
@@ -1596,7 +1685,7 @@ a:-webkit-any-link {
 	.infoselector {
 		width: 36%;
 		padding: 4px 20px 9px;
-		margin: 0 28%;
+		margin: 0 32%;
 	}
 
 	.infoselectorheader > i:hover {
@@ -1651,8 +1740,7 @@ a:-webkit-any-link {
 	}
 
 	.paymentprice {
-		width: 86%;
-		margin: 0 7%;
+		margin: 0 40px;
 	}
 
 	.paymentlocationselect {
@@ -1660,12 +1748,30 @@ a:-webkit-any-link {
 	}
 
 	.contactform {
-		margin: 0 25%;
+		margin: 16px 25%;
+		padding: 14px 40px 80px;
 	}
 
 	.contactform > input:hover, .contactform > textarea:hover {
 		border: 1px solid #bbb;
 		border-radius: 5px;
+	}
+
+	#confirmheader {
+		margin: 0 25%;
+	}
+
+	#returnhome {
+		margin: 20px 30%;
+		width: 40%;
+	}
+
+	#reservationdetails {
+		margin: 0 25%;
+	}
+
+	#pricedetails {
+		margin-right: 40px;
 	}
 
 	#vehicleimage {
@@ -1683,16 +1789,12 @@ a:-webkit-any-link {
 		padding-top: 0;
 	}
 
-	#reservationdetails {
-		padding-top: 0;
-	}
-
 	#reservecontent {
 		padding: 0;
 	}
 
 	#reservecontent > p {
-		margin: 0 30px 20px;
+		margin: 16px 30px 20px;
 	}
 
 	#reservecontent > h3 {
@@ -1704,12 +1806,16 @@ a:-webkit-any-link {
 	}
 
 	#paymentformdiv {
-		padding: 22px 16px 4px;
+		padding: 22px 30px 4px;
 	}
 
 	#reservecancelbutton {
 		bottom: 97px;
 		margin-left: 30px;
+	}
+
+	#reservecancelbutton:hover, #reservecancelbutton > p:hover {
+		cursor: pointer;
 	}
 
 	#threedetails {
@@ -1806,6 +1912,11 @@ a:-webkit-any-link {
 		position: relative;
 		margin-top: 525px;
 		padding: 0;
+	}
+
+	#paymentheader {
+		padding: 0 10px 6px !important;
+		margin: 20px 30px;
 	}
 
 	#reservationlist > div:not(:last-child) {
@@ -1978,6 +2089,11 @@ a:-webkit-any-link {
 	#registerform {
 		margin: 0 25% 20px;
 		padding: 15px 10px 70px;
+	}
+
+	#registerform > div > input:hover {
+		border-radius: 3px;
+		border: 1px solid #bbb;
 	}
 
 	#modifybutton {

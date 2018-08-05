@@ -1,0 +1,91 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block scripts %}
+<script>
+	var storeID = '{{ store.ID }}';
+	console.log(storeID);
+</script>
+<script type="text/javascript" src="{% static 'js/checkPickup.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/checkStartForm.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/validateTime.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/location.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h2 class="header" id="locationheader">Change Your Pick Up</h2>
+
+<p id="startinstructions">Begin by selecting your pick up and drop off times and locations. Then, search our wide variety
+    of vehicles to find your favorite vehicle.
+</p>
+
+<form name="paymentlocation" id="selectlocation" action="{% url 'inventory:store' %}" method="post">
+{% csrf_token %}
+    <div id="pickupdesktop" class="desktop">
+        
+        <div id="pickuptime" class="selectcard">
+            <p id="pickuptimetext">{{ pick_up_format }}</p>
+            <i class="material-icons" id="pickuptimearrow">expand_less</i>
+        </div>
+        <input type="hidden" name="pickuptimeformat" id="pickuptimeformat" value="{{ pick_up_time }}" readonly>
+        <input type="hidden" name="dropofftimeformat" id="dropofftimeformat" value="{{ drop_off_time }}" readonly>
+
+        <div id="pickuplocation" class="selectcard">
+            <p id="pickuploctext">{{ store }}</p>
+            <i class="material-icons" id="pickuplocationarrow">expand_less</i>
+        </div>
+        <input type="hidden" name="pickuplocationid" id="pickuplocationid" value="{{ store.ID }}" readonly>
+        <input type="hidden" name="dropofflocationid" id="dropofflocationid" value="{{ drop_off_store.ID }}" readonly>
+    </div>
+
+    <button type="button" id="startbutton" class="roundbutton">Done</button>
+</form>
+
+<div id="timeshade" class="popupshade"></div>
+<div id="locationshade" class="popupshade"></div>
+<div id="confirmshade" class="popupshade"></div>
+
+<div id="pickuptimecard" class="infoselector">
+        <div class="infoselectorheader">
+            <h3>Select Your Pick Up Time</h3>
+            <i id="closepickuptime" class="material-icons">close</i>
+        </div>
+        <p id="pickuptimemessage">Store Hours: 8:00 A.M. to 6:00 P.M.</p>
+        <div class="timepicker">
+            <input type="date" id="pickupdateinput" class="input" name="dateinput"/>
+            <p>AT</p>
+            <input type="time" id="pickuptimeinput" class="input" name="timeinput" min="7:00" max="20:00"/>
+        </div>
+        <p id="pickupdonebutton" class="donebutton">DONE</p>
+    </div>
+    
+    <div id="pickuplocationcard" class="infoselector mapinfoselector">
+            <div id="searchbox">
+                <i class="button material-icons" id="locatebutton">near_me</i>
+                <input id="locationsearch" placeholder="Enter your location..." type="text">
+                <i class="button material-icons" id="searchbutton">search</i>
+            </div>
+            <div id="pickupmap" class="testmap"></div>
+            <div class="infoselectorheader">
+                <h3>Select Your Pick Up Location</h3>
+                <i id="closepickup" class="material-icons">close</i>
+            </div>
+            <div class="locationpicker">
+                <p id="pickuplocationtext" class="locationpickertext">{{ store }}</p>
+            </div>
+            <p id="pickuplocationdone" class="donebutton">DONE</p>
+        </div>
+
+<div id="changevehiclecard" class="infoselector">
+    <div class="infoselectorheader">
+        <h3>Change Your Vehicle</h3>
+        <i id="closevehiclecard" class="material-icons">close</i>
+    </div>
+    <p>Since you are changing your pick up location, you must select a new vehicle.</p>
+    <p id="pickuplocationcontinue" class="donebutton">Continue</p>
+</div>
+{% endblock %}
+
+{% block initMap %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE&libraries=places"></script>
+{% endblock %}

@@ -6,39 +6,45 @@ document.addEventListener('DOMContentLoaded', function(event) {
     } else {
 
         if (!document.getElementById('modifylocation')) {
-            initMap('pickup');
+            if (document.getElementById('pickuplocationcard')) {
+                initMap('pickup');
+            }
         }
 
-        initMap('dropoff');
+        if (document.getElementById('dropofflocationcard')) {
+            initMap('dropoff');
+        }
     }
 
     if (document.getElementById('pickuplocationcard')) {
-        if (document.getElementById('dropoffdiff').checked) {
-            dropOffSelected = true;
-        } else {
-            dropOffSelected = false;
-        }
-
-        document.getElementById('dropoffdiff').addEventListener('click', function(){
-            if (!dropOffSelected) {
+        if (document.getElementById('dropoffdiff')) {
+            if (document.getElementById('dropoffdiff').checked) {
                 dropOffSelected = true;
-                document.getElementById('dropofflocation').style.display = 'flex';
-                checkFormCompletion();
             } else {
                 dropOffSelected = false;
-                document.getElementById('dropofflocation').style.display = 'none';
-                checkFormCompletion();
             }
-        });
 
-        document.getElementById('dropoffdiff').addEventListener('click', function() {
-            if (!document.getElementById('dropoffdiff').checked && document.getElementById('pickuplocationid').value != null) {
-                console.log('fired');
-                document.getElementById('dropofflocationid').value = document.getElementById('pickuplocationid').value;
-            } else {
-                console.log('not fired');
-            }
-        });
+            document.getElementById('dropoffdiff').addEventListener('click', function(){
+                if (!dropOffSelected) {
+                    dropOffSelected = true;
+                    document.getElementById('dropofflocation').style.display = 'flex';
+                    checkFormCompletion();
+                } else {
+                    dropOffSelected = false;
+                    document.getElementById('dropofflocation').style.display = 'none';
+                    checkFormCompletion();
+                }
+            });
+
+            document.getElementById('dropoffdiff').addEventListener('click', function() {
+                if (!document.getElementById('dropoffdiff').checked && document.getElementById('pickuplocationid').value != null) {
+                    console.log('fired');
+                    document.getElementById('dropofflocationid').value = document.getElementById('pickuplocationid').value;
+                } else {
+                    console.log('not fired');
+                }
+            });
+        }
     }
 
     // Add event listener to find location button
@@ -46,11 +52,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	/*document.getElementById('locatebutton').addEventListener('click', function() {
 		findLocation();
 	});*/
-    
+
     if (document.getElementById('pickuptimecard')) {
         initTimeHandler('pickup');
     }
-	initTimeHandler('dropoff');
+
+    if (document.getElementById('dropofftimecard')) {
+        initTimeHandler('dropoff');
+    }
 });
 
 // Setup location autocomplete and search
@@ -132,11 +141,15 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
             
             document.getElementById(element + 'locationdone').addEventListener('click', function() {
                 if (document.getElementById('pickuplocationcard')) {
-                    if (document.getElementById('dropoffdiff').checked) {
-                        document.getElementById(element + 'locationid').value = id;
+                    if (document.getElementById('dropoffdiff')) {
+                        if (document.getElementById('dropoffdiff').checked) {
+                            document.getElementById(element + 'locationid').value = id;
+                        } else {
+                            document.getElementById('pickuplocationid').value = id;
+                            document.getElementById('dropofflocationid').value = id;
+                        }
                     } else {
                         document.getElementById('pickuplocationid').value = id;
-                        document.getElementById('dropofflocationid').value = id;
                     }
                 } else {
                     document.getElementById(element + 'locationid').value = id;
@@ -208,12 +221,14 @@ function initMap(element) {
                 map: map
             });
 
-            document.getElementById('dropofflocation').addEventListener('click', function() {
-                mapOnLoad(request, id, map, addressDisplay, marker, 'dropoff');
-                document.getElementById('locationshade').style.display = 'block';
-                document.getElementById('locationshade').style.animation = 'fadeIn .4s ease forwards';
-                document.getElementById('dropofflocationcard').style.animation = 'mapUp .4s ease forwards';
-            });
+            if (document.getElementById('dropofflocation')) {
+                document.getElementById('dropofflocation').addEventListener('click', function() {
+                    mapOnLoad(request, id, map, addressDisplay, marker, 'dropoff');
+                    document.getElementById('locationshade').style.display = 'block';
+                    document.getElementById('locationshade').style.animation = 'fadeIn .4s ease forwards';
+                    document.getElementById('dropofflocationcard').style.animation = 'mapUp .4s ease forwards';
+                });
+            }
 
             if (document.getElementById('pickuplocation')) {
                 document.getElementById('pickuplocation').addEventListener('click', function() {

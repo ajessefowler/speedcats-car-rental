@@ -50,13 +50,13 @@
 
 /* Slide modify confirmation cards up and down */
 @keyframes cardUp {
-	from { transform: translateY(100px); }
+	from { transform: translateY(170px); }
 	to { transform: translateY(-350px); }
 }
 
 @keyframes cardDown {
 	from { transform: translateY(-350px); }
-	to { transform: translateY(100px); }
+	to { transform: translateY(170px); }
 }
 
 /* Animations for menu button */

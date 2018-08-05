@@ -9,12 +9,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
         });
     }
 
-    document.getElementById('dropoffdonebutton').addEventListener('click', function() {
-        const element = 'dropoff';
-        if (validateTime(element) && validateDate(element)) {
-            confirmValidation(element);
-        }
-    });
+    if (document.getElementById('dropoffdonebutton')) {
+        document.getElementById('dropoffdonebutton').addEventListener('click', function() {
+            const element = 'dropoff';
+            if (validateTime(element) && validateDate(element)) {
+                confirmValidation(element);
+            }
+        });
+    }
 
     function confirmValidation(element) {
         const apptDate = document.getElementById(element + 'dateinput').value;

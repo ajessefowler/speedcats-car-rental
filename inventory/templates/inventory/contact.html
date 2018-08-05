@@ -3,7 +3,7 @@
 {% block content %}
 <h2 class="header" id="feedbackheader">Contact Us</h2>
 <p id="modifyinstructions">Have a question about Speedcats's services? Use the form below to reach out to us.</p>
-<div class="contactform">
+<form class="contactform">
     <p>Name</p>
     <input type="text" name="name" id="contactname">
     <p>Email</p>
@@ -12,5 +12,7 @@
     <input type="text" name="subject" id="contactsubject">
     <p>Message</p>
     <textarea rows="12"></textarea>
-</div>
+
+    <button type="submit" id="sendbutton" class="roundbutton">Send</button>
+</form>
 {% endblock %}
