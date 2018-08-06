@@ -307,6 +307,17 @@ a:-webkit-any-link {
 	font-size: 22px;
 }
 
+.activateinfo {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	height: 55px;
+	width: calc(100% - 40px);
+	margin-top: 140px;
+	padding: 0 20px 60px;
+	text-align: center;
+}
+
 .timepicker {
 	display: flex;
 	flex-direction: row;
@@ -937,7 +948,7 @@ a:-webkit-any-link {
 	border: none;
 	width: 100%;
 	font-family: 'Roboto', sans-serif;
-	font-size: 11pt;
+	font-size: 16px;
 	padding: 0 10px;
 }
 
@@ -1529,6 +1540,12 @@ a:-webkit-any-link {
 	bottom: 75px;
 }
 
+#returnhomeactivate {
+	width: calc(100% - 90px);
+	margin: 65px 45px;
+	background-color: #FF5722;
+}
+
 #startinstructions {
 	padding: 8px 20px;
 	margin: 0;
@@ -1730,6 +1747,15 @@ a:-webkit-any-link {
 		cursor: pointer;
 	}
 
+	.activateinfo {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		height: 55px;
+		width: 100%;
+		margin-top: 220px;
+	}
+
 	.question {
 		margin: 0 25% 10px;
 		padding: 0;
@@ -1766,8 +1792,17 @@ a:-webkit-any-link {
 		width: 40%;
 	}
 
+	#returnhomeactivate {
+		width: 40%;
+		margin: 170px 30%;
+		background-color: #FF5722;
+		position: relative;
+		bottom: 75px;
+	}
+
 	#reservationdetails {
-		margin: 0 25%;
+		margin: 0 20px;
+		padding-top: 0;
 	}
 
 	#pricedetails {
@@ -1988,6 +2023,8 @@ a:-webkit-any-link {
 		width: 100%;
 		bottom: 290px;
 		cursor: default;
+		transform: translateY(-40px);
+		animation: arrowDown .8s ease .3s forwards;
 	}
 
 	#desktoparrow:hover {

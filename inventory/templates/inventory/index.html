@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block scripts %}
+<script>
+    var markerImage = "{% static 'img/location_marker.png' %}";
+</script>
 <script type="text/javascript" src="{% static 'js/checkStartForm.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/validateTime.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/location.js' %}"></script>

@@ -38,20 +38,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
             document.getElementById('dropoffdiff').addEventListener('click', function() {
                 if (!document.getElementById('dropoffdiff').checked && document.getElementById('pickuplocationid').value != null) {
-                    console.log('fired');
                     document.getElementById('dropofflocationid').value = document.getElementById('pickuplocationid').value;
-                } else {
-                    console.log('not fired');
                 }
             });
         }
     }
-
-    // Add event listener to find location button
-	initLocation();
-	/*document.getElementById('locatebutton').addEventListener('click', function() {
-		findLocation();
-	});*/
 
     if (document.getElementById('pickuptimecard')) {
         initTimeHandler('pickup');
@@ -61,56 +52,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
         initTimeHandler('dropoff');
     }
 });
-
-// Setup location autocomplete and search
-function initLocation() {
-    const countryRestriction = { componentRestrictions: { country: 'us' }};
-    const autocomplete = new google.maps.places.Autocomplete(document.getElementById('locationsearch'), countryRestriction);
-   
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-		document.getElementById('locationsearch').blur();
-    });
-    
-    /* document.getElementById('searchbutton').addEventListener('click', function() {
-        const currentLocation = resolveLocation(autocomplete);
-    });*/
-
-    function resolveLocation(element) {
-        const place = element.getPlace();
-    }
-}
-
-// Determine user's current location
-function findLocation() {
-    if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(resolveCoords, locationError);
-	} else {
-		alert('Your browser does not support location. Please enter your location.');
-	}
-}
-
-// Determine the coordinates of the user's current location
-function resolveCoords(position) {
-	const lat = position.coords.latitude;
-	const long = position.coords.longitude;
-	const key = 'AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE';
-	const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ lat + ',' + long + '&key=' + key;
-	const request = new XMLHttpRequest();
-
-	request.open('GET', url, true);
-	
-	request.onload = function() {
-		if (request.status >= 200 && request.status < 400) {
-			const location = JSON.parse(request.responseText);
-		} else {
-			console.log('Data error.');
-		}
-	};
-
-	request.onerror = () => { console.log('Connection error.'); };
-
-	request.send();
-}
 
 function mapOnLoad(request, id, map, addressDisplay, marker, element) {
 
@@ -129,7 +70,7 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
         setTimeout(function() {
             document.getElementById('locationshade').style.display = 'none';
         }, 400);
-    })
+    });
 
     if (request.status >= 200 && request.status < 400) {
         const vehiclesLink = '/inventory/' + id + '/';
@@ -176,6 +117,8 @@ function initMap(element) {
     const locations = JSON.parse(localStorage.getItem('locations'));
     let i;
     let map;
+
+    initLocation();
 
     // Initialize map centered over store locations
     if (element !== 'mapcontainer') {
@@ -243,5 +186,94 @@ function initMap(element) {
 	    request.onerror = () => { console.log('Connection error.'); };
 
 	    request.send();
+    }
+
+    document.getElementById('locatebutton').addEventListener('click', function() {
+        findLocation();
+    });
+
+    // Determine user's current location
+    function findLocation() {
+        if (navigator.geolocation) {
+		    navigator.geolocation.getCurrentPosition(resolveCoords, locationError);
+	    } else {
+		    alert('Your browser does not support location. Please enter your location.');
+	    }
+    }
+
+    // Determine the coordinates of the user's current location
+    function resolveCoords(position) {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        const key = 'AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE';
+        const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ lat + ',' + long + '&key=' + key;
+        const request = new XMLHttpRequest();
+        lookAtLocation(lat, long);
+
+        request.open('GET', url, true);
+        
+        request.onload = function() {
+            if (request.status >= 200 && request.status < 400) {
+                const location = JSON.parse(request.responseText);
+                const city = location.results[0].address_components[3].long_name;
+                const state = location.results[0].address_components[5].long_name;
+                document.getElementById('locationsearch').value = city + ', ' + state;
+            } else {
+                console.log('Data error.');
+            }
+        };
+
+        request.onerror = () => { console.log('Connection error.'); };
+
+        request.send();
+    }
+
+    // Alert user when their location cannot be found
+    function locationError() {
+        alert('Unable to retrieve location.');
+    }
+
+    // Setup location autocomplete and search
+    function initLocation() {
+        const countryRestriction = { componentRestrictions: { country: 'us' }};
+        const autocomplete = new google.maps.places.Autocomplete(document.getElementById('locationsearch'), countryRestriction);
+    
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            document.getElementById('locationsearch').blur();
+        });
+        
+        document.getElementById('searchbutton').addEventListener('click', function() {
+            const currentLocation = resolveLocation(autocomplete);
+        });
+
+        function resolveLocation(element) {
+            const place = element.getPlace();
+            const lat = place.geometry.location.lat();
+            const long = place.geometry.location.lng();
+            lookAtLocation(lat, long);
+        }
+    }
+
+    function lookAtLocation(lat, long) {
+        const icon = {
+            url: markerImage,
+            scaledSize: new google.maps.Size(50, 50)
+        };
+        
+        const locationMarker = new google.maps.Marker({
+            position: {
+                lat: lat,
+                lng: long
+            },
+            map: map,
+            icon: icon
+        });
+
+        map.setCenter({
+            lat: lat,
+            lng: long
+        });
+
+        map.setZoom(10);
     }
 }

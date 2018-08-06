@@ -2,9 +2,14 @@
 
 {% block title %}<title>Register</title>{% endblock %}
 
+{% load static %}
+{% block scripts %}
+<script type="text/javascript" src="{% static 'js/confirmAge.js' %}"></script>
+{% endblock %}
+
 {% block content %}
   <h2 class="header" id="registerheader">Create An Account</h2>
-  <form method="post">
+  <form method="post" name="registerform" id="registrationform">
     {% csrf_token %}
     <div id="registerform">
       <h3><b>Account Settings</b></h3>
@@ -35,6 +40,6 @@
       {% endfor %}
       {% endfor %}
     </div>
-    <button type="submit" id="registerbutton" class="roundbutton">Register</button>
+    <button id="registerbutton" class="roundbutton">Register</button>
   </form>
 {% endblock %}

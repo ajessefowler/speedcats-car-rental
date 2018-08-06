@@ -23,6 +23,7 @@ class Profile(models.Model):
 	state = models.CharField(max_length=2, blank=True, null=True)
 	zipcode = models.IntegerField(validators=[MaxValueValidator(99999)], blank=True, null=True)
 	date_of_birth = models.DateField(blank=True, null=True)
+	email_confirmed = models.BooleanField(default=False)
 
 	def __str__(self):
 		return str(self.user.first_name) + ' ' + str(self.user.last_name)

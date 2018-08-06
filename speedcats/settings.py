@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'axes',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +44,15 @@ INSTALLED_APPS = [
     'inventory.apps.InventoryConfig',
     'storages',
 ]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'axes_cache': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -144,3 +154,15 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('GMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = 'Speedcats Car Rental <speedcatscarrental@gmail.com>'
+
+AXES_CACHE = 'axes_cache'
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 1
+AXES_ONLY_USER_FAILURES = True

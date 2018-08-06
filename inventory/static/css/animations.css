@@ -133,4 +133,9 @@
 		from { transform: translateY(-150px); }
 		to { transform: translateY(700px); }
 	}
+
+	@keyframes arrowDown {
+		from { transform: translateY(-40px); }
+		to { transform: translateY(0); }
+	}
 }

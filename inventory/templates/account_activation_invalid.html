@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h2 class="activateinfo">Your confirmation was invalid. Please try again, or use the feedback form
+        to contact an administrator.</h2>
+    <a id="returnhomeactivate" class="roundbutton" href="{% url 'inventory:home' %}">
+        <p>Return Home</p>
+    </a>
+{% endblock %}

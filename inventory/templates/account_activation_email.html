@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{ user.username }},
+
+Please click on the link below to confirm your Speedcats Car Rental registration:
+
+http://{{ domain }}{% url 'inventory:activate' uidb64=uid token=token %}
+{% endautoescape %}
