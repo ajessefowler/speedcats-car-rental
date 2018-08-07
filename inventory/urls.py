@@ -5,6 +5,10 @@ from . import views
 app_name = 'inventory'
 urlpatterns = [
 	path('', views.index, name='index'),
+	path('documents/', views.documents, name='documents'),
+	path('training/', views.training, name='training'),
+	path('accounting/', views.accounting, name='accounting'),
+	path('marketing/', views.marketing, name='marketing'),
 	path('register/', views.register, name='register'),
 	path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),
 	path('activate/<uidb64>/<token>/', views.activate, name='activate'),

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Speedcats Car Rental Documents</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+
+	{% load static %}
+	<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
+	<link rel="stylesheet" href="{% static 'css/intranet.css' %}">
+</head>
+
+<body>
+    <div id="header">
+        <h1><a href="/admin">Speedcats Car Rental Intranet</a></h1>
+        <div id="adminlinks">
+            <a href="/inventory/documents/"><p>Documents</p></a>
+            <a href="/inventory/training/"><p>Training</p></a>
+            <a href="/inventory/accounting/"><p>Accounting</p></a>
+            <a href="/inventory/marketing/"><p>Marketing</p></a>
+        </div>
+    </div>
+    
+    {% block content %}{% endblock %}
+
+</body>
+</html>

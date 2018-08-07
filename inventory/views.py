@@ -33,7 +33,23 @@ def home(request):
 	}
 
 	return render(request, 'inventory/home.html', context)
+
+@login_required
+def documents(request):
+	return render(request, 'inventory/documents.html')
+
+@login_required
+def training(request):
+	return render(request, 'inventory/training.html')
 	
+@login_required
+def accounting(request):
+	return render(request, 'inventory/accounting.html')
+
+@login_required
+def marketing(request):
+	return render(request, 'inventory/marketing.html')
+
 def faqs(request):
 	return render(request, 'inventory/faqs.html')
 

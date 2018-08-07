@@ -113,12 +113,21 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
 
 // Initialize the map, with markers for each store
 function initMap(element) {
-    const key = 'AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE';
-    const locations = JSON.parse(localStorage.getItem('locations'));
     let i;
     let map;
+    const key = 'AIzaSyBTcPqvmsy0xt1IYWSsNnEbipW90i3otLE';
+    const locations = JSON.parse(localStorage.getItem('locations'));
+    const icon = {
+        url: markerImage,
+        scaledSize: new google.maps.Size(50, 50)
+    };
 
-    initLocation();
+    if (document.getElementById('mapcontainer')) {
+        initLocation();
+    } else {
+        initLocation('pickup');
+        initLocation('dropoff');
+    }
 
     // Initialize map centered over store locations
     if (element !== 'mapcontainer') {
@@ -161,7 +170,8 @@ function initMap(element) {
             const coords = location.results[0].geometry.location;
             const marker = new google.maps.Marker({
                 position: coords,
-                map: map
+                map: map,
+                icon: icon
             });
 
             if (document.getElementById('dropofflocation')) {
@@ -187,10 +197,18 @@ function initMap(element) {
 
 	    request.send();
     }
-
-    document.getElementById('locatebutton').addEventListener('click', function() {
-        findLocation();
-    });
+    if (document.getElementById('locatebutton')) {
+        document.getElementById('locatebutton').addEventListener('click', function() {
+            findLocation();
+        });
+    } else {
+        document.getElementById('pickuplocatebutton').addEventListener('click', function() {
+            findLocation();
+        });
+        document.getElementById('dropofflocatebutton').addEventListener('click', function() {
+            findLocation();
+        });
+    }
 
     // Determine user's current location
     function findLocation() {
@@ -217,7 +235,12 @@ function initMap(element) {
                 const location = JSON.parse(request.responseText);
                 const city = location.results[0].address_components[3].long_name;
                 const state = location.results[0].address_components[5].long_name;
-                document.getElementById('locationsearch').value = city + ', ' + state;
+                if (document.getElementById('locationsearch')) {
+                    document.getElementById('locationsearch').value = city + ', ' + state;
+                } else {
+                    document.getElementById('pickuplocationsearch').value = city + ', ' + state;
+                    document.getElementById('dropofflocationsearch').value = city + ', ' + state;
+                }
             } else {
                 console.log('Data error.');
             }
@@ -234,17 +257,41 @@ function initMap(element) {
     }
 
     // Setup location autocomplete and search
-    function initLocation() {
+    function initLocation(element) {
         const countryRestriction = { componentRestrictions: { country: 'us' }};
-        const autocomplete = new google.maps.places.Autocomplete(document.getElementById('locationsearch'), countryRestriction);
-    
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {
-            document.getElementById('locationsearch').blur();
-        });
+        let autocomplete;
+
+        if (!element) {
+            autocomplete = new google.maps.places.Autocomplete(document.getElementById('locationsearch'), countryRestriction);
+            
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                document.getElementById('locationsearch').blur();
+            });
+
+            document.getElementById('searchbutton').addEventListener('click', function() {
+                const currentLocation = resolveLocation(autocomplete);
+            });
+        } else {
+            pickupAutocomplete = new google.maps.places.Autocomplete(document.getElementById('pickuplocationsearch'), countryRestriction);
+            dropoffAutocomplete = new google.maps.places.Autocomplete(document.getElementById('dropofflocationsearch'), countryRestriction);
+            
+            google.maps.event.addListener(pickupAutocomplete, 'place_changed', function() {
+                document.getElementById('pickuplocationsearch').blur();
+            });
+
+            google.maps.event.addListener(dropoffAutocomplete, 'place_changed', function() {
+                document.getElementById('dropfflocationsearch').blur();
+            });
+
+            document.getElementById('pickupsearchbutton').addEventListener('click', function() {
+                const currentPickUpLocation = resolveLocation(pickupAutocomplete);
+            });
+
+            document.getElementById('dropoffsearchbutton').addEventListener('click', function() {
+                const currentDropOffLocation = resolveLocation(dropoffAutocomplete);
+            });
+        }
         
-        document.getElementById('searchbutton').addEventListener('click', function() {
-            const currentLocation = resolveLocation(autocomplete);
-        });
 
         function resolveLocation(element) {
             const place = element.getPlace();
@@ -256,10 +303,10 @@ function initMap(element) {
 
     function lookAtLocation(lat, long) {
         const icon = {
-            url: markerImage,
+            url: markerImageHome,
             scaledSize: new google.maps.Size(50, 50)
         };
-        
+
         const locationMarker = new google.maps.Marker({
             position: {
                 lat: lat,

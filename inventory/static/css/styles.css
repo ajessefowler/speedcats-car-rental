@@ -1,6 +1,6 @@
 html, body {
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 }
 
 textarea, select, input[type="text"], input[type="number"], input[type="button"], input[type="submit"], input[type="email"], input[type="password"], button { 
@@ -939,6 +939,36 @@ a:-webkit-any-link {
 	width: calc(100% - 40px);
 }
 
+#pickupsearchbox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 5px 20px;
+	height: 40px;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #666666;
+	background-color: white;
+	z-index: 50;
+	position: absolute;
+	top: 6px;
+	width: calc(100% - 40px);
+}
+
+#dropoffsearchbox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 5px 20px;
+	height: 40px;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px #666666;
+	background-color: white;
+	z-index: 50;
+	position: absolute;
+	top: 6px;
+	width: calc(100% - 40px);
+}
+
 #locatebutton {
 	margin-right: auto;
 	color: #333333;
@@ -952,11 +982,35 @@ a:-webkit-any-link {
 	padding: 0 10px;
 }
 
+#pickuplocationsearch {
+	border: none;
+	width: 100%;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	padding: 0 10px;
+}
+
+#dropofflocationsearch {
+	border: none;
+	width: 100%;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	padding: 0 10px;
+}
+
 #locationheader {
 	padding: 12px 0 0;
 }
 
 #locationsearch:focus {
+	outline: none;
+}
+
+#pickuplocationsearch:focus {
+	outline: none;
+}
+
+#dropofflocationsearch:focus {
 	outline: none;
 }
 
@@ -2037,6 +2091,18 @@ a:-webkit-any-link {
 	}
 	
 	#searchbox {
+		width: 400px;
+		margin-top: 10px;
+		box-shadow: 0 1px 5px #3f3f3f;
+	}
+
+	#pickupsearchbox {
+		width: 400px;
+		margin-top: 10px;
+		box-shadow: 0 1px 5px #3f3f3f;
+	}
+
+	#dropoffsearchbox {
 		width: 400px;
 		margin-top: 10px;
 		box-shadow: 0 1px 5px #3f3f3f;
