@@ -125,8 +125,11 @@ function initMap(element) {
     if (document.getElementById('mapcontainer')) {
         initLocation();
     } else {
-        initLocation('pickup');
-        initLocation('dropoff');
+        if (document.getElementById('pickuplocationcard')) {
+            initLocation('pickup');
+        } else if (document.getElementById('dropofflocationcard')) {
+            initLocation('dropoff');
+        }
     }
 
     // Initialize map centered over store locations
@@ -202,9 +205,11 @@ function initMap(element) {
             findLocation();
         });
     } else {
-        document.getElementById('pickuplocatebutton').addEventListener('click', function() {
-            findLocation();
-        });
+        if (document.getElementById('pickuplocatebutton')) {
+            document.getElementById('pickuplocatebutton').addEventListener('click', function() {
+                findLocation();
+            });
+        }
         document.getElementById('dropofflocatebutton').addEventListener('click', function() {
             findLocation();
         });
@@ -272,24 +277,31 @@ function initMap(element) {
                 const currentLocation = resolveLocation(autocomplete);
             });
         } else {
-            pickupAutocomplete = new google.maps.places.Autocomplete(document.getElementById('pickuplocationsearch'), countryRestriction);
-            dropoffAutocomplete = new google.maps.places.Autocomplete(document.getElementById('dropofflocationsearch'), countryRestriction);
+            if (document.getElementById('pickuplocationsearch')) {
+                pickupAutocomplete = new google.maps.places.Autocomplete(document.getElementById('pickuplocationsearch'), countryRestriction);
+                
+                google.maps.event.addListener(pickupAutocomplete, 'place_changed', function() {
+                    document.getElementById('pickuplocationsearch').blur();
+                });
+            }
             
-            google.maps.event.addListener(pickupAutocomplete, 'place_changed', function() {
-                document.getElementById('pickuplocationsearch').blur();
-            });
+            dropoffAutocomplete = new google.maps.places.Autocomplete(document.getElementById('dropofflocationsearch'), countryRestriction);
 
             google.maps.event.addListener(dropoffAutocomplete, 'place_changed', function() {
                 document.getElementById('dropfflocationsearch').blur();
             });
 
-            document.getElementById('pickupsearchbutton').addEventListener('click', function() {
-                const currentPickUpLocation = resolveLocation(pickupAutocomplete);
-            });
+            if (document.getElementById('pickupsearchbutton')) {
+                document.getElementById('pickupsearchbutton').addEventListener('click', function() {
+                    const currentPickUpLocation = resolveLocation(pickupAutocomplete);
+                });
+            }
 
-            document.getElementById('dropoffsearchbutton').addEventListener('click', function() {
-                const currentDropOffLocation = resolveLocation(dropoffAutocomplete);
-            });
+            if (document.getElementById('dropoffsearchbutton')) {
+                document.getElementById('dropoffsearchbutton').addEventListener('click', function() {
+                    const currentDropOffLocation = resolveLocation(dropoffAutocomplete);
+                });
+            }
         }
         
 

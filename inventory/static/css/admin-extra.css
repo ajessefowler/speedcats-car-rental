@@ -1,8 +1,13 @@
 
+h1 {
+    font-weight: 400;
+    font-size: 24px;
+    border-bottom: 1px solid #ccc;
+}
+
 caption {
     background: #718792 !important;
     border-radius: 5px !important;
-    box-shadow: 0 1px 6px #4d4d4d;
 }
 
 .breadcrumbs {
@@ -13,6 +18,10 @@ caption {
 #header {
     background-color: #455A64;
     box-shadow: 0 3px 15px -3px #4d4d4d;
+}
+
+#changelist-filter > h2 {
+    background: #718792 !important;
 }
 
 #adminlinks {
@@ -36,6 +45,7 @@ caption {
 #branding > h1 {
     color: white !important;
     padding-right: 28px;
+    border-bottom: none !important;
 }
 
 #branding > a:hover {
@@ -45,6 +55,61 @@ caption {
 
 #branding > h1 > a {
     color: white !important;
+}
+
+#reports {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+    padding: 0 40px;
+}
+
+#reports > a {
+    background-color: #718792;
+    padding: 8px 4px 8px 16px;
+    border-radius: 5px !important;
+    box-shadow: 0 1px 4px #4d4d4d;
+    margin: 12px 8px;
+}
+
+#reports > a:hover {
+    cursor: pointer;
+}
+
+#reports > a > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#reports > a > div > i {
+    padding: 0 0 0 10px;
+    margin: 0;
+    color: white;
+}
+
+#reports > a > div > p {
+    margin: 0;
+    color: white;
+    line-height: 100%;
+}
+
+#reportsheader {
+    margin: 50px 40px 20px;
+}
+
+#content-related {
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+}
+
+#recent-actions-module > h2 {
+    background-color: #718792 !important;
+    color: white !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -62,5 +127,9 @@ caption {
 
     #branding {
         padding-bottom: 0;
+    }
+
+    #reports > a {
+        margin: 0;
     }
 }

@@ -1,8 +1,9 @@
 import json
 import pytz
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -34,21 +35,52 @@ def home(request):
 
 	return render(request, 'inventory/home.html', context)
 
-@login_required
+@staff_member_required
 def documents(request):
 	return render(request, 'inventory/documents.html')
 
-@login_required
+@staff_member_required
 def training(request):
 	return render(request, 'inventory/training.html')
 	
-@login_required
+@staff_member_required
 def accounting(request):
 	return render(request, 'inventory/accounting.html')
 
-@login_required
+@staff_member_required
 def marketing(request):
 	return render(request, 'inventory/marketing.html')
+
+@staff_member_required
+def daily_summary(request):
+	query_results = []
+	now = datetime.now().date()
+	results = Reservation.objects.all()
+
+	for result in results:
+		if result.pick_up_time.date() == now or result.drop_off_time.date() == now:
+			query_results.append(result)
+
+	context = {
+		"results":query_results
+	}
+	return render(request, 'inventory/daily_summary.html', context)
+
+@staff_member_required
+def daily_sales(request):
+	return render(request, 'inventory/daily_sales.html')
+
+@staff_member_required
+def hourly_detail(request):
+	return render(request, 'inventory/hourly_detail.html')
+
+@staff_member_required
+def weekly_sales(request):
+	return render(request, 'inventory/weekly_sales.html')
+
+@staff_member_required
+def weekly_maintenance(request):
+	return render(request, 'inventory/weekly_maintenance.html')
 
 def faqs(request):
 	return render(request, 'inventory/faqs.html')

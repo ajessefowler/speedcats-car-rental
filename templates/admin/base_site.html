@@ -1,9 +1,14 @@
 {% extends "admin/base.html" %}
 {% load static %}
+<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
 
 {% block title %}Speedcats Car Rental Intranet{% endblock %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "css/admin-extra.css" %}" />{% endblock %}
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "css/admin-extra.css" %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock %}
 
 {% block branding %}
 <h1 id="site-name"><a href="{% url 'admin:index' %}">Speedcats Car Rental Intranet</a></h1>
@@ -16,3 +21,39 @@
 {% endblock %}
 
 {% block nav-global %}{% endblock %}
+
+{% block footer %}
+    <h1 id="reportsheader">Reports</h1>
+    <div id="reports">
+        <a href="{% url 'inventory:daily_summary' %}">
+            <div>
+                <p>Daily Summary</p>
+                <i class="material-icons">chevron_right</i>
+            </div>
+        </a>
+        <a href="{% url 'inventory:daily_sales' %}">
+            <div>
+                <p>Daily Sales</p>
+                <i class="material-icons">chevron_right</i>
+            </div>
+        </a>
+        <a href="{% url 'inventory:hourly_detail' %}">
+            <div>
+                <p>Hourly Detail</p>
+                <i class="material-icons">chevron_right</i>
+            </div>
+        </a>
+        <a href="{% url 'inventory:weekly_sales' %}">
+            <div>
+                <p>Weekly Sales</p>
+                <i class="material-icons">chevron_right</i>
+            </div>
+        </a>
+        <a href="{% url 'inventory:weekly_maintenance' %}">
+            <div>
+                <p>Weekly Maintenance</p>
+                <i class="material-icons">chevron_right</i>
+            </div>
+        </a>
+    </div>
+{% endblock %}

@@ -7,10 +7,31 @@ body {
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
 }
 
+.downloadlink {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 40px;
+    padding: 4px 4px 4px 12px;
+    height: 35px;
+    width: 50%;
+    background-color: #718792;
+    border-radius: 5px !important;
+    box-shadow: 0 1px 4px #4d4d4d;
+}
+
+.downloadlink > a > i {
+    padding: 8px;
+}
+
+.downloadlink > p, .downloadlink > a > i {
+    color: white;
+}
+
 #header {
     height: 40px;
     padding: 10px 40px;
-    width: 100%;
+    width: calc(100% - 80px);
     background-color: #455A64;
     box-shadow: 0 3px 15px -3px #4d4d4d;
     display: flex;
@@ -48,7 +69,30 @@ body {
     font-size: 14px;
 }
 
+#user-tools {
+    padding: 0;
+    margin: 0 0 0 auto;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: right;
+}
+
+#instructions {
+    padding: 0 40px;
+}
+
+#contenttable {
+    margin: 0 40px;
+    table-layout: fixed;
+}
+
 @media only screen and (min-width: 768px) {
+    .downloadlink > a:hover {
+        cursor: pointer;
+    }
+
     #adminlinks {
         display: flex;
         flex-direction: row;
@@ -62,8 +106,11 @@ body {
     }
 
     #pageheader {
-        margin: 30px 18% 10px;
+        margin: 20px 40px 10px;
         border-bottom: 1px solid #ccc;
-        padding: 6px;
+        padding: 0 0 1px;
+        color: #666;
+        font-weight: 400;
+        font-size: 24px;
     }
 }

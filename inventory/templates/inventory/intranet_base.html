@@ -4,6 +4,7 @@
 	<title>Speedcats Car Rental Documents</title>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
 
 	{% load static %}
@@ -19,6 +20,12 @@
             <a href="/inventory/training/"><p>Training</p></a>
             <a href="/inventory/accounting/"><p>Accounting</p></a>
             <a href="/inventory/marketing/"><p>Marketing</p></a>
+        </div>
+        <div id="user-tools">
+            Welcome, <strong>{{ user.first_name }}</strong>.
+            <a href="/">View site</a> /
+            <a href="/admin/password_change/">Change password</a> /
+            <a href="/admin/logout/">Log out</a>
         </div>
     </div>
     

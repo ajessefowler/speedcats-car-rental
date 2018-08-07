@@ -6,6 +6,10 @@
 	var storeID = '{{ store.ID }}';
 	console.log(storeID);
 </script>
+<script>
+    var markerImage = "{% static 'img/location_marker.png' %}";
+    var markerImageHome = "{% static 'img/location_marker_home.png' %}";
+</script>
 <script type="text/javascript" src="{% static 'js/checkPickup.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/checkStartForm.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/validateTime.js' %}"></script>

@@ -3,6 +3,10 @@
 {% load static %}
 
 {% block scripts %}
+<script>
+    var markerImage = "{% static 'img/location_marker.png' %}";
+    var markerImageHome = "{% static 'img/location_marker_home.png' %}";
+</script>
 <script type="text/javascript" src="{% static 'js/checkModifyForm.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/validateTime.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/location.js' %}"></script>
@@ -119,6 +123,11 @@
 </div>
 
 <div id="dropofflocationcard" class="infoselector mapinfoselector">
+    <div id="dropoffsearchbox">
+        <i class="button material-icons" id="dropofflocatebutton">near_me</i>
+        <input id="dropofflocationsearch" placeholder="Enter your location..." type="text">
+        <i class="button material-icons" id="dropoffsearchbutton">search</i>
+    </div>
     <div id="dropoffmap" class="testmap"></div>
     <div class="infoselectorheader">
         <h3>Select Your Drop Off Location</h3>
