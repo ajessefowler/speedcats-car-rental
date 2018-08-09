@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function(event) {
     let menuOut = false;
 		
-		document.getElementById('menushade').addEventListener('click', function() {
-			closeMenu();
-		})
+	// Close menu when shade is clicked
+	document.getElementById('menushade').addEventListener('click', function() {
+		closeMenu();
+	});
 
+	// Open or close menu when menu text is clicked
 	document.getElementById('menubuttontext').addEventListener('click', function() {
 		if (!menuOut) {
 			openMenu();
@@ -13,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		}
 	});
 
+	// Open or close menu when menu button is clicked
     document.getElementById('menubutton').addEventListener('click', function() {
 		if (!menuOut) {
 			openMenu();
@@ -21,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		}
 	});
 		
+	// Animate the menu opening
 	function openMenu() {
 		menuOut = true;
 		document.getElementById('menumiddle').style.animation = 'fadeOut .2s ease forwards';
@@ -31,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		document.getElementById('menushade').style.animation = 'fadeIn .3s ease forwards';
 	}
 		
+	// Animate the menu closing
 	function closeMenu() {
 		menuOut = false;
 		document.getElementById('menumiddle').style.animation = 'fadeIn .6s ease forwards';

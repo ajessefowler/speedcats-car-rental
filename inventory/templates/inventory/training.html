@@ -1,11 +1,12 @@
 {% extends "inventory/intranet_base.html" %}
+{% load static %}
 
 {% block content %}
 <h2 id="pageheader">Training</h2>
 <p id="instructions">Access Speedcats's training documentation by clicking the download
     link below.</p>
 <div class="downloadlink">
-    <p>Training Documentation</p>
-    <a><i class="material-icons">save_alt</i></a>
+    <p>System Training</p>
+    <a href="{% static 'docs/softwaretraining.docx' %}"><i class="material-icons">save_alt</i></a>
 </div>
 {% endblock %}

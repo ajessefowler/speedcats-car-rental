@@ -24,10 +24,7 @@
     {% empty %}
         <p>No vehicles available</p>
     {% endfor %}
-    </div>
-
-    {% if vehicles.has_other_pages %}
-        <div class="pagination">
+    <div class="pagination">
             {% if vehicles.has_previous %}
                 <div>
                     <a href="?page={{ vehicles.previous_page_number }}">
@@ -51,5 +48,5 @@
                 </div>
             {% endif %}
         </div>
-    {% endif %}
+    </div>
 {% endblock %}

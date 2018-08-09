@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
         const dateInput = document.getElementById('id_date_of_birth');
         const dateOfBirth = convertDateToUTC(new Date(dateInput.value));
         const now = new Date();
+
+        // Set comparison time to 18 years ago
         now.setFullYear(now.getFullYear() - 18);
        
         // If user is at least 18 y/o, submit form, otherwise display error

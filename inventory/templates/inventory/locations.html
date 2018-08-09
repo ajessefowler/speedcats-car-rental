@@ -25,11 +25,10 @@
     <p>With eight locations across the state of Ohio, the car of your dreams is never
         too far away.</p>
     <div id="desktoplocations">
-    {% for location in locations %}
+    {% for location in storelocations %}
         <div class="locationcard" id="location{{ forloop.counter }}">
             <div class="locationcardheader">
                 <h3>{{ location.city}}, {{ location.state }}</h3>
-                <i id="closedropofftime" class="material-icons">expand_less</i>
             </div>
             <p>{{ location }} {{ location.zipcode }}</p>
             <p>Email: {{ location.email }}</p>
@@ -38,6 +37,7 @@
     {% endfor %}
     </div>
 </div>
+
 {% endblock %}
 
 {% block initMap %}

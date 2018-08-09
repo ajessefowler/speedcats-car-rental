@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(event) {
-    // Show and hide payment form based on location selection
+    // Show and hide payment form based on payment location selection
 	document.getElementById('payonline').addEventListener('click', function() {
 		document.getElementById('paymentformdiv').style.display = 'block';
 	});

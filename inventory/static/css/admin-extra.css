@@ -10,9 +10,28 @@ caption {
     border-radius: 5px !important;
 }
 
+input[type=submit] {
+    background: #718792 !important;
+}
+
 .breadcrumbs {
     background: #718792 !important;
     box-shadow: 0 3px 15px -3px #4d4d4d !important;
+}
+
+.login > #container {
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+#login-form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+#login-form > .submit-row {
+    padding-top: 15px;
+    float: right;
 }
 
 #header {

@@ -4,6 +4,7 @@
 
 {% block content %}
 <h2 class="header" id="confirmheader">Your Reservation Has Been Placed!</h2>
+<div id="confirmcontent">
 <div id="reservationdetails">
     <h3>Summary</h3>
     <p>{{ reservation.vehicle }} for {{ length }} days</p>
@@ -20,4 +21,5 @@
 <a id="returnhome" class="roundbutton" href="{% url 'inventory:home' %}">
     <p>Return Home</p>
 </a>
+</div>
 {% endblock %}

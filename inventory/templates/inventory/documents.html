@@ -1,6 +1,22 @@
 {% extends "inventory/intranet_base.html" %}
+{% load static %}
 
 {% block content %}
 <h2 id="pageheader">Documents</h2>
-<p id="instructions">This page contains various documents for employee documentation.</p>
+<p id="instructions">View and download various employee documents.</p>
+
+<div class="downloadlink">
+    <p>Employement Application</p>
+    <a href="{% static 'docs/application.docx' %}"><i class="material-icons">save_alt</i></a>
+</div>
+
+<div class="downloadlink">
+    <p>Employee Termination</p>
+    <a href="{% static 'docs/termination.docx' %}"><i class="material-icons">save_alt</i></a>
+</div>
+
+<div class="downloadlink">
+    <p>Time-Off Request</p>
+    <a href="{% static 'docs/timeoff.docx' %}"><i class="material-icons">save_alt</i></a>
+</div>
 {% endblock %}

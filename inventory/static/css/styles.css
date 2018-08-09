@@ -104,11 +104,17 @@ footer {
 	height: 88px;
 	background-color: #455A64;
 	box-shadow: 0 -3px 8px -2px #2c2c2c;
+	margin-top: 15px;
 }
 
 footer > p {
 	margin-top: 50px;
 	color: white;
+}
+
+#relativefooter {
+	position: relative !important;
+	z-index: 52;
 }
 
 #social {
@@ -586,7 +592,7 @@ a:-webkit-any-link {
 	left: 0;
 	width: 100%;
 	height: 100vh;
-	z-index: 11;
+	z-index: 52;
 	background-color: rgba(15, 15, 15, 0.8);
 	opacity: 0;
 	display: none;
@@ -609,7 +615,7 @@ a:-webkit-any-link {
 
 .contactform {
 	background-color: white;
-	margin: 14px 20px;
+	margin: 14px 20px 70px;
 	padding: 1px 25px 80px;
 	box-shadow: 0 1px 3px #707070;
 	border-radius: 3px;
@@ -692,15 +698,18 @@ a:-webkit-any-link {
 
 #reservecancelbutton {
 	color: #777676;
-	position: absolute;
-	bottom: 23px;
+	position: relative;
+	top: 37px;
+	float: left;
+	left: 8px;
 }
 
 #reservecontinuebutton {
 	background-color: #FF5722;
-	position: absolute;
-	bottom: 15px;
-	right: 40px;
+	position: relative;
+	top: 30px;
+	right: 8px;
+	float: right;
 	-webkit-appearance: none;
 }
 
@@ -1116,6 +1125,9 @@ a:-webkit-any-link {
 
 #storecontent {
 	width: 100%;
+	position: relative;
+	height: 100%;
+	min-height: calc(100vh - 45px);
 }
 
 #vehiclesearch {
@@ -1170,12 +1182,20 @@ a:-webkit-any-link {
 	position: fixed;
 }
 
+#vehiclehomecontent {
+	z-index: 10;
+    position: relative;
+    background-color: rgb(218, 216, 216);
+    box-shadow: 0 -3px 6px -3px #2c2c2c;
+    padding-bottom: 120px;
+}
+
 #vehiclecontent {
 	z-index: 10;
 	position: relative;
 	background-color: rgb(218, 216, 216);
 	box-shadow: 0 -3px 6px -3px #2c2c2c;
-	padding-bottom: 120px;
+	padding-bottom: 40px;
 }
 
 #vehicledescription {
@@ -1517,11 +1537,13 @@ a:-webkit-any-link {
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-end;
-	padding-right: 12px;
+	padding-right: 20px;
+	align-self: flex-end;
 }
 
 #pricedetails > p {
-	margin: 8px 0;
+	margin: 8px 0 8px auto;
+	padding: 0;
 }
 
 #confirmheader {
@@ -1533,7 +1555,7 @@ a:-webkit-any-link {
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-	z-index: 12;
+	z-index: 52;
 	background-color: white;
 	padding: 12px;
 	margin: 0 15px;
@@ -1573,7 +1595,7 @@ a:-webkit-any-link {
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-	z-index: 12;
+	z-index: 53;
 	background-color: white;
 	padding: 12px;
 	margin: 0 15px;
@@ -1619,6 +1641,14 @@ a:-webkit-any-link {
 	text-align: left;
 }
 
+#reserveconfirmcontent {
+    z-index: 10;
+    position: relative;
+    background-color: rgb(218, 216, 216);
+    box-shadow: 0 -3px 6px -3px #2c2c2c;
+    padding-bottom: 0;
+}
+
 #modifyinstructions {
 	padding: 6px 20px;
 	margin: 0;
@@ -1637,6 +1667,10 @@ a:-webkit-any-link {
 
 #desktopvehicleimage {
 	display: none;
+}
+
+#desktoplocations {
+	margin-bottom: 60px;
 }
 
 #reservationsummary {
@@ -1772,6 +1806,10 @@ a:-webkit-any-link {
 		margin-top: 595px !important;
 	}
 
+	.popupshade:hover {
+		cursor: pointer;
+	}
+
 	.infoselector {
 		width: 36%;
 		padding: 4px 20px 9px;
@@ -1816,10 +1854,6 @@ a:-webkit-any-link {
 		width: 400px;
 	}
 
-	.locationcard:hover {
-		cursor: pointer;
-	}
-
 	.activateinfo {
 		display: flex;
 		justify-content: center;
@@ -1856,8 +1890,38 @@ a:-webkit-any-link {
 		border-radius: 5px;
 	}
 
+	#vehiclehomecontent {
+		margin: 0;
+		padding: 0 25% 50px;
+		width: 50%;
+		height: calc(100vh - 300px);
+	}
+
+	#reserveconfirmcontent {
+		margin: 0;
+    	padding: 0;
+    	width: 100%;
+    	height: auto;
+	}
+
+	#reserveconfirmcontent > h2 {
+		margin: 0 25%;
+	}
+
 	#confirmheader {
 		margin: 0 25%;
+	}
+
+	#relativefooter {
+		margin-top: 80px;
+	}
+
+	#social {
+		justify-content: center;
+	}
+	
+	#social > a {
+		padding: 8px 40px;
 	}
 
 	#returnhome {
@@ -1875,11 +1939,7 @@ a:-webkit-any-link {
 
 	#reservationdetails {
 		margin: 0 20px;
-		padding-top: 0;
-	}
-
-	#pricedetails {
-		margin-right: 40px;
+		padding-top: 0px;
 	}
 
 	#vehicleimage {
@@ -1899,6 +1959,7 @@ a:-webkit-any-link {
 
 	#reservecontent {
 		padding: 0;
+		margin: 0 25%;
 	}
 
 	#reservecontent > p {
@@ -1918,8 +1979,10 @@ a:-webkit-any-link {
 	}
 
 	#reservecancelbutton {
-		bottom: 97px;
-		margin-left: 30px;
+		position: relative;
+		top: 35px;
+		left: 40px;
+		float: left;
 	}
 
 	#reservecancelbutton:hover, #reservecancelbutton > p:hover {
@@ -2022,6 +2085,10 @@ a:-webkit-any-link {
 		padding: 0;
 	}
 
+	#reservebuttons {
+		margin-bottom: 80px;
+	}
+
 	#paymentheader {
 		padding: 0 10px 6px !important;
 		margin: 20px 30px;
@@ -2066,8 +2133,10 @@ a:-webkit-any-link {
 	}
 
 	#storecontent {
-		padding: 20px 27% 0;
+		padding: 20px 27% 100px;
 		width: auto;
+		height: inherit;
+		min-height: calc(100vh - 175px);
 	}
 
 	#vehiclesearch {
@@ -2165,8 +2234,9 @@ a:-webkit-any-link {
 
 	#vehiclecontent {
 		margin: 0;
-		padding: 0 25% 150px;
+		padding: 0 25% 50px;
 		width: 50%;
+		height: calc(100vh - 300px);
 	}
 
 	#vehiclecontent > .header {
@@ -2175,7 +2245,7 @@ a:-webkit-any-link {
 
 	#vehicledescription {
 		margin: 0 20px;
-		width: 100%;
+		width: calc(100% - 40px);
 	}
 
 	#vehicledetails {
@@ -2204,8 +2274,18 @@ a:-webkit-any-link {
 	}
 
 	#reservecontinuebutton {
-		bottom: 90px;
-		right: 29%;
+		position: relative;
+		bottom: 0;
+		top: 0;
+		right: 40px;
+		float: right;
+		margin-top: 30px;
+	}
+
+	#confirmcontent {
+		margin: 0;
+   	 	padding: 0 25% 150px;
+    	width: 50%;
 	}
 
 	#registerform {
@@ -2313,5 +2393,15 @@ a:-webkit-any-link {
 
 	#desktoparrow {
 		bottom: 215px;
+	}
+
+	#vehiclecontent {
+		padding: 0 25% 0px;
+		height: calc(100vh - 500px);
+	}
+
+	#vehiclehomecontent {
+		padding: 0 25% 0px;
+		height: calc(100vh - 500px);
 	}
 }

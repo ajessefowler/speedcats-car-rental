@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function(event) {
     let dropOffSelected;
 
+    // Determine which maps to initialize
     if (document.getElementById('mapcontainer')) {
         initMap('mapcontainer');
     } else {
-
         if (!document.getElementById('modifylocation')) {
             if (document.getElementById('pickuplocationcard')) {
                 initMap('pickup');
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         }
     }
 
+    // Control the checking and unchecking of 'drop off at another location' checkbox
     if (document.getElementById('pickuplocationcard')) {
         if (document.getElementById('dropoffdiff')) {
             if (document.getElementById('dropoffdiff').checked) {
@@ -72,6 +73,7 @@ function mapOnLoad(request, id, map, addressDisplay, marker, element) {
         }, 400);
     });
 
+    // Update page information when a marker is clicked
     if (request.status >= 200 && request.status < 400) {
         const vehiclesLink = '/inventory/' + id + '/';
 
@@ -157,6 +159,7 @@ function initMap(element) {
         });
     }
 
+    // For each location, add a marker on the map
     for (i = 0; i < locations.length; ++i) {
         const id = (i + 1);
         const addressDisplay = locations[i].address + ', ' + locations[i].city + ', ' + locations[i].state;
@@ -177,6 +180,7 @@ function initMap(element) {
                 icon: icon
             });
 
+            // Slide location selectors up
             if (document.getElementById('dropofflocation')) {
                 document.getElementById('dropofflocation').addEventListener('click', function() {
                     mapOnLoad(request, id, map, addressDisplay, marker, 'dropoff');
@@ -200,6 +204,8 @@ function initMap(element) {
 
 	    request.send();
     }
+
+    // Initialize event handlers for find location buttons
     if (document.getElementById('locatebutton')) {
         document.getElementById('locatebutton').addEventListener('click', function() {
             findLocation();
@@ -266,6 +272,7 @@ function initMap(element) {
         const countryRestriction = { componentRestrictions: { country: 'us' }};
         let autocomplete;
 
+        // Initialize event handlers for location search and autocomplete
         if (!element) {
             autocomplete = new google.maps.places.Autocomplete(document.getElementById('locationsearch'), countryRestriction);
             
@@ -305,6 +312,7 @@ function initMap(element) {
         }
         
 
+        // Find coordinates of search location
         function resolveLocation(element) {
             const place = element.getPlace();
             const lat = place.geometry.location.lat();
@@ -313,6 +321,7 @@ function initMap(element) {
         }
     }
 
+    // Set map position to new coordinates and zoom in
     function lookAtLocation(lat, long) {
         const icon = {
             url: markerImageHome,

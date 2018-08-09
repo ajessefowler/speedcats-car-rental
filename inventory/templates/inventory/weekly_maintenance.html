@@ -2,6 +2,26 @@
 
 {% block content %}
 <h2 id="pageheader">Weekly Maintenance</h2>
+<p id="reportdetail">View maintenance records for the upcoming week, as well as the total
+    maintenance costs for the next week.</p>
 <table id="contenttable">
+    <tr>
+        <th>Vehicle</th>
+        <th>Date</th>
+        <th>Mechanic</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+    {% for item in results %}
+    <tr>
+        <td>{{ item.vehicle }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.mechanic }}</td>
+        <td>{{ item.description }}</td>
+        <td>${{ item.price }}</td>
+    </tr>
+    {% endfor %}
 </table>
+    
+<h2 id="reporttotal">Total Costs: ${{ total }}</h2>
 {% endblock %}

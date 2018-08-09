@@ -22,7 +22,7 @@ from django.template.loader import render_to_string
 
 from .tokens import account_activation_token
 from .forms import RegisterForm, ProfileForm
-from .models import Store, Vehicle, Reservation, Payment
+from .models import Store, Vehicle, Reservation, Payment, Maintenance
 
 def home(request):
 	# Pass location data so front-end map can display store markers
@@ -57,6 +57,7 @@ def daily_summary(request):
 	now = datetime.now().date()
 	results = Reservation.objects.all()
 
+	# Find all reservations being picked up or dropped off today
 	for result in results:
 		if result.pick_up_time.date() == now or result.drop_off_time.date() == now:
 			query_results.append(result)
@@ -68,19 +69,79 @@ def daily_summary(request):
 
 @staff_member_required
 def daily_sales(request):
-	return render(request, 'inventory/daily_sales.html')
+	total = 0.0
+	query_results = []
+	now = datetime.now().date()
+	results = Reservation.objects.all()
+
+	# Find each reservation being picked up today
+	for result in results:
+		if result.pick_up_time.date() == now:
+			query_results.append(result)
+
+	# Add up the subtotal of each reservation from today
+	for reservation in query_results:
+		total += float(reservation.subtotal)
+
+	context = {
+		"results":query_results,
+		"total":total
+	}
+	
+	return render(request, 'inventory/daily_sales.html', context)
 
 @staff_member_required
 def hourly_detail(request):
-	return render(request, 'inventory/hourly_detail.html')
+	now = datetime.now()
+	hour = now + timedelta(hours=1)
+
+	# Find all reservations being picked up or dropped off in the next hour
+	results = Reservation.objects.filter(Q(pick_up_time__range=(now, hour)) | Q(drop_off_time__range=(now, hour)))
+
+	context = {
+		"results":results
+	}
+
+	return render(request, 'inventory/hourly_detail.html', context)
 
 @staff_member_required
 def weekly_sales(request):
-	return render(request, 'inventory/weekly_sales.html')
+	total = 0.0
+	now = datetime.now()
+	week = now + timedelta(days=7)
+
+	# Find all reservations being picked up in the next week
+	results = Reservation.objects.filter(pick_up_time__range=(now, week))
+
+	# Add the subtotal of all reservations being picked up in the next week
+	for reservation in results:
+		total += float(reservation.subtotal)
+
+	context = {
+		"results":results,
+		"total":total
+	}
+
+	return render(request, 'inventory/weekly_sales.html', context)
 
 @staff_member_required
 def weekly_maintenance(request):
-	return render(request, 'inventory/weekly_maintenance.html')
+	total = 0.0
+	now = datetime.now()
+	week = now + timedelta(days=7)
+
+	# Find all maintenance records occurring within the next week
+	results = Maintenance.objects.filter(date__range=(now, week))
+
+	for record in results:
+		total += float(record.price)
+
+	context = {
+		"results":results,
+		"total":total
+	}
+
+	return render(request, 'inventory/weekly_maintenance.html', context)
 
 def faqs(request):
 	return render(request, 'inventory/faqs.html')
@@ -93,9 +154,13 @@ def feedback(request):
 
 def locations(request):
 	locations = Store.objects.all()
-
+	# Pass location data so front-end map can display store markers
+	jlocations = Store.objects.all().values('address', 'city', 'state')
+	jlocations_json = json.dumps(list(jlocations), cls=DjangoJSONEncoder)
+	
 	context = {
-		"locations":locations
+		"storelocations":locations,
+		"locations":jlocations_json
 	}
 
 	return render(request, 'inventory/locations.html', context)
@@ -104,10 +169,15 @@ def register(request):
 	if request.method == 'POST':
 		register_form = RegisterForm(request.POST)
 		profile_form = ProfileForm(request.POST)
+
+		# Ensure both required forms are valid
 		if register_form.is_valid() and profile_form.is_valid():
+			# Create new inactive user
 			user = register_form.save(commit=False)
 			user.is_active = False
 			user.save()
+
+			# Send activiation email to user
 			current_site = get_current_site(request)
 			subject = 'Activate Your Speedcats Car Rental Account'
 			message = render_to_string('account_activation_email.html', {
@@ -130,15 +200,15 @@ def register(request):
 	return render(request, 'inventory/register.html', context)
 
 def activate(request, uidb64, token):
+
+	# Check if activation is valid
 	try:
 		uid = force_text(urlsafe_base64_decode(uidb64))
 		user = User.objects.get(pk=uid)
 	except (TypeError, ValueError, OverflowError, User.DoesNotExist):
 		user = None
 
-	if user:
-		print(user.first_name)
-	
+	# Make user active and log them in
 	if user is not None and account_activation_token.check_token(user, token):
 		user.is_active = True
 		user.profile.email_confirmed = True
@@ -173,7 +243,6 @@ def history(request):
 	return render(request, 'inventory/history.html', context)
 
 def store(request):
-
 	# If data is being posted, use that, otherwise use the session variables
 	if request.method == "POST":
 		try:
@@ -234,10 +303,16 @@ def store(request):
 	return render(request, 'inventory/vehicle_list.html', context)
 
 def search(request):
+	selected_vehicles = []
 	pickup_id = request.session["pickup_id"]
+	pickup_time = request.session["pickup_time"]
+	dropoff_time = request.session["dropoff_time"]
 	store = Store.objects.get(pk=pickup_id)
 	
 	query = request.POST["searchquery"]
+
+	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
+	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
 	# Split query into words and filter selected store for available vehicles with first word
 	search_terms = query.split()
@@ -248,9 +323,18 @@ def search(request):
 		for term in search_terms[1:]:
 			results = results.filter(Q(year__icontains=term) | Q(make__icontains=term) | Q(model__icontains=term) | Q(color__icontains=term))
 
+	# Check if vehicle is available during entire reservation time
+	for vehicle in results:
+		if len(vehicle.reservation_set.all()) == 0:
+			selected_vehicles.append(vehicle)
+		else:
+			for reservation in vehicle.reservation_set.all():
+				if reservation.drop_off_time < pickup_format or reservation.pick_up_time > dropoff_format:
+					selected_vehicles.append(vehicle)
+
 	context = {
 		"query":query,
-		"results":results,
+		"results":selected_vehicles,
 		"store":store
 	}
 
@@ -268,6 +352,7 @@ def vehicle(request, storeID, vehicleID):
 
 @login_required
 def reserve(request, storeID, vehicleID):
+	# If data is being posted, use that, otherwise use the session variables
 	if request.method == "POST":
 		try:
 			pickup_id = int(request.POST["pickuplocationid"])
@@ -376,10 +461,15 @@ def reservation(request, reservationID):
 
 @login_required
 def modify(request, reservationID):
+	# Pass location data so front-end map can display store markers
+	locations = Store.objects.all().values('address', 'city', 'state')
+	locations_json = json.dumps(list(locations), cls=DjangoJSONEncoder)
+	
 	reservation = Reservation.objects.get(pk=reservationID)
 
 	context = {
-		"reservation":reservation
+		"reservation":reservation,
+		"locations":locations_json
 	}
 	if request.user == reservation.user:
 		return render(request, 'inventory/modify.html', context)
@@ -390,6 +480,7 @@ def modify(request, reservationID):
 def update(request, reservationID):
 	reservation = Reservation.objects.get(pk=reservationID)
 
+	# Set reservation fields to new selections, then save the reservation
 	if request.user == reservation.user:
 		if 'pickuplocationid' in request.POST:
 			pickup_id = int(request.POST["pickuplocationid"])
@@ -428,6 +519,7 @@ def cancel(request, reservationID):
 	user = request.user
 	reservation = Reservation.objects.get(pk=reservationID)
 	if user == reservation.user:
+		# Set vehicle's status to available and delete the reservation, then display remaining reservations
 		reservation = Reservation.objects.get(pk=reservationID)
 		reservation.vehicle.status = 'a'
 		reservation.vehicle.save()
@@ -449,6 +541,10 @@ def change_pick_up(request, storeID, vehicleID):
 	dropoff_store = get_object_or_404(Store, pk=dropoff_id)
 	dropoff_time = request.session["dropoff_time"]
 
+	# Pass location data so front-end map can display store markers
+	locations = Store.objects.all().values('address', 'city', 'state')
+	locations_json = json.dumps(list(locations), cls=DjangoJSONEncoder)
+
 	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M")
 	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
 
@@ -459,7 +555,8 @@ def change_pick_up(request, storeID, vehicleID):
 		"pick_up_format":pickup_format,
 		"drop_off_time":dropoff_time,
 		"drop_off_format":dropoff_format,
-		"vehicle":vehicle
+		"vehicle":vehicle,
+		"locations":locations_json
 	}
 
 	return render(request, 'inventory/change_pick_up.html', context)
@@ -475,6 +572,10 @@ def change_drop_off(request, storeID, vehicleID):
 	dropoff_store = get_object_or_404(Store, pk=dropoff_id)
 	dropoff_time = request.session["dropoff_time"]
 
+	# Pass location data so front-end map can display store markers
+	locations = Store.objects.all().values('address', 'city', 'state')
+	locations_json = json.dumps(list(locations), cls=DjangoJSONEncoder)
+
 	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M")
 	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M")
 
@@ -485,7 +586,8 @@ def change_drop_off(request, storeID, vehicleID):
 		"pick_up_format":pickup_format,
 		"drop_off_time":dropoff_time,
 		"drop_off_format":dropoff_format,
-		"vehicle":vehicle
+		"vehicle":vehicle,
+		"locations":locations_json
 	}
 
 	return render(request, 'inventory/change_drop_off.html', context)

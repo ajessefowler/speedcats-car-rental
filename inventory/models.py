@@ -195,4 +195,4 @@ class Payment(models.Model):
 	) 
 
 	def __str__(self):
-		return '$' + str(self.amount) + ' by ' + str(self.reservation.user.first_name) + ' ' + str(self.reservation.user.last_name) + ' on ' + str(self.date)
+		return '$' + str(self.amount) + ' by ' + str(self.reservation.user.first_name) + ' ' + str(self.reservation.user.last_name)

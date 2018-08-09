@@ -1,56 +1,55 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <div id="logincontent">
+<div id="logincontent">
 
-        {% if form.errors %}
-        <p class="loginmessage">Your username and password didn't match. Please try again.</p>
-        {% endif %}
+    {% if form.errors %}
+    <p class="loginmessage">Your username and password didn't match. Please try again.</p>
+    {% endif %}
 
-        {% if next %}
-            {% if user.is_authenticated %}
-            <p class="loginmessage">Your account doesn't have access to this page. To proceed,
-            please login with an account that has access.</p>
-            {% else %}
-            <p class="loginmessage">Please login to see this page.</p>
-            {% endif %}
-        {% endif %}
-        
+    {% if next %}
         {% if user.is_authenticated %}
-            <h2 class="header" id="profileheader">Hello, {{ user.first_name }}!</h2>
-            <p>Welcome to your profile! Here, you can view your reservation history.</p>
-            <div id="reservationhistory">
-                <a href="{% url 'inventory:history' %}" id="historylink">
-                    <p>View Your Reservations</p>
-                    <i class="material-icons">chevron_right</i>
-                </a>
-            </div>
-            <div id="logoutbutton" class="roundbutton">
-                <p><a href="{% url 'logout' %}">LOGOUT</a></p>
-            </div>
+        <p class="loginmessage">Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
         {% else %}
-        <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            
-            <div id="username" class="loginform">
-                <p>Username</p>
-                <input type="text" name="username">
-            </div>
-            <div id="password" class="loginform">
-                <p>Password</p>
-                <input type="password" name="password">
-            </div>
-            <p id="forgotpassword"><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
-
-            {% if request.GET.next %}
-            <input type="hidden" name="next" value="{{ request.GET.next }}">
-            {% endif %}
-            <div id="loginbuttons">
-                <p id="createaccountbutton"><a href="{% url 'inventory:register' %}">Create Account</a></p>
-                <button type="submit" id="loginbutton" class="roundbutton">LOGIN</button>
-            </div>
-        </form>
+        <p class="loginmessage">Please login to see this page.</p>
         {% endif %}
+    {% endif %}
         
-    </div>
+    {% if user.is_authenticated %}
+        <h2 class="header" id="profileheader">Hello, {{ user.first_name }}!</h2>
+        <p>Welcome to your profile! Here, you can view your reservation history.</p>
+        <div id="reservationhistory">
+            <a href="{% url 'inventory:history' %}" id="historylink">
+                <p>View Your Reservations</p>
+                <i class="material-icons">chevron_right</i>
+            </a>
+        </div>
+        <div id="logoutbutton" class="roundbutton">
+            <p><a href="{% url 'logout' %}">LOGOUT</a></p>
+        </div>
+    {% else %}
+        <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+            
+        <div id="username" class="loginform">
+            <p>Username</p>
+            <input type="text" name="username">
+        </div>
+        <div id="password" class="loginform">
+            <p>Password</p>
+            <input type="password" name="password">
+        </div>
+        <p id="forgotpassword"><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+
+        {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        {% endif %}
+        <div id="loginbuttons">
+            <p id="createaccountbutton"><a href="{% url 'inventory:register' %}">Create Account</a></p>
+            <button type="submit" id="loginbutton" class="roundbutton">LOGIN</button>
+        </div>
+    </form>
+    {% endif %}   
+</div>
 {% endblock %}

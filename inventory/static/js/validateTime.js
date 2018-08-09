@@ -1,5 +1,5 @@
-// Add event listeners to done buttons to validate date and time
 document.addEventListener('DOMContentLoaded', function(event) {
+    // Add event listeners to done buttons to validate date and time
     if (document.getElementById('pickupdonebutton')) {
         document.getElementById('pickupdonebutton').addEventListener('click', function() {
             const element = 'pickup';
@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         });
     }
 
+    // Time has been validated, close selector, update page, and check if form is complete
     function confirmValidation(element) {
         const apptDate = document.getElementById(element + 'dateinput').value;
         const apptTime = document.getElementById(element + 'timeinput').value;
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		checkFormCompletion();
     }
 
+    // Put date into a formatted string
     function formatDate(date) {
         const year = date.substring(0, 4);
         const monthValue = parseInt(date.substring(5, 7));
@@ -46,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         return dateString;
     }
 
+    // Determine month corresponding to given value
     function getMonth(value) {
         let month;
 
@@ -92,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
 });
 
+// Format time into 12-hour string with meridiem
 function formatTime(time) {
     let hour = parseInt(time.substring(0, 2));
     const mins = time.substring(3);
@@ -109,14 +113,20 @@ function formatTime(time) {
 function validateDate(element) {
     const now = new Date();
     const date = document.getElementById(element + 'dateinput').value;
+    const time = document.getElementById(element + 'timeinput').value;
+    const hour = parseInt(time.substring(0, 3));
+    const min = parseInt(time.substring(3, 5));
 
-    if (date) {
+    if (date && time) {
         const year = parseInt(date.substring(0, 4));
         const month = parseInt(date.substring(5, 7));
         const day = parseInt(date.substring(8, 10));
 
         if (element === 'dropoff' && document.getElementById('pickuptimecard')) {
             const pickupDate = document.getElementById('pickupdateinput').value;
+            const pickupTime = document.getElementById('pickuptimeinput').value;
+            const pickupHour = parseInt(pickupTime.substring(0, 3));
+            const pickupMin = parseInt(pickupTime.substring(3, 5));
             const pickupYear = parseInt(pickupDate.substring(0, 4));
             const pickupMonth = parseInt(pickupDate.substring(5, 7));
             const pickupDay = parseInt(pickupDate.substring(8, 10));
@@ -125,12 +135,25 @@ function validateDate(element) {
                 clearAlert(element);
                 return true;
             } else if (year >= pickupYear && month === pickupMonth) {
-                if (day >= pickupDay) {
+                if (day > pickupDay) {
                     clearAlert(element);
                     return true;
+                } else if (day === pickupDay) {
+                    if ((hour === (pickupHour + 3)) && (pickupMin > min)) {
+                        document.getElementById(element + 'timeinput').style.border = '2px solid #f44336';
+                        displayAlert(element, 'Reservations must be at least 3 hours long.');
+                        return false;
+                    } else if (hour < (pickupHour + 3)) {
+                        document.getElementById(element + 'timeinput').style.border = '2px solid #f44336';
+                        displayAlert(element, 'Reservations must be at least 3 hours long.');
+                        return false;
+                    } else {
+                        clearAlert(element);
+                        return true;
+                    }
                 } else {
                     document.getElementById(element + 'dateinput').style.border = '2px solid #f44336';
-                    displayAlert(element, 'Drop off must follow pick up.');
+                    displayAlert(element, 'Reservations must be at least 3 hours long.');
                     return false;
                 }
             } else {
@@ -164,20 +187,6 @@ function validateDate(element) {
         displayAlert(element, 'You must choose a date.');
         return false;
     }
-
-    /*function compareTimes() {
-        const pickupTime = document.getElementById('pickuptimeinput').value;
-        const pickupHours = parseInt(pickupTime.substring(0, 2));
-
-        const dropoffTime = document.getElementById('dropofftimeinput').value;
-        const dropoffHours = parseInt(dropoffTime.substring(0, 2));
-
-        if (dropoffHours > pickupHours) {
-            return true;
-        } else {
-            return false;
-        }
-    }*/
 }
 
 // Ensure that pick up and drop off times fall inside store hours

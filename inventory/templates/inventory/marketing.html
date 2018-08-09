@@ -1,6 +1,37 @@
 {% extends "inventory/intranet_base.html" %}
+{% load static %}
 
 {% block content %}
 <h2 id="pageheader">Marketing</h2>
-<p id="instructions">Download a variety of Speedcats's marketing materials.</p>
+<p id="instructions">Download and view a variety of Speedcats's marketing materials.</p>
+
+<div class="downloadlink">
+    <p>Brochure</p>
+    <a href="{% static 'docs/brochure.docx' %}"><i class="material-icons">save_alt</i></a>
+</div>
+
+<div class="downloadlink">
+    <p>Flyer</p>
+    <a href="{% static 'docs/flyer.docx' %}"><i class="material-icons">save_alt</i></a>
+</div>
+
+<div class="downloadlink">
+    <p>Facebook</p>
+    <a href="http://fb.me/speedcatscarrental"><i class="material-icons">chevron_right</i></a>
+</div>
+
+<div class="downloadlink">
+    <p>Instagram</p>
+    <a href="https://instagram.com/speedcatscarrental"><i class="material-icons">chevron_right</i></a>
+</div>
+
+<div class="downloadlink">
+    <p>Twitter</p>
+    <a href="https://twitter.com/speedcatsr"><i class="material-icons">chevron_right</i></a>
+</div>
+
+<div class="downloadlink">
+    <p>Google+</p>
+    <a href="https://plus.google.com/108523434762412552892"><i class="material-icons">chevron_right</i></a>
+</div>
 {% endblock %}

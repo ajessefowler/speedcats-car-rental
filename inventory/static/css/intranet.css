@@ -7,11 +7,15 @@ body {
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
 }
 
+th {
+    text-align: left;
+}
+
 .downloadlink {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 40px;
+    margin: 0 40px 20px;
     padding: 4px 4px 4px 12px;
     height: 35px;
     width: 50%;
@@ -85,7 +89,31 @@ body {
 
 #contenttable {
     margin: 0 40px;
-    table-layout: fixed;
+    width: calc(100% - 80px);
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+#contenttable td, #contenttable th {
+    border: 1px solid #ccc;
+    padding: 8px 6px;
+}
+
+#contenttable th {
+    background-color: #718792;
+    color: white;
+    font-weight: 300;
+}
+
+#reportdetail {
+    margin: 18px 40px 12px;
+}
+
+#reporttotal {
+    margin: 40px;
+    float: right;
+    border-top: 1px solid #ccc;
+    padding: 9px 10px;
 }
 
 @media only screen and (min-width: 768px) {

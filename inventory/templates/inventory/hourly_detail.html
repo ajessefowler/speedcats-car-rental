@@ -2,6 +2,23 @@
 
 {% block content %}
 <h2 id="pageheader">Hourly Detail</h2>
+<p id="reportdetail">A list of incoming and outgoing reservations within the next hour.</p>
 <table id="contenttable">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Vehicle</th>
+        <th>Pick Up Time</th>
+        <th>Drop Off Time</th>
+    </tr>
+    {% for item in results %}
+    <tr>
+        <td>{{ item.user.first_name }}</td>
+        <td>{{ item.user.last_name }}</td>
+        <td>{{ item.vehicle }}</td>
+        <td>{{ item.pick_up_time }}</td>
+        <td>{{ item.drop_off_time }}</td>
+    </tr>
+    {% endfor %}
 </table>
 {% endblock %}

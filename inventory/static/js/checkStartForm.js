@@ -32,6 +32,7 @@ function checkFormCompletion() {
         } 
     }
 
+    // Set the start button as active
     function setStartButton() {
         const start = document.getElementById('startbutton');
         start.style.backgroundColor = '#FF5722';
@@ -39,6 +40,7 @@ function checkFormCompletion() {
         start.onclick = submitForm;
     }
 
+    // Make the start button inactive again
     function resetStartButton() {
         const start = document.getElementById('startbutton');
         start.style.backgroundColor = 'rgb(126, 126, 126)';
@@ -46,6 +48,7 @@ function checkFormCompletion() {
         start.onclick = null;
     }
 
+    // Submit the information selection form
     function submitForm() {
         document.getElementById('selectlocation').submit();
     }
