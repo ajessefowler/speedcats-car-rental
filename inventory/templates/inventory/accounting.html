@@ -1,10 +1,11 @@
 {% extends "inventory/intranet_base.html" %}
+{% load static %}
 
 {% block content %}
 <h2 id="pageheader">Accounting</h2>
 <p id="instructions">Download the folder linked below to access Speedcats's accounting system.</p>
 <div class="downloadlink">
     <p>Accounting System</p>
-    <a><i class="material-icons">save_alt</i></a>
+    <a href="{% static 'docs/accounting.zip' %}"><i class="material-icons">save_alt</i></a>
  </div>
 {% endblock %}
