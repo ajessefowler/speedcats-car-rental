@@ -15,6 +15,7 @@ body {
 
 a:link {
 	color: white;
+	text-decoration: none;
 }
 
 a:visited {
@@ -665,6 +666,10 @@ a:-webkit-any-link {
 	margin: 8px 0 24px;
 }
 
+.answer > a {
+	color: #455A64;
+}
+
 #faqheader {
 	padding-top: 12px;
 	padding-bottom: 16px;
@@ -1065,6 +1070,12 @@ a:-webkit-any-link {
 	z-index: 51;
 	box-shadow: 0 -3px 6px -3px #2c2c2c;
 	background-color: rgb(218, 216, 216);
+}
+
+#locationpageinfo {
+	padding: 0;
+	margin: 7px 20px;
+	text-align: left;
 }
 
 #dropoffcheckbox {
@@ -1584,6 +1595,27 @@ a:-webkit-any-link {
 	font-size: 15pt;
 }
 
+#homecreateaccount {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	color: white;
+	background-color: #FF5722;
+	margin: 16px 50px 0;
+	height: 38px;
+	border-radius: 19px;
+	padding: 0 9px 0 12px;
+    box-shadow: 0 1px 5px #5e5e5e;
+}
+
+#homecreateaccount > p {
+	margin: 0 0 0 auto;
+}
+
+#homecreateaccount > i {
+	margin-left: auto;
+}
+
 #confirmcancelbutton {
 	background-color: #f44336;
 	color: white;
@@ -1897,6 +1929,11 @@ a:-webkit-any-link {
 		height: calc(100vh - 300px);
 	}
 
+	#locationpageinfo {
+		margin: 7px 140px 0;
+		padding: 0;
+	}
+
 	#reserveconfirmcontent {
 		margin: 0;
     	padding: 0;
@@ -1927,6 +1964,14 @@ a:-webkit-any-link {
 	#returnhome {
 		margin: 20px 30%;
 		width: 40%;
+	}
+
+	#homecreateaccount:hover {
+		cursor: pointer;
+	}
+
+	#homecreateaccount > p:hover {
+		cursor: pointer;
 	}
 
 	#returnhomeactivate {
@@ -2061,6 +2106,7 @@ a:-webkit-any-link {
 		align-items: center;
 		flex-wrap: wrap;
 		margin-bottom: 40px;
+		padding: 0 140px;
 	}
 
 	#cancelconfirmation {
@@ -2111,6 +2157,11 @@ a:-webkit-any-link {
 
 	#reservationlist > div:hover {
 		cursor: pointer;
+	}
+	
+	#homecreateaccount {
+		height: 42px !important;
+		border-radius: 21px !important;
 	}
 
 	#startreservationbutton {

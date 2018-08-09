@@ -15,8 +15,8 @@ from speedcats.celery_tasks import set_vehicle_as_reserved, set_vehicle_as_avail
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 
-	# Phone regex found here: https://stackoverflow.com/questions/19130942/whats-the-best-way-to-store-phone-number-in-django-models
-	phone_regex = RegexValidator(regex=r'\d{3}-\d{3}-\d{4}', message="Phone number must be entered in the format: '999-999-9999'.")
+	
+	phone_regex = RegexValidator(regex=r'\d{3}\d{3}\d{4}', message="Phone number must be entered in the format: '9999999999'.")
 	phone_number = models.CharField(validators=[phone_regex], max_length=12, blank=True, null=True)
 	address = models.CharField(max_length=100, blank=True, null=True)
 	city = models.CharField(max_length=50, blank=True, null=True)
@@ -28,6 +28,7 @@ class Profile(models.Model):
 	def __str__(self):
 		return str(self.user.first_name) + ' ' + str(self.user.last_name)
 
+	# Create profile whenever a new user is created
 	@receiver(post_save, sender=User)
 	def create_user_profile(sender, instance, created, **kwargs):
 		if created:
@@ -162,9 +163,6 @@ class Reservation(models.Model):
 		if create_task:
 			set_vehicle_as_reserved.apply_async(args=[self.vehicle], eta=self.pick_up_time)
 			set_vehicle_as_available.apply_async(args=[self.vehicle, self.drop_off_location], eta=self.drop_off_time)
-		else:
-			# remove current tasks, create new tasks for modification
-			pass
 
 class Maintenance(models.Model):
 	vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)

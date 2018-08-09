@@ -2,16 +2,21 @@
 
 {% block content %}
 <h2 class="header" id="feedbackheader">Feedback</h2>
-<p id="contactinstructions">Have a comment about Speedcats's website? Did you find a bug? Let us know using the form below!</p>
-<form class="contactform">
+<p id="contactinstructions">Have a comment about Speedcats's website? Have you found a bug? Let us know 
+    using the form below. We normally reply to messages within 24-48 hours.</p>
+{% if message %}
+    <p class="loginmessage">{{ message }}</p>
+{% endif %}
+<form class="contactform" action="{% url 'inventory:feedback' %}" method="post">
+    {% csrf_token %}
     <p>Name</p>
     <input type="text" name="name" id="contactname">
     <p>Email</p>
-    <input type="email" name="email" id="contactemail">
+    <input type="email" name="email" id="contactemail" required>
     <p>Subject</p>
-    <input type="text" name="subject" id="contactsubject">
+    <input type="text" name="subject" id="contactsubject" required>
     <p>Message</p>
-    <textarea rows="12"></textarea>
+    <textarea rows="12" name="message" id="contactmessage" required></textarea>
 
     <button type="submit" id="sendbutton" class="roundbutton">Send</button>
 </form>

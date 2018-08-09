@@ -1,4 +1,28 @@
 document.addEventListener('DOMContentLoaded', function(event) {
+    if (document.getElementById('modifyinstructions') || document.getElementById('startinstructions')) {
+        if (document.getElementById('pickuptimecard')) {
+            setCurrentDatetime('pickup');
+        }
+        
+        if (document.getElementById('dropofftimecard')) {
+            setCurrentDatetime('dropoff');
+        }
+    }
+
+    function setCurrentDatetime(element) {
+        const date = document.getElementById(element + 'timeformat').value;
+        year = date.substring(0, 4);
+        month = date.substring(5, 7);
+        day = date.substring(8, 10);
+        dateFormat =  year + '-' +  month + '-' +  day;
+        document.getElementById(element + 'dateinput').value = dateFormat;
+
+        hour = date.substring(11, 13);
+        min = date.substring(14, 16);
+        timeFormat = hour + ':' + min;
+        document.getElementById(element + 'timeinput').value = timeFormat;
+    }
+
     // Add event listeners to done buttons to validate date and time
     if (document.getElementById('pickupdonebutton')) {
         document.getElementById('pickupdonebutton').addEventListener('click', function() {

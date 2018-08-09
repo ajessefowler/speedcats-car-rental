@@ -16,9 +16,10 @@ from django.db.models.signals import post_save
 from django.db.models import Q
 from django.dispatch import receiver
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string, get_template
 
 from .tokens import account_activation_token
 from .forms import RegisterForm, ProfileForm
@@ -83,9 +84,11 @@ def daily_sales(request):
 	for reservation in query_results:
 		total += float(reservation.subtotal)
 
+	format_total = '${:,.2f}'.format(total)
+
 	context = {
 		"results":query_results,
-		"total":total
+		"total":format_total
 	}
 	
 	return render(request, 'inventory/daily_sales.html', context)
@@ -117,9 +120,11 @@ def weekly_sales(request):
 	for reservation in results:
 		total += float(reservation.subtotal)
 
+	format_total = '${:,.2f}'.format(total)
+
 	context = {
 		"results":results,
-		"total":total
+		"total":format_total
 	}
 
 	return render(request, 'inventory/weekly_sales.html', context)
@@ -136,9 +141,11 @@ def weekly_maintenance(request):
 	for record in results:
 		total += float(record.price)
 
+	format_total = '${:,.2f}'.format(total)
+
 	context = {
 		"results":results,
-		"total":total
+		"total":format_total
 	}
 
 	return render(request, 'inventory/weekly_maintenance.html', context)
@@ -147,10 +154,34 @@ def faqs(request):
 	return render(request, 'inventory/faqs.html')
 
 def contact(request):
-	return render(request, 'inventory/contact.html')
+	if request.method == 'POST':
+		email = request.POST["email"]
+		subject = request.POST["subject"]
+		message = request.POST["message"]
+
+		send_mail("Speedcats Contact - " + subject, message, email, ['ajessefowler@icloud.com'])
+
+		context = {
+			'message':'Message sent!'
+		}
+		return render(request, 'inventory/contact.html', context)
+	else:
+		return render(request, 'inventory/contact.html')
 
 def feedback(request):
-	return render(request, 'inventory/feedback.html')
+	if request.method == 'POST':
+		email = request.POST["email"]
+		subject = request.POST["subject"]
+		message = request.POST["message"]
+
+		send_mail("Speedcats Feedback - " + subject, message, email, ['ajessefowler@icloud.com'])
+
+		context = {
+			'message':'Message sent!'
+		}
+		return render(request, 'inventory/feedback.html', context)
+	else:
+		return render(request, 'inventory/feedback.html')
 
 def locations(request):
 	locations = Store.objects.all()
@@ -307,9 +338,8 @@ def search(request):
 	pickup_id = request.session["pickup_id"]
 	pickup_time = request.session["pickup_time"]
 	dropoff_time = request.session["dropoff_time"]
-	store = Store.objects.get(pk=pickup_id)
-	
 	query = request.POST["searchquery"]
+	store = Store.objects.get(pk=pickup_id)
 
 	pickup_format = datetime.strptime(pickup_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 	dropoff_format = datetime.strptime(dropoff_time, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
@@ -392,6 +422,10 @@ def reserve(request, storeID, vehicleID):
 	tax = round(float(subtotal) * 0.07,2)
 	total = round(float(subtotal) + tax,2)
 	
+	format_subtotal = '${:,.2f}'.format(subtotal)
+	format_tax = '${:,.2f}'.format(tax)
+	format_total = '${:,.2f}'.format(total)
+	
 	context = {
 		"store":store,
 		"drop_off_store":dropoff_store,
@@ -401,9 +435,9 @@ def reserve(request, storeID, vehicleID):
 		"drop_off_format":dropoff_format,
 		"vehicle":vehicle,
 		"length":reservation_length,
-		"subtotal":subtotal,
-		"tax":tax,
-		"total":total
+		"subtotal":format_subtotal,
+		"tax":format_tax,
+		"total":format_total
 	}
 	return render(request, 'inventory/reserve_vehicle.html', context)
 
@@ -464,7 +498,6 @@ def modify(request, reservationID):
 	# Pass location data so front-end map can display store markers
 	locations = Store.objects.all().values('address', 'city', 'state')
 	locations_json = json.dumps(list(locations), cls=DjangoJSONEncoder)
-	
 	reservation = Reservation.objects.get(pk=reservationID)
 
 	context = {

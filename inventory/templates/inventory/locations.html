@@ -22,8 +22,9 @@
 </div>
 <div id="infocontainer" class="locationcontainer">
     <h2 class="header" id="locationheader">Locations</h2>
-    <p>With eight locations across the state of Ohio, the car of your dreams is never
-        too far away.</p>
+    <p id="locationpageinfo">With eight locations across the state of Ohio, the car of your dreams is never
+        too far away. Use the map above to find the locations closest to you. Then,
+        use the cards below to learn more about each location.</p>
     <div id="desktoplocations">
     {% for location in storelocations %}
         <div class="locationcard" id="location{{ forloop.counter }}">

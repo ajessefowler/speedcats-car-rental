@@ -2,6 +2,7 @@
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils import six
 
+# Generate token to use in email for account activation and password reset
 class AccountActivationTokenGenerator(PasswordResetTokenGenerator):
     def _make_hash_value(self, user, timestamp):
         return (

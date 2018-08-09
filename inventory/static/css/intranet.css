@@ -43,6 +43,10 @@ th {
     align-items: center;
 }
 
+#header a:visited {
+    color: white;
+}
+
 #header > h1 {
     font-weight: 300;
     font-size: 24px;
@@ -81,6 +85,7 @@ th {
     letter-spacing: 0.5px;
     text-transform: uppercase;
     text-align: right;
+    color: white;
 }
 
 #instructions {

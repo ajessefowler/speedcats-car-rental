@@ -27,7 +27,7 @@ AWS_STORAGE_BUCKET_NAME = 'speedcats'
 AWS_QUERYSTRING_AUTH = False
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1']
 

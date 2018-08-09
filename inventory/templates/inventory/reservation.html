@@ -23,38 +23,38 @@
             <h3>Drop Off</h3>
             <p id="separator">{{ reservation.drop_off_location }} on {{ reservation.drop_off_time }}</p>
             <div id="pricedetails">
-                <p>Subtotal: ${{ reservation.subtotal }}</p>
-                <p>Tax: ${{ reservation.tax }}</p>
-                <p>Total: ${{ reservation.total }}</p>
+                <p>Subtotal: ${{ reservation.subtotal|floatformat:2 }}</p>
+                <p>Tax: ${{ reservation.tax|floatformat:2 }}</p>
+                <p>Total: ${{ reservation.total|floatformat:2 }}</p>
             </div>
         </div>
         <div id="reservebuttons">
             {% if reservation.status == 'Upcoming' %}
             <div id="deletebutton" class="reservebutton roundbutton">
-                <p>CANCEL</p>
+                <p>Cancel</p>
             </div>
             <a href="{% url 'inventory:modify' reservation.id %}">
                 <div id="editbutton" class="reservebutton roundbutton">
-                    <p>MODIFY</p>
+                    <p>Modify</p>
                 </div>
             </a>
             {% endif %}
             {% if reservation.status == 'In Progress' %}
             <div id="deletebutton" class="disabledbutton roundbutton">
-                <p>CANCEL</p>
+                <p>Cancel</p>
             </div>
             <a href="{% url 'inventory:modify' reservation.id %}">
                 <div id="editbutton" class="reservebutton roundbutton">
-                    <p>MODIFY</p>
+                    <p>Modify</p>
                 </div>
             </a>
             {% endif %}
             {% if reservation.status == 'Completed' %}
             <div id="deletebutton" class="disabledbutton roundbutton">
-                <p>CANCEL</p>
+                <p>Cancel</p>
             </div>
             <div id="editbutton" class="disabledbutton roundbutton">
-                <p>MODIFY</p>
+                <p>Modify</p>
             </div>
             {% endif %}
         </div>
@@ -67,7 +67,7 @@
         <i class="material-icons" id="closeconfirmation">close</i>
         <a href="{% url 'inventory:cancel' reservation.id %}">
             <div id="confirmcancelbutton" class="roundbutton">
-                <p>CONFIRM</p>
+                <p>Confirm</p>
             </div>
         </a>
     </div>

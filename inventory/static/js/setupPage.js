@@ -19,8 +19,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 		if (document.getElementById('vehiclecontent')) {
 			contentDiv = 'vehiclecontent';
-		} else {
+		} else if (document.getElementById('vehiclehomecontent')) {
 			contentDiv = 'vehiclehomecontent';
+		} else if (document.getElementById('reserveconfirmcontent')) {
+			contentDiv = 'reserveconfirmcontent';
 		}
 
 		// Vary height based on screen size

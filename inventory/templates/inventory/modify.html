@@ -68,7 +68,7 @@
     <input type="hidden" name="total" id="total">
 
     <div id="modifybutton" class="roundbutton">
-        <p>DONE</p>
+        <p>Done</p>
     </div>
 </form>
 
@@ -81,9 +81,9 @@
     <i class="material-icons" id="closeconfirmation">close</i>
     <p id="priceupdate">Your price will not change.</p>
     <div id="pricedetails">
-        <p id="displaysubtotal">Subtotal: ${{ reservation.subtotal }}</p>
-        <p id="displaytax">Tax: ${{ reservation.tax }}</p>
-        <p id="displaytotal">Total: ${{ reservation.total }}</p>
+        <p id="displaysubtotal">Subtotal: ${{ reservation.subtotal|floatformat:2 }}</p>
+        <p id="displaytax">Tax: ${{ reservation.tax|floatformat:2 }}</p>
+        <p id="displaytotal">Total: ${{ reservation.total|floatformat:2 }}</p>
     </div>
     <a>
         <div id="confirmcancelbutton" class="roundbutton">
@@ -104,7 +104,7 @@
         <p>AT</p>
         <input type="time" id="pickuptimeinput" class="input" name="timeinput" min="7:00" max="20:00"/>
     </div>
-    <p id="pickupdonebutton" class="donebutton">DONE</p>
+    <p id="pickupdonebutton" class="donebutton">Done</p>
 </div>
 {% endif %}
 
@@ -119,7 +119,7 @@
         <p>AT</p>
         <input type="time" id="dropofftimeinput" class="input" name="timeinput" min="7:00" max="20:00"/>
     </div>
-    <p id="dropoffdonebutton" class="donebutton">DONE</p>
+    <p id="dropoffdonebutton" class="donebutton">Done</p>
 </div>
 
 <div id="dropofflocationcard" class="infoselector mapinfoselector">
@@ -136,7 +136,7 @@
     <div class="locationpicker">
         <p id="dropofflocationtext" class="locationpickertext">Choose a location on the map</p>
     </div>
-    <p id="dropofflocationdone" class="donebutton">DONE</p>
+    <p id="dropofflocationdone" class="donebutton">Done</p>
 </div>
 {% endblock %}
 
