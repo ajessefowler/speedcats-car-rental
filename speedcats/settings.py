@@ -160,7 +160,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('GMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL = 'Speedcats Car Rental <speedcatscarrental@gmail.com>'
 
 AXES_CACHE = 'axes_cache'
 AXES_FAILURE_LIMIT = 5
