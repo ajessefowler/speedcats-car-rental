@@ -48,15 +48,18 @@
                 </div>
             <div class="paymentprice">
                 <p>Subtotal:</p>
-                <input type="text" name="subtotal" id="checkoutsub" value="{{ subtotal }}" readonly><br>
+                <input type="text" name="subtotaldisplay" id="checkoutsub" value="{{ subtotal }}" readonly><br>
+                <input type="hidden" name="total" id="checkoutsubhidden" value="{{ subtotal_format }}" readonly><br>
             </div>
             <div class="paymentprice">
                 <p>Tax:</p>
-                <input type="text" name="tax" id="checkouttax" value="{{ tax }}" readonly><br>
+                <input type="text" name="taxdisplay" id="checkouttax" value="{{ tax }}" readonly><br>
+                <input type="hidden" name="tax" id="checkouttaxhidden" value="{{ tax_format }}" readonly><br>
             </div>
             <div class="paymentprice" id="totaldiv">
                 <p>Total:</p>
-                <input type="text" name="total" id="checkouttotal" value="{{ total }}" readonly><br>
+                <input type="text" name="totaldisplay" id="checkouttotal" value="{{ total }}" readonly><br>
+                <input type="hidden" name="total" id="checkouttotalhidden" value="{{ total_format }}" readonly><br>
             </div>
 
             <h3 id="paymentheader"><b>Payment</b></h3>

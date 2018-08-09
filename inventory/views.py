@@ -437,7 +437,10 @@ def reserve(request, storeID, vehicleID):
 		"length":reservation_length,
 		"subtotal":format_subtotal,
 		"tax":format_tax,
-		"total":format_total
+		"total":format_total,
+		"subtotal_format":subtotal,
+		"tax_format":tax,
+		"total_format":total
 	}
 	return render(request, 'inventory/reserve_vehicle.html', context)
 
