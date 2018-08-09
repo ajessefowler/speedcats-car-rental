@@ -1445,7 +1445,7 @@ a:-webkit-any-link {
 
 #reservecontent {
 	background-color: white;
-	margin: 0 20px 50px;
+	margin: 0 20px 70px;
 	padding: 14px 8px 0;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px #707070;
@@ -1946,7 +1946,10 @@ a:-webkit-any-link {
 	}
 
 	#confirmheader {
-		margin: 0 25%;
+		margin-top: 0;
+		margin-bottom: 0;
+		margin-left: calc(25% + 20px);
+		margin-right: calc(25% + 20px);
 	}
 
 	#relativefooter {
@@ -1995,7 +1998,7 @@ a:-webkit-any-link {
 		display: block;
 		border-top-left-radius: 3px;
 		border-top-right-radius: 3px;
-		margin-bottom: 10px;
+		margin-bottom: 24px;
 	}
 
 	#vehicledetails {
@@ -2004,7 +2007,7 @@ a:-webkit-any-link {
 
 	#reservecontent {
 		padding: 0;
-		margin: 0 25%;
+		margin: 0 25% 70px;
 	}
 
 	#reservecontent > p {
@@ -2337,6 +2340,10 @@ a:-webkit-any-link {
 		margin: 0;
    	 	padding: 0 25% 150px;
     	width: 50%;
+	}
+
+	#placedheader {
+		padding-top: 16px;
 	}
 
 	#registerform {

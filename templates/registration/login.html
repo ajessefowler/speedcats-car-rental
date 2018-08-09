@@ -28,7 +28,7 @@
             </a>
         </div>
         <div id="logoutbutton" class="roundbutton">
-            <p><a href="{% url 'logout' %}">LOGOUT</a></p>
+            <p><a href="{% url 'logout' %}">Logout</a></p>
         </div>
     {% else %}
         <form method="post" action="{% url 'login' %}">
@@ -49,7 +49,7 @@
         {% endif %}
         <div id="loginbuttons">
             <p id="createaccountbutton"><a href="{% url 'inventory:register' %}">Create Account</a></p>
-            <button type="submit" id="loginbutton" class="roundbutton">LOGIN</button>
+            <button type="submit" id="loginbutton" class="roundbutton">Login</button>
         </div>
     </form>
     {% endif %}   

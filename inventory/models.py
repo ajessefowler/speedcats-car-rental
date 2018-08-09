@@ -15,7 +15,6 @@ from speedcats.celery_tasks import set_vehicle_as_reserved, set_vehicle_as_avail
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
 
-	
 	phone_regex = RegexValidator(regex=r'\d{3}\d{3}\d{4}', message="Phone number must be entered in the format: '9999999999'.")
 	phone_number = models.CharField(validators=[phone_regex], max_length=12, blank=True, null=True)
 	address = models.CharField(max_length=100, blank=True, null=True)
