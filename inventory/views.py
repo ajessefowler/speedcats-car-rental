@@ -159,7 +159,7 @@ def contact(request):
 		subject = request.POST["subject"]
 		message = request.POST["message"]
 
-		send_mail("Speedcats Contact - " + subject, message, email, ['ajessefowler@icloud.com'])
+		send_mail("Speedcats Contact - " + subject, message + '\n\n' + email, email, ['ajessefowler@icloud.com'])
 
 		context = {
 			'message':'Message sent!'
