@@ -461,7 +461,7 @@ def makereservation(request, storeID, vehicleID):
 		total = request.POST["total"]
 		payment_type = request.POST["paymenttype"]
 	except KeyError:
-		pass
+		raise Http404('Error making reservation. Please try again.')
 
 	now = datetime.now()
 	
