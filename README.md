@@ -1,22 +1,33 @@
-# speedcats-car-rental
-Summer 2018 CSCI Capstone Project
+# Speedcats Car Rental
+Full stack car rental website built for Columbus State Community College's capstone project. Allows customers to place and modify reservations, view inventories, and make payments online. A complete administrator site improves employee workflow, making common tasks such as updating inventories and running reports simple and easy.
 
-<h2>Installing</h2>
+## Requirements
 
-https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment
+Python, Django, and a number of other dependencies are required by this project. If Python has been installed, the remaining dependencies, including Django, can be installed using the following command inside the speedcats-car-rental directory:
 
-Follow these instructions to install Python, virtualenvwrapper, and Django (You will only install Django in your virutal environment. Name
-your virtualenv 'speedcats' to follow along). Once you are in a virtualenv and have Django installed, cd to the speedcats directory in
-Terminal or Command Prompt. The speedcats directory contains a file called 'manage.py'. Once there, run the commands...
+```
+pip install -r requirements.txt
+```
 
-'python manage.py makemigrations'
-'python manage.py migrate'
+## Installing
 
-Now, you should be able to start the server with the command 'python manage.py runserver'. You will be able to access the site at
-http://127.0.0.1:8000, and the admin site at http://127.0.0.1:8000/admin. To create an account to login to the admin site, run the command
-'python manage.py createsuperuser' and enter a name and password. Then, you can login and manipulate the data!
+Once all dependencies have been installed and the project has been cloned or downloaded, run the following commands to ensure the database is up to date:
 
-The following video from Harvard's CS50 is a great introduction to Django. After watching, you should be comfortable enough
-to use Django for this project, and be able to appreciate its ease of use.
+```
+python manage.py makemigrations
+python manage.py migrate
+```
 
-https://youtu.be/ZjAMRnCu-84
+Now, you should be able to start the server with the following command:
+
+```
+python man
+age.py runserver 
+```
+You will be able to access the site at http://127.0.0.1:8000, and the admin site at http://127.0.0.1:8000/admin. To create an account to login to the admin site, run the command:
+
+```
+python manage.py createsuperuser
+```
+
+and enter a name and password. You will now be able to login to the admin site, and you will be able to access the user-facing website.
