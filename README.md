@@ -21,8 +21,7 @@ python manage.py migrate
 Now, you should be able to start the server with the following command:
 
 ```
-python man
-age.py runserver 
+python manage.py runserver 
 ```
 You will be able to access the site at http://127.0.0.1:8000, and the admin site at http://127.0.0.1:8000/admin. To create an account to login to the admin site, run the command:
 
