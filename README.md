@@ -33,3 +33,12 @@ python manage.py createsuperuser
 ```
 
 and enter a name and password. You will now be able to login to the admin site, and you will be able to access the user-facing website.
+
+## Built With
+
+- Django
+- Python
+- PostgreSQL
+- JavaScript
+- HTML
+- CSS
