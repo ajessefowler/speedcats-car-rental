@@ -37,7 +37,6 @@ and enter a name and password. You will now be able to login to the admin site, 
 ## Built With
 
 - Django
-- Python
 - PostgreSQL
 - JavaScript
 - HTML
